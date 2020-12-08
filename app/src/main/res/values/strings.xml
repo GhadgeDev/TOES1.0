@@ -4,7 +4,49 @@
     <string name="Enext">NEXT</string>
     <string name="Mnext">पुढे</string>
     <string name="Hnext">आगे</string>
+
     <string name="username">Contact Number</string>
+    <string name="Musername">संपर्क क्रमांक</string>
+    <string name="Husername">संपर्क क्रमांक</string>
+
+
+    <string name="welcome_back">Welcome Back,</string>
+    <string name="Mwelcome_back">आपले स्वागत आहे,</string>
+    <string name="Hwelcome_back">आपका स्वागत है,</string>
+
+    <string name="sign_in_to_continue">sign in to continue...</string>
+    <string name="Msign_in_to_continue">सुरू ठेवण्यासाठी साइन इन करा ...</string>
+    <string name="Hsign_in_to_continue">जारी रखने के लिए साइन इन करें ...</string>
+
+
+    <string name="contact_number">Contact Number</string>
+    <string name="Mcontact_number">संपर्क क्रमांक</string>
+    <string name="Hcontact_number">संपर्क क्रमांक</string>
+
+    <string name="password">Password</string>
+    <string name="Mpassword">संकेत शब्द</string>
+    <string name="Hpassword">संकेत शब्द</string>
+
+    <string name="show_password">Show password</string>
+    <string name="Mshow_password">संकेतशब्द दर्शवा</string>
+    <string name="Hshow_password">संकेतशब्द प्रदर्शित करें</string>
+
+
+    <string name="log_in">Log In</string>
+    <string name="Mlog_in">प्रवेश करा</string>
+    <string name="Hlog_in">प्रवेश करें</string>
+
+
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="Mforgot_password">संकेतशब्द विसरलात?</string>
+    <string name="Hforgot_password">संकेतशब्द भूल गए?</string>
+
+
+    <string name="create_new_account">Create New Account</string>
+    <string name="Mcreate_new_account">नवीन खाते तयार करा</string>
+    <string name="Hcreate_new_account">नया खाता बनाएँ</string>
+    <string name="or">Or</string>
+    <string name="Mor">अथवा</string>
 
 
 </resources>

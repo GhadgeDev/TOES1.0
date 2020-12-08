@@ -6,56 +6,175 @@
     android:layout_height="match_parent"
     android:background="#F8F8F8"
     tools:context=".LoginActivity">
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_text_input_layout"
+
+    <TextView
+        android:id="@+id/txt_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:counterEnabled="true"
-        app:counterMaxLength="10"
-        app:hintTextColor="@color/black"
+        android:text="@string/welcome_back"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="24sp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textColorHint="@color/black"
-      >
-
-        <EditText
-            android:id="@+id/editTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:autofillHints=""
-            android:ems="10"
-            android:background="@drawable/devnagaribtn"
-            android:hint="@string/username"
-            android:inputType="phone"
-            android:textColor="@color/black"
-
-            android:textColorHint="@color/black"
-            android:gravity="center" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_pass_input_layout"
-        app:passwordToggleEnabled="true"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        />
+    <TextView
+        android:id="@+id/txt_sign"
+        android:layout_below="@+id/txt_welcome"
         android:layout_width="wrap_content"
-        android:textColorHint="@color/black"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in_to_continue"
+        android:textColor="#ABA9A9"
+        android:textStyle="normal"
+        android:textSize="15sp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/username_text_input_layout"
-        >
+        android:layout_marginTop="5dp"
+        />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_below="@id/txt_sign"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/useravatar"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000">
+    </de.hdodenhof.circleimageview.CircleImageView>
+    <TextView
+        android:id="@+id/lableContact"
+        android:layout_below="@id/profile_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contact_number"
+        android:textSize="12sp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="2dp"
+        android:textColor="@color/black"
+        />
+    <EditText
+        android:id="@+id/etContactNo"
+        android:layout_below="@+id/lableContact"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:maxLength="10"
+        android:hint="Contact Number"
+        android:textColor="@color/black"
+        android:inputType="phone"
+        android:padding="15dp"
+        android:textColorHint="#ABA9A9"
+        android:background="@drawable/devnagaribtn"
+        android:layout_centerHorizontal="true"/>
 
-        <EditText
-            android:id="@+id/pass"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:textColor="@color/black"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:ems="10"
-            android:background="@drawable/devnagaribtn"
-            android:inputType="textPassword"
-            android:gravity="center"
-            android:hint="Password" />
+    <TextView
+        android:id="@+id/lablePass"
+        android:layout_below="@id/etContactNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/password"
+        android:textSize="12sp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="2dp"
+        android:textColor="@color/black"
+        />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    <EditText
+        android:id="@+id/etPass"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+
+        android:layout_below="@+id/lablePass"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black"
+        android:background="@drawable/devnagaribtn"
+        android:drawableRight="@android:drawable/presence_invisible"
+        android:hint="Password"
+        android:padding="15dp"
+        android:password="true"
+        android:textColorHint="#ABA9A9" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/cbShowPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etPass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/show_password"
+        android:textColor="@color/black"
+        android:textColorHighlight="#070707"
+        android:textColorHint="#0B0A0A"
+        android:textColorLink="#3F51B5"
+
+        />
+
+    <Button
+        android:id="@+id/btnSignIn"
+        android:layout_below="@id/cbShowPass"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/englishbutton"
+        android:text="@string/log_in"
+        />
+    <TextView
+        android:id="@+id/txtForgotPass"
+        android:layout_below="@id/btnSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/forgot_password"
+        android:layout_marginTop="25dp"
+        android:textColor="#2AA8B0"
+        />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="180dp"
+        android:layout_height="1dp"
+        android:layout_below="@id/txtForgotPass"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:background="@android:color/black" />
+    <TextView
+        android:id="@+id/txtOr"
+        android:layout_below="@id/txtForgotPass"
+        android:layout_toRightOf="@id/line1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/or"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textColor="@color/black"
+        />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="180dp"
+        android:layout_height="1dp"
+        android:layout_toRightOf="@id/txtOr"
+        android:layout_below="@id/txtForgotPass"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="5dp"
+        android:background="@android:color/black" />
+    <Button
+        android:id="@+id/btnCreateNewAcc"
+        android:layout_below="@id/txtOr"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/englishbutton"
+        android:text="@string/create_new_account"
+        android:layout_centerHorizontal="true"/>
+
 </RelativeLayout>

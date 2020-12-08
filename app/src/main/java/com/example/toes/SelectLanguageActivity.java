@@ -23,6 +23,7 @@ public class SelectLanguageActivity extends AppCompatActivity {
     FloatingActionButton btnNext;
     Button btnEnglish,btnMarathi,btnHindi;
     TextView txtNext;
+    String selectedLanguage;
     boolean selected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +46,7 @@ public class SelectLanguageActivity extends AppCompatActivity {
             btnHindi.setBackgroundColor(2825921);
             btnHindi.setTextColor(255);
         }*/
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =new Intent(SelectLanguageActivity.this,LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+
         btnEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +59,7 @@ public class SelectLanguageActivity extends AppCompatActivity {
                 btnHindi.setBackground(getResources().getDrawable(R.drawable.devnagaribtn));
                 btnHindi.setTextColor(Color.rgb(0,0,0));
 
+                selectedLanguage = "0";
             }
         });
 
@@ -79,7 +75,7 @@ public class SelectLanguageActivity extends AppCompatActivity {
 
                 btnHindi.setBackground(getResources().getDrawable(R.drawable.devnagaribtn));
                 btnHindi.setTextColor(Color.rgb(0,0,0));
-
+                selectedLanguage = "1";
             }
         });
         btnHindi.setOnClickListener(new View.OnClickListener() {
@@ -94,9 +90,20 @@ public class SelectLanguageActivity extends AppCompatActivity {
                 btnEnglish.setBackground(getResources().getDrawable(R.drawable.devnagaribtn));
                 btnEnglish.setTextColor(Color.rgb(0,0,0));
 
-
+                selectedLanguage = "2";
             }
         });
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(SelectLanguageActivity.this,LoginActivity.class);
+                selectedLanguage.toString();
+                intent.putExtra(Intent.EXTRA_TEXT, selectedLanguage);
+                startActivity(intent);
+            }
+        });
+
     }
    /* public void setLocale(String lang) {
         Locale myLocale = new Locale(lang);
