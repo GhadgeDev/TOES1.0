@@ -1,9 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_centerHorizontal="true"
+
+    android:background="#ffffff"
     tools:context=".SelectLanguageActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+   <!-- <TextView
+        android:id="@+id/select_lang"
+        android:layout_width="280dp"
+        android:layout_height="46dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:text="@string/select_lang"
+        android:textAppearance="@style/select_lang"
+
+        android:textSize="34sp" />-->
+
+ <Button
+     android:id="@+id/btn_english"
+     android:layout_width="167dp"
+     android:layout_height="66dp"
+     android:layout_centerHorizontal="true"
+     android:layout_marginTop="250dp"
+     android:background="@drawable/devnagaribtn"
+     android:fontFamily="@font/fonts"
+     android:selectAllOnFocus="true"
+     android:shadowColor="#2B1EC0"
+
+     android:text="ENGLISH"
+     android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/btn_marathi"
+        android:layout_width="167dp"
+        android:layout_height="66dp"
+        android:layout_below="@id/btn_english"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/devnagaribtn"
+        android:fontFamily="@font/fonts"
+        android:text="मराठी"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/btn_hindi"
+        android:layout_width="167dp"
+        android:layout_height="66dp"
+        android:layout_below="@id/btn_marathi"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/devnagaribtn"
+        android:fontFamily="@font/fonts"
+        android:text="हिंदी"
+        android:textColor="#000000" />
+    <TextView
+        android:id="@+id/txt_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="23dp"
+        android:fontFamily="@font/fonts"
+        android:text="@string/Enext"
+        android:textSize="20sp"
+        android:textColor="#000000" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/txt_next"
+        android:layout_alignParentRight="true"
+
+        android:layout_gravity="bottom|right"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/nextbutton"
+        app:backgroundTint="#2B1EC0"
+        app:layout_anchorGravity="bottom|right|end" />
+
+
+</RelativeLayout>
