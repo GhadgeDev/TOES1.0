@@ -48,5 +48,13 @@
     <string name="or">Or</string>
     <string name="Mor">अथवा</string>
 
+    <string name="select_job_title">Select Job Title</string>
+    <string name="Mselect_job_title">नोकरी शीर्षक निवडा</string>
+    <string name="Hselect_job_title">नौकरी का शीर्षक चुनें</string>
+
+    <string name="search_job_title">Search</string>
+    <string name="Msearch_job_title">शोधा</string>
+    <string name="Hsearch_job_title">खोज करें</string>
+
 
 </resources>
