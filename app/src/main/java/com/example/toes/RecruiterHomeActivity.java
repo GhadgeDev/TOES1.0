@@ -2,6 +2,7 @@ package com.example.toes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -16,10 +17,11 @@ public class RecruiterHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recruiter_home);
 
-        spinner1 = findViewById(R.id.spinner1);
+        spinner1 = findViewById(R.id.spinnerSelectJob);
 
-        String[] jobTitles = new String[]{"Carpenter", "Painter", "Driver", "Electrician", "Plumber"};
+        String[] jobTitles = new String[]{"Select Job","Carpenter", "Painter", "Driver", "Electrician", "Plumber"};
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this,R.layout.style_select_job_titles,jobTitles);
         spinner1.setAdapter(arrayAdapter);
+
     }
 }
