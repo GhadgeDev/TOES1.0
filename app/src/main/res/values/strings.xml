@@ -56,5 +56,24 @@
     <string name="Msearch_job_title">शोधा</string>
     <string name="Hsearch_job_title">खोज करें</string>
 
+    <string name="select_workers">Select Worker</string>
+    <string name="Mselect_worker">कामगार निवडा</string>
+
+    <string name="profession">Profession:</string>
+    <string name="selectItem" />
+
+    <string name="select">Please select role!</string>
+
+    <string name="visiting_charge">Visiting charges: </string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="edit_profile">Edit</string>
+    <string name="logout_button">Logout</string>
+    <string name="title_activity_recruiter_notification">RecruiterNotificationActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+
 
 </resources>

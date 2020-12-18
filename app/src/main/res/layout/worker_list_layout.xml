@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/worker_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:src="@mipmap/ic_launcher"/>
+    <TextView
+        android:id="@+id/worker_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/worker_image"
+        android:text="@string/app_name"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:padding="5dp"
+        android:layout_weight="1"/>
+    <TextView
+        android:id="@+id/visiting_charges"
+        android:layout_toRightOf="@+id/worker_image"
+        android:layout_below="@+id/worker_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="@string/visiting_charge"
+        android:padding="5dp"
+        android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/worker_visiting_fee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Job_name"
+        android:layout_toRightOf="@+id/visiting_charges"
+        android:layout_marginTop="48dp"
+        android:textColor="@color/black"/>
+</RelativeLayout>

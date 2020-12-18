@@ -33,23 +33,21 @@
         android:paddingTop="5dp"
         android:popupBackground="#827ADE"
 android:spinnerMode="dialog"
-
-
-         />
+        />
 
     <EditText
         android:id="@+id/jobDescription"
         android:layout_width="324dp"
         android:layout_height="170dp"
-        android:maxLength="2000"
         android:hint="Describe job in detail"
         android:textColor="@color/black"
-        android:inputType="text"
         android:gravity="top|left"
+        android:inputType="textMultiLine"
         android:layout_marginTop ="40dp"
         android:textColorHint="#ABA9A9"
         android:padding="10dp"
-        android:background="@drawable/devnagaribtn" />
+        android:background="@drawable/devnagaribtn"
+       />
 
     <Button
         android:id="@+id/btnsearch"
@@ -57,7 +55,6 @@ android:spinnerMode="dialog"
         android:layout_height="55dp"
         android:layout_marginTop="55dp"
         android:background="@drawable/englishbutton"
-        android:text="@string/search_job_title"
-        />
+        android:text="@string/search_job_title" />
 
 </LinearLayout>

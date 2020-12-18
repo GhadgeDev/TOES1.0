@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior = "none">
+        <item android:id="@+id/nav_notifications"
+            android:icon="@drawable/ic_notificationsblack"
+            android:title="Notifications"/>
+        <item android:id="@+id/nav_switch_roles"
+            android:icon="@drawable/ic_switchroleblack"
+            android:title="Switch Roles"/>
+        <item android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout_black"
+            android:title="Logout"/>
+    </group>
+</menu>
