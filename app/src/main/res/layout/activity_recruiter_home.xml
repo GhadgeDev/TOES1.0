@@ -32,6 +32,7 @@
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
         android:popupBackground="#827ADE"
+android:spinnerMode="dialog"
 
 
          />

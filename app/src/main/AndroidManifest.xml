@@ -12,17 +12,19 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".RecruiterHomeActivity"
             android:screenOrientation = "portrait">
+
+        </activity>
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SelectLanguageActivity" />
+        <activity android:name=".IdentityProofActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".SelectLanguageActivity" />
-        <activity android:name=".IdentityProofActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".SplashScreenActivity"></activity>
         <activity android:name=".SelectRoleActivity">
         </activity>
     </application>
