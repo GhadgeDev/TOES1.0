@@ -10,16 +10,7 @@
     android:background="#ffffff"
     tools:context=".SelectLanguageActivity">
 
-   <!-- <TextView
-        android:id="@+id/select_lang"
-        android:layout_width="280dp"
-        android:layout_height="46dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp"
-        android:text="@string/select_lang"
-        android:textAppearance="@style/select_lang"
 
-        android:textSize="34sp" />-->
 
  <Button
      android:id="@+id/btn_english"

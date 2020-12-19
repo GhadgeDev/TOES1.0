@@ -1,9 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".SignUpActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/txtDilouge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Here's\nyour first\nstep wth us, "
+        android:textSize="23sp"
+        android:textColor="@color/black"
+        android:layout_margin="20dp"
+        />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cimgprofile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/txtDilouge"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/useravatar"
+        />
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cimgprofile"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="50dp"
+
+        android:text="Name"
+        android:textColor="@color/black"
+        />
+    <EditText
+        android:id="@+id/etname"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/txtName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:hint="Name"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textColorHint="#97616161"
+        android:background="@drawable/devnagaribtn"
+        />
+
+    <TextView
+        android:id="@+id/txtContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etname"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="50dp"
+        android:text="Contact Number"
+        android:textColor="@color/black"
+        />
+    <EditText
+        android:id="@+id/etContact"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/txtContact"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:hint="Contact Number"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textColorHint="#97616161"
+        android:background="@drawable/devnagaribtn"
+        />
+    <TextView
+        android:id="@+id/txtAddr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etContact"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="50dp"
+        android:text="Address"
+        android:textColor="@color/black"
+        />
+    <EditText
+        android:id="@+id/etAddr"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/txtAddr"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:hint="Address"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textColorHint="#97616161"
+        android:background="@drawable/devnagaribtn"
+        />
+    <TextView
+        android:id="@+id/txtdob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etAddr"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="50dp"
+        android:text="Date Of Birth"
+        android:textColor="@color/black"
+        />
+    <EditText
+        android:id="@+id/etDob"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/txtdob"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:hint="Date of Birth"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textColorHint="#97616161"
+        android:focusable="false"
+        android:background="@drawable/devnagaribtn"
+        />
+    <TextView
+        android:id="@+id/txtGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etDob"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="50dp"
+        android:text="Gender"
+        android:textColor="@color/black"
+        />
+
+    <RadioGroup
+        android:id="@+id/radGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtGender"
+        android:layout_marginLeft="50dp"
+        android:background="#FFFFFF"
+        android:checkedButton="@id/rbtnGenderMale"
+        android:visibility="visible"
+        >
+
+        <RadioButton
+            android:id="@+id/rbtnGenderMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtGender"
+            android:layout_marginLeft="50dp"
+            android:outlineAmbientShadowColor="@color/black"
+            android:shadowColor="@color/black"
+            android:text="Male"
+            android:textColor="@color/black"
+            android:visibility="visible"
+            tools:visibility="visible"
+            android:buttonTint="#2B1EC0"/>
+
+        <RadioButton
+            android:id="@+id/rbtnGenderFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rbtnGenderMale"
+            android:layout_marginLeft="50dp"
+            android:outlineAmbientShadowColor="@color/black"
+            android:shadowColor="@color/black"
+            android:text="Female"
+            android:textColor="@color/black"
+            android:visibility="visible"
+            android:buttonTint="#2B1EC0"
+            tools:visibility="visible" />
+
+        <RadioButton
+            android:id="@+id/rbtnGenderOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rbtnGenderFemale"
+            android:layout_marginLeft="50dp"
+            android:outlineAmbientShadowColor="@color/black"
+            android:shadowColor="@color/black"
+            android:text="Other"
+            android:textColor="@color/black"
+            android:buttonTint="#2B1EC0"
+            android:visibility="visible"
+            tools:visibility="visible" />
+    </RadioGroup>
+    <TextView
+        android:id="@+id/txt_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="@font/fonts"
+        android:text="@string/Enext"
+        android:textSize="15sp"
+        android:textColor="#000000" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/txt_next"
+        android:layout_alignParentRight="true"
+
+        android:layout_gravity="bottom|right"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/nextbutton"
+        app:backgroundTint="#2B1EC0"
+        app:layout_anchorGravity="bottom|right|end" />
+
+</RelativeLayout>
