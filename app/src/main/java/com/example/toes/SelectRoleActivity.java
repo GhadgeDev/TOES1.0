@@ -7,16 +7,32 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class SelectRoleActivity extends AppCompatActivity {
 
     String selectedLanguage;
+    Button btnFindJob,btnFindWorker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_role);
         Intent intent = getIntent();
         selectedLanguage = intent.getStringExtra(Intent.EXTRA_TEXT);
+
+        btnFindJob = (Button)findViewById(R.id.btnFindJob);
+        btnFindWorker = (Button)findViewById(R.id.btnFindWorker);
+
+        btnFindWorker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent recruiter = new Intent(SelectRoleActivity.this,RecruiterHomeActivity.class);
+                startActivity(recruiter);
+            }
+        });
+
     }
 
     @Override
