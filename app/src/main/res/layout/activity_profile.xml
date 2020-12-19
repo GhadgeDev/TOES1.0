@@ -97,12 +97,15 @@
         android:layout_width="137dp"
         android:layout_height="37dp"
         android:layout_below="@+id/profile_address"
-        android:layout_margin="10dp"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="230dp"
+        android:layout_marginBottom="10dp"
+        android:layout_centerInParent="true"
         android:background="@drawable/englishbutton"
         android:padding="5dp"
         android:text="Logout"
-        android:layout_centerInParent="true"
         android:textSize="15sp" />
+
     <Button
         android:id="@+id/edit_profile"
         android:layout_width="137dp"
