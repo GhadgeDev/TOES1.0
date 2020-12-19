@@ -109,9 +109,7 @@
         android:layout_marginBottom="10dp"
         android:text="@string/show_password"
         android:textColor="@color/black"
-        android:textColorHighlight="#070707"
-        android:textColorHint="#0B0A0A"
-        android:textColorLink="#3F51B5"
+        android:buttonTint="#3F51B5"
 
         />
 

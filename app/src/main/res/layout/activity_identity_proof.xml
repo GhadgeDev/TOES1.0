@@ -1,9 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".IdentityProofActivity">
+    <TextView
+        android:id="@+id/txtDilouge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Need little bit of\ninformation, "
+        android:textSize="23sp"
+        android:textColor="@color/black"
+        android:layout_margin="20dp"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cimgprofile"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_below="@+id/txtDilouge"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/useravatar"
+        />
+    <TextView
+        android:id="@+id/txtPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cimgprofile"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+
+        android:text="New Password"
+        android:textColor="@color/black"
+        />
+    <EditText
+        android:id="@+id/etPass"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/txtPass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:hint="Create New Password"
+        android:password="true"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textColorHint="#97616161"
+        android:background="@drawable/devnagaribtn"
+        />
+
+    <TextView
+        android:id="@+id/txtConfirmPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPass"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:text="Confirm Password"
+        android:textColor="@color/black"
+        />
+    <EditText
+        android:id="@+id/etContact"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/txtConfirmPass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:password="true"
+        android:hint="Confirm Your Password"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:textColorHint="#97616161"
+        android:background="@drawable/devnagaribtn"
+        />
+    <TextView
+        android:id="@+id/txtAdhar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etContact"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:text="Adhar card no."
+        android:textColor="@color/black"
+        />
+    <EditText
+        android:id="@+id/etAdhar"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/txtAdhar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:hint="Adhar card Number"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textColorHint="#97616161"
+        android:background="@drawable/devnagaribtn"
+        />
+    <TextView
+        android:id="@+id/txtCAdhar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etAdhar"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:text="Confirm Adhar card no."
+        android:textColor="@color/black"
+        />
+    <EditText
+        android:id="@+id/etCAdhar"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/txtCAdhar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:hint="Confirm Your Adhar card Number"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textColorHint="#97616161"
+        android:background="@drawable/devnagaribtn"
+        />
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/cbShowPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etCAdhar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/show_password"
+        android:textColor="@color/black"
+      android:buttonTint="#3F51B5"
+
+        />
+
+    <Button
+        android:id="@+id/btnGo"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/cbShowPass"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:background="@drawable/englishbutton"
+        android:text="Let's Go"
+        />
+</RelativeLayout>

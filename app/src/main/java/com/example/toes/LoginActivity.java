@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     CheckBox cbShow;
     Button btnLogIn,btnSignUp;
     TextView txtWelcome,txtSign,labelContact,lablePass,txtForgotPass,txtOr;
-    String selectedLanguage;
+    String selectedLanguage = "1";
     int l ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogIn = (Button)findViewById(R.id.btnSignIn);
         btnSignUp = (Button)findViewById(R.id.btnCreateNewAcc);
-
+        selectedLanguage = "1";
         Intent intent = getIntent();
         selectedLanguage = intent.getStringExtra(Intent.EXTRA_TEXT);
         System.out.println("---------------------------------------------------"+selectedLanguage);

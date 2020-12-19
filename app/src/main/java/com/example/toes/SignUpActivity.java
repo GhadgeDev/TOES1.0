@@ -1,19 +1,25 @@
 package com.example.toes;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,10 +35,12 @@ public class SignUpActivity extends AppCompatActivity {
     TextView txtDilouge,txtName,txtContact,txtAddr,txtDob,txtGender,txtNext;
     RadioButton rbtnGenderMale,rbtnGenderFemale,rbtnGenderOther;
 
+    FloatingActionButton btnNext;
     String selectedLanguage;
-
-
-
+    String selectedImagePath;
+    Uri selectedImageUri;
+    String args[] = {"",""};
+    Bitmap bitmap=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,14 +60,17 @@ public class SignUpActivity extends AppCompatActivity {
         etContact = (EditText)findViewById(R.id.etContact);
         etDob = (EditText) findViewById(R.id.etDob);
         etAddr = (EditText)findViewById(R.id.etAddr);
+
         rbtnGenderMale = (RadioButton) findViewById(R.id.rbtnGenderMale);
         rbtnGenderFemale = (RadioButton) findViewById(R.id.rbtnGenderFemale);
         rbtnGenderOther = (RadioButton) findViewById(R.id.rbtnGenderOther);
 
+        btnNext = (FloatingActionButton) findViewById(R.id.btn_next);
+
 
         Intent intent = getIntent();
         selectedLanguage = intent.getStringExtra(Intent.EXTRA_TEXT);
-
+        args[0]= selectedLanguage;
         switch (selectedLanguage){
 
             case "0":
@@ -133,9 +144,23 @@ public class SignUpActivity extends AppCompatActivity {
                         myCal.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
+
+
+        //next Button
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next = new Intent(SignUpActivity.this,IdentityProofActivity.class);
+                next.putExtra("args",args);
+                System.out.println("--------------------------------sImage"+selectedImagePath);
+                startActivity(next);
+            }
+        });
+
     }
 
-    Bitmap bitmap=null;
+
 
 
         private void updateLabel () {
@@ -145,15 +170,20 @@ public class SignUpActivity extends AppCompatActivity {
 
             etDob.setText(sdf.format(myCal.getTime()));
         }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == PICK_IMAGE) {
-                Uri selectedImageUri = data.getData();
-                String selectedImagePath = selectedImageUri.getPath();
-                //  tv.setText(selectedImagePath);
+                 selectedImageUri = data.getData();
+                 selectedImagePath = selectedImageUri.getPath();
+
                 circleImageView.setImageURI(selectedImageUri);
+
+                args[1] = selectedImagePath;
             }
         }
     }
+
+
 }

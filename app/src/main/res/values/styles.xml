@@ -2,4 +2,7 @@
 <resources>
 
     <style name="select_lang"></style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#3F51B5</item>
+    </style>
 </resources>
