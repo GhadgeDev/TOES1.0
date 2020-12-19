@@ -76,4 +76,25 @@
     <string name="tab_text_2">Tab 2</string>
 
 
+    <string name="Mdilouge">आमच्यासह हे\nआपले पहिले\nपाऊल आहे,</string>
+    <string name="Hdilouge">यहाँ हमारे साथ\nआपका पहला\nकदम है,</string>
+
+    <string name="MName">नाव</string>
+    <string name="HName">नाम</string>
+
+    <string name="MAddr">पत्ता</string>
+    <string name="HAddr">पता</string>
+
+    <string name="MDob">जन्मतारीख</string>
+    <string name="HDob">जन्मतिथि</string>
+
+    <string name="MGender">लिंग</string>
+    <string name="HGender">लिंग</string>
+
+    <string name="Male">पुरुष</string>
+    <string name="Female">महिला</string>
+    <string name="MOther">इतर</string>
+    <string name="HOther">अन्य</string>
+
+
 </resources>

@@ -37,7 +37,7 @@
         android:textColor="@color/black"
         />
     <EditText
-        android:id="@+id/etname"
+        android:id="@+id/etName"
         android:layout_width="324dp"
         android:layout_height="55dp"
         android:layout_below="@+id/txtName"
@@ -54,7 +54,7 @@
         android:id="@+id/txtContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etname"
+        android:layout_below="@+id/etName"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="50dp"
         android:text="Contact Number"

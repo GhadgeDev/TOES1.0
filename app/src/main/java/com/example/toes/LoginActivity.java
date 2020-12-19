@@ -43,9 +43,9 @@ public class LoginActivity extends AppCompatActivity {
         btnSignUp = (Button)findViewById(R.id.btnCreateNewAcc);
 
         Intent intent = getIntent();
-        String text = intent.getStringExtra(Intent.EXTRA_TEXT);
-
-        switch (text){
+        selectedLanguage = intent.getStringExtra(Intent.EXTRA_TEXT);
+        System.out.println("---------------------------------------------------"+selectedLanguage);
+        switch (selectedLanguage){
              case "0":
 
                  break;
@@ -89,7 +89,15 @@ public class LoginActivity extends AppCompatActivity {
         }else{
            etPass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
         }
-
+       //Signup
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(LoginActivity.this,SignUpActivity.class);
+                intent1.putExtra(Intent.EXTRA_TEXT,selectedLanguage);
+                startActivity(intent1);
+            }
+        });
     }
 
 
