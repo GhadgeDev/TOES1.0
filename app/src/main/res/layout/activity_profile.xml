@@ -3,89 +3,77 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true"
+
     android:background="@color/white">
 
-    <TextView
-        android:id="@+id/textview_profile"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="#6259C5"
-        android:gravity="center|bottom"
-        android:text="Profile"
-        android:paddingBottom="8dp"
-        android:textColor="@color/white"
-        android:textSize="30sp" />
 
     <ImageView
-        android:layout_marginLeft="50sp"
-        android:layout_below="@+id/textview_profile"
+        android:layout_marginLeft="25dp"
+
         android:id="@+id/profile_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:layout_marginRight="50dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginRight="35dp"
         android:layout_marginTop="30dp"
-        android:src="@mipmap/ic_launcher_round" />
+
+        android:src="@mipmap/useravatar" />
 
     <TextView
         android:id="@+id/profile_name"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_marginTop="30dp"
         android:layout_toRightOf="@+id/profile_image"
-        android:layout_below="@+id/textview_profile"
         android:padding="8dp"
         android:text="Niket Jadhav"
         android:textColor="@color/black"
-        android:textSize="15sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/profile_contact"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_name"
-        android:layout_margin="10dp"
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/profile_image"
         android:padding="8dp"
         android:text="1234567891"
         android:textColor="@color/black"
-        android:textSize="15sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/profile_gender"
-        android:layout_width="300dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/profile_image"
         android:layout_below="@+id/profile_contact"
-        android:layout_margin="10dp"
+        android:layout_marginTop="5dp"
         android:padding="8dp"
         android:text="MALE"
         android:textColor="@color/black"
-        android:textSize="15sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/profile_adhar"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profile_gender"
-        android:layout_margin="10dp"
-        android:background="@drawable/textbox_border"
+        android:layout_below="@id/divider"
+
         android:gravity="center"
         android:lineSpacingExtra="8dp"
-        android:padding="8dp"
+        android:layout_centerHorizontal="true"
         android:text="Adhar Number: 123456789012"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
     <TextView
         android:id="@+id/profile_address"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_adhar"
         android:layout_margin="10dp"
-        android:background="@drawable/textbox_border"
         android:gravity="center"
-        android:layout_centerInParent="true"
+       android:layout_centerHorizontal="true"
         android:padding="8dp"
         android:text="Katraj, Pune - 411046"
         android:textColor="@color/black"
@@ -94,13 +82,14 @@
 
     <Button
         android:id="@+id/logout"
-        android:layout_width="137dp"
-        android:layout_height="37dp"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
         android:layout_below="@+id/profile_address"
         android:layout_centerVertical="true"
         android:layout_marginTop="230dp"
         android:layout_marginBottom="10dp"
         android:layout_centerInParent="true"
+        android:textColor="@color/white"
         android:background="@drawable/englishbutton"
         android:padding="5dp"
         android:text="Logout"
@@ -108,13 +97,34 @@
 
     <Button
         android:id="@+id/edit_profile"
-        android:layout_width="137dp"
-        android:layout_height="37dp"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
         android:layout_below="@+id/logout"
         android:background="@drawable/englishbutton"
         android:padding="5dp"
         android:text="Edit Profile"
+        android:textColor="@color/white"
         android:layout_centerInParent="true"
         android:textSize="15sp" />
+<TextView
+    android:id="@+id/txtprofession"
+    android:layout_width="325dp"
+    android:layout_height="100dp"
+    android:layout_marginTop="35dp"
+    android:background="@drawable/devnagaribtn"
+    android:layout_below="@+id/profile_address"
+    android:layout_centerHorizontal="true"
+    android:gravity="center"
+    android:textColor="#E80909"
+    android:text="No profession selected"
+    />
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+
+        android:layout_margin="20dp"
+        android:background="?android:attr/listDivider"
+        android:layout_below="@id/profile_image"/>
 
 </RelativeLayout>

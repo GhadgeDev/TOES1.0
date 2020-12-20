@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <vector
+        xmlns:aapt="http://schemas.android.com/aapt"
+        android:width="134dp"
+        android:height="52dp"
+        android:viewportWidth="134"
+        android:viewportHeight="52"
+
+        />
+    <solid
+        android:color="#CC2B1EC0"
+        >
+    </solid>
+    <corners
+
+        android:radius="10dp"
+        />
+</shape>
