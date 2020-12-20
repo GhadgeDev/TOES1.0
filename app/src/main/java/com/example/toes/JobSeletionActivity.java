@@ -72,14 +72,16 @@ public class JobSeletionActivity extends AppCompatActivity {
 
         switch (view.getId()) {
             case R.id.chkboxJob1:
-                if (flag < 2) {
+                if (flag < 3) {
 
                     if (checked) {
-                        System.out.println("-----------------------+++++-" + flag);
+
                         ++flag;
+                        System.out.println("--------------ch1-Checked---------+++++-" + flag);
                     } else {
-                        System.out.println("-----------------------+++++-" + flag);
-                        --flag;
+
+                        flag = --flag;
+                        System.out.println("---------ch1-UnChecked---------------" + flag);
                     }
                 } else {
                     chkboxJob1.setChecked(false);
@@ -90,11 +92,13 @@ public class JobSeletionActivity extends AppCompatActivity {
 
             case R.id.chkboxJob2:
 
-                if (flag < 2) {
+                if (flag < 3) {
                     if (checked) {
                         ++flag;
+                        System.out.println("----------ch2-Checked-------------+++++-" + flag);
                     } else {
-                        --flag;
+                        flag = --flag;
+                        System.out.println("------------------------" + flag);
                     }
                 } else {
                     chkboxJob2.setChecked(false);
@@ -106,8 +110,10 @@ public class JobSeletionActivity extends AppCompatActivity {
                 if (flag < 2) {
                     if (checked) {
                         ++flag;
+                        System.out.println("-----------------------+++++-" + flag);
                     } else {
-                        --flag;
+                        flag = --flag;
+                        System.out.println("------------------------" + flag);
                     }
                 } else {
                     chkboxJob3.setChecked(false);
@@ -116,11 +122,13 @@ public class JobSeletionActivity extends AppCompatActivity {
 
                 break;
             case R.id.chkboxJob4:
-                if (flag < 2) {
+                if (flag < 3) {
                     if (checked) {
                         ++flag;
+                        System.out.println("-----------------------+++++-" + flag);
                     } else {
-                        --flag;
+                        flag = --flag;
+                        System.out.println("------------------------" + flag);
                     }
                 } else {
                     chkboxJob4.setChecked(false);
@@ -129,11 +137,13 @@ public class JobSeletionActivity extends AppCompatActivity {
 
                 break;
             case R.id.chkboxJob5:
-                if (flag < 2) {
+                if (flag < 3) {
                     if (checked) {
                         ++flag;
+                        System.out.println("-----------------------+++++-" + flag);
                     } else {
-                        --flag;
+                        flag = --flag;
+                        System.out.println("------------------------" + flag);
                     }
                 } else {
 
@@ -143,7 +153,7 @@ public class JobSeletionActivity extends AppCompatActivity {
 
                 break;
             case R.id.chkboxOther:
-                if (flag < 2) {
+                if (flag < 3) {
                     if (checked) {
                         chkboxOther.setClickable(true);
                         etOtherJob.setVisibility(View.VISIBLE);
@@ -152,15 +162,20 @@ public class JobSeletionActivity extends AppCompatActivity {
                     } else {
                         chkboxOther.setClickable(true);
                         etOtherJob.setVisibility(View.INVISIBLE);
-                        --flag;
+                        flag = --flag;
                         System.out.println("------------------------" + flag);
                     }
-                    if (!checked){
-                        etOtherJob.setVisibility(View.INVISIBLE);
-                    }
 
-                } else {
-                    if (flag >= 2) {
+
+                }
+                if(flag >= 3){
+                    if (checked){}
+                    else {
+                        flag--;
+                        System.out.println("------------------------" + flag);
+                    }
+                }else {
+                    if (flag > 3) {
                         chkboxOther.setChecked(false);
                     }
                     Toast.makeText(JobSeletionActivity.this, "Maximum 3 jobs are allowed", Toast.LENGTH_SHORT).show();
