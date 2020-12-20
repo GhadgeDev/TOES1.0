@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".JobSeletionActivity"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/txtmesg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select the job,\nwhich you want to do,"
+        android:layout_margin="25dp"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+
+        />
+
+    <Spinner
+        android:id="@+id/spinnerCity"
+        android:layout_below="@+id/txtmesg"
+        android:layout_centerHorizontal="true"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:textAlignment="center"
+        android:background="@drawable/select_job_title"
+        android:gravity="center"
+        android:isScrollContainer="true"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:popupBackground="#827ADE"
+        />
+    <TextView
+        android:id="@+id/txtmesgJob"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Minimum 1 Maximum 3 jobs you can select..."
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:textSize="15sp"
+        android:layout_below="@id/spinnerCity"
+        android:textColor="#8E8D8D"
+
+        />
+
+    <CheckBox
+        android:id="@+id/chkboxJob1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtmesgJob"
+        android:text="Painting"
+        android:textColor="@color/black"
+        android:layout_marginLeft="70dp"
+        android:buttonTint="@color/purple_700"
+        android:onClick="onCheck"
+        android:layout_marginBottom="30dp"
+        />
+    <CheckBox
+        android:id="@+id/chkboxJob2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtmesgJob"
+        android:textColor="@color/black"
+        android:text="carpainting"
+        android:clickable="true"
+        android:buttonTint="@color/purple_700"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="70dp"
+        android:onClick="onCheck"
+        android:layout_toRightOf="@id/chkboxJob1" />
+    <CheckBox
+        android:id="@+id/chkboxJob3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chkboxJob1"
+        android:text="Plumbing"
+        android:textColor="@color/black"
+        android:onClick="onCheck"
+        android:buttonTint="@color/purple_700"
+        android:layout_marginLeft="70dp"
+        android:layout_marginBottom="30dp"
+
+        />
+    <CheckBox
+        android:id="@+id/chkboxJob4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chkboxJob2"
+        android:text="Driving"
+        android:textColor="@color/black"
+        android:buttonTint="@color/purple_700"
+        android:onClick="onCheck"
+        android:layout_marginLeft="70dp"
+        android:layout_toRightOf="@id/chkboxJob1" />
+    <CheckBox
+        android:id="@+id/chkboxJob5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chkboxJob3"
+        android:text="Tailering"
+        android:textColor="@color/black"
+        android:buttonTint="@color/purple_700"
+        android:onClick="onCheck"
+        android:layout_marginLeft="70dp"
+        android:layout_marginBottom="30dp"
+
+        />
+    <CheckBox
+        android:id="@+id/chkboxJob6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chkboxJob3"
+        android:text="Electrician"
+        android:textColor="@color/black"
+        android:buttonTint="@color/purple_700"
+        android:onClick="onCheck"
+        android:layout_marginLeft="70dp"
+        android:layout_toRightOf="@id/chkboxJob1" />
+
+    <CheckBox
+        android:id="@+id/chkboxOther"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chkboxJob5"
+        android:layout_centerHorizontal="true"
+        android:layout_toRightOf="@id/chkboxJob1"
+        android:buttonTint="@color/purple_700"
+        android:checked="false"
+        android:clickable="true"
+        android:onClick="onCheck"
+        android:text="Other"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/etOtherJob"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:layout_below="@id/chkboxOther"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:background="@drawable/devnagaribtn"
+        android:textColor="@color/black"
+        android:hint="Specify your Other Profession"
+        android:textColorHint="#CE787373"
+        android:gravity="center"
+        android:visibility="invisible"
+        />
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/etOtherJob"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/logout_dilouge"
+        android:shadowColor="@color/black"
+        android:text="Start"
+        android:textColor="@color/white"
+        />
+</RelativeLayout>
