@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VisitingChargesActivity">
+<LinearLayout
+    android:id="@+id/linear1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_centerHorizontal="true"
+    android:layout_margin="25dp"
+    android:padding="20dp"
+    android:background="@drawable/devnagaribtn">
+    <Button
+        android:id="@+id/btnJob1"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/logout_dilouge"
+        android:text="Job1"
+        android:textSize="13sp"
+        android:textColor="@color/white"/>
+    <Button
+        android:id="@+id/btnJob2"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/logout_dilouge"
+        android:text="job2"
+        android:textSize="13sp"
+        android:visibility="gone"
+        android:textColor="@color/white"/>
+    <Button
+        android:id="@+id/btnJob3"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Job3"
+        android:textSize="13sp"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:background="@drawable/logout_dilouge"/>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/linear1"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/devnagaribtn"
+        android:padding="25dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/li1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="2dp">
+        <LinearLayout
+            android:id="@+id/linearJob1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtVisitingCharges"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Visiting charges for "
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtJ1"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+
+                android:text="job1"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/etVisitingCharges"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:inputType="number"
+                android:gravity="center"
+                android:background="@drawable/devnagaribtn"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearExp1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtExperience"
+                android:layout_width="253dp"
+                android:layout_height="wrap_content"
+
+                android:textSize="18sp"
+                android:text="Experience for job" />
+
+            <EditText
+                android:id="@+id/etExperience"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:inputType="number"
+                android:gravity="center"
+                android:background="@drawable/devnagaribtn"
+                />
+        </LinearLayout>
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/li2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginTop="2dp">
+
+        <LinearLayout
+            android:id="@+id/linearJob2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/txtVisitingCharges2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Visiting charges for "
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/txtJ2"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+
+                android:text="job2"
+                android:textSize="18sp" />
+            <EditText
+                android:id="@+id/etVisitingCharges2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:inputType="number"
+                android:background="@drawable/devnagaribtn"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearExp2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:id="@+id/txtExperience2"
+                android:layout_width="253dp"
+                android:layout_height="wrap_content"
+
+                android:textSize="18sp"
+                android:text="Experience for job2" />
+
+            <EditText
+                android:id="@+id/etExperience2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:inputType="number"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/devnagaribtn"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/li3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <LinearLayout
+            android:id="@+id/linearJob3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/txtVisitingCharges3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Visiting charges for "
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/txtJ3"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+
+                android:text="job3"
+                android:textSize="18sp" />
+            <EditText
+                android:id="@+id/etVisitingCharges3"
+                android:layout_width="50dp"
+                android:inputType="number"
+                android:layout_height="50dp"
+                android:background="@drawable/devnagaribtn"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearExp3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtExperience3"
+                android:layout_width="253dp"
+                android:layout_height="wrap_content"
+
+                android:textSize="18sp"
+                android:text="Experience for job3" />
+
+            <EditText
+                android:id="@+id/etExperience3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:inputType="number"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/devnagaribtn"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGo"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/logout_dilouge"
+        android:text="Go"
+        android:textColor="@color/white"
+
+        android:layout_below="@+id/linear2"
+        />
+
+</RelativeLayout>

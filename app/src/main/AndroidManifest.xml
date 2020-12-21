@@ -12,7 +12,9 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".JobSeletionActivity"
+        <activity android:name=".VisitingChargesActivity"></activity>
+        <activity
+            android:name=".JobSeletionActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +24,7 @@
         </activity>
         <activity
             android:name=".RecruiterHomeActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".SelectWorkerActivity"
             android:screenOrientation="portrait"
@@ -35,13 +36,13 @@
         <activity
             android:name=".ProfileActivity"
             android:label="Profile"
-            android:screenOrientation="portrait"> </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".SignUpActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"> </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity
             android:name=".SelectLanguageActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"> </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity
             android:name=".IdentityProofActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -50,9 +51,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SplashScreenActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
         <activity android:name=".SelectRoleActivity"></activity>
     </application>
 
