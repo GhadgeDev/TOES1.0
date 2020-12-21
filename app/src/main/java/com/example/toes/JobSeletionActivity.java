@@ -28,7 +28,8 @@ public class JobSeletionActivity extends AppCompatActivity {
     Button btnStart;
     int flag = 0;
     String job1 = "",job2 = "",job3 = "";
-   // String job[] = new String[3];
+    String temp ="";
+    // String job[] = new String[3];
     ArrayList<String> job = new ArrayList<>();
     public int i = 0;
     @Override
@@ -66,21 +67,32 @@ public class JobSeletionActivity extends AppCompatActivity {
                     if(etOtherJob.getText().toString().equals("")){
                         Toast.makeText(JobSeletionActivity.this,"Please enter your other profession !",Toast.LENGTH_SHORT).show();
                     }else{
-                        Intent intent = new Intent(JobSeletionActivity.this,VisitingChargesActivity.class);
-                        startActivity(intent);
+                        if (spinnerCity.getSelectedItem().toString().equals("Select Your City")){
+                            Toast.makeText(JobSeletionActivity.this,"Please select city!",Toast.LENGTH_SHORT).show();
+                        }else{
+                            System.out.println("---------eiiiiiiii--------"+job);
+                    /*for (int j = 0 ; j < job.size(); j++){
+                        System.out.println(job.get(j));
+                    }*/ temp = etOtherJob.getText().toString();
+                            job.add(temp);
+                            System.out.println("---------eiiiiiiii--------"+job);
+
+                            Intent intent = new Intent(JobSeletionActivity.this,VisitingChargesActivity.class);
+                            intent.putExtra("arrl",job);
+                            intent.putExtra("f",flag);
+                            startActivity(intent);
+                        }
+
                     }
                 }else if (spinnerCity.getSelectedItem().toString().equals("Select Your City")){
                     Toast.makeText(JobSeletionActivity.this,"Please select city!",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    System.out.println("---------eiiiiiiii--------"+job);
-                    /*for (int j = 0 ; j < job.size(); j++){
-                        System.out.println(job.get(j));
-                    }*/
+
                     Intent intent = new Intent(JobSeletionActivity.this,VisitingChargesActivity.class);
-                   intent.putExtra("arrl",job);
-                   intent.putExtra("f",flag);
-                           startActivity(intent);
+                    intent.putExtra("arrl",job);
+                    intent.putExtra("f",flag);
+                    startActivity(intent);
                 }
             }
         });
@@ -112,26 +124,26 @@ public class JobSeletionActivity extends AppCompatActivity {
             case R.id.chkboxJob2:
 
 
-                    if (checked) {
-                        ++flag;
-                        //job[i] = chkboxJob2.getText().toString();
-                        job.add(i,chkboxJob2.getText().toString());
-                        i++;
-                        System.out.println("----------ch2-Checked-------------+++++-" + flag);
-                    } else {
-                        flag = --flag;
-                      //  job.remove(i);
-                        job.remove(chkboxJob2.getText().toString());
-                        i--;
-                        System.out.println("------------------------" + flag);
-                    }
+                if (checked) {
+                    ++flag;
+                    //job[i] = chkboxJob2.getText().toString();
+                    job.add(i,chkboxJob2.getText().toString());
+                    i++;
+                    System.out.println("----------ch2-Checked-------------+++++-" + flag);
+                } else {
+                    flag = --flag;
+                    //  job.remove(i);
+                    job.remove(chkboxJob2.getText().toString());
+                    i--;
+                    System.out.println("------------------------" + flag);
+                }
 
                 break;
             case R.id.chkboxJob3:
                 if (checked) {
                     ++flag;
                     job.add(i,chkboxJob3.getText().toString());
-                  //  job[i] = chkboxJob3.getText().toString();
+                    //  job[i] = chkboxJob3.getText().toString();
                     i++;
                     System.out.println("-----------------------+++++-" + flag);
                 } else {
@@ -144,14 +156,14 @@ public class JobSeletionActivity extends AppCompatActivity {
             case R.id.chkboxJob5:
                 if (checked) {
                     ++flag;
-                   // job[i] = chkboxJob5.getText().toString();
+                    // job[i] = chkboxJob5.getText().toString();
                     job.add(i,chkboxJob5.getText().toString());
                     i++;
                     System.out.println("-----------------------+++++-" + flag);
                 } else {
                     flag = --flag;
                     job.remove(chkboxJob5.getText().toString());
-                   // job.remove(i);
+                    // job.remove(i);
                     i--;
                     System.out.println("------------------------" + flag);
                 }
@@ -166,24 +178,24 @@ public class JobSeletionActivity extends AppCompatActivity {
                 } else {
                     flag = --flag;
                     job.remove(chkboxJob4.getText().toString());
-                  //  job.remove(i);
+                    //  job.remove(i);
                     i--;
                     System.out.println("------------------------" + flag);
                 }
                 break;
             case R.id.chkboxJob6:
                 if (checked) {
-                        ++flag;
+                    ++flag;
                     job.add(i,chkboxJob6.getText().toString());
-                  //  job[i] = chkboxJob6.getText().toString();
+                    //  job[i] = chkboxJob6.getText().toString();
                     i++;
-                        System.out.println("-----------------------+++++-" + flag);
-                    } else {
-                        flag = --flag;
+                    System.out.println("-----------------------+++++-" + flag);
+                } else {
+                    flag = --flag;
                     job.remove(chkboxJob6.getText().toString());
-                        i--;
-                        System.out.println("------------------------" + flag);
-                    }
+                    i--;
+                    System.out.println("------------------------" + flag);
+                }
 
 
                 break;
@@ -191,26 +203,27 @@ public class JobSeletionActivity extends AppCompatActivity {
 
             case R.id.chkboxOther:
 
-                    if (checked) {
-                        chkboxOther.setClickable(true);
-                        etOtherJob.setVisibility(View.VISIBLE);
-                        String temp = "";
-                       // temp = etOtherJob.getText().toString();
-                       // System.out.println("SSSSSSS ----- "+temp);
-                        //  chkboxOther.setText(temp);
-                        ++flag;
-                        job.add(i,chkboxOther.getText().toString());
-                       // job[i] = chkboxOther.getText().toString();
-                        i++;
-                        System.out.println("-----------------------+++++-" + flag);
-                    } else {
-                        chkboxOther.setClickable(true);
-                        etOtherJob.setVisibility(View.INVISIBLE);
-                        flag = --flag;
-                        job.remove(chkboxOther.getText().toString());
-                        i--;
-                        System.out.println("------------------------" + flag);
-                    }
+                if (checked) {
+                    chkboxOther.setClickable(true);
+                    etOtherJob.setVisibility(View.VISIBLE);
+
+                   temp = etOtherJob.getText().toString();
+                     System.out.println("SSSSSSS ----- "+temp);
+                    // chkboxOther.setText(temp);
+                    ++flag;
+                   // job.add(i,chkboxOther.getText().toString());
+                    // job[i] = chkboxOther.getText().toString();
+                    i++;
+                    System.out.println("-----------------------+++++-" + flag);
+                } else {
+                    chkboxOther.setClickable(true);
+                    etOtherJob.setVisibility(View.INVISIBLE);
+                    etOtherJob.setText("");
+                    flag = --flag;
+                    job.remove(temp);
+                    i--;
+                    System.out.println("------------------------" + flag);
+                }
 
                 break;
 
@@ -220,8 +233,3 @@ public class JobSeletionActivity extends AppCompatActivity {
 
 
 }
-
-
-
-
-
