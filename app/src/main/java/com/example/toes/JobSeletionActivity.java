@@ -194,9 +194,10 @@ public class JobSeletionActivity extends AppCompatActivity {
                     if (checked) {
                         chkboxOther.setClickable(true);
                         etOtherJob.setVisibility(View.VISIBLE);
-                     //   String temp = "";
-                      //  temp = etOtherJob.getText().toString();
-                      //  chkboxOther.setText(temp);
+                        String temp = "";
+                       // temp = etOtherJob.getText().toString();
+                       // System.out.println("SSSSSSS ----- "+temp);
+                        //  chkboxOther.setText(temp);
                         ++flag;
                         job.add(i,chkboxOther.getText().toString());
                        // job[i] = chkboxOther.getText().toString();
