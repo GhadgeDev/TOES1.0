@@ -14,6 +14,14 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText etContact,etPass;
@@ -45,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = getIntent();
         selectedLanguage = intent.getStringExtra(Intent.EXTRA_TEXT);
         System.out.println("---------------------------------------------------"+selectedLanguage);
-        switch (selectedLanguage){
+        switch ("0"){
              case "0":
 
                  break;
@@ -98,6 +106,29 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+       btnLogIn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               OkHttpClient client = new OkHttpClient().newBuilder()
+                       .build();
+               MediaType mediaType = MediaType.parse("text/plain");
+               RequestBody body = RequestBody.create(mediaType, "{\n    \"password\": \"qwerty@123\",\n    \"phone\": \"9876543201\"\n}");
+               Request request = new Request.Builder()
+                       .url("http://52.201.220.252/authapp/token/login/")
+                       .method("POST", body)
+                       .addHeader("password", etPass.getText().toString())
+                       .addHeader("phone", etContact.getText().toString())
+                       .build();
+               try {
+                   Response response = client.newCall(request).execute();
+                   System.out.println("++++++++++++++++++++"+response);
+               } catch (IOException e) {
+                   e.printStackTrace();
+
+               }
+
+           }
+       });
     }
 
 

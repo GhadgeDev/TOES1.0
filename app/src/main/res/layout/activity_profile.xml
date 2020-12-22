@@ -78,7 +78,17 @@
         android:text="Katraj, Pune - 411046"
         android:textColor="@color/black"
         android:textSize="15sp" />
-
+    <Button
+        android:id="@+id/edit_profile"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:layout_below="@+id/logout"
+        android:background="@drawable/englishbutton"
+        android:padding="5dp"
+        android:text="Edit Profile"
+        android:textColor="@color/white"
+        android:layout_centerInParent="true"
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/logout"
@@ -95,17 +105,7 @@
         android:text="Logout"
         android:textSize="15sp" />
 
-    <Button
-        android:id="@+id/edit_profile"
-        android:layout_width="150dp"
-        android:layout_height="55dp"
-        android:layout_below="@+id/logout"
-        android:background="@drawable/englishbutton"
-        android:padding="5dp"
-        android:text="Edit Profile"
-        android:textColor="@color/white"
-        android:layout_centerInParent="true"
-        android:textSize="15sp" />
+
 <TextView
     android:id="@+id/txtprofession"
     android:layout_width="325dp"

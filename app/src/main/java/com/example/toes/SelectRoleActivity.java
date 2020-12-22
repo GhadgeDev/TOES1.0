@@ -32,6 +32,13 @@ public class SelectRoleActivity extends AppCompatActivity {
                 startActivity(recruiter);
             }
         });
+        btnFindJob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent recruiter = new Intent(SelectRoleActivity.this,JobSeletionActivity.class);
+                startActivity(recruiter);
+            }
+        });
 
     }
 
