@@ -17,27 +17,16 @@
             android:id="@+id/worker_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#6259C5"
-            app:title="Toes"
-            app:titleTextColor="#6259C5" />
+            android:background="#3949AB"
+            app:title="Select Job"
+            app:titleTextColor="@color/white" />
 
-        <TextView
-            android:id="@+id/select_recruiter_text"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_below="@+id/worker_toolbar"
-            android:background="#6259C5"
-            android:gravity="bottom|center"
-            android:paddingBottom="15dp"
-            android:text="Select Job"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recruiter_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/select_recruiter_text" />
+            android:layout_below="@+id/worker_toolbar" />
 
         <FrameLayout
             android:id="@+id/fragment_container"

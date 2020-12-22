@@ -8,16 +8,6 @@
     android:background="@color/white"
     tools:context=".RecruiterNotificationActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="#6259C5"
-        android:text="Notifications"
-        android:textColor="@color/white"
-        android:gravity="center|bottom"
-        android:paddingBottom="10dp"
-        android:textSize="30sp"/>
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"

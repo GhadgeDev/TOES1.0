@@ -38,8 +38,6 @@ public class RecruiterHomeActivity extends AppCompatActivity {
                 if(!text.equals("Select Job")) {
                     Intent intent = SelectWorkerActivity.newIntent(RecruiterHomeActivity.this, text);
                     startActivity(intent);
-                  /*  Intent intent = new Intent(RecruiterHomeActivity.this,SelectWorkerActivity.class);
-                    startActivity(intent);*/
                 }
                 else{
                     Toast.makeText(RecruiterHomeActivity.this,R.string.select, Toast.LENGTH_SHORT).show();
