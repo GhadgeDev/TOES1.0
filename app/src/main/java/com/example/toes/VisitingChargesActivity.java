@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class VisitingChargesActivity extends AppCompatActivity {
 ArrayList<String> job = new ArrayList<>();
 int flag;
-Button btnJob1,btnJob2,btnJob3;
+Button btnJob1,btnJob2,btnJob3,btnGo;
 LinearLayout ll1,ll2,ll3;
 TextView t1,t2,t3;
     @Override
@@ -34,6 +34,7 @@ TextView t1,t2,t3;
         t2 = (TextView)findViewById(R.id.txtJ2);
         t3 = (TextView)findViewById(R.id.txtJ3);
 
+        btnGo = (Button)findViewById(R.id.btnGo);
         Intent intent = getIntent();
         job = intent.getStringArrayListExtra("arrl");
         System.out.println("In Visiting charge"+job);
@@ -69,5 +70,12 @@ TextView t1,t2,t3;
             t2.setText(job.get(1));
             t3.setText(job.get(2));
         }
+        btnGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1= new Intent(VisitingChargesActivity.this,SelectJobActivity.class);
+                startActivity(intent1);
+            }
+        });
     }
 }

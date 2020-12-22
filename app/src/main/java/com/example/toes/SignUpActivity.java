@@ -12,12 +12,14 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -30,9 +32,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SignUpActivity extends AppCompatActivity {
     Calendar myCal = Calendar.getInstance();
     public static final int PICK_IMAGE = 1;
-    EditText etName,etDob,etContact,etAddr;
+    EditText etName,etLName,etDob,etContact,etAddr;
     CircleImageView circleImageView;
-    TextView txtDilouge,txtName,txtContact,txtAddr,txtDob,txtGender,txtNext;
+    TextView txtDilouge,txtName,txtLName,txtContact,txtAddr,txtDob,txtGender,txtNext;
     RadioButton rbtnGenderMale,rbtnGenderFemale,rbtnGenderOther;
 
     FloatingActionButton btnNext;
@@ -41,6 +43,9 @@ public class SignUpActivity extends AppCompatActivity {
     Uri selectedImageUri;
     String args[] = {"",""};
     Bitmap bitmap=null;
+
+    int l= 0;
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,14 +54,16 @@ public class SignUpActivity extends AppCompatActivity {
         circleImageView = (CircleImageView)findViewById(R.id.cimgprofile);
 
         txtDilouge = (TextView)findViewById(R.id.txtDilouge);
-        txtName = (TextView)findViewById(R.id.txtName);
+        txtName = (TextView)findViewById(R.id.txtFName);
+        txtLName = (TextView)findViewById(R.id.txtLName);
         txtContact = (TextView)findViewById(R.id.txtContact);
         txtAddr = (TextView)findViewById(R.id.txtAddr);
         txtDob = (TextView)findViewById(R.id.txtdob);
         txtGender = (TextView)findViewById(R.id.txtGender);
         txtNext = (TextView)findViewById(R.id.txt_next);
 
-        etName = (EditText)findViewById(R.id.etName);
+        etName = (EditText)findViewById(R.id.etFName);
+        etLName = (EditText)findViewById(R.id.etLName);
         etContact = (EditText)findViewById(R.id.etContact);
         etDob = (EditText) findViewById(R.id.etDob);
         etAddr = (EditText)findViewById(R.id.etAddr);
@@ -79,6 +86,8 @@ public class SignUpActivity extends AppCompatActivity {
             case "1":
                 txtDilouge.setText(R.string.Mdilouge);
                 txtName.setText(R.string.MName);
+                txtLName.setText(R.string.MLName);
+
                 txtContact.setText(R.string.Musername);
                 txtAddr.setText(R.string.MAddr);
                 txtDob.setText(R.string.MDob);
@@ -86,6 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
                 txtNext.setText(R.string.Mnext);
 
                 etName.setHint(R.string.MName);
+                etLName.setHint(R.string.MLName);
                 etContact.setHint(R.string.Musername);
                 etAddr.setHint(R.string.MAddr);
                 etDob.setHint(R.string.MDob);
@@ -97,6 +107,7 @@ public class SignUpActivity extends AppCompatActivity {
             case "2":
                 txtDilouge.setText(R.string.Hdilouge);
                 txtName.setText(R.string.HName);
+                txtLName.setText(R.string.HLName);
                 txtContact.setText(R.string.Husername);
                 txtAddr.setText(R.string.HAddr);
                 txtDob.setText(R.string.HDob);
@@ -104,6 +115,7 @@ public class SignUpActivity extends AppCompatActivity {
                 txtNext.setText(R.string.Hnext);
 
                 etName.setHint(R.string.HName);
+                etLName.setHint(R.string.HLName);
                 etContact.setHint(R.string.Husername);
                 etAddr.setHint(R.string.HAddr);
                 etDob.setHint(R.string.HDob);
@@ -146,15 +158,28 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
 
-
-        //next Button
+        etContact.addTextChangedListener(new PhoneNumberFormattingTextWatcher("+91"));
+                //next Button
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent next = new Intent(SignUpActivity.this,IdentityProofActivity.class);
-                next.putExtra("args",args);
-                System.out.println("--------------------------------sImage"+selectedImagePath);
-                startActivity(next);
+                if (etName.getText().toString().isEmpty() || etLName.getText().toString().isEmpty() || etAddr.getText().toString().isEmpty() || etContact.getText().toString().isEmpty() || etDob.getText().toString().isEmpty()){
+                    Toast.makeText(SignUpActivity.this,"Please fill all fields !",Toast.LENGTH_SHORT).show();
+                }else if (etContact.getText().toString().length() < 10){
+                    Toast.makeText(SignUpActivity.this,"Please enter 10 digit number !",Toast.LENGTH_SHORT).show();
+                    System.out.println("--------------------------------sImage" + selectedImagePath);
+                    System.out.println("--------------------------------contact : " + etContact.getText().toString().length());
+
+                }
+              else {
+
+                      Intent next = new Intent(SignUpActivity.this, IdentityProofActivity.class);
+                      next.putExtra("args", args);
+                       System.out.println("--------------------------------sImage" + selectedImagePath);
+                       System.out.println("--------------------------------contact" + etContact.getText().toString());
+                       startActivity(next);
+
+                }
             }
         });
 

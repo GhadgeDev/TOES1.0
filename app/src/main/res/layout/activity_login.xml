@@ -108,6 +108,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:text="@string/show_password"
+        android:onClick="onCheck"
         android:textColor="@color/black"
         android:buttonTint="#3F51B5"
 

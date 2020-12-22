@@ -32,8 +32,8 @@ public class SelectJobActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_job);
 
-        Toolbar toolbar = findViewById(R.id.worker_toolbar);
-        setSupportActionBar(toolbar);
+       // Toolbar toolbar = findViewById(R.id.worker_toolbar);
+       // setSupportActionBar(toolbar);
         mDrawer = findViewById(R.id.worker_drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -58,7 +58,7 @@ public class SelectJobActivity extends AppCompatActivity {
         });
         View headerview = navigationView.getHeaderView(0);
         ImageView profileImage = headerview.findViewById(R.id.nav_image_click);
-        profileImage.setOnClickListener(new View.OnClickListener() {
+      profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SelectJobActivity.this, ProfileActivity.class);
@@ -67,7 +67,7 @@ public class SelectJobActivity extends AppCompatActivity {
             }
         });
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,mDrawer,toolbar,
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,mDrawer,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();

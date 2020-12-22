@@ -82,6 +82,9 @@
     <string name="MName">नाव</string>
     <string name="HName">नाम</string>
 
+    <string name="MLName">आडनाव</string>
+    <string name="HLName">उपनाम</string>
+
     <string name="MAddr">पत्ता</string>
     <string name="HAddr">पता</string>
 

@@ -26,35 +26,67 @@
         android:src="@mipmap/useravatar"
         />
     <TextView
-        android:id="@+id/txtName"
+        android:id="@+id/txtFName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cimgprofile"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="42dp"
 
-        android:text="Name"
+        android:text="First Name"
         android:textColor="@color/black"
         />
+
     <EditText
-        android:id="@+id/etName"
-        android:layout_width="324dp"
+        android:id="@+id/etFName"
+        android:layout_width="160dp"
         android:layout_height="55dp"
-        android:layout_below="@+id/txtName"
-        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/txtFName"
+        android:layout_marginLeft="42dp"
         android:layout_marginTop="5dp"
+        android:inputType="textPersonName"
+        android:background="@drawable/devnagaribtn"
+
+        android:cursorVisible="true"
+        android:duplicateParentState="true"
+
+        android:fontFamily="@font/lohitdevanagari"
+        android:gravity="center"
         android:hint="Name"
+        android:textColor="@color/black"
+        android:textColorHint="#97616161" />
+    <TextView
+        android:id="@+id/txtLName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cimgprofile"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+
+        android:text="Last Name"
+        android:textColor="@color/black"
+        android:layout_toRightOf="@+id/etFName" />
+    <EditText
+        android:id="@+id/etLName"
+        android:layout_width="160dp"
+        android:inputType="textPersonName"
+        android:layout_height="55dp"
+        android:fontFamily="@font/lohitdevanagari"
+        android:layout_below="@+id/txtLName"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/etFName"
+        android:hint="Last Name"
         android:textColor="@color/black"
         android:gravity="center"
         android:textColorHint="#97616161"
         android:background="@drawable/devnagaribtn"
         />
-
     <TextView
         android:id="@+id/txtContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etName"
+        android:layout_below="@+id/etFName"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="50dp"
         android:text="Contact Number"
@@ -68,6 +100,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:hint="Contact Number"
+        android:inputType="number"
+
+        android:maxLength="10"
         android:textColor="@color/black"
         android:gravity="center"
         android:textColorHint="#97616161"
@@ -91,6 +126,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:hint="Address"
+        android:inputType="textPostalAddress"
         android:gravity="center"
         android:textColor="@color/black"
         android:textColorHint="#97616161"

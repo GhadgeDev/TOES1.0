@@ -91,12 +91,7 @@ public class LoginActivity extends AppCompatActivity {
 
          }
 
-       if(!cbShow.isChecked()){
-           etPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
-        }else{
-           etPass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-        }
        //Signup
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
-       btnLogIn.setOnClickListener(new View.OnClickListener() {
+      /* btnLogIn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                OkHttpClient client = new OkHttpClient().newBuilder()
@@ -128,8 +123,14 @@ public class LoginActivity extends AppCompatActivity {
                }
 
            }
-       });
-    }
+       });*/
 
+        /*btnLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });*/
+    }
 
 }
