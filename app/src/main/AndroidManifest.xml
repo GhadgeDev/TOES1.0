@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.toes">
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:allowBackup="true"
         android:configChanges="locale|orientation"
@@ -11,48 +9,33 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".VisitingChargesActivity"></activity>
-        <activity
-            android:name=".JobSeletionActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".RecruiterHomeActivity"
+            android:screenOrientation = "portrait">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity
-            android:name=".RecruiterHomeActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".SelectWorkerActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".RecruiterNotificationActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".ProfileActivity"
-            android:label="Profile"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".SignUpActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
-        <activity
-            android:name=".SelectLanguageActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
-        <activity
-            android:name=".IdentityProofActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name=".SplashScreenActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
-        <activity android:name=".SelectRoleActivity"></activity>
+        <activity android:name=".SelectWorkerActivity"
+            android:screenOrientation = "portrait"/>
+        <activity android:name=".RecruiterNotificationActivity"
+            android:screenOrientation = "portrait"/>
+        <activity android:name=".ProfileActivity"
+            android:screenOrientation = "portrait"/>
+
+        <activity android:name=".SignUpActivity" >
+
+        </activity>
+        <activity android:name=".SelectLanguageActivity" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".IdentityProofActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SplashScreenActivity"></activity>
+        <activity android:name=".SelectRoleActivity">
+        </activity>
     </application>
 
 </manifest>
