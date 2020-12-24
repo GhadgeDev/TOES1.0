@@ -8,14 +8,13 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
-import android.widget.Button;
+
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -23,20 +22,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+
+
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class SignUpActivity extends AppCompatActivity {
     Calendar myCal = Calendar.getInstance();
@@ -55,6 +50,9 @@ public class SignUpActivity extends AppCompatActivity {
 
     String fName="",lName="",contact="",address="",dob="",gender="",pass="",phone="";
     int l= 0;
+
+    File file;
+    ArrayList<String> details1 = new ArrayList<>();
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,19 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         btnNext = (FloatingActionButton) findViewById(R.id.btn_next);
 
-        HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
-        okHttpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        OkHttpClient okHttpClient  = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
-
-        Retrofit retrofit = new Retrofit.Builder().
-                baseUrl("https://toes-apis.herokuapp.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
-                .build();
-
-
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
 
         Intent intent = getIntent();
@@ -189,6 +175,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (etName.getText().toString().isEmpty() || etLName.getText().toString().isEmpty() || etAddr.getText().toString().isEmpty() || etContact.getText().toString().isEmpty() || etDob.getText().toString().isEmpty()){
+
                     Toast.makeText(SignUpActivity.this,"Please fill all fields !",Toast.LENGTH_SHORT).show();
                 }else if (etContact.getText().toString().length() < 10){
                     Toast.makeText(SignUpActivity.this,"Please enter 10 digit number !",Toast.LENGTH_SHORT).show();
@@ -210,45 +197,25 @@ public class SignUpActivity extends AppCompatActivity {
                         gender = rbtnGenderOther.getText().toString();
                     }
 
-                    Call<Post> call = jsonPlaceHolderApi.createPost(false,
-                                                                    false,
-                            "fName","lName","TestUser1","pass@1234","13-01-2000","male",
-                            "123456789123",null,"address","4867913520","pass@1234");
+
+                    System.out.println("--------------------------------Name " + fName);
+                    System.out.println("-------------------------------- Lname " + lName);
+                    System.out.println("--------------------------------cno " + phone);
+                    System.out.println("--------------------------------addr" + address);
+                    System.out.println("--------------------------------dob" + dob);
+                    System.out.println("--------------------------------gender" + gender);
 
 
-                    call.enqueue(new Callback<Post>() {
-                        @Override
-                        public void onResponse(Call<Post> call, Response<Post> response) {
-                            if (!response.isSuccessful()) {
-                                System.out.println("Response : _--------- " + response.code());
-                                System.out.println("Response M : _--------- " + response.message());
+                        details1.add(fName);
+                        details1.add(lName);
+                        details1.add(phone);
+                        details1.add(address);
+                        details1.add(dob);
+                        details1.add(gender);
 
-                                return;
-                            }
-                            Post postResponse = response.body();
-                            System.out.println("Code :------------------- "+response.code());
-                            String content = "";
-                            content += "name : " + postResponse.getfName() + "\n";
-                            content += "lName : " + postResponse.getlName() + "\n";
-                            content += "Contact : " + postResponse.getPhone() + "\n";
-                            content += "Address : " + postResponse.getAddress() + "\n";
-                            content += "Dob : " + postResponse.getDob() + "\n";
-                            content += "gender : " + postResponse.getGender() + "\n";
-                            System.out.println("Data : _--------- " + content);
-                        }
-
-
-                        @Override
-                        public void onFailure(Call<Post> call, Throwable t) {
-                            System.out.println("fail : _--------- " + t.getMessage());
-
-                        }
-                    });
-
-
-                    ///******************************************/
                       Intent next = new Intent(SignUpActivity.this, IdentityProofActivity.class);
                       next.putExtra("args", args);
+                      next.putExtra("details1", details1);
                        System.out.println("--------------------------------sImage" + selectedImagePath);
                        System.out.println("--------------------------------contact" + etContact.getText().toString());
                        startActivity(next);
@@ -279,10 +246,13 @@ public class SignUpActivity extends AppCompatActivity {
 
                 circleImageView.setImageURI(selectedImageUri);
 
+                file = new File(selectedImageUri.toString());
                 args[1] = selectedImagePath;
             }
         }
     }
+
+
 
 
 }

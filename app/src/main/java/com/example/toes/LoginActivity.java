@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity  {
 
         btnLogIn = (Button) findViewById(R.id.btnSignIn);
         btnSignUp = (Button) findViewById(R.id.btnCreateNewAcc);
-        selectedLanguage = "1";
+        selectedLanguage = "0";
         Intent intent = getIntent();
         selectedLanguage = intent.getStringExtra(Intent.EXTRA_TEXT);
         System.out.println("---------------------------------------------------" + selectedLanguage);
