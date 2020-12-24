@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -25,9 +26,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SignUpActivity extends AppCompatActivity {
     Calendar myCal = Calendar.getInstance();
@@ -44,6 +53,7 @@ public class SignUpActivity extends AppCompatActivity {
     String args[] = {"",""};
     Bitmap bitmap=null;
 
+    String fName="",lName="",contact="",address="",dob="",gender="",pass="",phone="";
     int l= 0;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -73,6 +83,20 @@ public class SignUpActivity extends AppCompatActivity {
         rbtnGenderOther = (RadioButton) findViewById(R.id.rbtnGenderOther);
 
         btnNext = (FloatingActionButton) findViewById(R.id.btn_next);
+
+        HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
+        okHttpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient okHttpClient  = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
+
+        Retrofit retrofit = new Retrofit.Builder().
+                baseUrl("https://toes-apis.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build();
+
+
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
 
         Intent intent = getIntent();
@@ -161,6 +185,7 @@ public class SignUpActivity extends AppCompatActivity {
         etContact.addTextChangedListener(new PhoneNumberFormattingTextWatcher("+91"));
                 //next Button
         btnNext.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if (etName.getText().toString().isEmpty() || etLName.getText().toString().isEmpty() || etAddr.getText().toString().isEmpty() || etContact.getText().toString().isEmpty() || etDob.getText().toString().isEmpty()){
@@ -172,7 +197,56 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }
               else {
+                    fName = etName.getText().toString();
+                    lName = etLName.getText().toString();
+                    phone = etContact.getText().toString();
+                    dob = etDob.getText().toString();
+                    address = etAddr.getText().toString();
+                    if (rbtnGenderMale.isChecked()){
+                        gender = rbtnGenderMale.getText().toString();
+                    }else if(rbtnGenderFemale.isChecked()){
+                        gender = rbtnGenderFemale.getText().toString();
+                    }else{
+                        gender = rbtnGenderOther.getText().toString();
+                    }
 
+                    Call<Post> call = jsonPlaceHolderApi.createPost(false,
+                                                                    false,
+                            "fName","lName","TestUser1","pass@1234","13-01-2000","male",
+                            "123456789123",null,"address","4867913520","pass@1234");
+
+
+                    call.enqueue(new Callback<Post>() {
+                        @Override
+                        public void onResponse(Call<Post> call, Response<Post> response) {
+                            if (!response.isSuccessful()) {
+                                System.out.println("Response : _--------- " + response.code());
+                                System.out.println("Response M : _--------- " + response.message());
+
+                                return;
+                            }
+                            Post postResponse = response.body();
+                            System.out.println("Code :------------------- "+response.code());
+                            String content = "";
+                            content += "name : " + postResponse.getfName() + "\n";
+                            content += "lName : " + postResponse.getlName() + "\n";
+                            content += "Contact : " + postResponse.getPhone() + "\n";
+                            content += "Address : " + postResponse.getAddress() + "\n";
+                            content += "Dob : " + postResponse.getDob() + "\n";
+                            content += "gender : " + postResponse.getGender() + "\n";
+                            System.out.println("Data : _--------- " + content);
+                        }
+
+
+                        @Override
+                        public void onFailure(Call<Post> call, Throwable t) {
+                            System.out.println("fail : _--------- " + t.getMessage());
+
+                        }
+                    });
+
+
+                    ///******************************************/
                       Intent next = new Intent(SignUpActivity.this, IdentityProofActivity.class);
                       next.putExtra("args", args);
                        System.out.println("--------------------------------sImage" + selectedImagePath);

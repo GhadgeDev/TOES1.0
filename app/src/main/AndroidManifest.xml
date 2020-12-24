@@ -3,6 +3,7 @@
     package="com.example.toes">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -11,6 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
+
         android:theme="@style/AppTheme">
 
         <activity android:name=".VisitingChargesActivity">
@@ -27,6 +29,7 @@
         <activity
             android:name=".SelectWorkerActivity"
             android:screenOrientation="portrait"
+
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".RecruiterNotificationActivity"

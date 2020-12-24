@@ -69,7 +69,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
 
         mSelectedItemIs = getIntent().getStringExtra(EXTRA_ITEM_SELECTED_IS);
 
-        mJobNameTextView = findViewById(R.id.job_name);
+     mJobNameTextView = findViewById(R.id.job_name);
         mJobNameTextView.setText(mSelectedItemIs);
 
         RecyclerView workerList = findViewById(R.id.worker_list);
