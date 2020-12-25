@@ -29,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -41,6 +42,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity  {
 
+    //variable Declaration
     EditText etContact,etPass;
     CheckBox cbShow;
     Button btnLogIn,btnSignUp;
@@ -55,6 +57,7 @@ public class LoginActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //initialization
         etContact = (EditText) findViewById(R.id.etContactNo);
         etPass = (EditText) findViewById(R.id.etPass);
 
@@ -69,11 +72,13 @@ public class LoginActivity extends AppCompatActivity  {
 
         btnLogIn = (Button) findViewById(R.id.btnSignIn);
         btnSignUp = (Button) findViewById(R.id.btnCreateNewAcc);
+
+        //code
         selectedLanguage = "0";
         Intent intent = getIntent();
         selectedLanguage = intent.getStringExtra(Intent.EXTRA_TEXT);
         System.out.println("---------------------------------------------------" + selectedLanguage);
-        switch ("0") {
+        switch (selectedLanguage) {
             case "0":
 
                 break;
@@ -110,11 +115,14 @@ public class LoginActivity extends AppCompatActivity  {
 
         }
 
+        //For http log
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
         okHttpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         OkHttpClient okHttpClient  = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
 
+
+        //connecting to base url
         Retrofit retrofit = new Retrofit.Builder().
                 baseUrl("http://52.201.220.252/token/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -168,8 +176,7 @@ public class LoginActivity extends AppCompatActivity  {
                             return;
                         }
                         Post postResponse = response.body();
-
-                        code = response.code();
+                        System.out.println("----------------------------------------------------");
 
 
 
@@ -183,6 +190,7 @@ public class LoginActivity extends AppCompatActivity  {
                         String content = "";
                         content += "code : " + response.code() + "\n";
                           System.out.println("Data : _--------- " + content);
+                          System.out.println("body : _--------- " );
                     }
 
 
