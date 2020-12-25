@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/worker_image"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="35dp"
+        android:src="@mipmap/useravatar" />
+
+    <TextView
+        android:id="@+id/particular_worker_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@+id/worker_image"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        tools:text="Worker Name" />
+
+    <TextView
+        android:id="@+id/particular_worker_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/particular_worker_name"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/worker_image"
+        android:hint="Address"
+        android:padding="8dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/particular_worker_experience"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/particular_worker_address"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/worker_image"
+        android:hint="Experience:"
+        android:padding="8dp"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="210dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtprofession"
+            android:layout_width="325dp"
+            android:layout_height="150dp"
+            android:background="@drawable/textbox_border"
+            android:gravity="top"
+            android:hint="Job Description"
+            android:padding="10dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Visiting Fee (Rs.): "
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_marginTop="2dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:id="@+id/particular_worker_fees"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                tools:text="Worker fees" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="*charges may apply as per work"
+            android:padding="10dp" />
+
+        <Button
+            android:id="@+id/hire_btn"
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:background="@drawable/englishbutton"
+            android:padding="5dp"
+            android:text="Hire"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

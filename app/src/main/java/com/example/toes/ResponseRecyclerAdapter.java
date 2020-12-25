@@ -69,6 +69,7 @@ public class ResponseRecyclerAdapter extends RecyclerView.Adapter<ResponseRecycl
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.tv.setText(mData.get(position).getName());
+        holder.tv1.setText(mData.get(position).getProfession());
     }
 
     @Override
@@ -79,12 +80,14 @@ public class ResponseRecyclerAdapter extends RecyclerView.Adapter<ResponseRecycl
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         private TextView tv;
+        private TextView tv1;
         private LinearLayout workerResponseList;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             workerResponseList = itemView.findViewById(R.id.recruiter_response_list);
             tv = itemView.findViewById(R.id.worker_name);
+            tv1 = itemView.findViewById(R.id.worker_profession);
         }
     }
 }

@@ -15,11 +15,19 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".VisitingChargesActivity">
+        <activity android:name=".EditProfileActivity"
+            android:label="Edit Profile"
+            android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".JobSeletionActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:name=".ParticularRecruiterActivity"
+            android:label="Recruiter Information"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ParticularWorkerActivity"
+            android:label="Worker Information"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".RecruiterHomeActivity"
@@ -29,45 +37,42 @@
         <activity
             android:name=".SelectWorkerActivity"
             android:screenOrientation="portrait"
-
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".RecruiterNotificationActivity"
             android:label="Notifications"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ProfileActivity"
             android:label="Profile"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SelectJobActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
-
-        <activity android:name=".SelectJobActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".WokerNotificationActivity"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".WokerNotificationActivity"
             android:label="Notifications"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:screenOrientation="portrait" />
 
+
+        <activity android:name=".VisitingChargesActivity" />
+        <activity
+            android:name=".JobSeletionActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SignUpActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".SelectLanguageActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
-
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".IdentityProofActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
         <activity
             android:name=".LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
         <activity
             android:name=".SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -77,8 +82,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".SelectRoleActivity">
-        </activity>
+        <activity android:name=".SelectRoleActivity" />
     </application>
+
 </manifest>

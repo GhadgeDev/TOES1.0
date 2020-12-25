@@ -42,7 +42,7 @@ interface JsonPlaceHolderApi {
                           @Field("dob") String dob,
                           @Field("gender") String gender,
                           @Field("aadhar_no") String adhar_no,
-                          @Field("profile_image")File profile_image,
+                          @Field("profile_image")String profile_image,
                           @Field("address") String address,
                           @Field("phone") String phone,
                           @Field("re_password") String re_password

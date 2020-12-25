@@ -40,17 +40,17 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class LoginActivity extends AppCompatActivity  {
+public class LoginActivity extends AppCompatActivity {
 
     //variable Declaration
-    EditText etContact,etPass;
+    EditText etContact, etPass;
     CheckBox cbShow;
-    Button btnLogIn,btnSignUp;
-    TextView txtWelcome,txtSign,labelContact,lablePass,txtForgotPass,txtOr;
+    Button btnLogIn, btnSignUp;
+    TextView txtWelcome, txtSign, labelContact, lablePass, txtForgotPass, txtOr;
     String selectedLanguage = "1";
-    int l ;
+    int l;
     String uName = "", pass = "";
- int code = 0;
+    int code = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity  {
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
         okHttpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        OkHttpClient okHttpClient  = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
 
 
         //connecting to base url
@@ -130,10 +130,6 @@ public class LoginActivity extends AppCompatActivity  {
                 .build();
 
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
-
-
-
 
 
         //Signup
@@ -162,14 +158,13 @@ public class LoginActivity extends AppCompatActivity  {
                         if (!response.isSuccessful()) {
                             System.out.println("Response : _--------- " + response.code());
                             System.out.println("Response M : _--------- " + response.message());
-                            if(response.code() == 400){
+                            if (response.code() == 400) {
 
                                 Toast toast = Toast.makeText(LoginActivity.this, "Incorrect username or password ! ", Toast.LENGTH_SHORT);
-                                View view =toast.getView();
+                                View view = toast.getView();
                                 TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                                 toastMessage.setTextColor(Color.RED);
                                 toast.show();
-
 
 
                             }
@@ -179,18 +174,17 @@ public class LoginActivity extends AppCompatActivity  {
                         System.out.println("----------------------------------------------------");
 
 
-
                         Toast toast = Toast.makeText(LoginActivity.this, "Log In successfully !", Toast.LENGTH_SHORT);
-                        View view =toast.getView();
+                        View view = toast.getView();
                         TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                         toastMessage.setTextColor(Color.GREEN);
                         toast.show();
-                            startActivity(intent1);
+                        startActivity(intent1);
 
                         String content = "";
                         content += "code : " + response.code() + "\n";
-                          System.out.println("Data : _--------- " + content);
-                          System.out.println("body : _--------- " );
+                        System.out.println("Data : _--------- " + content);
+                        System.out.println("body : _--------- ");
                     }
 
 
@@ -199,7 +193,7 @@ public class LoginActivity extends AppCompatActivity  {
 
                         System.out.println("fail : _--------- " + t.getMessage());
                         Toast toast = Toast.makeText(LoginActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
-                        View view =toast.getView();
+                        View view = toast.getView();
                         TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                         toastMessage.setTextColor(Color.RED);
                         toast.show();
@@ -215,7 +209,6 @@ public class LoginActivity extends AppCompatActivity  {
     }
 
 
-
-    }
+}
 
 

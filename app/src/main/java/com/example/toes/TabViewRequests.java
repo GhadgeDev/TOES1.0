@@ -3,10 +3,15 @@ package com.example.toes;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +19,9 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class TabViewRequests extends Fragment {
+    View v;
+    private RecyclerView myRecyclerView;
+    private List<ViewRequestListModel> lstworker;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,16 +57,20 @@ public class TabViewRequests extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        lstworker = new ArrayList<>();
+        lstworker.add(new ViewRequestListModel("Ruturaj Varne","Carpenter"));
+        lstworker.add(new ViewRequestListModel("Aditya Jambulkar","Driver"));
+        lstworker.add(new ViewRequestListModel("Gauri Raskar","Painter"));
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab_view_requests, container, false);
+        v = inflater.inflate(R.layout.fragment_tab_view_requests, container, false);
+        myRecyclerView = v.findViewById(R.id.viewRequestRecycler);
+        ViewRequestRecyclerAdapter recyclerAdapter = new ViewRequestRecyclerAdapter(getContext(),lstworker);
+        myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        myRecyclerView.setAdapter(recyclerAdapter);
+        return v;
     }
 }

@@ -37,8 +37,8 @@ public class TabWorkerRequestResponse extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         lstRequestResponse = new ArrayList<>();
-        lstRequestResponse.add(new WorkerResponseList("Swapnil Bansode"));
-        lstRequestResponse.add(new WorkerResponseList("Megha Gurav"));
-        lstRequestResponse.add(new WorkerResponseList("Ruturaj Varne"));
+        lstRequestResponse.add(new WorkerResponseList("Swapnil Bansode","Plumber"));
+        lstRequestResponse.add(new WorkerResponseList("Megha Gurav","Driver"));
+        lstRequestResponse.add(new WorkerResponseList("Ruturaj Varne","Electrician"));
     }
 }

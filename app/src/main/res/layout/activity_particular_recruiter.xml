@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".ParticularRecruiterActivity">
+
+    <ImageView
+        android:id="@+id/recruiter_profile_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:padding="15dp"
+        android:src="@mipmap/useravatar"/>
+
+    <TextView
+        android:id="@+id/particular_recruiter_name"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:hint="Recruiter Name"/>
+
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:hint="Recruiter Address"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="10dp"
+        android:background="?android:attr/listDivider" />
+
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:hint="Recruiter Job Description"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="10dp"
+        android:background="?android:attr/listDivider" />
+
+    <EditText
+        android:layout_margin="5dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:hint="Enter Amount(Rs.)"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:inputType="number"
+        android:background="@drawable/devnagaribtn"/>
+
+    <Button
+        android:id="@+id/hire_btn"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:background="@drawable/englishbutton"
+        android:padding="5dp"
+        android:text="Send Request"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+</LinearLayout>

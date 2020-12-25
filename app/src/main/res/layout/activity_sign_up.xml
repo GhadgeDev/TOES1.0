@@ -175,8 +175,7 @@
         android:layout_marginLeft="50dp"
         android:background="#FFFFFF"
         android:checkedButton="@id/rbtnGenderMale"
-        android:visibility="visible"
-        >
+        android:visibility="visible">
 
         <RadioButton
             android:id="@+id/rbtnGenderMale"
@@ -196,7 +195,6 @@
             android:id="@+id/rbtnGenderFemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rbtnGenderMale"
             android:layout_marginLeft="50dp"
             android:outlineAmbientShadowColor="@color/black"
             android:shadowColor="@color/black"

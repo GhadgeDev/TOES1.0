@@ -212,7 +212,7 @@ public class SignUpActivity extends AppCompatActivity {
                         details1.add(address);
                         details1.add(dob);
                         details1.add(gender);
-
+                    details1.add(selectedImagePath);
                       Intent next = new Intent(SignUpActivity.this, IdentityProofActivity.class);
                       next.putExtra("args", args);
                       next.putExtra("details1", details1);

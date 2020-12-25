@@ -1,5 +1,7 @@
 package com.example.toes;
 
+import android.app.AppOpsManager;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,46 +11,63 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.net.ContentHandler;
+import java.util.List;
+
 public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerViewHolder> {
 
-    private String[] workerN;
-    private String[] visitingC;
-    public WorkerAdapter(String[] workerN, String[] visitingC){
-        this.workerN = workerN;
-        this.visitingC = visitingC;
+    Context mContext;
+    List<WorkerListLayoutModel> mData;
+
+    private OnNoteListener mOnNoteListener;
+
+    public WorkerAdapter(Context context, List<WorkerListLayoutModel> data, OnNoteListener onNoteListener) {
+        mContext = context;
+        mData = data;
+        this.mOnNoteListener = onNoteListener;
     }
 
     @NonNull
     @Override
     public WorkerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.worker_list_layout, parent, false);
-        return new WorkerViewHolder(view);
+        View v;
+        v = LayoutInflater.from(mContext).inflate(R.layout.worker_list_layout,parent,false);
+        WorkerViewHolder viewHolder = new WorkerViewHolder(v,mOnNoteListener);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull WorkerViewHolder holder, int position) {
-        String title = workerN[position];
-        holder.wName.setText(title);
-
-        String title1 = visitingC[position];
-        holder.vCharges.setText(title1);
+        holder.wName.setText(mData.get(position).getWorker_name());
+        holder.vCharges.setText(mData.get(position).getWorker_fees());
     }
 
     @Override
     public int getItemCount() {
-        return workerN.length;
+        return mData.size();
     }
 
-    public class WorkerViewHolder extends RecyclerView.ViewHolder{
-        ImageView imgIcon;
+    public class WorkerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        //ImageView imgIcon;
         TextView wName;
         TextView vCharges;
-        public WorkerViewHolder(@NonNull View itemView) {
+
+        OnNoteListener onNoteListener;
+        public WorkerViewHolder(@NonNull View itemView, OnNoteListener onNoteListener) {
             super(itemView);
-            imgIcon = itemView.findViewById(R.id.worker_image);
+         //   imgIcon = itemView.findViewById(R.id.worker_image);           setting image of worker for recruiter to see in the list
             wName = itemView.findViewById(R.id.worker_name);
             vCharges = itemView.findViewById(R.id.worker_visiting_fee);
+            this.onNoteListener = onNoteListener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onNoteListener.onNoteClick(getAdapterPosition());
+        }
+    }
+    public interface OnNoteListener{
+        void onNoteClick(int position);
     }
 }

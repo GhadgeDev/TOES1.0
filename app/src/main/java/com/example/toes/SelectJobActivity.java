@@ -23,7 +23,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectJobActivity extends AppCompatActivity {
+public class SelectJobActivity extends AppCompatActivity implements RecruiterAdapter.OnRecruiterListener {
     private DrawerLayout mDrawer;
     private List<RecruiterListModel> lstRecruiter;
 
@@ -79,7 +79,7 @@ public class SelectJobActivity extends AppCompatActivity {
         lstRecruiter.add(new RecruiterListModel("Aditya Mali","Carpenter"));
         lstRecruiter.add(new RecruiterListModel("Damodar Dikonda","Electrician"));
         lstRecruiter.add(new RecruiterListModel("Tanmay Mahamulkar","Plumber"));
-        myRecyclerView.setAdapter(new RecruiterAdapter(this,lstRecruiter));
+        myRecyclerView.setAdapter(new RecruiterAdapter(this,lstRecruiter, this));
     }
     public void openLogOutDialog(){
         LogoutDialog logoutDialog = new LogoutDialog();
@@ -96,5 +96,12 @@ public class SelectJobActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onRecruiterClick(int position) {
+        Intent intent = new Intent(SelectJobActivity.this,ParticularRecruiterActivity.class);
+        intent.putExtra("recruiter name",lstRecruiter.get(position).getName());
+        startActivity(intent);
     }
 }

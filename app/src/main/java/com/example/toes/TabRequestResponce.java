@@ -60,9 +60,9 @@ public class TabRequestResponce extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         lstResponse = new ArrayList<>();
-        lstResponse.add(new RecruiterResponseList("Niket Jadhav"));
-        lstResponse.add(new RecruiterResponseList("Tanmay Mahamulkar"));
-        lstResponse.add(new RecruiterResponseList("Aditya Mali"));
+        lstResponse.add(new RecruiterResponseList("Niket Jadhav","Painter"));
+        lstResponse.add(new RecruiterResponseList("Tanmay Mahamulkar","Carpenter"));
+        lstResponse.add(new RecruiterResponseList("Aditya Mali","Driver"));
     }
 
     @Override

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".ParticularRecruiterActivity">
+
+    <ImageView
+        android:id="@+id/recruiter_profile_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="20dp"
+        android:padding="15dp"
+        android:src="@mipmap/useravatar" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/devnagaribtn"
+        android:gravity="center"
+        android:hint="Enter Name"
+        android:inputType="text"
+        android:textSize="17sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/devnagaribtn"
+        android:gravity="center"
+        android:maxLength="10"
+        android:hint="Enter contact number"
+        android:inputType="number"
+        android:textSize="17sp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/devnagaribtn"
+        android:gravity="center"
+        android:maxLength="200"
+        android:hint="Enter Address"
+        android:inputType="textMultiLine"
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:text="Select Gender"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Male"
+                android:buttonTint="#2B1EC0"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Female"
+                android:buttonTint="#2B1EC0"
+                android:textSize="18sp" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Other"
+                android:buttonTint="#2B1EC0"
+                android:textSize="18sp" />
+
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/hire_btn"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:background="@drawable/englishbutton"
+        android:padding="5dp"
+        android:text="Save"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+</LinearLayout>

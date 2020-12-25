@@ -74,7 +74,7 @@ public class IdentityProofActivity extends AppCompatActivity {
         selectedLanguage = args[0];
         selectedImagePath = args[1];
 
-        System.out.println("in IdentityProof"+details2);
+        System.out.println("in IdentityProof "+details2);
        // System.out.println("-----------------ARGS[1]--------------"+args[1]);
 
         //For Server Connectivity
@@ -131,7 +131,7 @@ public class IdentityProofActivity extends AppCompatActivity {
                     Call<Post> call = jsonPlaceHolderApi.createUser(false,
                             false,
                             details2.get(0), details2.get(1), "TOES@" + details2.get(2), newPass, details2.get(4), details2.get(5),
-                            aadharNo, null, details2.get(3), details2.get(2), cPass);
+                            aadharNo, details2.get(6), details2.get(3), details2.get(2), cPass);
 
                     System.out.println("--------------------------------------------------------------------");
 

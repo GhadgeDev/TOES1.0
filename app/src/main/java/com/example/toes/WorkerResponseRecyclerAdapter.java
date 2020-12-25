@@ -62,6 +62,7 @@ public class WorkerResponseRecyclerAdapter extends RecyclerView.Adapter<WorkerRe
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.tv.setText(mData.get(position).getrName());
+        holder.tv_requirement.setText(mData.get(position).getrRequirement());
     }
 
     @Override
@@ -71,12 +72,14 @@ public class WorkerResponseRecyclerAdapter extends RecyclerView.Adapter<WorkerRe
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         private TextView tv;
+        private TextView tv_requirement;
         private LinearLayout workerResponseList;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             workerResponseList = itemView.findViewById(R.id.inside_worker_response_list);
             tv = itemView.findViewById(R.id.response_list);
+            tv_requirement = itemView.findViewById(R.id.response_list_requirement);
         }
     }
 }
