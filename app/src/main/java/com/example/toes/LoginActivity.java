@@ -26,7 +26,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -51,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
     int l;
     String uName = "", pass = "";
     int code = 0;
+
+    String token = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,13 +128,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //connecting to base url
-        Retrofit retrofit = new Retrofit.Builder().
+        Retrofit.Builder retrofit = new Retrofit.Builder().
                 baseUrl("http://52.201.220.252/token/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
-                .build();
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit1 = retrofit.build();
 
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit1.create(JsonPlaceHolderApi.class);
 
 
         //Signup
@@ -147,68 +151,54 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 uName = etContact.getText().toString();
                 pass = etPass.getText().toString();
-
                 Post post = new Post(pass, uName);
-                Call<Post> call = jsonPlaceHolderApi.createPost(post);
-                Intent intent1 = new Intent(LoginActivity.this, SelectRoleActivity.class);
+                Call<User> call = jsonPlaceHolderApi.createPost(post);
 
-                call.enqueue(new Callback<Post>() {
+                call.enqueue(new Callback<User>() {
                     @Override
-                    public void onResponse(Call<Post> call, Response<Post> response) {
+                    public void onResponse(Call<User> call, Response<User> response) {
                         if (!response.isSuccessful()) {
                             System.out.println("Response : _--------- " + response.code());
                             System.out.println("Response M : _--------- " + response.message());
                             if (response.code() == 400) {
-
                                 Toast toast = Toast.makeText(LoginActivity.this, "Incorrect username or password ! ", Toast.LENGTH_SHORT);
                                 View view = toast.getView();
                                 TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                                 toastMessage.setTextColor(Color.RED);
                                 toast.show();
-
-
                             }
                             return;
                         }
-                        Post postResponse = response.body();
+
+
+                        //     Post postResponse = response.body();
                         System.out.println("----------------------------------------------------");
-
-
-                        Toast toast = Toast.makeText(LoginActivity.this, "Log In successfully !", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(LoginActivity.this, "Log In successfully ! " + response.body().getAuth_token(), Toast.LENGTH_SHORT);
                         View view = toast.getView();
                         TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                         toastMessage.setTextColor(Color.GREEN);
                         toast.show();
+                        Intent intent1 = new Intent(LoginActivity.this, SelectRoleActivity.class);
                         startActivity(intent1);
 
                         String content = "";
                         content += "code : " + response.code() + "\n";
                         System.out.println("Data : _--------- " + content);
                         System.out.println("body : _--------- ");
+                        System.out.println("TOKEN = " + response.body().getAuth_token());
                     }
 
-
                     @Override
-                    public void onFailure(Call<Post> call, Throwable t) {
-
+                    public void onFailure(Call<User> call, Throwable t) {
                         System.out.println("fail : _--------- " + t.getMessage());
                         Toast toast = Toast.makeText(LoginActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
                         View view = toast.getView();
                         TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                         toastMessage.setTextColor(Color.RED);
                         toast.show();
-
                     }
                 });
-
-
             }
         });
-
-
     }
-
-
 }
-
-

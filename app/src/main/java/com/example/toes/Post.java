@@ -3,8 +3,10 @@ package com.example.toes;
 import com.google.gson.annotations.SerializedName;
 
 class Post {
-    private  String password;
+    private String password;
     private String phone;
+
+//    private String token;
 
     private boolean is_superuser = false;
     private boolean is_admin = false;
@@ -22,14 +24,13 @@ class Post {
     private String address;
     private String re_pass;
     //private String re_password;
-   private String token = "";
 
     public Post(String password, String phone) {
         this.password = password;
         this.phone = phone;
     }
 
-    public Post(String password, String phone, boolean is_superuser, boolean is_admin, String fName, String lName, String username, String dob, String gender, String adharNo, String profileImage, String address,String re_pass,String token) {
+/*    public Post(String password, String phone, boolean is_superuser, boolean is_admin, String fName, String lName, String username, String dob, String gender, String adharNo, String profileImage, String address,String re_pass,String token) {
         this.password = password;
         this.phone = phone;
         this.is_superuser = is_superuser;
@@ -45,7 +46,7 @@ class Post {
         this.re_pass = re_pass;
         this.token = token;
     }
-/*  public Post(boolean is_superuser,boolean is_admin,String fName, String lName, String phone, String address, String dob, String gender) {
+  public Post(boolean is_superuser,boolean is_admin,String fName, String lName, String phone, String address, String dob, String gender) {
         this.fName = fName;
         this.lName = lName;
         this.phone = phone;
@@ -54,13 +55,13 @@ class Post {
         this.gender = gender;
     }*/
 
-    public String getToken() {
+ /*   public String getToken() {
         return token;
     }
 
     public void setToken(String token) {
         this.token = token;
-    }
+    }*/
 
     public String getPassword() {
         return password;
