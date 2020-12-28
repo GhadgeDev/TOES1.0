@@ -10,19 +10,20 @@ class Post {
 
     private boolean is_superuser = false;
     private boolean is_admin = false;
-    private String fName;
-    private String lName;
+    private String first_name;
+    private String last_name;
     private String username;
 
     private String dob;
     private String gender;
 
 
-    private String adharNo;
+    private String aadhar_no;
     private String profileImage;
     //private String email;
     private String address;
     private String re_pass;
+    private String  profile_image = null;
     //private String re_password;
 
     public Post(String password, String phone) {
@@ -30,38 +31,40 @@ class Post {
         this.phone = phone;
     }
 
-/*    public Post(String password, String phone, boolean is_superuser, boolean is_admin, String fName, String lName, String username, String dob, String gender, String adharNo, String profileImage, String address,String re_pass,String token) {
+    public Post() {
+
+    }
+
+    public Post(String password, boolean is_superuser, boolean is_admin, String first_name, String last_name, String username, String dob, String gender, String aadhar_no, String profileImage, String address,String profile_image) {
         this.password = password;
-        this.phone = phone;
         this.is_superuser = is_superuser;
         this.is_admin = is_admin;
-        this.fName = fName;
-        this.lName = lName;
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.username = username;
         this.dob = dob;
         this.gender = gender;
-        this.adharNo = adharNo;
+        this.aadhar_no = aadhar_no;
+        this.profile_image = profile_image;
         this.profileImage = profileImage;
         this.address = address;
-        this.re_pass = re_pass;
-        this.token = token;
     }
-  public Post(boolean is_superuser,boolean is_admin,String fName, String lName, String phone, String address, String dob, String gender) {
-        this.fName = fName;
-        this.lName = lName;
-        this.phone = phone;
-        this.address = address;
-        this.dob = dob;
-        this.gender = gender;
-    }*/
 
- /*   public String getToken() {
+    /*   public String getToken() {
         return token;
     }
 
     public void setToken(String token) {
         this.token = token;
     }*/
+
+    public String getProfile_image() {
+        return profile_image;
+    }
+
+    public void setProfile_image(String profile_image) {
+        this.profile_image = profile_image;
+    }
 
     public String getPassword() {
         return password;
@@ -96,19 +99,19 @@ class Post {
     }
 
     public String getfName() {
-        return fName;
+        return first_name;
     }
 
     public void setfName(String fName) {
-        this.fName = fName;
+        this.first_name = fName;
     }
 
     public String getlName() {
-        return lName;
+        return last_name;
     }
 
     public void setlName(String lName) {
-        this.lName = lName;
+        this.last_name = lName;
     }
 
     public String getUsername() {
@@ -136,11 +139,11 @@ class Post {
     }
 
     public String getAdharNo() {
-        return adharNo;
+        return aadhar_no;
     }
 
     public void setAdharNo(String adharNo) {
-        this.adharNo = adharNo;
+        this.aadhar_no = adharNo;
     }
 
     public String getProfileImage() {

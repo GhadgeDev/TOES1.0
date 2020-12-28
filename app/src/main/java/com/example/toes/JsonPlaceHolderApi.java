@@ -10,16 +10,22 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 interface JsonPlaceHolderApi {
 
-    @GET()
-    Call<List<Post>> getPosts();
+ /*   @Headers({
+            "Content-Type: application/json",
+            "Authorization:Token 7bad7ac4696b7ff76f1513c2879079ecce887c80"
+    })*/
+    @GET("users/me/")
+    Call<Post> getPost(@Header("Authorization") String token);
 
     @POST("login/")
     Call<User> createPost(@Body Post post);
@@ -40,6 +46,7 @@ interface JsonPlaceHolderApi {
                           @Field("phone") String phone,
                           @Field("re_password") String re_password
                         );
+
 
 
 }

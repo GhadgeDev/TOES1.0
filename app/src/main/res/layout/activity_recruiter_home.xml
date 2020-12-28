@@ -21,18 +21,20 @@
 
     <Spinner
         android:id="@+id/spinnerSelectJob"
+        style="@style/Widget.AppCompat.Spinner.DropDown"
         android:layout_width="324dp"
         android:layout_height="55dp"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
-        android:textAlignment="center"
         android:background="@drawable/select_job_title"
         android:gravity="center"
         android:isScrollContainer="true"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
-        android:popupBackground="#827ADE"
-        />
+        android:popupBackground="#CC3426D8"
+        android:scrollbarStyle="outsideInset"
+        android:textAlignment="center"
+        android:verticalScrollbarPosition="left" />
 
     <EditText
         android:id="@+id/jobDescription"

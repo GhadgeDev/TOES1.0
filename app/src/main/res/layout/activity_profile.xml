@@ -16,7 +16,7 @@
         android:src="@mipmap/useravatar" />
 
     <TextView
-        android:id="@+id/profile_name"
+        android:id="@+id/txtprofile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -27,10 +27,10 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/profile_contact"
+        android:id="@+id/txtprofile_contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_name"
+        android:layout_below="@+id/txtprofile_name"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/profile_image"
         android:padding="8dp"
@@ -39,10 +39,10 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/profile_gender"
+        android:id="@+id/txtprofile_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_contact"
+        android:layout_below="@+id/txtprofile_contact"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/profile_image"
         android:padding="8dp"
@@ -51,7 +51,7 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/profile_adhar"
+        android:id="@+id/txtprofile_adhar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/divider"
@@ -64,10 +64,10 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/profile_address"
+        android:id="@+id/txtprofile_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/profile_adhar"
+        android:layout_below="@+id/txtprofile_adhar"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:gravity="center"
@@ -80,7 +80,7 @@
         android:id="@+id/edit_profile_btn"
         android:layout_width="150dp"
         android:layout_height="55dp"
-        android:layout_below="@+id/logout"
+        android:layout_below="@+id/btnlogout"
         android:layout_centerInParent="true"
         android:background="@drawable/englishbutton"
         android:padding="5dp"
@@ -89,10 +89,10 @@
         android:textSize="15sp" />
 
     <Button
-        android:id="@+id/logout"
+        android:id="@+id/btnlogout"
         android:layout_width="150dp"
         android:layout_height="55dp"
-        android:layout_below="@+id/profile_address"
+        android:layout_below="@+id/txtprofile_address"
         android:layout_centerInParent="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="190dp"
@@ -108,7 +108,7 @@
         android:id="@+id/txtprofession"
         android:layout_width="325dp"
         android:layout_height="100dp"
-        android:layout_below="@+id/profile_address"
+        android:layout_below="@+id/txtprofile_address"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:background="@drawable/devnagaribtn"

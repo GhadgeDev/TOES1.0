@@ -75,7 +75,7 @@ public class IdentityProofActivity extends AppCompatActivity {
         selectedImagePath = args[1];
 
         System.out.println("in IdentityProof "+details2);
-       // System.out.println("-----------------ARGS[1]--------------"+args[1]);
+
 
         //For Server Connectivity
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
@@ -164,7 +164,7 @@ public class IdentityProofActivity extends AppCompatActivity {
                             content += "username : " + postResponse.getUsername() + "\n";
                             System.out.println("Data : _--------- " + content);
 
-                            Intent go = new Intent(IdentityProofActivity.this,SelectRoleActivity.class);
+                            Intent go = new Intent(IdentityProofActivity.this,LoginActivity.class);
                             go.putExtra(Intent.EXTRA_TEXT,selectedLanguage);
                             startActivity(go);
 
