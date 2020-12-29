@@ -1,5 +1,7 @@
 package com.example.toes;
 
+import androidx.core.app.ComponentActivity;
+
 import java.util.List;
 import java.util.Map;
 import okhttp3.RequestBody;
@@ -15,6 +17,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 
@@ -47,6 +50,10 @@ interface JsonPlaceHolderApi {
                           @Field("re_password") String re_password
                         );
 
+    @GET("/api/user/{Phone_no}")
+    Call<User> sendOTP(@Path(value = "Phone_no") String Phone_no);
 
 
+  /* @GET("api/user/")
+   Call<User> sendOTP();*/
 }

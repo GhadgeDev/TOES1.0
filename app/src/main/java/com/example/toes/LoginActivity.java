@@ -2,13 +2,21 @@ package com.example.toes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.VoiceInteractor;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,6 +41,7 @@ import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 import okhttp3.OkHttpClient;
@@ -61,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
 
         //initialization
@@ -120,6 +130,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
         }
+
+
 
         //For http log
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
@@ -207,5 +219,26 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+    public void onCheck(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+        switch (view.getId()) {
+            case R.id.cbShowPass:
+                if (checked){
+                    etPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else{
+
+                    etPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                break;
+
+
+        }
+    }
+
+
+    public void forgotPass(View view) {
+        Intent forgotPass = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+        startActivity(forgotPass);
     }
 }

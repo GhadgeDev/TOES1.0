@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8F8F8"
+    android:scrollbars="vertical"
+    android:scrollbarStyle="insideInset"
     tools:context=".LoginActivity">
 
     <TextView
@@ -92,7 +94,7 @@
         android:drawableRight="@android:drawable/presence_invisible"
         android:hint="Password"
         android:padding="15dp"
-        android:password="true"
+android:inputType="textPassword"
         android:textColorHint="#ABA9A9" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
@@ -132,6 +134,7 @@
         android:layout_centerHorizontal="true"
         android:text="@string/forgot_password"
         android:layout_marginTop="25dp"
+        android:onClick="forgotPass"
         android:textColor="#2AA8B0"
         />
 
