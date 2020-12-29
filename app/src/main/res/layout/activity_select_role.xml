@@ -9,14 +9,26 @@
 
     >
 <TextView
-    android:id="@+id/txtname"
+    android:id="@+id/txtWlcm"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Hello,\nDevendra"
+    android:text="Hello"
     android:textSize="24sp"
     android:textStyle="bold"
-    android:layout_margin="25dp"
+    android:layout_marginTop="25dp"
+    android:layout_marginLeft="25dp"
     />
+    <TextView
+        android:id="@+id/txtname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtWlcm"
+        android:text="Devendra,"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="25dp"
+        />
     <TextView
     android:id="@+id/txtmesg"
     android:layout_width="wrap_content"

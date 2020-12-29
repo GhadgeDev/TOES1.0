@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -12,8 +13,12 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -75,7 +80,7 @@ public class IdentityProofActivity extends AppCompatActivity {
         selectedImagePath = args[1];
 
         System.out.println("in IdentityProof "+details2);
-       // System.out.println("-----------------ARGS[1]--------------"+args[1]);
+
 
         //For Server Connectivity
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
@@ -164,7 +169,7 @@ public class IdentityProofActivity extends AppCompatActivity {
                             content += "username : " + postResponse.getUsername() + "\n";
                             System.out.println("Data : _--------- " + content);
 
-                            Intent go = new Intent(IdentityProofActivity.this,SelectRoleActivity.class);
+                            Intent go = new Intent(IdentityProofActivity.this,LoginActivity.class);
                             go.putExtra(Intent.EXTRA_TEXT,selectedLanguage);
                             startActivity(go);
 
@@ -194,6 +199,22 @@ public class IdentityProofActivity extends AppCompatActivity {
 
     }
 
+    public void onCheck(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+        switch (view.getId()) {
+            case R.id.cbShowPass:
+                if (checked){
+                    etnewPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    etCPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else{
 
+                    etnewPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    etCPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                break;
+
+
+        }
+    }
 
 }
