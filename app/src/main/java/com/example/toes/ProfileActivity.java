@@ -67,7 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         //connecting to base url
 
-        Retrofit.Builder retrofit = new Retrofit.Builder().
+ /*       Retrofit.Builder retrofit = new Retrofit.Builder().
                 baseUrl("http://52.201.220.252/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create());
@@ -121,7 +121,7 @@ public class ProfileActivity extends AppCompatActivity {
                 System.out.println("Filed in ProfileActivity : "+t.getMessage());
 
             }
-        });
+        });*/
 
 
         mLogoutButton.setOnClickListener(new View.OnClickListener() {
