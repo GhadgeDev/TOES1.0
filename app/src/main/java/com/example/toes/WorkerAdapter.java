@@ -11,17 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.net.ContentHandler;
 import java.util.List;
 
 public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerViewHolder> {
 
     Context mContext;
-    List<WorkerListLayoutModel> mData;
+    List<GetSpecificWorkerModel> mData;
 
     private OnNoteListener mOnNoteListener;
 
-    public WorkerAdapter(Context context, List<WorkerListLayoutModel> data, OnNoteListener onNoteListener) {
+    public WorkerAdapter(Context context, List<GetSpecificWorkerModel> data, OnNoteListener onNoteListener) {
         mContext = context;
         mData = data;
         this.mOnNoteListener = onNoteListener;
@@ -38,8 +37,8 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerView
 
     @Override
     public void onBindViewHolder(@NonNull WorkerViewHolder holder, int position) {
-        holder.wName.setText(mData.get(position).getWorker_name());
-        holder.vCharges.setText(mData.get(position).getWorker_fees());
+        holder.wName.setText(mData.get(position).getWorkerName());
+        holder.vCharges.setText(mData.get(position).getVisitingCharges());
     }
 
     @Override
@@ -47,7 +46,7 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerView
         return mData.size();
     }
 
-    public class WorkerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class WorkerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         //ImageView imgIcon;
         TextView wName;
         TextView vCharges;

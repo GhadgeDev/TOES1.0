@@ -14,15 +14,18 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Path;
 import retrofit2.http.Url;
 
 interface JsonPlaceHolderApi {
 
-    @GET()
-    Call<List<Post>> getPosts();
-
     @POST("login/")
     Call<User> createPost(@Body Post post);
+
+    @GET("{category_name}/")
+    Call<List<GetSpecificWorkerModel>> getWorkerInfo(@Header("Authorization") String token,
+                                                @Path("category_name") String categoryName);
+
 
     @FormUrlEncoded
     @POST("/users/")

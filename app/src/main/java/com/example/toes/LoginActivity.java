@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     String uName = "", pass = "";
     int code = 0;
 
-    String token = null;
+    public static String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +123,6 @@ public class LoginActivity extends AppCompatActivity {
         //For http log
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
         okHttpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
 
 
@@ -131,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
         Retrofit.Builder retrofit = new Retrofit.Builder().
                 baseUrl("http://52.201.220.252/token/")
                 .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit1 = retrofit.build();
+        Retrofit retrofit1 = retrofit.client(okHttpClient).build();
 
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit1.create(JsonPlaceHolderApi.class);
 
@@ -170,10 +169,9 @@ public class LoginActivity extends AppCompatActivity {
                             return;
                         }
 
-
                         //     Post postResponse = response.body();
                         System.out.println("----------------------------------------------------");
-                        Toast toast = Toast.makeText(LoginActivity.this, "Log In successfully ! " + response.body().getAuth_token(), Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(LoginActivity.this, "Log In successfully ! ", Toast.LENGTH_SHORT);
                         View view = toast.getView();
                         TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                         toastMessage.setTextColor(Color.GREEN);
@@ -185,7 +183,8 @@ public class LoginActivity extends AppCompatActivity {
                         content += "code : " + response.code() + "\n";
                         System.out.println("Data : _--------- " + content);
                         System.out.println("body : _--------- ");
-                        System.out.println("TOKEN = " + response.body().getAuth_token());
+                        token =  response.body().getAuth_token();
+                        System.out.println("TOKEN = " + token );
                     }
 
                     @Override

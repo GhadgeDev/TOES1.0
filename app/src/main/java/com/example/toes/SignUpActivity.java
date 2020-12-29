@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,45 +37,46 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SignUpActivity extends AppCompatActivity {
     Calendar myCal = Calendar.getInstance();
     public static final int PICK_IMAGE = 1;
-    EditText etName,etLName,etDob,etContact,etAddr;
+    EditText etName, etLName, etDob, etContact, etAddr;
     CircleImageView circleImageView;
-    TextView txtDilouge,txtName,txtLName,txtContact,txtAddr,txtDob,txtGender,txtNext;
-    RadioButton rbtnGenderMale,rbtnGenderFemale,rbtnGenderOther;
+    TextView txtDilouge, txtName, txtLName, txtContact, txtAddr, txtDob, txtGender, txtNext;
+    RadioButton rbtnGenderMale, rbtnGenderFemale, rbtnGenderOther;
 
     FloatingActionButton btnNext;
     String selectedLanguage;
     String selectedImagePath;
     Uri selectedImageUri;
-    String args[] = {"",""};
-    Bitmap bitmap=null;
+    String args[] = {"", ""};
+    Bitmap bitmap = null;
 
-    String fName="",lName="",contact="",address="",dob="",gender="",pass="",phone="";
-    int l= 0;
+    String fName = "", lName = "", contact = "", address = "", dob = "", gender = "", pass = "", phone = "";
+    int l = 0;
 
     File file;
     ArrayList<String> details1 = new ArrayList<>();
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        circleImageView = (CircleImageView)findViewById(R.id.cimgprofile);
+        circleImageView = (CircleImageView) findViewById(R.id.cimgprofile);
 
-        txtDilouge = (TextView)findViewById(R.id.txtDilouge);
-        txtName = (TextView)findViewById(R.id.txtFName);
-        txtLName = (TextView)findViewById(R.id.txtLName);
-        txtContact = (TextView)findViewById(R.id.txtContact);
-        txtAddr = (TextView)findViewById(R.id.txtAddr);
-        txtDob = (TextView)findViewById(R.id.txtdob);
-        txtGender = (TextView)findViewById(R.id.txtGender);
-        txtNext = (TextView)findViewById(R.id.txt_next);
+        txtDilouge = (TextView) findViewById(R.id.txtDilouge);
+        txtName = (TextView) findViewById(R.id.txtFName);
+        txtLName = (TextView) findViewById(R.id.txtLName);
+        txtContact = (TextView) findViewById(R.id.txtContact);
+        txtAddr = (TextView) findViewById(R.id.txtAddr);
+        txtDob = (TextView) findViewById(R.id.txtdob);
+        txtGender = (TextView) findViewById(R.id.txtGender);
+        txtNext = (TextView) findViewById(R.id.txt_next);
 
-        etName = (EditText)findViewById(R.id.etFName);
-        etLName = (EditText)findViewById(R.id.etLName);
-        etContact = (EditText)findViewById(R.id.etContact);
+        etName = (EditText) findViewById(R.id.etFName);
+        etLName = (EditText) findViewById(R.id.etLName);
+        etContact = (EditText) findViewById(R.id.etContact);
         etDob = (EditText) findViewById(R.id.etDob);
-        etAddr = (EditText)findViewById(R.id.etAddr);
+        etAddr = (EditText) findViewById(R.id.etAddr);
 
         rbtnGenderMale = (RadioButton) findViewById(R.id.rbtnGenderMale);
         rbtnGenderFemale = (RadioButton) findViewById(R.id.rbtnGenderFemale);
@@ -83,12 +85,10 @@ public class SignUpActivity extends AppCompatActivity {
         btnNext = (FloatingActionButton) findViewById(R.id.btn_next);
 
 
-
-
         Intent intent = getIntent();
         selectedLanguage = intent.getStringExtra(Intent.EXTRA_TEXT);
-        args[0]= selectedLanguage;
-        switch (selectedLanguage){
+        args[0] = selectedLanguage;
+        switch (selectedLanguage) {
 
             case "0":
 
@@ -169,31 +169,30 @@ public class SignUpActivity extends AppCompatActivity {
 
 
         etContact.addTextChangedListener(new PhoneNumberFormattingTextWatcher("+91"));
-                //next Button
+        //next Button
         btnNext.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if (etName.getText().toString().isEmpty() || etLName.getText().toString().isEmpty() || etAddr.getText().toString().isEmpty() || etContact.getText().toString().isEmpty() || etDob.getText().toString().isEmpty()){
+                if (etName.getText().toString().isEmpty() || etLName.getText().toString().isEmpty() || etAddr.getText().toString().isEmpty() || etContact.getText().toString().isEmpty() || etDob.getText().toString().isEmpty()) {
 
-                    Toast.makeText(SignUpActivity.this,"Please fill all fields !",Toast.LENGTH_SHORT).show();
-                }else if (etContact.getText().toString().length() < 10){
-                    Toast.makeText(SignUpActivity.this,"Please enter 10 digit number !",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "Please fill all fields !", Toast.LENGTH_SHORT).show();
+                } else if (etContact.getText().toString().length() < 10) {
+                    Toast.makeText(SignUpActivity.this, "Please enter 10 digit number !", Toast.LENGTH_SHORT).show();
                     System.out.println("--------------------------------sImage" + selectedImagePath);
                     System.out.println("--------------------------------contact : " + etContact.getText().toString().length());
 
-                }
-              else {
+                } else {
                     fName = etName.getText().toString();
                     lName = etLName.getText().toString();
                     phone = etContact.getText().toString();
                     dob = etDob.getText().toString();
                     address = etAddr.getText().toString();
-                    if (rbtnGenderMale.isChecked()){
+                    if (rbtnGenderMale.isChecked()) {
                         gender = rbtnGenderMale.getText().toString();
-                    }else if(rbtnGenderFemale.isChecked()){
+                    } else if (rbtnGenderFemale.isChecked()) {
                         gender = rbtnGenderFemale.getText().toString();
-                    }else{
+                    } else {
                         gender = rbtnGenderOther.getText().toString();
                     }
 
@@ -206,19 +205,19 @@ public class SignUpActivity extends AppCompatActivity {
                     System.out.println("--------------------------------gender" + gender);
 
 
-                        details1.add(fName);
-                        details1.add(lName);
-                        details1.add(phone);
-                        details1.add(address);
-                        details1.add(dob);
-                        details1.add(gender);
+                    details1.add(fName);
+                    details1.add(lName);
+                    details1.add(phone);
+                    details1.add(address);
+                    details1.add(dob);
+                    details1.add(gender);
                     details1.add(selectedImagePath);
-                      Intent next = new Intent(SignUpActivity.this, IdentityProofActivity.class);
-                      next.putExtra("args", args);
-                      next.putExtra("details1", details1);
-                       System.out.println("--------------------------------sImage" + selectedImagePath);
-                       System.out.println("--------------------------------contact" + etContact.getText().toString());
-                       startActivity(next);
+                    Intent next = new Intent(SignUpActivity.this, IdentityProofActivity.class);
+                    next.putExtra("args", args);
+                    next.putExtra("details1", details1);
+                    System.out.println("--------------------------------sImage" + selectedImagePath);
+                    System.out.println("--------------------------------contact" + etContact.getText().toString());
+                    startActivity(next);
 
                 }
             }
@@ -227,22 +226,20 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
+    private void updateLabel() {
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
+        etDob.setText(sdf.format(myCal.getTime()));
+    }
 
-
-        private void updateLabel () {
-            String myFormat = "dd/MM/yyyy"; //In which you need put here
-
-            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
-
-            etDob.setText(sdf.format(myCal.getTime()));
-        }
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == PICK_IMAGE) {
-                 selectedImageUri = data.getData();
-                 selectedImagePath = selectedImageUri.getPath();
+                selectedImageUri = data.getData();
+                //call uploadFile method here
+                selectedImagePath = selectedImageUri.getPath();
 
                 circleImageView.setImageURI(selectedImageUri);
 
@@ -251,8 +248,4 @@ public class SignUpActivity extends AppCompatActivity {
             }
         }
     }
-
-
-
-
 }
