@@ -9,6 +9,8 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -31,6 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -55,8 +58,8 @@ public class LoginActivity extends AppCompatActivity {
     String uName = "", pass = "";
     int code = 0;
 
-    String token = null;
-
+    static String token = null;
+    ArrayList<String> tokenDetail = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,15 +176,22 @@ public class LoginActivity extends AppCompatActivity {
 
                         //     Post postResponse = response.body();
                         System.out.println("----------------------------------------------------");
-                        Toast toast = Toast.makeText(LoginActivity.this, "Log In successfully ! " + response.body().getAuth_token(), Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(LoginActivity.this, "Log In successfully ! " , Toast.LENGTH_SHORT);
                         View view = toast.getView();
                         TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-                        toastMessage.setTextColor(Color.GREEN);
+
+                        toastMessage.setTextColor(Color.parseColor("#2E7D32"));
                         toast.show();
+
+                        tokenDetail.add(selectedLanguage);
+                        tokenDetail.add(response.body().getAuth_token());
+                        System.out.println("details"+tokenDetail);
                         Intent intent1 = new Intent(LoginActivity.this, SelectRoleActivity.class);
+                        intent1.putExtra("tokenDetails",tokenDetail);
                         startActivity(intent1);
 
                         String content = "";
+
                         content += "code : " + response.code() + "\n";
                         System.out.println("Data : _--------- " + content);
                         System.out.println("body : _--------- ");
@@ -200,5 +210,26 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+    public void onCheck(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+        switch (view.getId()) {
+            case R.id.cbShowPass:
+                if (checked){
+                    etPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }else{
+
+                    etPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                break;
+
+
+        }
+    }
+
+
+    public void forgotPass(View view) {
+        Intent forgotPass = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+        startActivity(forgotPass);
     }
 }

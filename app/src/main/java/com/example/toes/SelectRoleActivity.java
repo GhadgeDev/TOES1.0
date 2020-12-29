@@ -48,9 +48,10 @@ public class SelectRoleActivity extends AppCompatActivity {
 
         System.out.println("Token :---------- "+tokenDetails.get(0));
         System.out.println("language :---------- "+tokenDetails.get(1));
-       // System.out.println("language :---------- "+selectedLanguage);
+        // System.out.println("language :---------- "+selectedLanguage);
 
         token = "Token "+tokenDetails.get(1);
+
 
         btnFindJob = (Button)findViewById(R.id.btnFindJob);
         btnFindWorker = (Button)findViewById(R.id.btnFindWorker);
@@ -67,7 +68,7 @@ public class SelectRoleActivity extends AppCompatActivity {
 
         //connecting to base url
 
- /*       Retrofit.Builder retrofit = new Retrofit.Builder().
+        Retrofit.Builder retrofit = new Retrofit.Builder().
                 baseUrl("http://52.201.220.252/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create());
@@ -75,35 +76,35 @@ public class SelectRoleActivity extends AppCompatActivity {
 
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit1.create(JsonPlaceHolderApi.class);
 
-       Call<Post> call = jsonPlaceHolderApi.getPost(token);
-call.enqueue(new Callback<Post>() {
-    @Override
-    public void onResponse(Call<Post> call, Response<Post> response) {
-        if (!response.isSuccessful()) {
+        Call<Post> call = jsonPlaceHolderApi.getPost(token);
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (!response.isSuccessful()) {
 
-            System.out.println("Response : _--------- " + response.code());
-            System.out.println("Response M : _--------- " + response.message());
+                    System.out.println("Response : _--------- " + response.code());
+                    System.out.println("Response M : _--------- " + response.message());
 
-            return;
-        }
+                    return;
+                }
 
-        Post postResponse = response.body();
-        System.out.println("Code :------------------- " + response.code());
-        String content = "";
-        content += "name : " + postResponse.getfName() + "\n";
-        content += "lName : " + postResponse.getlName() + "\n";
+                Post postResponse = response.body();
+                System.out.println("Code :------------------- " + response.code());
+                String content = "";
+                content += "name : " + postResponse.getfName() + "\n";
+                content += "lName : " + postResponse.getlName() + "\n";
 
-        txtName.setText(postResponse.getfName()+",");
-        System.out.println("Data : _--------- " + content);
+                txtName.setText(postResponse.getfName()+",");
+                System.out.println("Data : _--------- " + content);
 
-    }
+            }
 
-    @Override
-    public void onFailure(Call<Post> call, Throwable t) {
-        System.out.println("Filed in selectRole : "+t.getMessage());
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                System.out.println("Filed in selectRole : "+t.getMessage());
 
-    }
-});*/
+            }
+        });
 
         btnFindWorker.setOnClickListener(new View.OnClickListener() {
             @Override

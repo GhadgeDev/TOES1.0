@@ -67,7 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         //connecting to base url
 
- /*       Retrofit.Builder retrofit = new Retrofit.Builder().
+        Retrofit.Builder retrofit = new Retrofit.Builder().
                 baseUrl("http://52.201.220.252/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create());
@@ -90,8 +90,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                 Post postResponse = response.body();
 
-               // File photo = new File(postResponse.getProfile_image());
-               // RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), photo);
+                // File photo = new File(postResponse.getProfile_image());
+                // RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), photo);
 
                 System.out.println("Code :------------------- " + response.code());
                 String content = "";
@@ -107,9 +107,9 @@ public class ProfileActivity extends AppCompatActivity {
                 txtGender.setText(postResponse.getGender());
                 txtaadhar.setText(postResponse.getAdharNo());
                 txtaddr.setText(postResponse.getAddress());
-            //    String mImgUrl = "";
-          //      mImgUrl = "http://52.201.220.252/" + postResponse.getProfile_image();
-           //     profile_image.setImageURI(Uri.parse(mImgUrl));
+                //    String mImgUrl = "";
+                //      mImgUrl = "http://52.201.220.252/" + postResponse.getProfile_image();
+                //     profile_image.setImageURI(Uri.parse(mImgUrl));
 
                 System.out.println("Data : _--------- " + content);
 
@@ -121,7 +121,7 @@ public class ProfileActivity extends AppCompatActivity {
                 System.out.println("Filed in ProfileActivity : "+t.getMessage());
 
             }
-        });*/
+        });
 
 
         mLogoutButton.setOnClickListener(new View.OnClickListener() {
