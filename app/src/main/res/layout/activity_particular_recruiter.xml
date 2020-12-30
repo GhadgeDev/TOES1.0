@@ -18,16 +18,18 @@
     <TextView
         android:id="@+id/particular_recruiter_name"
         android:layout_margin="5dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="18sp"
+
+        android:textStyle="bold"
         android:textColor="@color/black"
-        android:hint="Recruiter Name"/>
+       android:hint="Recruiter Name"/>
 
     <TextView
         android:layout_margin="5dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="18sp"
@@ -41,7 +43,7 @@
 
     <TextView
         android:layout_margin="5dp"
-        android:layout_width="match_parent"
+        android:layout_width="324dp"
         android:layout_height="150dp"
         android:gravity="center"
         android:textSize="18sp"
@@ -55,10 +57,10 @@
 
     <EditText
         android:layout_margin="5dp"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
         android:hint="Enter Amount(Rs.)"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:gravity="center"
         android:inputType="number"
         android:background="@drawable/devnagaribtn"/>
