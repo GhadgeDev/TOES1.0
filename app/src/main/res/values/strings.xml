@@ -62,7 +62,7 @@
     <string name="profession">Profession:</string>
     <string name="selectItem" />
 
-    <string name="select">Please select role!</string>
+    <string name="select">Please select role! and Give job description</string>
 
     <string name="visiting_charge">Visiting charges: </string>
 

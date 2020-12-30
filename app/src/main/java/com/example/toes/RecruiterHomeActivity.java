@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RecruiterHomeActivity extends AppCompatActivity {
     Spinner spinner1;
     EditText jobDesc;
-    String jobDescVal;
+
     private Button msearch;
 
     @Override
@@ -35,53 +35,53 @@ public class RecruiterHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recruiter_home);
         spinner1 = findViewById(R.id.spinnerSelectJob);
 
-        jobDesc = findViewById(R.id.jobDescription);
-        jobDescVal = jobDesc.getText().toString();
-
         String[] jobTitles = new String[]{"Select Job", "Carpenter", "Painter", "Driver", "Electrician", "Plumber"};
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.style_select_job_titles, jobTitles);
         spinner1.setAdapter(arrayAdapter);
+
+        JsonPlaceHolderApi jsonPlaceHolderApi = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
 
         msearch = findViewById(R.id.btnsearch);
 
         msearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                jobDesc = (EditText) findViewById(R.id.jobDescription);
+                String jobDescVal = jobDesc.getText().toString();
+
                 String text = spinner1.getSelectedItem().toString();
-                if (!text.equals("Select Job")) {
+
+                Call<GetRecruiterJobInfo> call = jsonPlaceHolderApi.getRecruiterJobInfo("token " + LoginActivity.token, text,
+                        jobDescVal, 1,LoginActivity.userMeId);
+
+                call.enqueue(new Callback<GetRecruiterJobInfo>() {
+                    @Override
+                    public void onResponse(Call<GetRecruiterJobInfo> call, Response<GetRecruiterJobInfo> response) {
+                        if (!response.isSuccessful()) {
+                            Toast toast = Toast.makeText(RecruiterHomeActivity.this, "ERROR :( ", Toast.LENGTH_SHORT);
+                            toast.show();
+                            return;
+                        }
+
+                        Toast toast = Toast.makeText(RecruiterHomeActivity.this, "Job uploaded successfully", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<GetRecruiterJobInfo> call, Throwable t) {
+                        Toast toast = Toast.makeText(RecruiterHomeActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                        TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                        toastMessage.setTextColor(Color.RED);
+                        toast.show();
+                    }
+                });
+
+                if (!text.equals("Select Job")  && jobDescVal != null) {
                     Intent intent = SelectWorkerActivity.newIntent(RecruiterHomeActivity.this, text);
-                    uploadRecruiterProfile(text);
                     startActivity(intent);
                 } else {
                     Toast.makeText(RecruiterHomeActivity.this, R.string.select, Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-    }
-
-    private void uploadRecruiterProfile(String t) {
-        JsonPlaceHolderApi jsonPlaceHolderApi = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
-        Call<GetRecruiterJobInfo> call = jsonPlaceHolderApi.getRecruiterJobInfo(LoginActivity.token, t,
-                jobDescVal, 1, ProfileActivity.userMeId);
-
-        call.enqueue(new Callback<GetRecruiterJobInfo>() {
-            @Override
-            public void onResponse(Call<GetRecruiterJobInfo> call, Response<GetRecruiterJobInfo> response) {
-                if (!response.isSuccessful()) {
-                    Toast toast = Toast.makeText(RecruiterHomeActivity.this, "Incorrect username or password ! ", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-
-                Toast toast = Toast.makeText(RecruiterHomeActivity.this, "Job uploaded successfully", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-
-            @Override
-            public void onFailure(Call<GetRecruiterJobInfo> call, Throwable t) {
-                Toast toast = Toast.makeText(RecruiterHomeActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
-                TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-                toastMessage.setTextColor(Color.RED);
-                toast.show();
             }
         });
     }

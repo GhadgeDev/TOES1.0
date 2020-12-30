@@ -39,7 +39,6 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView profile_image;
 
     String token = "";
-    public static int userMeId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,8 +114,6 @@ public class ProfileActivity extends AppCompatActivity {
                 //     profile_image.setImageURI(Uri.parse(mImgUrl));
 
                 System.out.println("Data : _--------- " + content);
-                userMeId = postResponse.getId();
-                System.out.println("ID : _------------" + userMeId);
             }
 
             @Override
