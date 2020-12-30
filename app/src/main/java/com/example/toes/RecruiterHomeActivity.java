@@ -41,12 +41,17 @@ public class RecruiterHomeActivity extends AppCompatActivity {
                 String text = spinner1.getSelectedItem().toString();
                 if (!text.equals("Select Job")) {
                     Intent intent = SelectWorkerActivity.newIntent(RecruiterHomeActivity.this, text);
+                    uploadRecruiterProfile();
                     startActivity(intent);
                 } else {
                     Toast.makeText(RecruiterHomeActivity.this, R.string.select, Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+
+    private void uploadRecruiterProfile() {
 
     }
 }

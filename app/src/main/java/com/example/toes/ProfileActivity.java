@@ -39,6 +39,8 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView profile_image;
 
     String token = "";
+    public static int userMeId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit1.create(JsonPlaceHolderApi.class);
 
-        Call<Post> call = jsonPlaceHolderApi.getPost(token);
+        Call<Post> call = jsonPlaceHolderApi.getPost("token " + LoginActivity.token);
         call.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
@@ -83,7 +85,6 @@ public class ProfileActivity extends AppCompatActivity {
 
                     System.out.println("Response : _--------- " + response.code());
                     System.out.println("Response M : _--------- " + response.message());
-
                     return;
                 }
 
@@ -107,13 +108,15 @@ public class ProfileActivity extends AppCompatActivity {
                 txtGender.setText(postResponse.getGender());
                 txtaadhar.setText(postResponse.getAdharNo());
                 txtaddr.setText(postResponse.getAddress());
+
+
                 //    String mImgUrl = "";
                 //      mImgUrl = "http://52.201.220.252/" + postResponse.getProfile_image();
                 //     profile_image.setImageURI(Uri.parse(mImgUrl));
 
                 System.out.println("Data : _--------- " + content);
-
-
+                userMeId = postResponse.getId();
+                System.out.println("ID : _------------" + userMeId);
             }
 
             @Override

@@ -130,13 +130,12 @@ public class IdentityProofActivity extends AppCompatActivity {
                     toast.show();
 
                 }else {
-
                     String phone = details2.get(2);
                     System.out.println("-------------------Phone-----------------"+phone);
                     Call<Post> call = jsonPlaceHolderApi.createUser(false,
                             false,
                             details2.get(0), details2.get(1), "TOES@" + details2.get(2), newPass, details2.get(4), details2.get(5),
-                            aadharNo, details2.get(6), details2.get(3), details2.get(2), cPass);
+                            aadharNo, SignUpActivity.encodedImg , details2.get(3), details2.get(2), cPass);
 
                     System.out.println("--------------------------------------------------------------------");
 
@@ -167,6 +166,7 @@ public class IdentityProofActivity extends AppCompatActivity {
                             content += "Dob : " + postResponse.getDob() + "\n";
                             content += "gender : " + postResponse.getGender() + "\n";
                             content += "username : " + postResponse.getUsername() + "\n";
+                            content += "profile_image : " + postResponse.getProfileImage() + "\n";
                             System.out.println("Data : _--------- " + content);
 
                             Intent go = new Intent(IdentityProofActivity.this,LoginActivity.class);

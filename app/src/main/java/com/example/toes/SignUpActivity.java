@@ -13,7 +13,9 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.util.Base64;
 import android.view.View;
 
 import android.widget.DatePicker;
@@ -26,7 +28,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -55,9 +59,12 @@ public class SignUpActivity extends AppCompatActivity {
     FloatingActionButton btnNext;
     String selectedLanguage;
     public static String selectedImagePath;
-    Uri selectedImageUri;
+    //Uri selectedImageUri;
+
+    Bitmap bitmap;
+    public static String encodedImg;
+
     String args[] = {"", ""};
-    Bitmap bitmap = null;
 
     String fName = "", lName = "", contact = "", address = "", dob = "", gender = "", pass = "", phone = "";
     int l = 0;
@@ -248,13 +255,25 @@ public class SignUpActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == PICK_IMAGE) {
-                selectedImageUri = data.getData();
+                // selectedImageUri = data.getData();
+                // selectedImagePath = selectedImageUri.getPath();
+                //  circleImageView.setImageURI(selectedImageUri);
+                // file = new File(selectedImageUri.toString());
+                // args[1] = selectedImagePath;
 
-                selectedImagePath = selectedImageUri.getPath();
+                Uri path = data.getData();
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),path);
+                    circleImageView.setImageBitmap(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-                circleImageView.setImageURI(selectedImageUri);
-                file = new File(selectedImageUri.toString());
-               // args[1] = selectedImagePath;
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 85, byteArrayOutputStream);
+                byte[] imgInBit = byteArrayOutputStream.toByteArray();
+
+                encodedImg = Base64.encodeToString(imgInBit, Base64.DEFAULT);
             }
         }
     }
