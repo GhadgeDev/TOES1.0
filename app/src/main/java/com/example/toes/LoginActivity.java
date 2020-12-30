@@ -58,7 +58,8 @@ public class LoginActivity extends AppCompatActivity {
     String uName = "", pass = "";
     int code = 0;
 
-    static String token = null;
+    public static String token;
+
     ArrayList<String> tokenDetail = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,6 +184,7 @@ public class LoginActivity extends AppCompatActivity {
                         toastMessage.setTextColor(Color.parseColor("#2E7D32"));
                         toast.show();
 
+                        token =  response.body().getAuth_token();
                         tokenDetail.add(selectedLanguage);
                         tokenDetail.add(response.body().getAuth_token());
                         System.out.println("details"+tokenDetail);
