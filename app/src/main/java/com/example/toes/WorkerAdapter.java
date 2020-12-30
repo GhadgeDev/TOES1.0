@@ -39,14 +39,6 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerView
     public void onBindViewHolder(@NonNull WorkerViewHolder holder, int position) {
         holder.wName.setText(mData.get(position).getWorkerName());
         holder.vCharges.setText(mData.get(position).getVisitingCharges());
-
-        System.out.println("**************************************************");
-        System.out.println("Worker name: " +mData.get(position).getWorkerName());
-        System.out.println("Visiting charges: "+mData.get(position).getVisitingCharges());
-        System.out.println("Experience: "+mData.get(position).getExperience());
-        System.out.println("Contact: "+mData.get(position).getContactNo());
-        System.out.println("category: "+mData.get(position).getCategory());
-        System.out.println("**************************************************");
     }
 
     @Override

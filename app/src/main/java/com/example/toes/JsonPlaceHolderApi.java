@@ -58,13 +58,13 @@ interface JsonPlaceHolderApi {
     @GET("/api/user/{Phone_no}")
     Call<User> sendOTP(@Path(value = "Phone_no") String Phone_no);
 
+    @FormUrlEncoded
     @POST("job/")
     Call<GetRecruiterJobInfo> getRecruiterJobInfo(@Header("Authorization") String token,
-                                                  @Field("id") int id,
                                                   @Field("job_title") String jobTitle,
                                                   @Field("job_Description") String jbDesc,
                                                   @Field("status") int status,
-                                                  @Field("recruiter") int role);
+                                                  @Field("recruiter") int id);
 
 
 }
