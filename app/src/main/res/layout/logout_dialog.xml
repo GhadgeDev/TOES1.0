@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/logout_dilouge"
+    android:background="@color/white"
 
     android:gravity="center">
 
@@ -11,10 +11,10 @@
         android:id="@+id/sure_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Are you sure you want to logout"
+        android:text="Are you sure you want to logout ?"
         android:gravity="center"
         android:padding="15dp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="16sp"/>
 
 </RelativeLayout>

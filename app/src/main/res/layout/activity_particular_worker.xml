@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true"
+    android:scrollbars="vertical"
     android:background="@color/white">
 
     <ImageView
+        android:layout_centerHorizontal="true"
         android:id="@+id/worker_image"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="35dp"
@@ -19,9 +21,9 @@
         android:id="@+id/particular_worker_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_toRightOf="@+id/worker_image"
-        android:padding="8dp"
+        android:layout_margin="10dp"
+        android:layout_below ="@+id/worker_image"
+        android:layout_centerHorizontal="true"
         android:textColor="@color/black"
         android:textSize="18sp"
         tools:text="Worker Name" />
@@ -31,46 +33,54 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/particular_worker_name"
-        android:layout_marginTop="5dp"
-        android:layout_toRightOf="@+id/worker_image"
+        android:layout_centerHorizontal="true"
+
         android:hint="Address"
-        android:padding="8dp"
-        android:textSize="16sp" />
+
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/particular_worker_experience"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/particular_worker_address"
-        android:layout_marginTop="5dp"
-        android:layout_toRightOf="@id/worker_image"
-        android:hint="Experience:"
-        android:padding="8dp"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="210dp"
-        android:orientation="vertical">
+        android:hint="Experience:"
+
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+    <View
+        android:id="@+id/divider1"
+        android:layout_below="@+id/particular_worker_experience"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="10dp"
+        android:background="?android:attr/listDivider" />
 
         <TextView
             android:id="@+id/txtprofession"
-            android:layout_width="325dp"
+            android:layout_width="324dp"
             android:layout_height="150dp"
             android:background="@drawable/textbox_border"
+            android:layout_below="@+id/divider1"
             android:gravity="top"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:scrollbars="vertical"
+            android:textSize="15sp"
             android:hint="Job Description"
             android:padding="10dp" />
 
         <LinearLayout
+            android:id="@+id/linearWorkFee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp">
+            android:layout_below="@id/txtprofession"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -81,34 +91,40 @@
 
             <TextView
                 android:layout_marginTop="2dp"
-                android:textStyle="bold"
+
                 android:textColor="@color/black"
                 android:id="@+id/particular_worker_fees"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 tools:text="Worker fees" />
         </LinearLayout>
 
         <TextView
+            android:id="@+id/txtNote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:hint="*charges may apply as per work"
-            android:padding="10dp" />
+            android:layout_below="@+id/linearWorkFee"
+            android:layout_centerHorizontal="true"
+            android:textSize="12sp"
+            android:padding="2dp" />
 
         <Button
             android:id="@+id/hire_btn"
-            android:layout_width="250dp"
-            android:layout_height="45dp"
+            android:layout_below="@+id/txtNote"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
             android:layout_gravity="center"
-            android:layout_margin="30dp"
+            android:layout_margin="20dp"
             android:background="@drawable/englishbutton"
             android:padding="5dp"
             android:text="Hire"
+            android:layout_centerHorizontal="true"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
-    </LinearLayout>
+
 
 </RelativeLayout>

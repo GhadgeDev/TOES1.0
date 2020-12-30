@@ -27,68 +27,98 @@
         android:layout_centerHorizontal="true"
         android:src="@mipmap/useravatar"
         />
-    <TextView
-        android:id="@+id/txtFName"
+
+    <LinearLayout
+        android:id="@+id/llMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cimgprofile"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="42dp"
+        android:orientation="horizontal"
+        android:layout_below="@id/cimgprofile"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        >
+        <LinearLayout
+            android:id="@+id/ll1Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/cimgprofile"
+            >
+            <TextView
+                android:id="@+id/txtFName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cimgprofile"
 
-        android:text="First Name"
-        android:textColor="@color/black"
-        />
+                android:layout_marginTop="10dp"
 
-    <EditText
-        android:id="@+id/etFName"
-        android:layout_width="160dp"
-        android:layout_height="55dp"
-        android:layout_below="@+id/txtFName"
-        android:layout_marginLeft="42dp"
-        android:layout_marginTop="5dp"
-        android:inputType="textPersonName"
-        android:background="@drawable/devnagaribtn"
+                android:text="First Name"
+                android:textColor="@color/black" />
 
-        android:cursorVisible="true"
-        android:duplicateParentState="true"
+            <EditText
+                android:id="@+id/etFName"
+                android:layout_width="160dp"
+                android:layout_height="55dp"
+                android:layout_below="@+id/txtFName"
 
-        android:fontFamily="@font/lohitdevanagari"
-        android:gravity="center"
-        android:hint="Name"
-        android:textColor="@color/black"
-        android:textColorHint="#97616161" />
-    <TextView
-        android:id="@+id/txtLName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/cimgprofile"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:inputType="textPersonName"
+                android:background="@drawable/devnagaribtn"
 
-        android:text="Last Name"
-        android:textColor="@color/black"
-        android:layout_toRightOf="@+id/etFName" />
-    <EditText
-        android:id="@+id/etLName"
-        android:layout_width="160dp"
-        android:inputType="textPersonName"
-        android:layout_height="55dp"
-        android:fontFamily="@font/lohitdevanagari"
-        android:layout_below="@+id/txtLName"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_toRightOf="@+id/etFName"
-        android:hint="Last Name"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:textColorHint="#97616161"
-        android:background="@drawable/devnagaribtn"
-        />
+                android:cursorVisible="true"
+                android:duplicateParentState="true"
+
+                android:fontFamily="@font/lohitdevanagari"
+                android:gravity="center"
+                android:hint="Name"
+                android:textColor="@color/black"
+                android:textColorHint="#97616161" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll2Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/cimgprofile"
+            android:layout_toRightOf="@+id/ll1Name"
+            >
+            <TextView
+                android:id="@+id/txtLName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cimgprofile"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+
+                android:text="Last Name"
+                android:textColor="@color/black"
+                android:layout_toRightOf="@+id/etFName" />
+            <EditText
+                android:id="@+id/etLName"
+                android:layout_width="160dp"
+                android:inputType="textPersonName"
+                android:layout_height="55dp"
+                android:fontFamily="@font/lohitdevanagari"
+                android:layout_below="@+id/txtLName"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/etFName"
+                android:hint="Last Name"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textColorHint="#97616161"
+                android:background="@drawable/devnagaribtn"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
     <TextView
         android:id="@+id/txtContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etFName"
+        android:layout_below="@+id/llMain"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="50dp"
         android:text="Contact Number"

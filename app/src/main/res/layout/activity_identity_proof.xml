@@ -153,6 +153,7 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="20dp"
         android:background="@drawable/englishbutton"
+        android:textColor="@color/white"
         android:text="Let's Go"
         />
 </RelativeLayout>

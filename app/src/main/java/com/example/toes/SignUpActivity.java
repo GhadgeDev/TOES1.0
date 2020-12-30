@@ -168,6 +168,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
                 myCal.set(Calendar.YEAR, year);
                 myCal.set(Calendar.MONTH, month);
                 myCal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -178,7 +179,7 @@ public class SignUpActivity extends AppCompatActivity {
         etDob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(SignUpActivity.this, date, myCal
+                new DatePickerDialog(SignUpActivity.this,R.style.DialogTheme, date, myCal
                         .get(Calendar.YEAR), myCal.get(Calendar.MONTH),
                         myCal.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -247,6 +248,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void updateLabel() {
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
+
         etDob.setText(sdf.format(myCal.getTime()));
     }
 

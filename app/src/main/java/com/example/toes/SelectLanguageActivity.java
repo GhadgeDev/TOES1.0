@@ -23,7 +23,7 @@ public class SelectLanguageActivity extends AppCompatActivity {
     FloatingActionButton btnNext;
     Button btnEnglish,btnMarathi,btnHindi;
     TextView txtNext;
-    String selectedLanguage;
+    String selectedLanguage = "";
     boolean selected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,10 +97,19 @@ public class SelectLanguageActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(SelectLanguageActivity.this,LoginActivity.class);
-                selectedLanguage.toString();
-                intent.putExtra(Intent.EXTRA_TEXT, selectedLanguage);
-                startActivity(intent);
+                if (selectedLanguage.equals("")){
+                    selectedLanguage = "0";
+                    Intent intent =new Intent(SelectLanguageActivity.this,LoginActivity.class);
+                    selectedLanguage.toString();
+                    intent.putExtra(Intent.EXTRA_TEXT, selectedLanguage);
+                    startActivity(intent);
+                }else{
+                    Intent intent =new Intent(SelectLanguageActivity.this,LoginActivity.class);
+                    selectedLanguage.toString();
+                    intent.putExtra(Intent.EXTRA_TEXT, selectedLanguage);
+                    startActivity(intent);
+                }
+
             }
         });
 
