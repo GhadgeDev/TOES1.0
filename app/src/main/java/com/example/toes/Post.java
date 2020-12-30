@@ -6,8 +6,6 @@ class Post {
     private String password;
     private String phone;
 
-//    private String token;
-
     private boolean is_superuser = false;
     private boolean is_admin = false;
     private String first_name;
@@ -49,14 +47,6 @@ class Post {
         this.profileImage = profileImage;
         this.address = address;
     }
-
-    /*   public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }*/
 
     public String getProfile_image() {
         return profile_image;

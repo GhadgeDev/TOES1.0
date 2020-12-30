@@ -45,7 +45,7 @@ public class IdentityProofActivity extends AppCompatActivity {
     EditText etnewPass,etCPass,etAadhar,etCAadhar;
     Button btnNext;
     String selectedLanguage;
-    String selectedImagePath;
+   // String selectedImagePath;
     //String args[];
 
     String newPass = "",cPass = "",aadharNo = "",cAadharNo ="";
@@ -77,7 +77,7 @@ public class IdentityProofActivity extends AppCompatActivity {
 
         details2  = intent.getStringArrayListExtra("details1");
         selectedLanguage = args[0];
-        selectedImagePath = args[1];
+      //  selectedImagePath = args[1];
 
         System.out.println("in IdentityProof "+details2);
 
@@ -89,7 +89,7 @@ public class IdentityProofActivity extends AppCompatActivity {
         OkHttpClient okHttpClient  = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder().
-                baseUrl("http://52.201.220.252/token/")
+                baseUrl("http://52.201.220.252/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();

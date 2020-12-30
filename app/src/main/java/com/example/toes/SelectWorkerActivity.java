@@ -79,14 +79,17 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
 
         Retrofit.Builder retrofit = new Retrofit.Builder()
-                .baseUrl("http://52.201.220.252/api/category/")
+                .baseUrl("http://52.201.220.252/")
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit1 = retrofit.client(okHttpClient).build();
 
         JsonPlaceHolderApi workerInfoList = retrofit1.create(JsonPlaceHolderApi.class);
-        System.out.println("**************Token =  " + LoginActivity.token);
 
-       Call<List<GetSpecificWorkerModel>> call = workerInfoList.getWorkerInfo("token " + LoginActivity.token, mSelectedItemIs);
+       Call<List<GetSpecificWorkerModel>> call = workerInfoList.getWorkerInfo("token " + LoginActivity.token, mSelectedItemIs.toLowerCase());
+        System.out.println("#################################");
+        System.out.println("SelectedItem: "+ mSelectedItemIs);
+        System.out.println("#################################");
+
 
         call.enqueue(new Callback<List<GetSpecificWorkerModel>>() {
             @Override

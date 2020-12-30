@@ -9,6 +9,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,6 +35,13 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -44,7 +54,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     FloatingActionButton btnNext;
     String selectedLanguage;
-    String selectedImagePath;
+    public static String selectedImagePath;
     Uri selectedImageUri;
     String args[] = {"", ""};
     Bitmap bitmap = null;
@@ -219,6 +229,7 @@ public class SignUpActivity extends AppCompatActivity {
                     System.out.println("--------------------------------contact" + etContact.getText().toString());
                     startActivity(next);
 
+
                 }
             }
         });
@@ -238,14 +249,15 @@ public class SignUpActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == PICK_IMAGE) {
                 selectedImageUri = data.getData();
-                //call uploadFile method here
+
                 selectedImagePath = selectedImageUri.getPath();
 
                 circleImageView.setImageURI(selectedImageUri);
-
                 file = new File(selectedImageUri.toString());
-                args[1] = selectedImagePath;
+               // args[1] = selectedImagePath;
             }
         }
     }
+
+
 }

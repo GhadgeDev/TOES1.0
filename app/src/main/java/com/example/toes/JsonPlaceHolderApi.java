@@ -2,6 +2,8 @@ package com.example.toes;
 
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -26,12 +28,18 @@ interface JsonPlaceHolderApi {
     @POST("login/")
     Call<User> createPost(@Body Post post);
 
-    @GET("{category_name}/")
+    @GET("api/category/{category_name}/")
     Call<List<GetSpecificWorkerModel>> getWorkerInfo(@Header("Authorization") String authToken,
                                                      @Path("category_name") String a);
 
+  /*  @Multipart
+    @POST("users/")
+    Call<ResponseBody> uploadImage(@Part MultipartBody.Part part,
+                                   @Part("data") RequestBody requestBody);*/
+
+
     @FormUrlEncoded
-    @POST("/users/")
+    @POST("users/")
     Call<Post> createUser(@Field("is_superuser") boolean is_superuser,
                           @Field("is_admin") boolean is_admin,
                           @Field("first_name") String fName,

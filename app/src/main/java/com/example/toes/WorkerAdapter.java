@@ -30,8 +30,8 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerView
     @Override
     public WorkerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
-        v = LayoutInflater.from(mContext).inflate(R.layout.worker_list_layout,parent,false);
-        WorkerViewHolder viewHolder = new WorkerViewHolder(v,mOnNoteListener);
+        v = LayoutInflater.from(mContext).inflate(R.layout.worker_list_layout, parent, false);
+        WorkerViewHolder viewHolder = new WorkerViewHolder(v, mOnNoteListener);
         return viewHolder;
     }
 
@@ -39,6 +39,14 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerView
     public void onBindViewHolder(@NonNull WorkerViewHolder holder, int position) {
         holder.wName.setText(mData.get(position).getWorkerName());
         holder.vCharges.setText(mData.get(position).getVisitingCharges());
+
+        System.out.println("**************************************************");
+        System.out.println("Worker name: " +mData.get(position).getWorkerName());
+        System.out.println("Visiting charges: "+mData.get(position).getVisitingCharges());
+        System.out.println("Experience: "+mData.get(position).getExperience());
+        System.out.println("Contact: "+mData.get(position).getContactNo());
+        System.out.println("category: "+mData.get(position).getCategory());
+        System.out.println("**************************************************");
     }
 
     @Override
@@ -52,9 +60,10 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerView
         TextView vCharges;
 
         OnNoteListener onNoteListener;
+
         public WorkerViewHolder(@NonNull View itemView, OnNoteListener onNoteListener) {
             super(itemView);
-         //   imgIcon = itemView.findViewById(R.id.worker_image);           setting image of worker for recruiter to see in the list
+            //   imgIcon = itemView.findViewById(R.id.worker_image);           setting image of worker for recruiter to see in the list
             wName = itemView.findViewById(R.id.worker_name);
             vCharges = itemView.findViewById(R.id.worker_visiting_fee);
             this.onNoteListener = onNoteListener;
@@ -66,7 +75,8 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerView
             onNoteListener.onNoteClick(getAdapterPosition());
         }
     }
-    public interface OnNoteListener{
+
+    public interface OnNoteListener {
         void onNoteClick(int position);
     }
 }
