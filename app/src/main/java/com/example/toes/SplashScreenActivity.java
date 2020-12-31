@@ -32,5 +32,8 @@ public class SplashScreenActivity extends AppCompatActivity {
             }
         }, SPLASH_TIME);
 
+        JsonPlaceHolderApi jsonPlaceHolderApi = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+
+
     }
 }

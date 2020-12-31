@@ -28,15 +28,10 @@ interface JsonPlaceHolderApi {
     @POST("login/")
     Call<User> createPost(@Body Post post);
 
+    //Getting all worker list for recruiter to choose
     @GET("api/category/{category_name}/")
     Call<List<GetSpecificWorkerModel>> getWorkerInfo(@Header("Authorization") String authToken,
                                                      @Path("category_name") String a);
-
-  /*  @Multipart
-    @POST("users/")
-    Call<ResponseBody> uploadImage(@Part MultipartBody.Part part,
-                                   @Part("data") RequestBody requestBody);*/
-
 
     @FormUrlEncoded
     @POST("users/")
@@ -49,15 +44,14 @@ interface JsonPlaceHolderApi {
                           @Field("dob") String dob,
                           @Field("gender") String gender,
                           @Field("aadhar_no") String adhar_no,
-                          @Field("profile_image")String profile_image,
                           @Field("address") String address,
                           @Field("phone") String phone,
                           @Field("re_password") String re_password
     );
 
+
     @GET("/api/user/{Phone_no}")
     Call<User> sendOTP(@Path(value = "Phone_no") String Phone_no);
-
     @FormUrlEncoded
     @POST("/worker/")
     Call<WorkerJobDetails> insertWorkerJobInfo(@Header("Authorization") String token,
@@ -65,6 +59,8 @@ interface JsonPlaceHolderApi {
                                                @Field("category_1")String category_1,
                                                @Field("category_1_vc")String category_1_vc,
                                                @Field("category_1_exp")int category_1_exp,
+
+
                                                @Field("category_1")String category_2,
                                                @Field("category_2_vc")String category_2_vc,
                                                @Field("category_2_exp")int category_2_exp,
@@ -73,7 +69,29 @@ interface JsonPlaceHolderApi {
                                                @Field("category_3_exp")int category_3_exp,
                                                @Field("user")int user
                                               );
+    //Recruiter clicks search, post get uploaded at worker side
+    @FormUrlEncoded
+    @POST("job/")
+    Call<GetRecruiterJobInfo> getRecruiterJobInfo(@Header("Authorization") String token,
+                                                  @Field("job_title") String jobTitle,
+                                                  @Field("job_Description") String jbDesc,
+                                                  @Field("status") int status,
+                                                  @Field("recruiter") int id);
 
+    //Recruiter clicks hire button
+    @FormUrlEncoded
+    @POST("recruiter/req")
+    Call<RecruiterHirePostRequest> postHireReq(@Header("Authorization") String token,
+                                               @Field("recruiter") int userMeId,
+                                               @Field("status") int status,
+                                               @Field("job_detail") int jbDetail,
+                                               @Field("worker") int workerId);
+
+
+    @Multipart
+    @POST("profile/image")
+    Call<GetProfileImage> uploadImage(@Part MultipartBody.Part part,
+                                   @Part("profile_image") int userId);
     @GET("/worker/")
     Call<List<Post>> getId(@Header("Authorization") String token);
 }

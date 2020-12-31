@@ -7,13 +7,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.util.Base64;
 import android.view.View;
 
 import android.widget.DatePicker;
@@ -26,7 +29,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,6 +47,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.http.Multipart;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -55,9 +61,12 @@ public class SignUpActivity extends AppCompatActivity {
     FloatingActionButton btnNext;
     String selectedLanguage;
     public static String selectedImagePath;
-    Uri selectedImageUri;
+
+    public static Uri selectedImageUri;
+    Bitmap bitmap;
+    public static String imgPath;
+
     String args[] = {"", ""};
-    Bitmap bitmap = null;
 
     String fName = "", lName = "", contact = "", address = "", dob = "", gender = "", pass = "", phone = "";
     int l = 0;
@@ -172,7 +181,7 @@ public class SignUpActivity extends AppCompatActivity {
         etDob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(SignUpActivity.this,R.style.DialogTheme, date, myCal
+                new DatePickerDialog(SignUpActivity.this, R.style.DialogTheme, date, myCal
                         .get(Calendar.YEAR), myCal.get(Calendar.MONTH),
                         myCal.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -209,11 +218,11 @@ public class SignUpActivity extends AppCompatActivity {
 
 
                     System.out.println("--------------------------------Name " + fName);
-                    System.out.println("-------------------------------- Lname " + lName);
-                    System.out.println("--------------------------------cno " + phone);
-                    System.out.println("--------------------------------addr" + address);
-                    System.out.println("--------------------------------dob" + dob);
-                    System.out.println("--------------------------------gender" + gender);
+                    System.out.println("-------------------------------- Lname: " + lName);
+                    System.out.println("--------------------------------cno: " + phone);
+                    System.out.println("--------------------------------addr: " + address);
+                    System.out.println("--------------------------------dob : " + dob);
+                    System.out.println("--------------------------------gender: " + gender);
 
 
                     details1.add(fName);
@@ -226,8 +235,8 @@ public class SignUpActivity extends AppCompatActivity {
                     Intent next = new Intent(SignUpActivity.this, IdentityProofActivity.class);
                     next.putExtra("args", args);
                     next.putExtra("details1", details1);
-                    System.out.println("--------------------------------sImage" + selectedImagePath);
-                    System.out.println("--------------------------------contact" + etContact.getText().toString());
+                    System.out.println("--------------------------------sImage: " + selectedImagePath);
+                    System.out.println("--------------------------------contact: " + etContact.getText().toString());
                     startActivity(next);
 
 
@@ -250,16 +259,26 @@ public class SignUpActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == PICK_IMAGE) {
+
                 selectedImageUri = data.getData();
-
                 selectedImagePath = selectedImageUri.getPath();
-
                 circleImageView.setImageURI(selectedImageUri);
-                file = new File(selectedImageUri.toString());
-               // args[1] = selectedImagePath;
+
+
+         /*       selectedImageUri = data.getData();
+                System.out.println("--------------------------------selected Image: " + selectedImagePath);
+
+                File file = new File(selectedImagePath);
+                RequestBody requestBody = RequestBody.create(MediaType.parse("images/*"),file);
+                part = MultipartBody.Part.createFormData("profile_image", file.getName(),requestBody);*/
             }
         }
     }
 
-
+   /* public String getPath(Uri uri){
+        Cursor cursor = getContentResolver().query(uri,null,null,null,null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
+    }*/
 }

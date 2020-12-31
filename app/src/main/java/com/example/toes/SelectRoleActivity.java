@@ -28,6 +28,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class SelectRoleActivity extends AppCompatActivity {
     SharedPreferences prf;
     TextView txtName;
+    public static String textUserfName;
+    public static String textUserlName;
     String selectedLanguage;
     Button btnFindJob,btnFindWorker;
     String token = "";
@@ -96,6 +98,8 @@ public class SelectRoleActivity extends AppCompatActivity {
                 content += "lName : " + postResponse.getlName() + "\n";
 
                 txtName.setText(postResponse.getfName()+",");
+                textUserfName = postResponse.getfName();
+                textUserlName = postResponse.getlName();
                 System.out.println("Data : _--------- " + content);
 
             }

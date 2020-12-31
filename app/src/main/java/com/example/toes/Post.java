@@ -20,6 +20,9 @@ class Post {
     private String profileImage;
     //private String email;
     private String address;
+
+    private int id;
+
     private String re_pass;
     private String  profile_image = null;
     private  int id ;
@@ -68,13 +71,13 @@ class Post {
         this.user = user;
     }
 
-    public String getProfile_image() {
+ /*   public String getProfile_image() {
         return profile_image;
     }
 
     public void setProfile_image(String profile_image) {
         this.profile_image = profile_image;
-    }
+    }*/
 
     public String getPassword() {
         return password;
@@ -174,6 +177,14 @@ class Post {
 
     public String getRe_pass() {
         return re_pass;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setRe_pass(String re_pass) {

@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,8 +59,9 @@ public class LoginActivity extends AppCompatActivity {
     int code = 0;
 
     public static String token;
+    public static int userMeId;
 
-   static ArrayList<String> tokenDetail = new ArrayList<>();
+    ArrayList<String> tokenDetail = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,6 +156,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 uName = etContact.getText().toString();
                 pass = etPass.getText().toString();
                 Post post = new Post(pass, uName);
@@ -186,6 +189,9 @@ public class LoginActivity extends AppCompatActivity {
                         toast.show();
 
                         token =  response.body().getAuth_token();
+
+                        callFirst();
+
                         tokenDetail.add(selectedLanguage);
                         tokenDetail.add(response.body().getAuth_token());
                         System.out.println("details"+tokenDetail);
@@ -240,5 +246,29 @@ public class LoginActivity extends AppCompatActivity {
     public void forgotPass(View view) {
         Intent forgotPass = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
         startActivity(forgotPass);
+    }
+
+    JsonPlaceHolderApi callToApi = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+
+    public void callFirst(){
+        Call<Post> call1 = callToApi.getPost("token " + token);
+        call1.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if(!response.isSuccessful()){
+                    Toast toast = Toast.makeText(LoginActivity.this, "ERROR :( ", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                userMeId = response.body().getId();
+            }
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                Toast toast = Toast.makeText(LoginActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                toastMessage.setTextColor(Color.RED);
+                toast.show();
+            }
+        });
     }
 }
