@@ -59,9 +59,7 @@ interface JsonPlaceHolderApi {
                                                @Field("category_1")String category_1,
                                                @Field("category_1_vc")String category_1_vc,
                                                @Field("category_1_exp")int category_1_exp,
-
-
-                                               @Field("category_1")String category_2,
+                                               @Field("category_2")String category_2,
                                                @Field("category_2_vc")String category_2_vc,
                                                @Field("category_2_exp")int category_2_exp,
                                                @Field("category_3")String category_3,
