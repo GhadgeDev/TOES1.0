@@ -26,11 +26,11 @@ public class JobSeletionActivity extends AppCompatActivity {
     CheckBox chkboxJob1, chkboxJob2, chkboxJob3, chkboxJob4, chkboxJob5, chkboxJob6, chkboxOther;
     EditText etOtherJob;
     Button btnStart;
-    int flag = 0;
+    static int flag = 0;
     String job1 = "",job2 = "",job3 = "";
     String temp ="";
-    // String job[] = new String[3];
-    ArrayList<String> job = new ArrayList<>();
+    static String city = "";
+    static ArrayList<String> job = new ArrayList<>();
     public int i = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +51,12 @@ public class JobSeletionActivity extends AppCompatActivity {
         btnStart = (Button) findViewById(R.id.btnStart);
 
         spinnerCity = findViewById(R.id.spinnerCity);
-
+        flag=0;
         String[] jobTitles = new String[]{"Select Your City", "Satara", "Pune", "Mumbai", "Nagpur", "Solapur"};
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.style_select_job_titles, jobTitles);
         spinnerCity.setAdapter(arrayAdapter);
 
+        job.removeAll(job);
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,11 +72,23 @@ public class JobSeletionActivity extends AppCompatActivity {
                             Toast.makeText(JobSeletionActivity.this,"Please select city!",Toast.LENGTH_SHORT).show();
                         }else{
                             System.out.println("---------eiiiiiiii--------"+job);
-                    /*for (int j = 0 ; j < job.size(); j++){
-                        System.out.println(job.get(j));
-                    }*/ temp = etOtherJob.getText().toString();
+                            temp = etOtherJob.getText().toString();
+                            if (spinnerCity.getSelectedItem().toString().equals("Satara")){
+                                city = "Satara";
+                            }else  if (spinnerCity.getSelectedItem().toString().equals("Pune")){
+                                city = "Pune";
+                            }else  if (spinnerCity.getSelectedItem().toString().equals("Mumbai")){
+                                city = "Mumbai";
+                            }else if (spinnerCity.getSelectedItem().toString().equals("Nagpur")){
+                                city = "Nagpur";
+                            }else if (spinnerCity.getSelectedItem().toString().equals("Solapur")){
+                                city = "Solapur";
+                            }
+
                             job.add(temp);
+
                             System.out.println("---------eiiiiiiii--------"+job);
+                            System.out.println("---------eiiiiiiii--------"+city);
 
                             Intent intent = new Intent(JobSeletionActivity.this,VisitingChargesActivity.class);
                             intent.putExtra("arrl",job);
@@ -88,6 +101,22 @@ public class JobSeletionActivity extends AppCompatActivity {
                     Toast.makeText(JobSeletionActivity.this,"Please select city!",Toast.LENGTH_SHORT).show();
                 }
                 else{
+
+
+                    System.out.println("---------eiiiiiiii--------"+city);
+
+
+                    if (spinnerCity.getSelectedItem().toString().equals("Satara")){
+                        city = "Satara";
+                    }else  if (spinnerCity.getSelectedItem().toString().equals("Pune")){
+                        city = "Pune";
+                    }else  if (spinnerCity.getSelectedItem().toString().equals("Mumbai")){
+                        city = "Mumbai";
+                    }else if (spinnerCity.getSelectedItem().toString().equals("Nagpur")){
+                        city = "Nagpur";
+                    }else if (spinnerCity.getSelectedItem().toString().equals("Solapur")){
+                        city = "Solapur";
+                    }
 
                     Intent intent = new Intent(JobSeletionActivity.this,VisitingChargesActivity.class);
                     intent.putExtra("arrl",job);

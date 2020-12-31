@@ -58,5 +58,22 @@ interface JsonPlaceHolderApi {
     @GET("/api/user/{Phone_no}")
     Call<User> sendOTP(@Path(value = "Phone_no") String Phone_no);
 
+    @FormUrlEncoded
+    @POST("/worker/")
+    Call<WorkerJobDetails> insertWorkerJobInfo(@Header("Authorization") String token,
+                                               @Field("city") String city,
+                                               @Field("category_1")String category_1,
+                                               @Field("category_1_vc")String category_1_vc,
+                                               @Field("category_1_exp")int category_1_exp,
+                                               @Field("category_1")String category_2,
+                                               @Field("category_2_vc")String category_2_vc,
+                                               @Field("category_2_exp")int category_2_exp,
+                                               @Field("category_3")String category_3,
+                                               @Field("category_3_vc")String category_3_vc,
+                                               @Field("category_3_exp")int category_3_exp,
+                                               @Field("user")int user
+                                              );
 
+    @GET("/worker/")
+    Call<List<Post>> getId(@Header("Authorization") String token);
 }

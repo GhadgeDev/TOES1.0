@@ -22,6 +22,8 @@ class Post {
     private String address;
     private String re_pass;
     private String  profile_image = null;
+    private  int id ;
+    private  int user ;
     //private String re_password;
 
     public Post(String password, String phone) {
@@ -33,7 +35,7 @@ class Post {
 
     }
 
-    public Post(String password, boolean is_superuser, boolean is_admin, String first_name, String last_name, String username, String dob, String gender, String aadhar_no, String profileImage, String address,String profile_image) {
+    public Post(String password, boolean is_superuser, boolean is_admin, String first_name, String last_name, String username, String dob, String gender, String aadhar_no, String profileImage, String address,String profile_image,int id,int user) {
         this.password = password;
         this.is_superuser = is_superuser;
         this.is_admin = is_admin;
@@ -46,6 +48,24 @@ class Post {
         this.profile_image = profile_image;
         this.profileImage = profileImage;
         this.address = address;
+        this.id = id;
+        this.user = user;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUser() {
+        return user;
+    }
+
+    public void setUser(int user) {
+        this.user = user;
     }
 
     public String getProfile_image() {

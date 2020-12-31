@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.VoiceInteractor;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,11 +23,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -45,22 +41,25 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.toes.SplashScreenActivity.IsLoggedIn;
+
 
 public class LoginActivity extends AppCompatActivity {
 
     //variable Declaration
+    static SharedPreferences prf;
     EditText etContact, etPass;
     CheckBox cbShow;
     Button btnLogIn, btnSignUp;
     TextView txtWelcome, txtSign, labelContact, lablePass, txtForgotPass, txtOr;
-    String selectedLanguage = "1";
+    static String selectedLanguage = "1";
     int l;
     String uName = "", pass = "";
     int code = 0;
 
     public static String token;
 
-    ArrayList<String> tokenDetail = new ArrayList<>();
+   static ArrayList<String> tokenDetail = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         labelContact = (TextView) findViewById(R.id.lableContact);
         lablePass = (TextView) findViewById(R.id.lablePass);
         txtForgotPass = (TextView) findViewById(R.id.txtForgotPass);
-
+        prf = getSharedPreferences("user_details",MODE_PRIVATE);
         cbShow = (CheckBox) findViewById(R.id.cbShowPass);
 
         btnLogIn = (Button) findViewById(R.id.btnSignIn);
@@ -87,6 +86,9 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = getIntent();
         selectedLanguage = intent.getStringExtra(Intent.EXTRA_TEXT);
         System.out.println("---------------------------------------------------" + selectedLanguage);
+
+
+        selectedLanguage = SelectLanguageActivity.selectedLanguage;
         switch (selectedLanguage) {
             case "0":
 
@@ -187,6 +189,12 @@ public class LoginActivity extends AppCompatActivity {
                         tokenDetail.add(selectedLanguage);
                         tokenDetail.add(response.body().getAuth_token());
                         System.out.println("details"+tokenDetail);
+                        SplashScreenActivity.IsLoggedIn = true;
+                        SharedPreferences.Editor editor = prf.edit();
+                        editor.putString("phone",uName);
+                        editor.putString("password",pass);
+                        editor.commit();
+
                         Intent intent1 = new Intent(LoginActivity.this, SelectRoleActivity.class);
                         intent1.putExtra("tokenDetails",tokenDetail);
                         startActivity(intent1);

@@ -80,6 +80,7 @@ public class IdentityProofActivity extends AppCompatActivity {
       //  selectedImagePath = args[1];
 
         System.out.println("in IdentityProof "+details2);
+        System.out.println("in IdentityProof "+details2);
 
 
         //For Server Connectivity

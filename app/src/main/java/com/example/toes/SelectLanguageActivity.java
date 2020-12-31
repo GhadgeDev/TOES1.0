@@ -20,10 +20,11 @@ import java.util.Locale;
 
 
 public class SelectLanguageActivity extends AppCompatActivity {
+
     FloatingActionButton btnNext;
     Button btnEnglish,btnMarathi,btnHindi;
     TextView txtNext;
-    String selectedLanguage = "";
+    static String selectedLanguage = "";
     boolean selected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

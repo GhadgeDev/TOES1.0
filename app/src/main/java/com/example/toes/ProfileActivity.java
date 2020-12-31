@@ -112,6 +112,7 @@ public class ProfileActivity extends AppCompatActivity {
                 //     profile_image.setImageURI(Uri.parse(mImgUrl));
 
                 System.out.println("Data : _--------- " + content);
+                System.out.println("id : -------------------------- " + postResponse.getId());
 
 
             }

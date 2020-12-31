@@ -174,11 +174,13 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
     public void openLogOutDialog() {
         LogoutDialog logoutDialog = new LogoutDialog();
         logoutDialog.show(getSupportFragmentManager(), "logout dialog");
+
+
     }
 
     public void openSwitchRolesDialog() {
         SwitchRolesDialog switchRolesDialog = new SwitchRolesDialog();
-        switchRolesDialog.show(getSupportFragmentManager(), "Switch roles");
+        switchRolesDialog.show(getSupportFragmentManager(), "Switch Roles");
     }
 
     @Override

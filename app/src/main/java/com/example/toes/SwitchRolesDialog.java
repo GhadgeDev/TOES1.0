@@ -3,6 +3,7 @@ package com.example.toes;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +32,8 @@ public class SwitchRolesDialog extends DialogFragment {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //pass intent of home activity
+                        Intent intent = new Intent(getActivity() ,SelectRoleActivity.class);
+                        startActivity(intent);
                     }
                 });
         mTextSureMsg = view.findViewById(R.id.sure_msg);

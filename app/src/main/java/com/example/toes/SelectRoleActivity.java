@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,14 +14,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,12 +26,15 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SelectRoleActivity extends AppCompatActivity {
-
+    SharedPreferences prf;
     TextView txtName;
     String selectedLanguage;
     Button btnFindJob,btnFindWorker;
     String token = "";
+    public static int id ;
+    static boolean userPresent = false;
     ArrayList<String> tokenDetails = new ArrayList<>();
+    static int user ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,17 +46,17 @@ public class SelectRoleActivity extends AppCompatActivity {
 
 
 
-        System.out.println("Token :---------- "+tokenDetails.get(0));
-        System.out.println("language :---------- "+tokenDetails.get(1));
-        // System.out.println("language :---------- "+selectedLanguage);
+        System.out.println("Token :---------- "+LoginActivity.token);
+        //System.out.println("language :---------- "+tokenDetails.get(1));
+         System.out.println("Details :---------- "+LoginActivity.tokenDetail);
 
-        token = "Token "+tokenDetails.get(1);
+        token = "Token "+LoginActivity.token;
 
 
         btnFindJob = (Button)findViewById(R.id.btnFindJob);
         btnFindWorker = (Button)findViewById(R.id.btnFindWorker);
         txtName = (TextView)findViewById(R.id.txtname);
-
+        prf = getSharedPreferences("user_details",MODE_PRIVATE);
 
         //For http log
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
@@ -89,6 +89,7 @@ public class SelectRoleActivity extends AppCompatActivity {
                 }
 
                 Post postResponse = response.body();
+                id = postResponse.getId();
                 System.out.println("Code :------------------- " + response.code());
                 String content = "";
                 content += "name : " + postResponse.getfName() + "\n";
@@ -98,7 +99,6 @@ public class SelectRoleActivity extends AppCompatActivity {
                 System.out.println("Data : _--------- " + content);
 
             }
-
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
                 System.out.println("Filed in selectRole : "+t.getMessage());
@@ -113,14 +113,61 @@ public class SelectRoleActivity extends AppCompatActivity {
                 startActivity(recruiter);
             }
         });
+
         btnFindJob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent recruiter = new Intent(SelectRoleActivity.this,JobSeletionActivity.class);
-                startActivity(recruiter);
+
+                Call<List<Post>> call = jsonPlaceHolderApi.getId(token);
+
+                call.enqueue(new Callback<List<Post>>() {
+                    @Override
+                    public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                        if (!response.isSuccessful()) {
+
+                            System.out.println("Response : _--------- " + response.code());
+                            System.out.println("Response M : _--------- " + response.message());
+
+                            return;
+                        }
+
+                        List<Post> posts = response.body();
+
+                        System.out.println("Code :------------------- " + response.code());
+                        for (Post post : posts){
+                            user = post.getUser();
+                            if (user == id){
+                                userPresent = true;
+                                break;
+                            }else {
+                                userPresent = false;
+                            }
+                        }
+
+                        if (userPresent){
+                            Intent recruiter = new Intent(SelectRoleActivity.this,SelectJobActivity.class);
+                            startActivity(recruiter);
+                        }else{
+                            Toast toast = Toast.makeText(SelectRoleActivity.this, "Welcome to TOES!\nPlease Enter your Details " , Toast.LENGTH_SHORT);
+                            View view = toast.getView();
+                            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                            toastMessage.setTextColor(Color.parseColor("#2E7D32"));
+                            toast.show();
+                            Intent recruiter = new Intent(SelectRoleActivity.this,JobSeletionActivity.class);
+                            startActivity(recruiter);
+                        }
+
+                        System.out.println("User Data : _---------------- "+user);
+                        System.out.println("User present : _---------------- "+userPresent);
+                        System.out.println("Id Data : _---------------- "+id);
+                    }
+                    @Override
+                    public void onFailure(Call<List<Post>> call, Throwable t) {
+                        System.out.println("In button find job ------------ "+t.getMessage());
+                    }
+                });
             }
         });
-
 
     }
 
@@ -140,6 +187,9 @@ public class SelectRoleActivity extends AppCompatActivity {
                 startActivity(Profileintent);
                 break;
             case R.id.menu_logout:
+                SharedPreferences.Editor editor = prf.edit();
+                editor.clear();
+                editor.commit();
                 Intent intent = new Intent(SelectRoleActivity.this,LoginActivity.class);
                 intent.putExtra(Intent.EXTRA_TEXT,selectedLanguage);
                 startActivity(intent);
