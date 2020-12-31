@@ -28,14 +28,15 @@ interface JsonPlaceHolderApi {
     @POST("login/")
     Call<User> createPost(@Body Post post);
 
+    //Getting all worker list for recruiter to choose
     @GET("api/category/{category_name}/")
     Call<List<GetSpecificWorkerModel>> getWorkerInfo(@Header("Authorization") String authToken,
                                                      @Path("category_name") String a);
 
-  /*  @Multipart
-    @POST("users/")
+    @Multipart
+    @POST("profile/image")
     Call<ResponseBody> uploadImage(@Part MultipartBody.Part part,
-                                   @Part("data") RequestBody requestBody);*/
+                                   @Part("profile_image") RequestBody userId);
 
 
     @FormUrlEncoded
@@ -49,15 +50,16 @@ interface JsonPlaceHolderApi {
                           @Field("dob") String dob,
                           @Field("gender") String gender,
                           @Field("aadhar_no") String adhar_no,
-                          @Field("profile_image")String profile_image,
                           @Field("address") String address,
                           @Field("phone") String phone,
                           @Field("re_password") String re_password
     );
 
+
     @GET("/api/user/{Phone_no}")
     Call<User> sendOTP(@Path(value = "Phone_no") String Phone_no);
 
+    //Recruiter clicks search, post get uploaded at worker side
     @FormUrlEncoded
     @POST("job/")
     Call<GetRecruiterJobInfo> getRecruiterJobInfo(@Header("Authorization") String token,
@@ -65,6 +67,15 @@ interface JsonPlaceHolderApi {
                                                   @Field("job_Description") String jbDesc,
                                                   @Field("status") int status,
                                                   @Field("recruiter") int id);
+
+    //Recruiter clicks hire button
+    @FormUrlEncoded
+    @POST("recruiter/req")
+    Call<RecruiterHirePostRequest> postHireReq(@Header("Authorization") String token,
+                                               @Field("recruiter") int userMeId,
+                                               @Field("status") int status,
+                                               @Field("job_detail") int jbDetail,
+                                               @Field("worker") int workerId);
 
 
 }

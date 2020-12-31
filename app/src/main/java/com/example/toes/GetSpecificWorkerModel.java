@@ -19,6 +19,9 @@ public class GetSpecificWorkerModel {
     @SerializedName("experience")
     private Integer experience;
 
+    @SerializedName("Worker_id")
+    private Integer workerId;
+
 
     public String getWorkerName() {
         return workerName;
@@ -60,4 +63,11 @@ public class GetSpecificWorkerModel {
         this.experience = experience;
     }
 
+    public Integer getWorkerId() {
+        return workerId;
+    }
+
+    public void setWorkerId(Integer workerId) {
+        this.workerId = workerId;
+    }
 }

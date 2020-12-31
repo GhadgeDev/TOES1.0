@@ -43,12 +43,14 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         WorkerAdapter.OnNoteListener {
 
     private DrawerLayout drawer;
+    TextView dUserName;
     private RecyclerView workerList;
     private List<GetSpecificWorkerModel> lstWorker;
     private String mSelectedItemIs;
     private TextView mJobNameTextView;
     private WorkerAdapter adapter;
 
+    public static int workerId;
     private static final String EXTRA_ITEM_SELECTED_IS = "recruiter.home.activity.itemSelected";
 
     public static Intent newIntent(Context packageContext, String selectedItem) {
@@ -99,6 +101,12 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
                 lstWorker = response.body();
                 adapter = new WorkerAdapter(SelectWorkerActivity.this,lstWorker,SelectWorkerActivity.this);
                 workerList.setAdapter(adapter);
+
+
+                dUserName = findViewById(R.id.nav_text_click);
+                CharSequence dfname = SelectRoleActivity.textUserfName;
+                CharSequence dlname = SelectRoleActivity.textUserfName;
+                dUserName.setText(dfname);
             }
 
             @Override
@@ -174,6 +182,8 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         Intent intent = new Intent(this, ParticularWorkerActivity.class);
         intent.putExtra("worker name", lstWorker.get(position).getWorkerName());
         intent.putExtra("worker fees", lstWorker.get(position).getVisitingCharges());
+        intent.putExtra("worker experience", lstWorker.get(position).getExperience());
+        workerId = lstWorker.get(position).getWorkerId();
         startActivity(intent);
     }
 }

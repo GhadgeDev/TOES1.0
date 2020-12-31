@@ -39,6 +39,8 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerView
     public void onBindViewHolder(@NonNull WorkerViewHolder holder, int position) {
         holder.wName.setText(mData.get(position).getWorkerName());
         holder.vCharges.setText(mData.get(position).getVisitingCharges());
+        holder.wExperience.setText(""+mData.get(position).getExperience());
+        int a = mData.get(position).getWorkerId();
     }
 
     @Override
@@ -50,6 +52,7 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerView
         //ImageView imgIcon;
         TextView wName;
         TextView vCharges;
+        TextView wExperience;
 
         OnNoteListener onNoteListener;
 
@@ -58,6 +61,7 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerView
             //   imgIcon = itemView.findViewById(R.id.worker_image);           setting image of worker for recruiter to see in the list
             wName = itemView.findViewById(R.id.worker_name);
             vCharges = itemView.findViewById(R.id.worker_visiting_fee);
+            wExperience = itemView.findViewById(R.id.experience);
             this.onNoteListener = onNoteListener;
             itemView.setOnClickListener(this);
         }

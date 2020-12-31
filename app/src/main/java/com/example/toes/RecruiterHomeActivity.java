@@ -28,6 +28,9 @@ public class RecruiterHomeActivity extends AppCompatActivity {
     EditText jobDesc;
 
     private Button msearch;
+    public static String jobDescVal;
+
+    public static int jbDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,37 +50,36 @@ public class RecruiterHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 jobDesc = (EditText) findViewById(R.id.jobDescription);
-                String jobDescVal = jobDesc.getText().toString();
+                jobDescVal = jobDesc.getText().toString();
 
                 String text = spinner1.getSelectedItem().toString();
+                if (text != "Select Job" && (!jobDescVal.isEmpty())) {
+                    Intent intent = SelectWorkerActivity.newIntent(RecruiterHomeActivity.this, text);
+                    Call<GetRecruiterJobInfo> call = jsonPlaceHolderApi.getRecruiterJobInfo("token " + LoginActivity.token, text,
+                            jobDescVal, 1, LoginActivity.userMeId);
 
-                Call<GetRecruiterJobInfo> call = jsonPlaceHolderApi.getRecruiterJobInfo("token " + LoginActivity.token, text,
-                        jobDescVal, 1,LoginActivity.userMeId);
+                    call.enqueue(new Callback<GetRecruiterJobInfo>() {
+                        @Override
+                        public void onResponse(Call<GetRecruiterJobInfo> call, Response<GetRecruiterJobInfo> response) {
+                            if (!response.isSuccessful()) {
+                                Toast toast = Toast.makeText(RecruiterHomeActivity.this, "ERROR :( ", Toast.LENGTH_SHORT);
+                                toast.show();
+                                return;
+                            }
 
-                call.enqueue(new Callback<GetRecruiterJobInfo>() {
-                    @Override
-                    public void onResponse(Call<GetRecruiterJobInfo> call, Response<GetRecruiterJobInfo> response) {
-                        if (!response.isSuccessful()) {
-                            Toast toast = Toast.makeText(RecruiterHomeActivity.this, "ERROR :( ", Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(RecruiterHomeActivity.this, "Job uploaded successfully", Toast.LENGTH_SHORT);
                             toast.show();
-                            return;
+                            jbDetail = response.body().getId();
                         }
 
-                        Toast toast = Toast.makeText(RecruiterHomeActivity.this, "Job uploaded successfully", Toast.LENGTH_SHORT);
-                        toast.show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<GetRecruiterJobInfo> call, Throwable t) {
-                        Toast toast = Toast.makeText(RecruiterHomeActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
-                        TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-                        toastMessage.setTextColor(Color.RED);
-                        toast.show();
-                    }
-                });
-
-                if (!text.equals("Select Job")  && jobDescVal != null) {
-                    Intent intent = SelectWorkerActivity.newIntent(RecruiterHomeActivity.this, text);
+                        @Override
+                        public void onFailure(Call<GetRecruiterJobInfo> call, Throwable t) {
+                            Toast toast = Toast.makeText(RecruiterHomeActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                            toastMessage.setTextColor(Color.RED);
+                            toast.show();
+                        }
+                    });
                     startActivity(intent);
                 } else {
                     Toast.makeText(RecruiterHomeActivity.this, R.string.select, Toast.LENGTH_SHORT).show();

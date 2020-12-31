@@ -46,6 +46,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.http.Multipart;
 
 
 public class SignUpActivity extends AppCompatActivity {
@@ -58,11 +59,12 @@ public class SignUpActivity extends AppCompatActivity {
 
     FloatingActionButton btnNext;
     String selectedLanguage;
-    public static String selectedImagePath;
-    //Uri selectedImageUri;
+    String selectedImagePath;
 
-    Bitmap bitmap;
-    public static String encodedImg;
+    public static String ImgPath;
+
+    Uri selectedImageUri;
+    public static MultipartBody.Part part;
 
     String args[] = {"", ""};
 
@@ -179,7 +181,7 @@ public class SignUpActivity extends AppCompatActivity {
         etDob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(SignUpActivity.this,R.style.DialogTheme, date, myCal
+                new DatePickerDialog(SignUpActivity.this, R.style.DialogTheme, date, myCal
                         .get(Calendar.YEAR), myCal.get(Calendar.MONTH),
                         myCal.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -216,11 +218,11 @@ public class SignUpActivity extends AppCompatActivity {
 
 
                     System.out.println("--------------------------------Name " + fName);
-                    System.out.println("-------------------------------- Lname " + lName);
-                    System.out.println("--------------------------------cno " + phone);
-                    System.out.println("--------------------------------addr" + address);
-                    System.out.println("--------------------------------dob" + dob);
-                    System.out.println("--------------------------------gender" + gender);
+                    System.out.println("-------------------------------- Lname: " + lName);
+                    System.out.println("--------------------------------cno: " + phone);
+                    System.out.println("--------------------------------addr: " + address);
+                    System.out.println("--------------------------------dob : " + dob);
+                    System.out.println("--------------------------------gender: " + gender);
 
 
                     details1.add(fName);
@@ -233,8 +235,8 @@ public class SignUpActivity extends AppCompatActivity {
                     Intent next = new Intent(SignUpActivity.this, IdentityProofActivity.class);
                     next.putExtra("args", args);
                     next.putExtra("details1", details1);
-                    System.out.println("--------------------------------sImage" + selectedImagePath);
-                    System.out.println("--------------------------------contact" + etContact.getText().toString());
+                    System.out.println("--------------------------------sImage: " + selectedImagePath);
+                    System.out.println("--------------------------------contact: " + etContact.getText().toString());
                     startActivity(next);
 
 
@@ -257,28 +259,16 @@ public class SignUpActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == PICK_IMAGE) {
-                // selectedImageUri = data.getData();
-                // selectedImagePath = selectedImageUri.getPath();
-                //  circleImageView.setImageURI(selectedImageUri);
-                // file = new File(selectedImageUri.toString());
-                // args[1] = selectedImagePath;
+                selectedImageUri = data.getData();
+                ImgPath = data.getData().getPath();
 
-                Uri path = data.getData();
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),path);
-                    circleImageView.setImageBitmap(bitmap);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                selectedImagePath = selectedImageUri.getPath();
+                circleImageView.setImageURI(selectedImageUri);
 
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 85, byteArrayOutputStream);
-                byte[] imgInBit = byteArrayOutputStream.toByteArray();
-
-                encodedImg = Base64.encodeToString(imgInBit, Base64.DEFAULT);
+            /*    File file = new File(selectedImagePath);
+                RequestBody requestBody = RequestBody.create(MediaType.parse("images/*"),file);
+                part = MultipartBody.Part.createFormData("profile_image", file.getName(),requestBody);*/
             }
         }
     }
-
-
 }
