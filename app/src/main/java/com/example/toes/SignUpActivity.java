@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 
 import android.graphics.Color;
@@ -59,12 +60,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     FloatingActionButton btnNext;
     String selectedLanguage;
-    String selectedImagePath;
+    public static String selectedImagePath;
 
-    public static String ImgPath;
-
-    Uri selectedImageUri;
-    public static MultipartBody.Part part;
+    public static Uri selectedImageUri;
+    Bitmap bitmap;
+    public static String imgPath;
 
     String args[] = {"", ""};
 
@@ -259,16 +259,26 @@ public class SignUpActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == PICK_IMAGE) {
-                selectedImageUri = data.getData();
-                ImgPath = data.getData().getPath();
 
+                selectedImageUri = data.getData();
                 selectedImagePath = selectedImageUri.getPath();
                 circleImageView.setImageURI(selectedImageUri);
 
-            /*    File file = new File(selectedImagePath);
+
+         /*       selectedImageUri = data.getData();
+                System.out.println("--------------------------------selected Image: " + selectedImagePath);
+
+                File file = new File(selectedImagePath);
                 RequestBody requestBody = RequestBody.create(MediaType.parse("images/*"),file);
                 part = MultipartBody.Part.createFormData("profile_image", file.getName(),requestBody);*/
             }
         }
     }
+
+   /* public String getPath(Uri uri){
+        Cursor cursor = getContentResolver().query(uri,null,null,null,null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
+    }*/
 }

@@ -33,12 +33,6 @@ interface JsonPlaceHolderApi {
     Call<List<GetSpecificWorkerModel>> getWorkerInfo(@Header("Authorization") String authToken,
                                                      @Path("category_name") String a);
 
-    @Multipart
-    @POST("profile/image")
-    Call<ResponseBody> uploadImage(@Part MultipartBody.Part part,
-                                   @Part("profile_image") RequestBody userId);
-
-
     @FormUrlEncoded
     @POST("users/")
     Call<Post> createUser(@Field("is_superuser") boolean is_superuser,
@@ -78,4 +72,8 @@ interface JsonPlaceHolderApi {
                                                @Field("worker") int workerId);
 
 
+    @Multipart
+    @POST("profile/image")
+    Call<GetProfileImage> uploadImage(@Part MultipartBody.Part part,
+                                   @Part("profile_image") int userId);
 }

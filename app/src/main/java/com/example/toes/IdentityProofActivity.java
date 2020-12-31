@@ -40,6 +40,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Part;
 
 public class IdentityProofActivity extends AppCompatActivity {
     Calendar myCal = Calendar.getInstance();
@@ -49,20 +50,17 @@ public class IdentityProofActivity extends AppCompatActivity {
     TextView txtDilouge, txtName, txtContact, txtAddr, txtDob, txtGender, txtNext;
     EditText etnewPass, etCPass, etAadhar, etCAadhar;
     Button btnNext;
+    Button btnSave;
     String selectedLanguage;
-    int userImgId;
     // String selectedImagePath;
     //String args[];
+    int imgId;
 
     String newPass = "", cPass = "", aadharNo = "", cAadharNo = "";
 
     Bitmap bitmap = null;
 
     ArrayList<String> details2 = new ArrayList<>();
-
-
-
-    JsonPlaceHolderApi jsonPlaceHolderApi;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -77,6 +75,7 @@ public class IdentityProofActivity extends AppCompatActivity {
         etCAadhar = (EditText) findViewById(R.id.etCAdhar);
 
 
+        //  btnSave = (Button) findViewById(R.id.btnSave);
         btnNext = (Button) findViewById(R.id.btnGo);
 
         Intent intent = getIntent();
@@ -102,14 +101,9 @@ public class IdentityProofActivity extends AppCompatActivity {
                 .build();
 
 
-        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
-
-
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 newPass = etnewPass.getText().toString();
                 cPass = etCPass.getText().toString();
                 aadharNo = etAadhar.getText().toString();
@@ -136,14 +130,14 @@ public class IdentityProofActivity extends AppCompatActivity {
                     toast.show();
 
                 } else {
+
+                    JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
                     String phone = details2.get(2);
                     System.out.println("-------------------Phone-----------------" + phone);
                     Call<Post> call = jsonPlaceHolderApi.createUser(false,
                             false,
                             details2.get(0), details2.get(1), "TOES@" + details2.get(2), newPass, details2.get(4), details2.get(5),
                             aadharNo, details2.get(3), details2.get(2), cPass);
-
-                    System.out.println("--------------------------------------------------------------------");
 
                     call.enqueue(new Callback<Post>() {
                         @Override
@@ -173,12 +167,11 @@ public class IdentityProofActivity extends AppCompatActivity {
                             content += "username : " + postResponse.getUsername() + "\n";
                             System.out.println("Data : _--------- " + content);
 
+                            //imgId = String.valueOf(postResponse.getId());
+                            imgId = postResponse.getId();
 
                             Intent go = new Intent(IdentityProofActivity.this, LoginActivity.class);
                             go.putExtra(Intent.EXTRA_TEXT, selectedLanguage);
-
-                            userImgId = postResponse.getId();
-                            uploadImage();
                             startActivity(go);
 
                         }
@@ -186,21 +179,55 @@ public class IdentityProofActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<Post> call, Throwable t) {
                             Toast toast = Toast.makeText(IdentityProofActivity.this, "You are disconnected from internet\nOr Server is under maintenance", Toast.LENGTH_SHORT);
-                            View view = toast.getView();
                             TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                             toastMessage.setTextColor(Color.RED);
                             toast.show();
-                            System.out.println("fail : _--------- " + t.getMessage());
-
                         }
                     });
 
-
                 }
-
-
             }
         });
+
+       /* btnNext.setOnClickListener(new View.OnClickListener() {
+
+            JsonPlaceHolderApi profile = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+
+            @Override
+            public void onClick(View v) {
+                RequestBody requestUserId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(imgId));
+                MultipartBody.Part requestImge = null;
+
+                File file = new File(SignUpActivity.selectedImagePath);
+                RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/for-data"), file);
+                requestImge = MultipartBody.Part.createFormData("profile_image",file.getName(),requestFile);
+
+                Call<GetProfileImage> call = profile.uploadImage(requestImge,imgId);
+                call.enqueue(new Callback<GetProfileImage>() {
+                    @Override
+                    public void onResponse(Call<GetProfileImage> call, Response<GetProfileImage> response) {
+                        if(!response.isSuccessful()){
+                            Toast.makeText(IdentityProofActivity.this,"Unsuccessful request",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Toast.makeText(IdentityProofActivity.this,"Uploaded",Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<GetProfileImage> call, Throwable t) {
+                        Toast toast = Toast.makeText(IdentityProofActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                        TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                        toastMessage.setTextColor(Color.RED);
+                        toast.show();
+                    }
+                });
+            }
+        });*/
+    }
+
+    public void uploadImg() {
+
     }
 
     public void onCheck(View view) {
@@ -216,48 +243,6 @@ public class IdentityProofActivity extends AppCompatActivity {
                     etCPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
                 break;
-
-
         }
-    }
-
-
-    public void uploadImage(){
-
-        File file = new File(SignUpActivity.ImgPath);
-
-        RequestBody requestUserId = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(userImgId));
-        MultipartBody.Part requestImage = null;
-
-        if(file == null){
-            file = new File(SignUpActivity.ImgPath);
-        }
-
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        requestImage = MultipartBody.Part.createFormData("profile_image",file.getName(), requestFile);
-
-        Call<ResponseBody> call = jsonPlaceHolderApi.uploadImage(requestImage,requestUserId);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (!response.isSuccessful()) {
-                    System.out.println("Response : _--------- " + response.code());
-                    System.out.println("Response M : _--------- " + response.message());
-                    return;
-                }
-
-                Toast.makeText(IdentityProofActivity.this,"File uploaded",Toast.LENGTH_SHORT).show();
-                System.out.println("Response : _--------- " + response.code());
-                System.out.println("Response M : _--------- " + response.message());
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast toast = Toast.makeText(IdentityProofActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
-                TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-                toastMessage.setTextColor(Color.RED);
-                toast.show();
-            }
-        });
     }
 }
