@@ -66,8 +66,6 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
 
         workerList = findViewById(R.id.worker_list);
         workerList.setLayoutManager(new LinearLayoutManager(this));
-        
-       // lstWorker = new ArrayList<>();
 
         mSelectedItemIs = getIntent().getStringExtra(EXTRA_ITEM_SELECTED_IS);
         mJobNameTextView = findViewById(R.id.job_name);
@@ -89,7 +87,6 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
 
        Call<List<GetSpecificWorkerModel>> call = workerInfoList.getWorkerInfo("token " + LoginActivity.token, mSelectedItemIs.toLowerCase());
 
-
         call.enqueue(new Callback<List<GetSpecificWorkerModel>>() {
             @Override
             public void onResponse(@NotNull Call<List<GetSpecificWorkerModel>> call, @NotNull Response<List<GetSpecificWorkerModel>> response) {
@@ -102,11 +99,11 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
                 adapter = new WorkerAdapter(SelectWorkerActivity.this,lstWorker,SelectWorkerActivity.this);
                 workerList.setAdapter(adapter);
 
-
                 dUserName = findViewById(R.id.nav_text_click);
                 CharSequence dfname = SelectRoleActivity.textUserfName;
-                CharSequence dlname = SelectRoleActivity.textUserfName;
+                CharSequence dlname = SelectRoleActivity.textUserlName;
                 dUserName.setText(dfname);
+                dUserName.setText(dlname);
             }
 
             @Override

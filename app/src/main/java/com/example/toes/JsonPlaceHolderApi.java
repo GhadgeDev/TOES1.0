@@ -22,9 +22,11 @@ import retrofit2.http.Url;
 interface JsonPlaceHolderApi {
 
 
+    //GettingUsersId
     @GET("users/me/")
     Call<Post> getPost(@Header("Authorization") String token);
 
+    //Login
     @POST("login/")
     Call<User> createPost(@Body Post post);
 
@@ -33,6 +35,7 @@ interface JsonPlaceHolderApi {
     Call<List<GetSpecificWorkerModel>> getWorkerInfo(@Header("Authorization") String authToken,
                                                      @Path("category_name") String a);
 
+    //PostingNewUser
     @FormUrlEncoded
     @POST("users/")
     Call<Post> createUser(@Field("is_superuser") boolean is_superuser,
@@ -52,6 +55,8 @@ interface JsonPlaceHolderApi {
 
     @GET("/api/user/{Phone_no}")
     Call<User> sendOTP(@Path(value = "Phone_no") String Phone_no);
+
+    //InsertWorkerDetails
     @FormUrlEncoded
     @POST("/worker/")
     Call<WorkerJobDetails> insertWorkerJobInfo(@Header("Authorization") String token,
@@ -67,6 +72,7 @@ interface JsonPlaceHolderApi {
                                                @Field("category_3_exp")int category_3_exp,
                                                @Field("user")int user
                                               );
+
     //Recruiter clicks search, post get uploaded at worker side
     @FormUrlEncoded
     @POST("job/")
@@ -86,10 +92,18 @@ interface JsonPlaceHolderApi {
                                                @Field("worker") int workerId);
 
 
+    //ProfileImage
     @Multipart
     @POST("profile/image")
     Call<GetProfileImage> uploadImage(@Part MultipartBody.Part part,
                                    @Part("profile_image") int userId);
+
+    //SelectRoleApi
     @GET("/worker/")
     Call<List<Post>> getId(@Header("Authorization") String token);
+
+    //Getting all recruiter list for worker to choose
+    @GET("/api/specificjobs/{user_id}")
+    Call<List<GetSpecificRecruiterModel>> getRecruiterInfo(@Header("Authorization") String aToken,
+                                                           @Path("user_id") int uId);
 }

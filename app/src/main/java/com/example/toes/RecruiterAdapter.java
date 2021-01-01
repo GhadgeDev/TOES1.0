@@ -13,10 +13,10 @@ import java.util.List;
 
 public class RecruiterAdapter extends RecyclerView.Adapter<RecruiterAdapter.RecruiterViewHolder> {
     Context mContext;
-    List<RecruiterListModel> mData;
+    List<GetSpecificRecruiterModel> mData;
     private OnRecruiterListener mOnRecruiterListener;
 
-    public RecruiterAdapter(Context mContext, List<RecruiterListModel> mData, OnRecruiterListener onRecruiterListener) {
+    public RecruiterAdapter(Context mContext, List<GetSpecificRecruiterModel> mData, OnRecruiterListener onRecruiterListener) {
         this.mContext = mContext;
         this.mData = mData;
         this.mOnRecruiterListener = onRecruiterListener;
@@ -33,8 +33,8 @@ public class RecruiterAdapter extends RecyclerView.Adapter<RecruiterAdapter.Recr
 
     @Override
     public void onBindViewHolder(@NonNull RecruiterViewHolder holder, int position) {
-        holder.tv_name.setText(mData.get(position).getName());
-        holder.tv_requirement.setText(mData.get(position).getRequirement());
+        holder.tv_name.setText(mData.get(position).getRecruiterFname());
+        holder.tv_requirement.setText(mData.get(position).getCategory1());
     }
 
     @Override
