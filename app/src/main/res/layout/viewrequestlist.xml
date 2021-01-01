@@ -12,7 +12,7 @@
         android:layout_height="90dp"
         android:padding="16dp"
         android:layout_gravity="center"
-        android:src="@drawable/recruiterprofile" />
+        android:src="@drawable/workerprofile" />
 
     <LinearLayout
         android:layout_width="wrap_content"

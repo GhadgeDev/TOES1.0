@@ -3,7 +3,7 @@
     android:id="@+id/nav_header_click"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="176dp"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     android:gravity="bottom|center"
     android:padding="16dp"
@@ -11,9 +11,9 @@
 
     <ImageView
         android:id="@+id/nav_image_click"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_margin="5dp"
+        android:layout_margin="15dp"
         android:clickable="true"
         android:src="@mipmap/useravatar"/>
 
@@ -21,9 +21,9 @@
         android:id="@+id/nav_text_click"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
         android:textSize="20sp"
         android:text="Niket Jadhav"
+
         android:textColor="@color/black"
         android:clickable="true"/>
 
