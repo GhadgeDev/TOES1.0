@@ -137,13 +137,13 @@ public class JobSeletionActivity extends AppCompatActivity {
                 if (checked) {
                     ++flag;
                     //job[i] = chkboxJob2.getText().toString();
-                    job.add(i,chkboxJob1.getText().toString());
+                    job.add(i,"painter");
                     i++;
                     System.out.println("----------ch2-Checked-------------+++++-" + flag);
                 } else {
                     flag = --flag;
                     //  job.remove(i);
-                    job.remove(chkboxJob1.getText().toString());
+                    job.remove("painter");
                     i--;
                     System.out.println("------------------------" + flag);
                 }
@@ -156,7 +156,7 @@ public class JobSeletionActivity extends AppCompatActivity {
                 if (checked) {
                     ++flag;
                     //job[i] = chkboxJob2.getText().toString();
-                    job.add(i,chkboxJob2.getText().toString());
+                    job.add(i,"carpenter");
                     i++;
                     System.out.println("----------ch2-Checked-------------+++++-" + flag);
                 } else {
@@ -171,13 +171,13 @@ public class JobSeletionActivity extends AppCompatActivity {
             case R.id.chkboxJob3:
                 if (checked) {
                     ++flag;
-                    job.add(i,chkboxJob3.getText().toString());
+                    job.add(i,"plumber");
                     //  job[i] = chkboxJob3.getText().toString();
                     i++;
                     System.out.println("-----------------------+++++-" + flag);
                 } else {
                     flag = --flag;
-                    job.remove(chkboxJob3.getText().toString());
+                    job.remove("plumber");
                     i--;
                     System.out.println("------------------------" + flag);
                 }
@@ -186,12 +186,12 @@ public class JobSeletionActivity extends AppCompatActivity {
                 if (checked) {
                     ++flag;
                     // job[i] = chkboxJob5.getText().toString();
-                    job.add(i,chkboxJob5.getText().toString());
+                    job.add(i,"tailor");
                     i++;
                     System.out.println("-----------------------+++++-" + flag);
                 } else {
                     flag = --flag;
-                    job.remove(chkboxJob5.getText().toString());
+                    job.remove("tailor");
                     // job.remove(i);
                     i--;
                     System.out.println("------------------------" + flag);
@@ -200,13 +200,13 @@ public class JobSeletionActivity extends AppCompatActivity {
             case R.id.chkboxJob4:
                 if (checked) {
                     ++flag;
-                    job.add(i,chkboxJob4.getText().toString());
+                    job.add(i,"driver");
                     //job[i] = chkboxJob4.getText().toString();
                     i++;
                     System.out.println("-----------------------+++++-" + flag);
                 } else {
                     flag = --flag;
-                    job.remove(chkboxJob4.getText().toString());
+                    job.remove("driver");
                     //  job.remove(i);
                     i--;
                     System.out.println("------------------------" + flag);
@@ -215,13 +215,13 @@ public class JobSeletionActivity extends AppCompatActivity {
             case R.id.chkboxJob6:
                 if (checked) {
                     ++flag;
-                    job.add(i,chkboxJob6.getText().toString());
+                    job.add(i,"electrician");
                     //  job[i] = chkboxJob6.getText().toString();
                     i++;
                     System.out.println("-----------------------+++++-" + flag);
                 } else {
                     flag = --flag;
-                    job.remove(chkboxJob6.getText().toString());
+                    job.remove("electrician");
                     i--;
                     System.out.println("------------------------" + flag);
                 }

@@ -95,6 +95,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
                     toast.show();
                     return;
                 }
+
                 lstWorker = response.body();
                 adapter = new WorkerAdapter(SelectWorkerActivity.this,lstWorker,SelectWorkerActivity.this);
                 workerList.setAdapter(adapter);
