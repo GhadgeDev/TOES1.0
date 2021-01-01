@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="18sp"
-        android:hint="Recruiter Address"/>
+        android:hint="Pune"/>
 
     <View
         android:layout_width="match_parent"
@@ -47,7 +47,7 @@
         android:layout_height="150dp"
         android:gravity="center"
         android:textSize="18sp"
-        android:hint="Recruiter Job Description"/>
+        android:hint="Want to repair leakage in bathroom "/>
 
     <View
         android:layout_width="match_parent"

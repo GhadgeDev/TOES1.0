@@ -55,7 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
         mEditButton = findViewById(R.id.edit_profile_btn);
 
         Intent intent1= getIntent();
-        token = intent1.getStringExtra(Intent.EXTRA_TEXT);
+        token = "Token "+LoginActivity.token;
 
 
         //For http log
