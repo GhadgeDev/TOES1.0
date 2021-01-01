@@ -25,7 +25,7 @@ class Post {
 
     private String re_pass;
     private String  profile_image = null;
-    private  int id ;
+
     private  int user ;
     //private String re_password;
 
@@ -179,13 +179,7 @@ class Post {
         return re_pass;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setRe_pass(String re_pass) {
         this.re_pass = re_pass;

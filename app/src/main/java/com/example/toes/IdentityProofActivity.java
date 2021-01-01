@@ -136,7 +136,7 @@ public class IdentityProofActivity extends AppCompatActivity {
                     Call<Post> call = jsonPlaceHolderApi.createUser(false,
                             false,
                             details2.get(0), details2.get(1), "TOES@" + details2.get(2), newPass, details2.get(4), details2.get(5),
-                            aadharNo, details2.get(6), details2.get(3), details2.get(2), cPass);
+                            aadharNo, details2.get(3), details2.get(2), cPass);
 
                     System.out.println("--------------------------------------------------------------------");
 

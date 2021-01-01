@@ -49,7 +49,6 @@ public class SelectRoleActivity extends AppCompatActivity {
 
 
         System.out.println("Token :---------- "+LoginActivity.token);
-        //System.out.println("language :---------- "+tokenDetails.get(1));
          System.out.println("Details :---------- "+LoginActivity.tokenDetail);
 
         token = "Token "+LoginActivity.token;

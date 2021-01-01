@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     public static String token;
     public static int userMeId;
 
-    ArrayList<String> tokenDetail = new ArrayList<>();
+   static ArrayList<String> tokenDetail = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

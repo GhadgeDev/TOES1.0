@@ -75,6 +75,7 @@
         android:layout_margin="25dp"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:foregroundGravity=""
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/btnFindWorker"
         android:src="@drawable/thinking"

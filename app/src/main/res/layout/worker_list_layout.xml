@@ -9,25 +9,32 @@
 
     <ImageView
         android:id="@+id/worker_image"
-        android:layout_width="90dp"
+        android:layout_width="100dp"
         android:layout_marginTop="5dp"
         android:layout_height="100dp"
         android:padding="5dp"
         android:src="@drawable/workerprofile" />
+<LinearLayout
+    android:id="@+id/llmain"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@+id/worker_image"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="90dp"
+
         android:layout_marginTop="5dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/worker_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="5dp"
+           android:padding="5dp"
             android:text="@string/app_name"
             android:textColor="@color/black"
             android:textSize="20sp" />
@@ -41,8 +48,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="90dp"
-            android:layout_marginTop="40dp"
+
             android:orientation="horizontal">
 
             <TextView
@@ -51,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:padding="4dp"
                 android:text="@string/visiting_charge"
+                android:textStyle="bold"
                 android:textColor="@color/black" />
 
             <TextView
@@ -58,16 +65,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:padding="4dp"
+
                 android:textColor="@color/black"
-                android:textStyle="bold"
+
                 tools:text="Job_name" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="90dp"
+
             android:orientation="horizontal">
 
             <TextView
@@ -76,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:padding="4dp"
                 android:text="Experience(years): "
+                android:textStyle="bold"
                 android:textColor="@color/black" />
 
             <TextView
@@ -85,11 +93,12 @@
                 android:layout_weight="1"
                 android:padding="4dp"
                 android:textColor="@color/black"
-                android:textStyle="bold"
+
                 tools:text="experience" />
 
         </LinearLayout>
 
 
     </LinearLayout>
+</LinearLayout>
 </RelativeLayout>
