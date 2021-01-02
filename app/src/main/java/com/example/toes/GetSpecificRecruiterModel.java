@@ -12,6 +12,12 @@ public class GetSpecificRecruiterModel {
     @SerializedName("category_1")
     private String category1;
 
+    @SerializedName("recruiter_id")
+    private Integer recruiterId;
+
+    @SerializedName("job_id")
+    private Integer jobId;
+
     public String getRecruiterFname() {
         return recruiterFname;
     }
@@ -35,4 +41,22 @@ public class GetSpecificRecruiterModel {
     public void setCategory1(String category1) {
         this.category1 = category1;
     }
+
+    public Integer getRecruiterId() {
+        return recruiterId;
+    }
+
+    public void setRecruiterId(Integer recruiterId) {
+        this.recruiterId = recruiterId;
+    }
+
+
+    public Integer getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(Integer jobId) {
+        this.jobId = jobId;
+    }
+
 }

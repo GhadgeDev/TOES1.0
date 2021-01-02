@@ -3,30 +3,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
     android:layout_centerHorizontal="true"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".ParticularRecruiterActivity">
 
     <ImageView
         android:id="@+id/recruiter_profile_image"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_marginTop="20dp"
         android:padding="15dp"
         android:src="@mipmap/useravatar" />
 
     <EditText
+        android:id="@+id/edit_profile_fname"
         android:layout_width="324dp"
         android:layout_height="55dp"
         android:layout_margin="5dp"
         android:background="@drawable/devnagaribtn"
         android:gravity="center"
-        android:hint="Enter Name"
+        android:hint="Enter First Name"
         android:inputType="text"
-        android:textSize="17sp" />
+        android:textSize="16sp" />
 
     <EditText
+        android:id="@+id/edit_profile_lname"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/devnagaribtn"
+        android:gravity="center"
+        android:hint="Enter Last Name"
+        android:inputType="text"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/edit_profile_contact"
         android:layout_width="324dp"
         android:layout_height="55dp"
         android:layout_margin="5dp"
@@ -35,9 +48,10 @@
         android:hint="Enter contact number"
         android:inputType="number"
         android:maxLength="10"
-        android:textSize="17sp" />
+        android:textSize="16sp" />
 
     <EditText
+        android:id="@+id/edit_profile_address"
         android:layout_width="324dp"
         android:layout_height="55dp"
         android:layout_margin="5dp"
@@ -46,14 +60,13 @@
         android:hint="Enter Address"
         android:inputType="textMultiLine"
         android:maxLength="200"
-        android:textSize="17sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_margin="25dp"
-
         android:layout_marginLeft="50dp"
         android:layout_marginTop="25dp"
         android:gravity="center"
@@ -64,38 +77,41 @@
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="visible">
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Male"
-                android:buttonTint="#2B1EC0"
-                android:textSize="18sp" />
+        <RadioButton
+            android:id="@+id/edit_profile_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:buttonTint="#2B1EC0"
+            android:text="Male"
+            android:textSize="18sp" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Female"
-                android:buttonTint="#2B1EC0"
-                android:textSize="18sp" />
+        <RadioButton
+            android:id="@+id/edit_profile_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:buttonTint="#2B1EC0"
+            android:text="Female"
+            android:textSize="18sp" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Other"
-                android:buttonTint="#2B1EC0"
-                android:textSize="18sp" />
+        <RadioButton
+            android:id="@+id/edit_profile_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:buttonTint="#2B1EC0"
+            android:text="Other"
+            android:textSize="18sp" />
 
     </RadioGroup>
 
 
     <Button
-        android:id="@+id/hire_btn"
+        android:id="@+id/btn_save_profile"
         android:layout_width="150dp"
         android:layout_height="55dp"
         android:layout_gravity="center"

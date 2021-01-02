@@ -35,6 +35,9 @@ public class SelectJobActivity extends AppCompatActivity implements RecruiterAda
     private List<GetSpecificRecruiterModel> lstRecruiter;
     RecyclerView myRecyclerView;
     RecruiterAdapter adapter;
+    public static int recruiterId;      //WrecruiterID --> For my own reference
+
+    public static int WjbDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,7 @@ public class SelectJobActivity extends AppCompatActivity implements RecruiterAda
                     return;
                 }
                 lstRecruiter = response.body();
+                System.out.println("Whole List Of recruiter " + lstRecruiter);
                 adapter = new RecruiterAdapter(SelectJobActivity.this, lstRecruiter, SelectJobActivity.this);
                 myRecyclerView.setAdapter(adapter);
             }
@@ -109,16 +113,6 @@ public class SelectJobActivity extends AppCompatActivity implements RecruiterAda
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
-
-
-  /*      //Inside Response////////////////////////////////////////////////////////////////////////////////
-        lstRecruiter = new ArrayList<>();
-        lstRecruiter.add(new RecruiterListModel("Aadesh Sighwan", "Plumber"));
-        lstRecruiter.add(new RecruiterListModel("Aditya Mali", "Carpenter"));
-        lstRecruiter.add(new RecruiterListModel("Damodar Dikonda", "Electrician"));
-        lstRecruiter.add(new RecruiterListModel("Tanmay Mahamulkar", "Plumber"));
-        myRecyclerView.setAdapter(new RecruiterAdapter(this, lstRecruiter, this));
-        //////////////////////////////////////////////////////////////////////////////////////////////////*/
     }
 
 
@@ -141,10 +135,41 @@ public class SelectJobActivity extends AppCompatActivity implements RecruiterAda
         }
     }
 
+    JsonPlaceHolderApi recruiterJbInfo = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+
     @Override
     public void onRecruiterClick(int position) {
         Intent intent = new Intent(SelectJobActivity.this, ParticularRecruiterActivity.class);
-        intent.putExtra("recruiter name", lstRecruiter.get(position).getRecruiterFname());
-        startActivity(intent);
+        String tv_fname = lstRecruiter.get(position).getRecruiterFname();
+        String tv_lname = lstRecruiter.get(position).getRecruiterLname();
+        recruiterId = lstRecruiter.get(position).getRecruiterId();
+        WjbDetail = lstRecruiter.get(position).getJobId();
+
+        Call<List<GetRecruiterJobDetails>> call = recruiterJbInfo.getRecruiterJobIfo("token " + LoginActivity.token, recruiterId);
+        call.enqueue(new Callback<List<GetRecruiterJobDetails>>() {
+            @Override
+            public void onResponse(Call<List<GetRecruiterJobDetails>> call, Response<List<GetRecruiterJobDetails>> response) {
+                if (!response.isSuccessful()) {
+                    Toast toast = Toast.makeText(SelectJobActivity.this, "Unsuccessfully !", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                // String getJbDesc = response.body().get(position).getJobDescription();
+                // String getReAddress = response.body().get(position).getAddress();
+
+                intent.putExtra("recruiter name", tv_fname + " " + tv_lname);
+                intent.putExtra("recruiter jbDesc", response.body().get(position).getAddress());
+                intent.putExtra("recruiter_add", response.body().get(position).getJobDescription());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(Call<List<GetRecruiterJobDetails>> call, Throwable t) {
+                Toast toast = Toast.makeText(SelectJobActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                TextView toastMessage = toast.getView().findViewById(android.R.id.message);
+                toastMessage.setTextColor(Color.RED);
+                toast.show();
+            }
+        });
     }
 }

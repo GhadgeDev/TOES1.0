@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="@color/white">
+
     <ImageView
         android:id="@+id/imgUser"
         android:layout_width="100dp"
@@ -14,9 +15,9 @@
         android:src="@mipmap/useravatar" />
 
     <LinearLayout
-        android:layout_below="@+id/imgUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/imgUser"
         android:layout_marginTop="5dp"
         android:background="@color/white"
         android:gravity="center_horizontal"
@@ -26,51 +27,32 @@
             android:id="@+id/view_request_recruiter_name_dialog"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="Recruiter Name"
+            android:layout_margin="5dp"
             android:gravity="center"
+            android:text="Recruiter Name"
             android:textColor="@color/black"
             android:textSize="20sp"
-          android:layout_margin="5dp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/view_request_recruiter_desc"
             android:layout_width="250dp"
             android:layout_height="150dp"
-            android:background="@drawable/textbox_border"
-            android:isScrollContainer="true"
             android:layout_margin="5dp"
-            android:scrollbars="vertical|horizontal"
+            android:background="@drawable/textbox_border"
             android:hint="Want to paint a wall"
-            android:padding="10dp" />
+            android:isScrollContainer="true"
+            android:padding="10dp"
+            android:scrollbars="vertical|horizontal" />
 
         <TextView
+            android:id="@+id/view_request_recruiter_address"
             android:layout_width="250dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
             android:background="@drawable/textbox_border"
             android:hint="Katraj, Pune"
             android:padding="10dp" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-           >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Your visiting charges:"
-                android:padding="7dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="500/-"
-                android:padding="7dp"/>
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"

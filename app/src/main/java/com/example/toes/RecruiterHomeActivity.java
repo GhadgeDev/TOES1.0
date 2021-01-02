@@ -30,7 +30,7 @@ public class RecruiterHomeActivity extends AppCompatActivity {
     private Button msearch;
     public static String jobDescVal;
 
-    public static int jbDetail;
+    public static int RjbDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class RecruiterHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recruiter_home);
         spinner1 = findViewById(R.id.spinnerSelectJob);
 
-        String[] jobTitles = new String[]{"Select Job", "Carpenter", "Painter", "Driver", "Electrician", "Plumber"};
+        String[] jobTitles = new String[]{"Select Job", "carpenter", "painter", "driver", "electrician", "plumber","tailor"};
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.style_select_job_titles, jobTitles);
         spinner1.setAdapter(arrayAdapter);
 
@@ -69,7 +69,7 @@ public class RecruiterHomeActivity extends AppCompatActivity {
 
                             Toast toast = Toast.makeText(RecruiterHomeActivity.this, "Job uploaded successfully", Toast.LENGTH_SHORT);
                             toast.show();
-                            jbDetail = response.body().getId();
+                            RjbDetail = response.body().getId();
                         }
 
                         @Override

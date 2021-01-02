@@ -1,5 +1,6 @@
 package com.example.toes;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,9 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,14 +28,13 @@ import java.util.List;
 public class TabViewRequests extends Fragment {
     View v;
     private RecyclerView myRecyclerView;
-    private List<ViewRequestListModel> lstworker;
+    private List<GetRecruiterViewRequestModel> lstworker;
+    ViewRequestRecyclerAdapter adapter;
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -36,15 +42,7 @@ public class TabViewRequests extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TabViewRequests.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static TabViewRequests newInstance(String param1, String param2) {
         TabViewRequests fragment = new TabViewRequests();
         Bundle args = new Bundle();
@@ -57,20 +55,39 @@ public class TabViewRequests extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        lstworker = new ArrayList<>();
-        lstworker.add(new ViewRequestListModel("Ruturaj Varne","Carpenter"));
-        lstworker.add(new ViewRequestListModel("Aditya Jambulkar","Driver"));
-        lstworker.add(new ViewRequestListModel("Gauri Raskar","Painter"));
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_tab_view_requests, container, false);
         myRecyclerView = v.findViewById(R.id.viewRequestRecycler);
-        ViewRequestRecyclerAdapter recyclerAdapter = new ViewRequestRecyclerAdapter(getContext(),lstworker);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        myRecyclerView.setAdapter(recyclerAdapter);
+
+        JsonPlaceHolderApi recruiterSideViewRequest = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+        Call<List<GetRecruiterViewRequestModel>> call = recruiterSideViewRequest.getRecruiterViewRequest("token " + LoginActivity.token,
+                LoginActivity.userMeId);
+        call.enqueue(new Callback<List<GetRecruiterViewRequestModel>>() {
+            @Override
+            public void onResponse(Call<List<GetRecruiterViewRequestModel>> call, Response<List<GetRecruiterViewRequestModel>> response) {
+                if (!response.isSuccessful()) {
+                    Toast toast = Toast.makeText(getActivity(), "Unsuccessfully !", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                lstworker = response.body();
+                adapter = new ViewRequestRecyclerAdapter(getContext(), lstworker);
+                myRecyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<GetRecruiterViewRequestModel>> call, Throwable t) {
+                Toast toast = Toast.makeText(getActivity(), "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                TextView toastMessage = toast.getView().findViewById(android.R.id.message);
+                toastMessage.setTextColor(Color.RED);
+                toast.show();
+            }
+        });
         return v;
     }
 }

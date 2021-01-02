@@ -148,7 +148,7 @@ public class ParticularWorkerActivity extends AppCompatActivity {
     JsonPlaceHolderApi jsonPlaceHolderApi = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
     public void postHireReq(){
         Call<RecruiterHirePostRequest> call = jsonPlaceHolderApi.postHireReq("token " + LoginActivity.token, LoginActivity.userMeId,
-                1,RecruiterHomeActivity.jbDetail,SelectWorkerActivity.workerId);
+                1,RecruiterHomeActivity.RjbDetail,SelectWorkerActivity.RworkerId);
 
         call.enqueue(new Callback<RecruiterHirePostRequest>() {
             @Override

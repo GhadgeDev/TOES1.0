@@ -50,7 +50,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
     private TextView mJobNameTextView;
     private WorkerAdapter adapter;
 
-    public static int workerId;
+    public static int RworkerId;
     private static final String EXTRA_ITEM_SELECTED_IS = "recruiter.home.activity.itemSelected";
 
     public static Intent newIntent(Context packageContext, String selectedItem) {
@@ -85,7 +85,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
 
         JsonPlaceHolderApi workerInfoList = retrofit1.create(JsonPlaceHolderApi.class);
 
-       Call<List<GetSpecificWorkerModel>> call = workerInfoList.getWorkerInfo("token " + LoginActivity.token, mSelectedItemIs.toLowerCase());
+       Call<List<GetSpecificWorkerModel>> call = workerInfoList.getWorkerInfo("token " + LoginActivity.token, mSelectedItemIs);
 
         call.enqueue(new Callback<List<GetSpecificWorkerModel>>() {
             @Override
@@ -183,7 +183,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         intent.putExtra("worker name", lstWorker.get(position).getWorkerName());
         intent.putExtra("worker fees", lstWorker.get(position).getVisitingCharges());
         intent.putExtra("worker experience", lstWorker.get(position).getExperience());
-        workerId = lstWorker.get(position).getWorkerId();
+        RworkerId = lstWorker.get(position).getWorkerId();
         startActivity(intent);
     }
 }

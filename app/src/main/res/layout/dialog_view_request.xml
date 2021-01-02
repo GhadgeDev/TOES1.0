@@ -3,15 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
     android:layout_centerVertical="true"
+    android:layout_gravity="center"
     android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:layout_below="@+id/imgWorkerProfile"
+        android:background="@color/white"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -28,41 +28,43 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Experience: 5 years"
+                android:layout_marginTop="5dp"
+                android:text="Requested amount for the job"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15sp"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                tools:text="5 years" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Rs. "
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/worker_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Rs. "
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Requested amount for the job\n                      200/-"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
-     <!--   <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_margin="5dp"
-            android:textColor="@color/black"
-            tools:text="200/-" />
--->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

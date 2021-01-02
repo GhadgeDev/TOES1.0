@@ -16,10 +16,10 @@ import java.util.List;
 public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequestRecyclerAdapter.MyViewHolder> {
 
     Context mContext;
-    List<ViewRequestListModel> mData;
+    List<GetRecruiterViewRequestModel> mData;
     Dialog myDialog;
 
-    public ViewRequestRecyclerAdapter(Context context, List<ViewRequestListModel> data) {
+    public ViewRequestRecyclerAdapter(Context context, List<GetRecruiterViewRequestModel> data) {
         mContext = context;
         mData = data;
     }
@@ -37,9 +37,14 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
         viewHolder.RecruiterViewRequestList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String wFName = mData.get(viewHolder.getAdapterPosition()).getWokerFname();
+                String wLName = mData.get(viewHolder.getAdapterPosition()).getWokerLname();
+                String wAmount = mData.get(viewHolder.getAdapterPosition()).getAmount().toString();
+
                 TextView dialog_worker_name = myDialog.findViewById(R.id.view_worker_name_dialog);
-                dialog_worker_name.setText(mData.get(viewHolder.getAdapterPosition()).getWorker_name());
-                //add experience, worker image, requested amount: like this
+                dialog_worker_name.setText(wFName + " " + wLName);
+                TextView dialog_worker_amount = myDialog.findViewById(R.id.worker_amount);
+                dialog_worker_amount.setText(wAmount);
                 myDialog.show();
             }
         });
@@ -48,8 +53,10 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.tv_worker_name.setText(mData.get(position).getWorker_name());
-        holder.tv_worker_profession.setText(mData.get(position).getWorker_profession());
+        String wFName = mData.get(position).getWokerFname();
+        String wLName = mData.get(position).getWokerLname();
+        holder.tv_worker_name.setText(wFName + " " + wLName);
+        holder.tv_worker_profession.setText(mData.get(position).getJobTitle());
     }
 
     @Override

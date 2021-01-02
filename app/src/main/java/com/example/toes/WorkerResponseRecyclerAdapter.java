@@ -19,10 +19,10 @@ import java.util.List;
 public class WorkerResponseRecyclerAdapter extends RecyclerView.Adapter<WorkerResponseRecyclerAdapter.MyViewHolder> {
 
     Context mContext;
-    List<WorkerResponseList> mData;
+    List<GetWorkerResponses> mData;
     Dialog myWorkerResponseDialog;
 
-    public WorkerResponseRecyclerAdapter(Context context, List<WorkerResponseList> data) {
+    public WorkerResponseRecyclerAdapter(Context context, List<GetWorkerResponses> data) {
         mContext = context;
         mData = data;
     }
@@ -42,14 +42,22 @@ public class WorkerResponseRecyclerAdapter extends RecyclerView.Adapter<WorkerRe
             @Override
             public void onClick(View v) {
                 TextView recruiter_name = myWorkerResponseDialog.findViewById(R.id.recruiter_name_dialog);
-                recruiter_name.setText(mData.get(vHolder.getAdapterPosition()).getrName());
+                TextView status = myWorkerResponseDialog.findViewById(R.id.status);
+
+                String rFname = mData.get(vHolder.getAdapterPosition()).getRecruiterFname();
+                String rLname = mData.get(vHolder.getAdapterPosition()).getRecruiterLname();
+                String rContact = mData.get(vHolder.getAdapterPosition()).getContactNo();
+                String rStatus = mData.get(vHolder.getAdapterPosition()).getStatus();
+
+                recruiter_name.setText(rFname +" "+ rLname);
+                status.setText(rStatus);
 
                 Button call_recruiter = myWorkerResponseDialog.findViewById(R.id.call_recruiter_btn);
                 call_recruiter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(Intent.ACTION_DIAL);
-                        intent.setData(Uri.parse("tel:1234567890"));    //Call recruiter(get number form database)
+                        intent.setData(Uri.parse("tel:" + rContact));    //Call recruiter(get number form database)
                         mContext.startActivity(intent);
                     }
                 });
@@ -61,8 +69,10 @@ public class WorkerResponseRecyclerAdapter extends RecyclerView.Adapter<WorkerRe
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.tv.setText(mData.get(position).getrName());
-        holder.tv_requirement.setText(mData.get(position).getrRequirement());
+        String rFname = mData.get(position).getRecruiterFname();
+        String rLname = mData.get(position).getRecruiterLname();
+        holder.tv.setText(rFname + " " + rLname);
+        holder.tv_requirement.setText(mData.get(position).getJobTitle());
     }
 
     @Override

@@ -13,6 +13,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
@@ -20,8 +21,6 @@ import retrofit2.http.Path;
 import retrofit2.http.Url;
 
 interface JsonPlaceHolderApi {
-
-
     //GettingUsersId
     @GET("users/me/")
     Call<Post> getPost(@Header("Authorization") String token);
@@ -49,9 +48,7 @@ interface JsonPlaceHolderApi {
                           @Field("aadhar_no") String adhar_no,
                           @Field("address") String address,
                           @Field("phone") String phone,
-                          @Field("re_password") String re_password
-    );
-
+                          @Field("re_password") String re_password);
 
     @GET("/api/user/{Phone_no}")
     Call<User> sendOTP(@Path(value = "Phone_no") String Phone_no);
@@ -61,17 +58,17 @@ interface JsonPlaceHolderApi {
     @POST("/worker/")
     Call<WorkerJobDetails> insertWorkerJobInfo(@Header("Authorization") String token,
                                                @Field("city") String city,
-                                               @Field("category_1")String category_1,
-                                               @Field("category_1_vc")String category_1_vc,
-                                               @Field("category_1_exp")int category_1_exp,
-                                               @Field("category_2")String category_2,
-                                               @Field("category_2_vc")String category_2_vc,
-                                               @Field("category_2_exp")int category_2_exp,
-                                               @Field("category_3")String category_3,
-                                               @Field("category_3_vc")String category_3_vc,
-                                               @Field("category_3_exp")int category_3_exp,
-                                               @Field("user")int user
-                                              );
+                                               @Field("category_1") String category_1,
+                                               @Field("category_1_vc") String category_1_vc,
+                                               @Field("category_1_exp") int category_1_exp,
+                                               @Field("category_2") String category_2,
+                                               @Field("category_2_vc") String category_2_vc,
+                                               @Field("category_2_exp") int category_2_exp,
+                                               @Field("category_3") String category_3,
+                                               @Field("category_3_vc") String category_3_vc,
+                                               @Field("category_3_exp") int category_3_exp,
+                                               @Field("user") int user
+    );
 
     //Recruiter clicks search, post get uploaded at worker side
     @FormUrlEncoded
@@ -82,7 +79,7 @@ interface JsonPlaceHolderApi {
                                                   @Field("status") int status,
                                                   @Field("recruiter") int id);
 
-    //Recruiter clicks hire button
+    //Recruiter sends request to worker
     @FormUrlEncoded
     @POST("recruiter/req")
     Call<RecruiterHirePostRequest> postHireReq(@Header("Authorization") String token,
@@ -91,12 +88,11 @@ interface JsonPlaceHolderApi {
                                                @Field("job_detail") int jbDetail,
                                                @Field("worker") int workerId);
 
-
     //ProfileImage
     @Multipart
     @POST("profile/image")
     Call<GetProfileImage> uploadImage(@Part MultipartBody.Part part,
-                                   @Part("profile_image") int userId);
+                                      @Part("profile_image") int userId);
 
     //SelectRoleApi
     @GET("/worker/")
@@ -106,4 +102,51 @@ interface JsonPlaceHolderApi {
     @GET("/api/specificjobs/{user_id}")
     Call<List<GetSpecificRecruiterModel>> getRecruiterInfo(@Header("Authorization") String aToken,
                                                            @Path("user_id") int uId);
+
+    //Getting recruiter job details
+    @GET("api/recruiterinfo/{recruiter_id}")
+    Call<List<GetRecruiterJobDetails>> getRecruiterJobIfo(@Header("Authorization") String token,
+                                                          @Path("recruiter_id") int recId);
+
+    //Worker sends request to recruiter
+    @FormUrlEncoded
+    @POST("worker/req/")
+    Call<WorkerSendPostRequest> sendPostRequest(@Header("Authorization") String token,
+                                                @Field("recruiter") int recruiterId,
+                                                @Field("amount") int amount,
+                                                @Field("status") int status,
+                                                @Field("job_detail") int jbDetail,
+                                                @Field("worker") int workerId);
+
+    //Get view all request on worker side (View request WorkerSide)
+    @GET("api/workers/requests/{userMeId}")
+    Call<List<GetWorkerViewRequestModel>> getWorkerViewRequest(@Header("Authorization") String token,
+                                                               @Path("userMeId") int userMeId);
+
+    //Get view all request on recruiter side(View request RecruiterSide)
+    @GET("api/recuriters/requests/{userMeId}")
+    Call<List<GetRecruiterViewRequestModel>> getRecruiterViewRequest(@Header("Authorization") String token,
+                                                                     @Path("userMeId") int userMeId);
+
+    //Edit profile api
+    @FormUrlEncoded
+    @PATCH("users/{me}/")
+    Call<Post> editProfile(@Header("Authorization") String token,
+                           @Field("first_name") String fName,
+                           @Field("last_name") String lName,
+                           @Field("gender") String g,
+                           @Field("address") String address,
+                           @Field("phone") String contact,
+                           @Path("me") int id);
+
+    //Get worker side accept reject button click
+    @GET("api/worreq/{status}/{viewJob_id}")
+    Call<GetAcceptRejectBtnClick> getAcceptRejectBtnClick(@Header("Authorization") String token,
+                                                          @Path("status") int status,
+                                                          @Path("viewJob_id") int viewJob_Id);
+
+    //Get worker side response list of request he send
+    @GET("api/workers/responses/{user_me}")
+    Call<List<GetWorkerResponses>> getWorkerResponse(@Header("Authorization") String token,
+                                               @Path("user_me") int userMeId);
 }

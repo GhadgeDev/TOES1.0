@@ -22,12 +22,12 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="18sp"
-
         android:textStyle="bold"
         android:textColor="@color/black"
        android:hint="Recruiter Name"/>
 
     <TextView
+        android:id="@+id/recruiter_address"
         android:layout_margin="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,6 +42,7 @@
         android:background="?android:attr/listDivider" />
 
     <TextView
+        android:id="@+id/recruiter_description"
         android:layout_margin="5dp"
         android:layout_width="324dp"
         android:layout_height="150dp"
@@ -56,6 +57,7 @@
         android:background="?android:attr/listDivider" />
 
     <EditText
+        android:id="@+id/worker_edit_amount"
         android:layout_margin="5dp"
         android:layout_width="150dp"
         android:layout_height="55dp"
@@ -66,7 +68,7 @@
         android:background="@drawable/devnagaribtn"/>
 
     <Button
-        android:id="@+id/hire_btn"
+        android:id="@+id/send_req"
         android:layout_width="250dp"
         android:layout_height="45dp"
         android:layout_gravity="center"
