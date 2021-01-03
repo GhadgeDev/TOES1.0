@@ -149,4 +149,13 @@ interface JsonPlaceHolderApi {
     @GET("api/workers/responses/{user_me}")
     Call<List<GetWorkerResponses>> getWorkerResponse(@Header("Authorization") String token,
                                                @Path("user_me") int userMeId);
+
+    //Get Jobs into profile
+    @GET("/api/specificjobs/{user_id}")
+    Call<Worker> getJobs(@Header("Authorization") String aToken,
+                                                           @Path("user_id") int uId);
+
+
+
+
 }

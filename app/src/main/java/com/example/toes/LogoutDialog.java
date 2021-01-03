@@ -40,6 +40,9 @@ public class LogoutDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(getActivity() ,LoginActivity.class);
+                        LoginActivity.sp.edit().putBoolean("logged",false).apply();
+                        LoginActivity.sp.edit().putString("token","").apply();
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
                 });
