@@ -47,7 +47,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
     private RecyclerView workerList;
     private List<GetSpecificWorkerModel> lstWorker;
     private String mSelectedItemIs;
-    private TextView mJobNameTextView;
+    private TextView mJobNameTextView,txtName;
     private WorkerAdapter adapter;
 
     public static int RworkerId;
@@ -65,6 +65,8 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         setContentView(R.layout.activity_select_worker);
 
         workerList = findViewById(R.id.worker_list);
+        txtName = (TextView) findViewById(R.id.nav_text_click);
+
         workerList.setLayoutManager(new LinearLayoutManager(this));
 
         mSelectedItemIs = getIntent().getStringExtra(EXTRA_ITEM_SELECTED_IS);
@@ -133,6 +135,8 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
                 drawer.closeDrawer(GravityCompat.START);
             }
         });
+
+
         drawer.addDrawerListener(toggle);
         toggle.syncState();
     }

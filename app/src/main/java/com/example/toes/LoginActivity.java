@@ -3,8 +3,10 @@ package com.example.toes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.VoiceInteractor;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -60,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public static String token;
     public static int userMeId;
+   public static SharedPreferences sp;
 
    static ArrayList<String> tokenDetail = new ArrayList<>();
     @Override
@@ -90,6 +93,16 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println("---------------------------------------------------" + selectedLanguage);
 
 
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("com.package.ACTION_LOGOUT");
+        registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Log.d("onReceive","Logout in progress");
+                //At this point you should start the login activity and finish this one
+                finish();
+            }
+        }, intentFilter);
         selectedLanguage = SelectLanguageActivity.selectedLanguage;
         switch (selectedLanguage) {
             case "0":
@@ -162,7 +175,7 @@ public class LoginActivity extends AppCompatActivity {
                 Post post = new Post(pass, uName);
                 Call<User> call = jsonPlaceHolderApi.createPost(post);
 
-                call.enqueue(new Callback<User>() {
+               call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         if (!response.isSuccessful()) {
@@ -179,7 +192,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
 
-                        //     Post postResponse = response.body();
+                          //  Post postResponse = response.body();
                         System.out.println("----------------------------------------------------");
                         Toast toast = Toast.makeText(LoginActivity.this, "Log In successfully ! " , Toast.LENGTH_SHORT);
                         View view = toast.getView();
@@ -187,21 +200,19 @@ public class LoginActivity extends AppCompatActivity {
 
                         toastMessage.setTextColor(Color.parseColor("#2E7D32"));
                         toast.show();
-
-                        token =  response.body().getAuth_token();
-
+                        userMeId = response.body().getId();
+                        LoginActivity.token =  response.body().getAuth_token();
+                        System.out.println("----------------------------------------------------"+LoginActivity.token);
                         callFirst();
 
                         tokenDetail.add(selectedLanguage);
                         tokenDetail.add(response.body().getAuth_token());
                         System.out.println("details"+tokenDetail);
-                        SplashScreenActivity.IsLoggedIn = true;
-                        SharedPreferences.Editor editor = prf.edit();
-                        editor.putString("phone",uName);
-                        editor.putString("password",pass);
-                        editor.commit();
 
+                        sp.edit().putBoolean("logged",true).apply();
+                        sp.edit().putString("token",token).apply();
                         Intent intent1 = new Intent(LoginActivity.this, SelectRoleActivity.class);
+                        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent1.putExtra("tokenDetails",tokenDetail);
                         startActivity(intent1);
 
@@ -238,7 +249,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 break;
 
-
         }
     }
     public void forgotPass(View view) {
@@ -259,6 +269,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 userMeId = response.body().getId();
+                System.out.println("userId ----------------------------------"+userMeId);
             }
             @Override
             public void onFailure(Call<Post> call, Throwable t) {

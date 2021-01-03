@@ -25,18 +25,29 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SelectRoleActivity extends AppCompatActivity {
+public class
+SelectRoleActivity extends AppCompatActivity {
     SharedPreferences prf;
     TextView txtName;
     public static String textUserfName;
     public static String textUserlName;
     String selectedLanguage;
     Button btnFindJob,btnFindWorker;
-    String token = "";
+    String token = LoginActivity.token;
     public static int id ;
     static boolean userPresent = false;
     ArrayList<String> tokenDetails = new ArrayList<>();
     static int user ;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences prefs = getSharedPreferences("X", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("lastActivity", getClass().getName());
+        editor.commit();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,13 +62,15 @@ public class SelectRoleActivity extends AppCompatActivity {
         System.out.println("Token :---------- "+LoginActivity.token);
          System.out.println("Details :---------- "+LoginActivity.tokenDetail);
 
-        token = "Token "+LoginActivity.token;
-
 
         btnFindJob = (Button)findViewById(R.id.btnFindJob);
         btnFindWorker = (Button)findViewById(R.id.btnFindWorker);
         txtName = (TextView)findViewById(R.id.txtname);
         prf = getSharedPreferences("user_details",MODE_PRIVATE);
+
+        token = "Token "+LoginActivity.token;
+
+
 
         //For http log
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
@@ -174,11 +187,13 @@ public class SelectRoleActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menues,menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -190,12 +205,8 @@ public class SelectRoleActivity extends AppCompatActivity {
                 startActivity(Profileintent);
                 break;
             case R.id.menu_logout:
-                SharedPreferences.Editor editor = prf.edit();
-                editor.clear();
-                editor.commit();
-                Intent intent = new Intent(SelectRoleActivity.this,LoginActivity.class);
-                intent.putExtra(Intent.EXTRA_TEXT,selectedLanguage);
-                startActivity(intent);
+                LogoutDialog logoutDialog = new LogoutDialog();
+                logoutDialog.show(getSupportFragmentManager(),"logout dialog");
                 break;
 
         }
