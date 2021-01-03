@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -79,6 +80,7 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
                         status = 2;
                         Toast.makeText(mContext,"Job accepted",Toast.LENGTH_SHORT).show();
                         callAcceptRejectApi();
+                        myDialog.dismiss();
                     }
                 });
 
@@ -88,6 +90,7 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
                         status = 3;
                         Toast.makeText(mContext,"Job Rejected",Toast.LENGTH_SHORT).show();
                         callAcceptRejectApi();
+                        myDialog.dismiss();
                     }
                 });
             }
@@ -136,7 +139,10 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
 
             @Override
             public void onFailure(Call<GetAcceptRejectBtnClick> call, Throwable t) {
-
+                Toast toast = Toast.makeText(mContext,"Please Check your Internet Connection",Toast.LENGTH_SHORT);
+                TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                toastMessage.setTextColor(Color.RED);
+                toast.show();
             }
         });
     }

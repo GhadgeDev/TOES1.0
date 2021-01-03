@@ -32,7 +32,7 @@ public class WorkerResponseRecyclerAdapter extends RecyclerView.Adapter<WorkerRe
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
-        v = LayoutInflater.from(mContext).inflate(R.layout.workerrequestresponselist,parent,false);
+        v = LayoutInflater.from(mContext).inflate(R.layout.workerrequestresponselist, parent, false);
         MyViewHolder vHolder = new MyViewHolder(v);
 
         //Dialog
@@ -50,21 +50,17 @@ public class WorkerResponseRecyclerAdapter extends RecyclerView.Adapter<WorkerRe
                 String rContact = mData.get(vHolder.getAdapterPosition()).getContactNo();
                 String rStatus = mData.get(vHolder.getAdapterPosition()).getStatus();
 
-                recruiter_name.setText(rFname +" "+ rLname);
+                recruiter_name.setText(rFname + " " + rLname);
+
                 status.setText(rStatus);
 
                 Button call_recruiter = myWorkerResponseDialog.findViewById(R.id.call_recruiter_btn);
                 call_recruiter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(rStatus == "Accepted") {
-                            Intent intent = new Intent(Intent.ACTION_DIAL);
-                            intent.setData(Uri.parse("tel:" + rContact));    //Call recruiter(get number form database)
-                            mContext.startActivity(intent);
-                        }
-                        else{
-                            Toast.makeText(mContext,"Job is not accepted yet !",Toast.LENGTH_SHORT).show();
-                        }
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:" + rContact));    //Call recruiter(get number form database)
+                        mContext.startActivity(intent);
                     }
                 });
                 myWorkerResponseDialog.show();
@@ -86,7 +82,7 @@ public class WorkerResponseRecyclerAdapter extends RecyclerView.Adapter<WorkerRe
         return mData.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView tv;
         private TextView tv_requirement;
         private LinearLayout workerResponseList;

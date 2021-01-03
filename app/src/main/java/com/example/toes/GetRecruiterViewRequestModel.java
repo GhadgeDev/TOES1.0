@@ -21,6 +21,9 @@ public class GetRecruiterViewRequestModel {
     @SerializedName("woker_address")
     private String wokerAddress;
 
+    @SerializedName("jobid")
+    private int jbid;
+
     public String getJobTitle() {
         return jobTitle;
     }
@@ -67,5 +70,13 @@ public class GetRecruiterViewRequestModel {
 
     public void setWokerAddress(String wokerAddress) {
         this.wokerAddress = wokerAddress;
+    }
+
+    public int getJbid() {
+        return jbid;
+    }
+
+    public void setJbid(int jbid) {
+        this.jbid = jbid;
     }
 }

@@ -76,7 +76,7 @@ public class ParticularWorkerActivity extends AppCompatActivity {
         particularWorkerAddress = findViewById(R.id.particular_worker_address);
         jobDescription = findViewById(R.id.txtprofession);
 
-        mWorkerExp = getIntent().getIntExtra("worker exp", 1);
+        mWorkerExp = getIntent().getIntExtra("worker experience", 1);
         particularWorkerExperience = findViewById(R.id.nOfexp);
         particularWorkerExperience.setText("" + mWorkerExp);
 

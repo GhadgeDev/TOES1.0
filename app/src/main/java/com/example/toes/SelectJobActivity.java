@@ -31,6 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SelectJobActivity extends AppCompatActivity implements RecruiterAdapter.OnRecruiterListener {
+    TextView dUserName;
     private DrawerLayout mDrawer;
     private List<GetSpecificRecruiterModel> lstRecruiter;
     RecyclerView myRecyclerView;
@@ -65,6 +66,11 @@ public class SelectJobActivity extends AppCompatActivity implements RecruiterAda
                 System.out.println("Whole List Of recruiter " + lstRecruiter);
                 adapter = new RecruiterAdapter(SelectJobActivity.this, lstRecruiter, SelectJobActivity.this);
                 myRecyclerView.setAdapter(adapter);
+
+                dUserName = findViewById(R.id.nav_text_click);
+                String dfname = SelectRoleActivity.textUserfName;
+                String dlname = SelectRoleActivity.textUserlName;
+                dUserName.setText(dfname + " " + dlname);
             }
 
             @Override
@@ -154,12 +160,10 @@ public class SelectJobActivity extends AppCompatActivity implements RecruiterAda
                     toast.show();
                     return;
                 }
-                // String getJbDesc = response.body().get(position).getJobDescription();
-                // String getReAddress = response.body().get(position).getAddress();
 
                 intent.putExtra("recruiter name", tv_fname + " " + tv_lname);
-                intent.putExtra("recruiter jbDesc", response.body().get(position).getAddress());
-                intent.putExtra("recruiter_add", response.body().get(position).getJobDescription());
+                intent.putExtra("recruiter jbDesc", response.body().get(position).getJobDescription());
+                intent.putExtra("recruiter_add", response.body().get(position).getAddress());
                 startActivity(intent);
             }
 
