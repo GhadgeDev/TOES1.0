@@ -22,14 +22,16 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class ResponseRecyclerAdapter extends RecyclerView.Adapter<ResponseRecyclerAdapter.MyViewHolder> {
     Context mContext;
-    List<RecruiterResponseList> mData;
+    List<GetRecruiterResponses> mData;
     Dialog myDialog;
 
-    public ResponseRecyclerAdapter(Context context, List<RecruiterResponseList> data) {
+    public ResponseRecyclerAdapter(Context context, List<GetRecruiterResponses> data) {
         mContext = context;
         mData = data;
     }
@@ -38,7 +40,7 @@ public class ResponseRecyclerAdapter extends RecyclerView.Adapter<ResponseRecycl
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
-        v = LayoutInflater.from(mContext).inflate(R.layout.requestresponselist,parent,false);
+        v = LayoutInflater.from(mContext).inflate(R.layout.requestresponselist, parent, false);
         MyViewHolder vHolder = new MyViewHolder(v);
 
         myDialog = new Dialog(mContext);
@@ -49,14 +51,22 @@ public class ResponseRecyclerAdapter extends RecyclerView.Adapter<ResponseRecycl
             @Override
             public void onClick(View v) {
                 TextView dialog_name_tv = myDialog.findViewById(R.id.worker_name_dialog);
-                dialog_name_tv.setText(mData.get(vHolder.getAdapterPosition()).getName());
+                TextView dialog_request_status = myDialog.findViewById(R.id.request_status);
+
+                String fName = mData.get(vHolder.getAdapterPosition()).getWorkerFname();
+                String lName = mData.get(vHolder.getAdapterPosition()).getWorkerLname();
+                String Contact = mData.get(vHolder.getAdapterPosition()).getContactNo();
+                String status = mData.get(vHolder.getAdapterPosition()).getStatus();
+
+                dialog_name_tv.setText(fName + " " + lName);
+                dialog_request_status.setText(status);
 
                 Button call_worker = myDialog.findViewById(R.id.worker_call_btn);
                 call_worker.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(Intent.ACTION_DIAL);
-                        intent.setData(Uri.parse("tel:7894561230"));    //Call worker(get number form database)
+                        intent.setData(Uri.parse("tel:" + Contact));    //Call worker(get number form database)
                         mContext.startActivity(intent);
                     }
                 });
@@ -68,8 +78,11 @@ public class ResponseRecyclerAdapter extends RecyclerView.Adapter<ResponseRecycl
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.tv.setText(mData.get(position).getName());
-        holder.tv1.setText(mData.get(position).getProfession());
+        String fName = mData.get(position).getWorkerFname();
+        String lName = mData.get(position).getWorkerLname();
+        String profession = mData.get(position).getJobTitle();
+        holder.tv.setText(fName +" "+lName);
+        holder.tv1.setText(profession);
     }
 
     @Override
@@ -77,11 +90,12 @@ public class ResponseRecyclerAdapter extends RecyclerView.Adapter<ResponseRecycl
         return mData.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tv;
         private TextView tv1;
         private LinearLayout workerResponseList;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 

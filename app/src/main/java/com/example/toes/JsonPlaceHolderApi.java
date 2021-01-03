@@ -145,17 +145,24 @@ interface JsonPlaceHolderApi {
                                                           @Path("status") int status,
                                                           @Path("viewJob_id") int viewJob_Id);
 
-    //Get worker side response list of request he send
+    //Get worker side response list of request he had sent
     @GET("api/workers/responses/{user_me}")
     Call<List<GetWorkerResponses>> getWorkerResponse(@Header("Authorization") String token,
-                                               @Path("user_me") int userMeId);
+                                                     @Path("user_me") int userMeId);
 
     //Get Jobs into profile
     @GET("/api/specificjobs/{user_id}")
     Call<Worker> getJobs(@Header("Authorization") String aToken,
-                                                           @Path("user_id") int uId);
+                         @Path("user_id") int uId);
 
+    //Get recruiter side accept reject button click
+    @GET("api/recreq/{status}/{jbId}")
+    Call<GetAcpRejClickRecruiter> getAccRejClickRecruiter(@Header("Authorization") String token,
+                                                          @Path("status") int status,
+                                                          @Path("jbId") int jbId);
 
-
-
+    //Get recruiter side response list of request he had sent
+    @GET("api/recruiters/responses/{userMeId}")
+    Call<List<GetRecruiterResponses>> getRecruiterResponses(@Header("Authorization") String token,
+                                                            @Path("userMeId") int userMeid);
 }

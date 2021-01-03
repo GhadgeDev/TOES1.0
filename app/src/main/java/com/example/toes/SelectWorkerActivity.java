@@ -103,10 +103,9 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
                 workerList.setAdapter(adapter);
 
                 dUserName = findViewById(R.id.nav_text_click);
-                CharSequence dfname = SelectRoleActivity.textUserfName;
-                CharSequence dlname = SelectRoleActivity.textUserlName;
-                dUserName.setText(dfname);
-                dUserName.setText(dlname);
+                String dfname = SelectRoleActivity.textUserfName;
+                String dlname = SelectRoleActivity.textUserlName;
+                dUserName.setText(dfname +" "+ dlname);
             }
 
             @Override
