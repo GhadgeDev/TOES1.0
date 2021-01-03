@@ -157,7 +157,9 @@ public class ParticularWorkerActivity extends AppCompatActivity {
                     Toast.makeText(ParticularWorkerActivity.this,"Unsuccessful request",Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                RecruiterHirePostRequest rq = new RecruiterHirePostRequest();
+               SplashScreenActivity.rId = response.body().getRecruiter();
+                LoginActivity.sp.edit().putInt("rid",SplashScreenActivity.rId).apply();
                 Toast.makeText(ParticularWorkerActivity.this,"Request Sent",Toast.LENGTH_SHORT).show();
             }
 
