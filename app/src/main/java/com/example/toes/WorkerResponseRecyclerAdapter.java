@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,9 +57,14 @@ public class WorkerResponseRecyclerAdapter extends RecyclerView.Adapter<WorkerRe
                 call_recruiter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_DIAL);
-                        intent.setData(Uri.parse("tel:" + rContact));    //Call recruiter(get number form database)
-                        mContext.startActivity(intent);
+                        if(rStatus == "Accepted") {
+                            Intent intent = new Intent(Intent.ACTION_DIAL);
+                            intent.setData(Uri.parse("tel:" + rContact));    //Call recruiter(get number form database)
+                            mContext.startActivity(intent);
+                        }
+                        else{
+                            Toast.makeText(mContext,"Job is not accepted yet !",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 myWorkerResponseDialog.show();

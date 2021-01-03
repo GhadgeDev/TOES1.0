@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
     android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".RecruiterHomeActivity">
 
     <TextView
@@ -40,23 +40,29 @@
         android:id="@+id/jobDescription"
         android:layout_width="324dp"
         android:layout_height="170dp"
-        android:hint="Describe job in detail"
-        android:textColor="@color/black"
-        android:gravity="top|left"
-        android:inputType="textMultiLine"
-        android:layout_marginTop ="40dp"
-        android:textColorHint="#ABA9A9"
-        android:padding="10dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/devnagaribtn"
-       />
+        android:gravity="top|left"
+        android:hint="Describe job in detail"
+        android:inputType="textMultiLine"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="#ABA9A9" />
+
+    <CheckBox
+        android:layout_margin="10dp"
+        android:id="@+id/post_job_CheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post your job to all worker"/>
 
     <Button
         android:id="@+id/btnsearch"
         android:layout_width="150dp"
         android:layout_height="55dp"
         android:layout_marginTop="55dp"
-        android:textColor="@color/white"
         android:background="@drawable/englishbutton"
-        android:text="@string/search_job_title" />
+        android:text="@string/search_job_title"
+        android:textColor="@color/white" />
 
 </LinearLayout>
