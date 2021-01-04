@@ -14,7 +14,14 @@ public class GetRecruiterJobDetails {
     private String address;
 
     @SerializedName("job_Description")
-    private String jobDescription;
+    private String job_Description;
+
+    public GetRecruiterJobDetails(String fname, String lname, String address, String job_Description) {
+        this.fname = fname;
+        this.lname = lname;
+        this.address = address;
+        this.job_Description = job_Description;
+    }
 
     public String getFname() {
         return fname;
@@ -41,11 +48,11 @@ public class GetRecruiterJobDetails {
     }
 
     public String getJobDescription() {
-        return jobDescription;
+        return job_Description;
     }
 
     public void setJobDescription(String jobDescription) {
-        this.jobDescription = jobDescription;
+        this.job_Description = jobDescription;
     }
 
 }

@@ -54,23 +54,15 @@ SelectRoleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_role);
         Intent intent = getIntent();
         tokenDetails = intent.getStringArrayListExtra("tokenDetails");
-
         selectedLanguage = intent.getStringExtra(Intent.EXTRA_TEXT);
-
-
-
         System.out.println("Token :---------- "+LoginActivity.token);
          System.out.println("Details :---------- "+LoginActivity.tokenDetail);
-
 
         btnFindJob = (Button)findViewById(R.id.btnFindJob);
         btnFindWorker = (Button)findViewById(R.id.btnFindWorker);
         txtName = (TextView)findViewById(R.id.txtname);
         prf = getSharedPreferences("user_details",MODE_PRIVATE);
-
         token = "Token "+LoginActivity.token;
-
-
 
         //For http log
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
@@ -78,10 +70,7 @@ SelectRoleActivity extends AppCompatActivity {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
 
-
-
         //connecting to base url
-
         Retrofit.Builder retrofit = new Retrofit.Builder().
                 baseUrl("http://52.201.220.252/")
                 .client(okHttpClient)
