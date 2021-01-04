@@ -27,7 +27,7 @@ public class ParticularRecruiterActivity extends AppCompatActivity {
     private TextView recruiterJbDesc;
 
     private EditText editAmount;
-    private Integer amount;
+    private Integer amount = 0;
 
     private Button hire_btn;
 
@@ -55,28 +55,32 @@ public class ParticularRecruiterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 editAmount = findViewById(R.id.worker_edit_amount);
                 amount = Integer.parseInt(editAmount.getText().toString());
+                if (amount > 20) {
 
-                Call<WorkerSendPostRequest> call = sendReq.sendPostRequest("token " + LoginActivity.token, SelectJobActivity.recruiterId,
-                        amount,1,SelectJobActivity.WjbDetail,LoginActivity.userMeId);
+                    Call<WorkerSendPostRequest> call = sendReq.sendPostRequest("token " + LoginActivity.token, SelectJobActivity.recruiterId,
+                            amount, 1, SelectJobActivity.WjbDetail, LoginActivity.userMeId);
 
-                call.enqueue(new Callback<WorkerSendPostRequest>() {
-                    @Override
-                    public void onResponse(Call<WorkerSendPostRequest> call, Response<WorkerSendPostRequest> response) {
-                        if(!response.isSuccessful()){
-                            Toast.makeText(ParticularRecruiterActivity.this,"Unsuccessful request",Toast.LENGTH_SHORT).show();
-                            return;
+                    call.enqueue(new Callback<WorkerSendPostRequest>() {
+                        @Override
+                        public void onResponse(Call<WorkerSendPostRequest> call, Response<WorkerSendPostRequest> response) {
+                            if (!response.isSuccessful()) {
+                                Toast.makeText(ParticularRecruiterActivity.this, "Unsuccessful request", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            Toast.makeText(ParticularRecruiterActivity.this, "Request Sent", Toast.LENGTH_SHORT).show();
                         }
-                        Toast.makeText(ParticularRecruiterActivity.this,"Request Sent",Toast.LENGTH_SHORT).show();
-                    }
 
-                    @Override
-                    public void onFailure(Call<WorkerSendPostRequest> call, Throwable t) {
-                        Toast toast = Toast.makeText(ParticularRecruiterActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
-                        TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-                        toastMessage.setTextColor(Color.RED);
-                        toast.show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<WorkerSendPostRequest> call, Throwable t) {
+                            Toast toast = Toast.makeText(ParticularRecruiterActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                            toastMessage.setTextColor(Color.RED);
+                            toast.show();
+                        }
+                    });
+                } else{
+                    Toast.makeText(ParticularRecruiterActivity.this,"Fill appropriate amount !",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

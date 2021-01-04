@@ -65,9 +65,14 @@ public class ResponseRecyclerAdapter extends RecyclerView.Adapter<ResponseRecycl
                 call_worker.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_DIAL);
-                        intent.setData(Uri.parse("tel:" + Contact));    //Call worker(get number form database)
-                        mContext.startActivity(intent);
+                        if(status.equals("Accepted")) {
+                            Intent intent = new Intent(Intent.ACTION_DIAL);
+                            intent.setData(Uri.parse("tel:" + Contact));    //Call worker(get number form database)
+                            mContext.startActivity(intent);
+                        }
+                        else{
+                            Toast.makeText(mContext,"Request is not accepted yet !",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 myDialog.show();
