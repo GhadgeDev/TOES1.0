@@ -73,6 +73,8 @@ public class TabWorkerRequestResponse extends Fragment {
                 lstRequestResponse = response.body();
                 adapter = new WorkerResponseRecyclerAdapter(getContext(), lstRequestResponse);
                 myRecyclerView.setAdapter(adapter);
+
+                refreshWorkerResponses.setRefreshing(false);
             }
 
             @Override

@@ -88,6 +88,8 @@ public class TabViewRequests extends Fragment {
                 lstworker = response.body();
                 adapter = new ViewRequestRecyclerAdapter(getContext(), lstworker);
                 myRecyclerView.setAdapter(adapter);
+
+                refreshRecruiterViewRequests.setRefreshing(false);
             }
 
             @Override

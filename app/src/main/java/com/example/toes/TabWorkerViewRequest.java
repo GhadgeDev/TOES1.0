@@ -74,6 +74,8 @@ public class TabWorkerViewRequest extends Fragment {
                 lstViewRequest = response.body();
                 adapter = new WorkerViewRequestRecyclerAdapter(getContext(),lstViewRequest);
                 myRecyclerView.setAdapter(adapter);
+
+                refreshWorkerViewRequests.setRefreshing(false);
             }
 
             @Override

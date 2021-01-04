@@ -74,6 +74,8 @@ public class TabRequestResponce extends Fragment {
                 myrecyclerview.setAdapter(adapter);
 
                 refreshRecruiterResponses.setRefreshing(false);
+
+                refreshRecruiterResponses.setRefreshing(false);
             }
 
             @Override
