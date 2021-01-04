@@ -21,7 +21,7 @@ public class GetRecruiterViewRequestModel {
     @SerializedName("woker_address")
     private String wokerAddress;
 
-    @SerializedName("jobid")
+    @SerializedName("job_id")
     private int jbid;
 
     public String getJobTitle() {

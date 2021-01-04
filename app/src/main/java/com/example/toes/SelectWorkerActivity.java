@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -47,8 +48,9 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
     private RecyclerView workerList;
     private List<GetSpecificWorkerModel> lstWorker;
     private String mSelectedItemIs;
-    private TextView mJobNameTextView,txtName;
+    private TextView mJobNameTextView, txtName;
     private WorkerAdapter adapter;
+    private SwipeRefreshLayout refreshWorkerList;
 
     public static int RworkerId;
     private static final String EXTRA_ITEM_SELECTED_IS = "recruiter.home.activity.itemSelected";
@@ -65,6 +67,8 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         setContentView(R.layout.activity_select_worker);
 
         workerList = findViewById(R.id.worker_list);
+        refreshWorkerList = findViewById(R.id.refresh_worker_list);
+
         txtName = (TextView) findViewById(R.id.nav_text_click);
 
         workerList.setLayoutManager(new LinearLayoutManager(this));
@@ -76,44 +80,11 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
-        okHttpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
-
-        Retrofit.Builder retrofit = new Retrofit.Builder()
-                .baseUrl("http://52.201.220.252/")
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit1 = retrofit.client(okHttpClient).build();
-
-        JsonPlaceHolderApi workerInfoList = retrofit1.create(JsonPlaceHolderApi.class);
-
-       Call<List<GetSpecificWorkerModel>> call = workerInfoList.getWorkerInfo("token " + LoginActivity.token, mSelectedItemIs);
-
-        call.enqueue(new Callback<List<GetSpecificWorkerModel>>() {
+        callToGetAllWorkers();
+        refreshWorkerList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onResponse(@NotNull Call<List<GetSpecificWorkerModel>> call, @NotNull Response<List<GetSpecificWorkerModel>> response) {
-                if (!response.isSuccessful()) {
-                    Toast toast = Toast.makeText(SelectWorkerActivity.this, "Unsuccessfully !", Toast.LENGTH_SHORT);
-                    toast.show();
-                    return;
-                }
-
-                lstWorker = response.body();
-                adapter = new WorkerAdapter(SelectWorkerActivity.this,lstWorker,SelectWorkerActivity.this);
-                workerList.setAdapter(adapter);
-
-                dUserName = findViewById(R.id.nav_text_click);
-                String dfname = SelectRoleActivity.textUserfName;
-                String dlname = SelectRoleActivity.textUserlName;
-                dUserName.setText(dfname +" "+ dlname);
-            }
-
-            @Override
-            public void onFailure(Call<List<GetSpecificWorkerModel>> call, Throwable t) {
-                Toast toast = Toast.makeText(SelectWorkerActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
-                TextView toastMessage = toast.getView().findViewById(android.R.id.message);
-                toastMessage.setTextColor(Color.RED);
-                toast.show();
+            public void onRefresh() {
+                callToGetAllWorkers();
             }
         });
 
@@ -188,5 +159,40 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         intent.putExtra("worker experience", lstWorker.get(position).getExperience());
         RworkerId = lstWorker.get(position).getWorkerId();
         startActivity(intent);
+    }
+
+    JsonPlaceHolderApi workerInfoList = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+    public void callToGetAllWorkers(){
+        Call<List<GetSpecificWorkerModel>> call = workerInfoList.getWorkerInfo("token " + LoginActivity.token, mSelectedItemIs);
+
+        call.enqueue(new Callback<List<GetSpecificWorkerModel>>() {
+            @Override
+            public void onResponse(@NotNull Call<List<GetSpecificWorkerModel>> call, @NotNull Response<List<GetSpecificWorkerModel>> response) {
+                if (!response.isSuccessful()) {
+                    Toast toast = Toast.makeText(SelectWorkerActivity.this, "Unsuccessfully !", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+
+                lstWorker = response.body();
+                adapter = new WorkerAdapter(SelectWorkerActivity.this, lstWorker, SelectWorkerActivity.this);
+                workerList.setAdapter(adapter);
+
+                refreshWorkerList.setRefreshing(false);
+
+                dUserName = findViewById(R.id.nav_text_click);
+                String dfname = SelectRoleActivity.textUserfName;
+                String dlname = SelectRoleActivity.textUserlName;
+                dUserName.setText(dfname + " " + dlname);
+            }
+
+            @Override
+            public void onFailure(Call<List<GetSpecificWorkerModel>> call, Throwable t) {
+                Toast toast = Toast.makeText(SelectWorkerActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                TextView toastMessage = toast.getView().findViewById(android.R.id.message);
+                toastMessage.setTextColor(Color.RED);
+                toast.show();
+            }
+        });
     }
 }

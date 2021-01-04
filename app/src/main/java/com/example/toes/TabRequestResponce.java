@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +28,7 @@ public class TabRequestResponce extends Fragment {
     private RecyclerView myrecyclerview;
     private List<GetRecruiterResponses> lstResponse;
     ResponseRecyclerAdapter adapter;
+    private SwipeRefreshLayout refreshRecruiterResponses;
 
     public TabRequestResponce() {
         // Required empty public constructor
@@ -35,16 +37,29 @@ public class TabRequestResponce extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_tab_request_responce, container, false);
         myrecyclerview = v.findViewById(R.id.requestResponseRecycler);
+        refreshRecruiterResponses = v.findViewById(R.id.refresh_recruiter_responses);
+
         myrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        JsonPlaceHolderApi recruiterResponses = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+        callToGetAllRequestResponses();
+
+        refreshRecruiterResponses.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                callToGetAllRequestResponses();
+            }
+        });
+        return v;
+    }
+
+    JsonPlaceHolderApi recruiterResponses = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+    public void callToGetAllRequestResponses(){
         Call<List<GetRecruiterResponses>> call = recruiterResponses.getRecruiterResponses("token " + LoginActivity.token, LoginActivity.userMeId);
         call.enqueue(new Callback<List<GetRecruiterResponses>>() {
             @Override
@@ -57,6 +72,8 @@ public class TabRequestResponce extends Fragment {
                 lstResponse = response.body();
                 adapter = new ResponseRecyclerAdapter(getContext(),lstResponse);
                 myrecyclerview.setAdapter(adapter);
+
+                refreshRecruiterResponses.setRefreshing(false);
             }
 
             @Override
@@ -67,6 +84,5 @@ public class TabRequestResponce extends Fragment {
                 toast.show();
             }
         });
-        return v;
     }
 }

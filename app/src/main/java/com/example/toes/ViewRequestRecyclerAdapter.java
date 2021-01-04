@@ -1,5 +1,6 @@
 package com.example.toes;
 
+import android.app.AppOpsManager;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -27,7 +28,8 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
     Dialog myDialog;
     Button AcceptBtn, RejectBtn;
     int status;
-    public int viewJob_id;
+    int jbid;
+
 
     public ViewRequestRecyclerAdapter(Context context, List<GetRecruiterViewRequestModel> data) {
         mContext = context;
@@ -38,7 +40,7 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
-        v = LayoutInflater.from(mContext).inflate(R.layout.viewrequestlist,parent,false);
+        v = LayoutInflater.from(mContext).inflate(R.layout.viewrequestlist, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(v);
 
         //Dialog
@@ -47,7 +49,6 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
         viewHolder.RecruiterViewRequestList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewJob_id = mData.get(viewHolder.getAdapterPosition()).getJbid();
 
                 String wFName = mData.get(viewHolder.getAdapterPosition()).getWokerFname();
                 String wLName = mData.get(viewHolder.getAdapterPosition()).getWokerLname();
@@ -68,7 +69,7 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
                     @Override
                     public void onClick(View v) {
                         status = 2;
-                        Toast.makeText(mContext,"Worker hired",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "Worker hired", Toast.LENGTH_SHORT).show();
                         callToAcceptRejectApi();
                         myDialog.dismiss();
                     }
@@ -79,7 +80,7 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
                     @Override
                     public void onClick(View v) {
                         status = 3;
-                        Toast.makeText(mContext,"Request declined",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "Request declined", Toast.LENGTH_SHORT).show();
                         callToAcceptRejectApi();
                         myDialog.dismiss();
                     }
@@ -94,10 +95,12 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
         String wFName = mData.get(position).getWokerFname();
         String wLName = mData.get(position).getWokerLname();
         holder.tv_worker_name.setText(wFName + " " + wLName);
         holder.tv_worker_profession.setText(mData.get(position).getJobTitle());
+        jbid = mData.get(position).getJbid();
     }
 
     @Override
@@ -105,7 +108,7 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
         return mData.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView tv_worker_name;
         private TextView tv_worker_profession;
         private LinearLayout RecruiterViewRequestList;
@@ -117,15 +120,16 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
             tv_worker_profession = itemView.findViewById(R.id.view_worker_profession);
             RecruiterViewRequestList = itemView.findViewById(R.id.recruiter_view_request_list);
         }
-    }
 
+    }
     JsonPlaceHolderApi accRejApi = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
-    public void callToAcceptRejectApi(){
-        Call<GetAcpRejClickRecruiter> call = accRejApi.getAccRejClickRecruiter("token " + LoginActivity.token, status,viewJob_id);
+
+    public void callToAcceptRejectApi() {
+        Call<GetAcpRejClickRecruiter> call = accRejApi.getAccRejClickRecruiter("token " + LoginActivity.token, status,jbid);
         call.enqueue(new Callback<GetAcpRejClickRecruiter>() {
             @Override
             public void onResponse(Call<GetAcpRejClickRecruiter> call, Response<GetAcpRejClickRecruiter> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     Toast toast = Toast.makeText(mContext, "Unsuccessfully !", Toast.LENGTH_SHORT);
                     toast.show();
                 }
@@ -135,7 +139,7 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
 
             @Override
             public void onFailure(Call<GetAcpRejClickRecruiter> call, Throwable t) {
-                Toast toast = Toast.makeText(mContext,"Please Check your Internet Connection",Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(mContext, "Please Check your Internet Connection", Toast.LENGTH_SHORT);
                 TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                 toastMessage.setTextColor(Color.RED);
                 toast.show();

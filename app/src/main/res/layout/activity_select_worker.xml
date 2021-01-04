@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,56 +19,61 @@
             android:layout_height="wrap_content"
             android:background="#3949AB"
             app:title="Select Worker"
-            app:titleTextColor="@color/white"/>
+            app:titleTextColor="@color/white" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/worker_list"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_worker_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/profession_textView"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profession_textView">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/worker_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <TextView
             android:id="@+id/profession_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:fontFamily="@font/lohitdevanagari"
+            android:paddingLeft="95dp"
+            android:paddingTop="10dp"
             android:text="@string/profession"
             android:textColor="@color/black"
-            android:fontFamily="@font/lohitdevanagari"
-            android:layout_below="@id/toolbar"
-            android:textSize="20sp"
-            android:paddingTop="10dp"
-            android:paddingLeft="95dp"
-            />
+            android:textSize="20sp" />
 
         <TextView
-            android:paddingBottom="10dp"
             android:id="@+id/job_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Job_name"
-            android:textColor="@color/black"
-            android:layout_toRightOf="@id/profession_textView"
             android:layout_below="@id/toolbar"
-            android:textSize="20sp"
+            android:layout_toRightOf="@id/profession_textView"
+            android:paddingLeft="5dp"
             android:paddingTop="11dp"
-            android:paddingLeft="5dp"/>
+            android:paddingBottom="10dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:text="Job_name" />
 
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
 
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
-        app:itemTextColor="@color/white"
-        android:backgroundTint="#827ADE"
         android:layout_width="210dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:backgroundTint="#827ADE"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_menu"/>
+        app:itemTextColor="@color/white"
+        app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

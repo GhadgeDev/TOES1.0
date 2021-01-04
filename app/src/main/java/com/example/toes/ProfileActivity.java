@@ -37,34 +37,34 @@ public class ProfileActivity extends AppCompatActivity {
     private Button mLogoutButton;
     private Button mEditButton;
 
-    TextView txtName,txtPhone,txtGender,txtaadhar,txtaddr,txtProfession;
+    TextView txtName, txtPhone, txtGender, txtaadhar, txtaddr, txtProfession;
     ImageView profile_image;
-    Button btnJob1,btnJob2,btnJob3,btnGo;
+    Button btnJob1, btnJob2, btnJob3, btnGo;
     String token = "";
     ArrayList<String> jobs = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        txtName = (TextView)findViewById(R.id.txtprofile_name);
-        txtPhone = (TextView)findViewById(R.id.txtprofile_contact);
-        txtGender = (TextView)findViewById(R.id.txtprofile_gender);
-        txtaadhar = (TextView)findViewById(R.id.txtprofile_adhar);
-        txtaddr = (TextView)findViewById(R.id.txtprofile_address);
-        profile_image = (ImageView)findViewById(R.id.profile_image);
+        txtName = (TextView) findViewById(R.id.txtprofile_name);
+        txtPhone = (TextView) findViewById(R.id.txtprofile_contact);
+        txtGender = (TextView) findViewById(R.id.txtprofile_gender);
+        txtaadhar = (TextView) findViewById(R.id.txtprofile_adhar);
+        txtaddr = (TextView) findViewById(R.id.txtprofile_address);
+        profile_image = (ImageView) findViewById(R.id.profile_image);
         mLogoutButton = findViewById(R.id.btnlogout);
         mEditButton = findViewById(R.id.edit_profile_btn);
 
-        btnJob1= (Button)findViewById(R.id.btnJob1);
-        btnJob2= (Button)findViewById(R.id.btnJob2);
-        btnJob3= (Button)findViewById(R.id.btnJob3);
+        btnJob1 = (Button) findViewById(R.id.btnJob1);
+        btnJob2 = (Button) findViewById(R.id.btnJob2);
+        btnJob3 = (Button) findViewById(R.id.btnJob3);
 
-        txtProfession = (TextView)findViewById(R.id.txtNoProfession);
+        txtProfession = (TextView) findViewById(R.id.txtNoProfession);
 
-        Intent intent1= getIntent();
-        token = "Token "+LoginActivity.token;
-
+        Intent intent1 = getIntent();
+        token = "Token " + LoginActivity.token;
 
         //For http log
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
@@ -72,10 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
 
-
-
         //connecting to base url
-
         Retrofit.Builder retrofit = new Retrofit.Builder().
                 baseUrl("http://52.201.220.252/")
                 .client(okHttpClient)
@@ -89,18 +86,13 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
                 if (!response.isSuccessful()) {
-
                     System.out.println("Response : _--------- " + response.code());
                     System.out.println("Response M : _--------- " + response.message());
                     return;
                 }
-
-
                 Post postResponse = response.body();
-
                 // File photo = new File(postResponse.getProfile_image());
                 // RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), photo);
-
                 System.out.println("Code :------------------- " + response.code());
                 String content = "";
                 content += "name : " + postResponse.getfName() + "\n";
@@ -109,36 +101,26 @@ public class ProfileActivity extends AppCompatActivity {
                 content += "Gender : " + postResponse.getGender() + "\n";
                 content += "Aadhar : " + postResponse.getAdharNo() + "\n";
                 content += "address : " + postResponse.getAddress() + "\n";
-
-                txtName.setText(postResponse.getfName()+" "+postResponse.getlName());
+                txtName.setText(postResponse.getfName() + " " + postResponse.getlName());
                 txtPhone.setText(postResponse.getPhone());
                 txtGender.setText(postResponse.getGender());
                 txtaadhar.setText(postResponse.getAdharNo());
                 txtaddr.setText(postResponse.getAddress());
-
-
                 //    String mImgUrl = "";
                 //      mImgUrl = "http://52.201.220.252/" + postResponse.getProfile_image();
                 //     profile_image.setImageURI(Uri.parse(mImgUrl));
 
                 System.out.println("Data : _--------- " + content);
                 System.out.println("id : -------------------------- " + postResponse.getId());
-
-
             }
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
-                System.out.println("Filed in ProfileActivity : "+t.getMessage());
-
+                System.out.println("Filed in ProfileActivity : " + t.getMessage());
             }
         });
 
-
-
-        Call<Post> call1 = jsonPlaceHolderApi.getPost(token);
-        Call<Worker> job = jsonPlaceHolderApi.getJobs(token,SelectRoleActivity.id);
-
+        Call<Worker> job = jsonPlaceHolderApi.getJobs(token, SelectRoleActivity.id);
         job.enqueue(new Callback<Worker>() {
             @Override
             public void onResponse(Call<Worker> call, Response<Worker> response) {
@@ -155,25 +137,23 @@ public class ProfileActivity extends AppCompatActivity {
                 jobs.add(workers.getCategory_2());
                 jobs.add(workers.getCategory_3());
                 int size = jobs.size();
-                if(size == 1){
+                if (size == 1) {
                     txtProfession.setVisibility(View.GONE);
                     btnJob1.setVisibility(View.VISIBLE);
                     btnJob1.setText(jobs.get(0));
-                }else if(size == 2){
-                    txtProfession.setVisibility(View.GONE);
-                    btnJob1.setVisibility(View.VISIBLE);
-                    btnJob1.setText(jobs.get(0));
-
-                    btnJob2.setVisibility(View.VISIBLE);
-                    btnJob2.setText(jobs.get(1));
-                }else if(size == 3){
+                } else if (size == 2) {
                     txtProfession.setVisibility(View.GONE);
                     btnJob1.setVisibility(View.VISIBLE);
                     btnJob1.setText(jobs.get(0));
 
                     btnJob2.setVisibility(View.VISIBLE);
                     btnJob2.setText(jobs.get(1));
-
+                } else if (size == 3) {
+                    txtProfession.setVisibility(View.GONE);
+                    btnJob1.setVisibility(View.VISIBLE);
+                    btnJob1.setText(jobs.get(0));
+                    btnJob2.setVisibility(View.VISIBLE);
+                    btnJob2.setText(jobs.get(1));
                     btnJob3.setVisibility(View.VISIBLE);
                     btnJob3.setText(jobs.get(2));
                 }
@@ -185,18 +165,10 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Worker> call, Throwable t) {
-
             }
 
 
         });
-
-
-
-
-
-
-
 
         mLogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,12 +184,10 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
     }
-    public void openLogOutDialog(){
+
+    public void openLogOutDialog() {
         LogoutDialog logoutDialog = new LogoutDialog();
-        logoutDialog.show(getSupportFragmentManager(),"logout dialog");
+        logoutDialog.show(getSupportFragmentManager(), "logout dialog");
     }
 }

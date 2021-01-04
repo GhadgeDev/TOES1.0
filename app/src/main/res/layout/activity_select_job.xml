@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/worker_drawer_layout"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:fitsSystemWindows="true">
 
     <RelativeLayout
@@ -22,12 +22,17 @@
             app:title="Select Job"
             app:titleTextColor="@color/white" />
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recruiter_list"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_recruiter_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/worker_toolbar" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/worker_toolbar">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recruiter_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <FrameLayout
             android:id="@+id/fragment_container"

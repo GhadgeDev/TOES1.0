@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class TabWorkerViewRequest extends Fragment {
     private RecyclerView myRecyclerView;
     private List<GetWorkerViewRequestModel> lstViewRequest;
     WorkerViewRequestRecyclerAdapter adapter;
+    private SwipeRefreshLayout refreshWorkerViewRequests;
 
     public TabWorkerViewRequest() {
 
@@ -37,9 +39,28 @@ public class TabWorkerViewRequest extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.tab_worker_view_request,container,false);
         myRecyclerView = v.findViewById(R.id.WorkerViewRequestRecycler);
+        refreshWorkerViewRequests = v.findViewById(R.id.refresh_worker_viewRequests);
+
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        JsonPlaceHolderApi workerSideViewRequest = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+        callToWorkerViewRequests();
+        refreshWorkerViewRequests.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                callToWorkerViewRequests();
+            }
+        });
+        return v;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
+
+    JsonPlaceHolderApi workerSideViewRequest = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+    public void callToWorkerViewRequests(){
         Call<List<GetWorkerViewRequestModel>> call = workerSideViewRequest.getWorkerViewRequest("token " + LoginActivity.token,
                 LoginActivity.userMeId);
         call.enqueue(new Callback<List<GetWorkerViewRequestModel>>() {
@@ -63,12 +84,5 @@ public class TabWorkerViewRequest extends Fragment {
                 toast.show();
             }
         });
-        return v;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 }

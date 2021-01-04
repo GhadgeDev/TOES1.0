@@ -18,6 +18,12 @@ public class GetSpecificRecruiterModel {
     @SerializedName("job_id")
     private Integer jobId;
 
+    @SerializedName("job_description")
+    private String jobDescription;
+
+    @SerializedName("address")
+    private String address;
+
     public String getRecruiterFname() {
         return recruiterFname;
     }
@@ -50,7 +56,6 @@ public class GetSpecificRecruiterModel {
         this.recruiterId = recruiterId;
     }
 
-
     public Integer getJobId() {
         return jobId;
     }
@@ -59,4 +64,19 @@ public class GetSpecificRecruiterModel {
         this.jobId = jobId;
     }
 
+    public String getJobDescription() {
+        return jobDescription;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setJobDescription(String jobDescription) {
+        this.jobDescription = jobDescription;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

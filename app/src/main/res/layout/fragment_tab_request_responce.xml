@@ -6,9 +6,16 @@
     android:background="@color/white"
     tools:context=".TabRequestResponce">
 
-   <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/requestResponseRecycler"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"/>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_recruiter_responses"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/requestResponseRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

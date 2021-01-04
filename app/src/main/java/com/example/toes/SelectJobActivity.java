@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -37,8 +38,8 @@ public class SelectJobActivity extends AppCompatActivity implements RecruiterAda
     RecyclerView myRecyclerView;
     RecruiterAdapter adapter;
     public static int recruiterId;      //WrecruiterID --> For my own reference
-
     public static int WjbDetail;
+    private SwipeRefreshLayout refreshRecruiterList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,42 +47,19 @@ public class SelectJobActivity extends AppCompatActivity implements RecruiterAda
         setContentView(R.layout.activity_select_job);
 
         myRecyclerView = findViewById(R.id.recruiter_list);
+        refreshRecruiterList = findViewById(R.id.refresh_recruiter_list);
         myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Toolbar toolbar = findViewById(R.id.worker_toolbar);
         setSupportActionBar(toolbar);
 
-        //Call to Api
-        JsonPlaceHolderApi recruiterInfoList = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
-        Call<List<GetSpecificRecruiterModel>> call = recruiterInfoList.getRecruiterInfo("token " + LoginActivity.token, LoginActivity.userMeId);
-        call.enqueue(new Callback<List<GetSpecificRecruiterModel>>() {
+        callToGetAllRecruiters();
+        refreshRecruiterList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onResponse(Call<List<GetSpecificRecruiterModel>> call, Response<List<GetSpecificRecruiterModel>> response) {
-                if (!response.isSuccessful()) {
-                    Toast toast = Toast.makeText(SelectJobActivity.this, "Unsuccessfully !", Toast.LENGTH_SHORT);
-                    toast.show();
-                    return;
-                }
-                lstRecruiter = response.body();
-                System.out.println("Whole List Of recruiter " + lstRecruiter);
-                adapter = new RecruiterAdapter(SelectJobActivity.this, lstRecruiter, SelectJobActivity.this);
-                myRecyclerView.setAdapter(adapter);
-
-                dUserName = findViewById(R.id.nav_text_click);
-                String dfname = SelectRoleActivity.textUserfName;
-                String dlname = SelectRoleActivity.textUserlName;
-                dUserName.setText(dfname + " " + dlname);
-            }
-
-            @Override
-            public void onFailure(Call<List<GetSpecificRecruiterModel>> call, Throwable t) {
-                Toast toast = Toast.makeText(SelectJobActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
-                TextView toastMessage = toast.getView().findViewById(android.R.id.message);
-                toastMessage.setTextColor(Color.RED);
-                toast.show();
+            public void onRefresh() {
+                callToGetAllRecruiters();
             }
         });
-
 
         mDrawer = findViewById(R.id.worker_drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -141,34 +119,50 @@ public class SelectJobActivity extends AppCompatActivity implements RecruiterAda
         }
     }
 
-    JsonPlaceHolderApi recruiterJbInfo = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
-
     @Override
     public void onRecruiterClick(int position) {
         Intent intent = new Intent(SelectJobActivity.this, ParticularRecruiterActivity.class);
         String tv_fname = lstRecruiter.get(position).getRecruiterFname();
         String tv_lname = lstRecruiter.get(position).getRecruiterLname();
+        String jbDesc = lstRecruiter.get(position).getJobDescription();
+        String jbAdd = lstRecruiter.get(position).getAddress();
+
         recruiterId = lstRecruiter.get(position).getRecruiterId();
         WjbDetail = lstRecruiter.get(position).getJobId();
 
-        Call<List<GetRecruiterJobDetails>> call = recruiterJbInfo.getRecruiterJobIfo("token " + LoginActivity.token, recruiterId);
-        call.enqueue(new Callback<List<GetRecruiterJobDetails>>() {
+        intent.putExtra("recruiter name", tv_fname + " " + tv_lname);
+        intent.putExtra("recruiter jbDesc", jbDesc);
+        intent.putExtra("recruiter_add", jbAdd);
+        startActivity(intent);
+    }
+
+    //Call to Api
+    JsonPlaceHolderApi recruiterInfoList = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+    public void callToGetAllRecruiters(){
+        Call<List<GetSpecificRecruiterModel>> call = recruiterInfoList.getRecruiterInfo("token " + LoginActivity.token, LoginActivity.userMeId);
+        call.enqueue(new Callback<List<GetSpecificRecruiterModel>>() {
             @Override
-            public void onResponse(Call<List<GetRecruiterJobDetails>> call, Response<List<GetRecruiterJobDetails>> response) {
+            public void onResponse(Call<List<GetSpecificRecruiterModel>> call, Response<List<GetSpecificRecruiterModel>> response) {
                 if (!response.isSuccessful()) {
                     Toast toast = Toast.makeText(SelectJobActivity.this, "Unsuccessfully !", Toast.LENGTH_SHORT);
                     toast.show();
                     return;
                 }
+                lstRecruiter = response.body();
+                System.out.println("Whole List Of recruiter " + lstRecruiter);
+                adapter = new RecruiterAdapter(SelectJobActivity.this, lstRecruiter, SelectJobActivity.this);
+                myRecyclerView.setAdapter(adapter);
 
-                intent.putExtra("recruiter name", tv_fname + " " + tv_lname);
-                intent.putExtra("recruiter jbDesc", response.body().get(position).getJobDescription());
-                intent.putExtra("recruiter_add", response.body().get(position).getAddress());
-                startActivity(intent);
+                refreshRecruiterList.setRefreshing(false);
+
+                dUserName = findViewById(R.id.nav_text_click);
+                String dfname = SelectRoleActivity.textUserfName;
+                String dlname = SelectRoleActivity.textUserlName;
+                dUserName.setText(dfname + " " + dlname);
             }
 
             @Override
-            public void onFailure(Call<List<GetRecruiterJobDetails>> call, Throwable t) {
+            public void onFailure(Call<List<GetSpecificRecruiterModel>> call, Throwable t) {
                 Toast toast = Toast.makeText(SelectJobActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
                 TextView toastMessage = toast.getView().findViewById(android.R.id.message);
                 toastMessage.setTextColor(Color.RED);

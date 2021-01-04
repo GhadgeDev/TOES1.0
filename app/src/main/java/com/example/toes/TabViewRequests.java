@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,8 @@ public class TabViewRequests extends Fragment {
     private RecyclerView myRecyclerView;
     private List<GetRecruiterViewRequestModel> lstworker;
     ViewRequestRecyclerAdapter adapter;
-
+    private SwipeRefreshLayout refreshRecruiterViewRequests;
+    public static int viewJob_id;
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -57,9 +59,22 @@ public class TabViewRequests extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_tab_view_requests, container, false);
         myRecyclerView = v.findViewById(R.id.viewRequestRecycler);
+        refreshRecruiterViewRequests = v.findViewById(R.id.refresh_recruiter_viewRequests);
+
         myRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        JsonPlaceHolderApi recruiterSideViewRequest = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+        callToRecruiterViewRequests();
+        refreshRecruiterViewRequests.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                callToRecruiterViewRequests();
+            }
+        });
+        return v;
+    }
+
+    JsonPlaceHolderApi recruiterSideViewRequest = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+    public void callToRecruiterViewRequests(){
         Call<List<GetRecruiterViewRequestModel>> call = recruiterSideViewRequest.getRecruiterViewRequest("token " + LoginActivity.token,
                 LoginActivity.userMeId);
         call.enqueue(new Callback<List<GetRecruiterViewRequestModel>>() {
@@ -83,6 +98,5 @@ public class TabViewRequests extends Fragment {
                 toast.show();
             }
         });
-        return v;
     }
 }
