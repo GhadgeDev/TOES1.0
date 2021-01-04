@@ -125,7 +125,9 @@ SelectRoleActivity extends AppCompatActivity {
         btnFindWorker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent recruiter = new Intent(SelectRoleActivity.this,RecruiterHomeActivity.class);
+               /* Intent recruiter = new Intent(SelectRoleActivity.this,RecruiterHomeActivity.class);
+                startActivity(recruiter);*/
+                Intent recruiter = new Intent(SelectRoleActivity.this,RecentPostedJobActivity .class);
                 startActivity(recruiter);
             }
         });

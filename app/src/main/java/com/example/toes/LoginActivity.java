@@ -269,6 +269,8 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 userMeId = response.body().getId();
+                sp.edit().putInt("uid",userMeId).apply();
+
                 System.out.println("userId ----------------------------------"+userMeId);
             }
             @Override

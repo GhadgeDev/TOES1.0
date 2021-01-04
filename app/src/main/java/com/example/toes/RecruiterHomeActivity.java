@@ -74,6 +74,7 @@ public class RecruiterHomeActivity extends AppCompatActivity {
                                 Toast toast = Toast.makeText(RecruiterHomeActivity.this, "Job uploaded successfully", Toast.LENGTH_SHORT);
                                 toast.show();
                                 RjbDetail = response.body().getId();
+                                System.out.println("ll============================"+RjbDetail);
                             }
 
                             @Override
