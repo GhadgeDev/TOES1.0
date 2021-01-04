@@ -33,7 +33,7 @@ SelectRoleActivity extends AppCompatActivity {
     public static String textUserlName;
     String selectedLanguage;
     Button btnFindJob,btnFindWorker;
-    String token = LoginActivity.token;
+    String token = (String) LoginActivity.token;
     public static int id ;
     static boolean userPresent = false;
     ArrayList<String> tokenDetails = new ArrayList<>();

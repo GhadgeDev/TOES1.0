@@ -19,7 +19,7 @@ import retrofit2.Response;
 public class EditProfileActivity extends AppCompatActivity {
 
     EditText editFname, editLname, editContact, editAddress;
-    String fname, lname, contact,address;
+    String fname, lname, contact, address;
 
     RadioButton rBtnMale, rBtnFemale, rBtnOther;
     String gender;
@@ -58,11 +58,11 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
 
                 JsonPlaceHolderApi editProfile = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
-                Call<Post> call = editProfile.editProfile("token " + LoginActivity.token, fname,lname,gender,address,contact,LoginActivity.userMeId);
+                Call<Post> call = editProfile.editProfile("token " + LoginActivity.token, fname, lname, gender, address, contact, LoginActivity.userMeId);
                 call.enqueue(new Callback<Post>() {
                     @Override
                     public void onResponse(Call<Post> call, Response<Post> response) {
-                        if(!response.isSuccessful()){
+                        if (!response.isSuccessful()) {
                             Toast toast = Toast.makeText(EditProfileActivity.this, "ERROR :( ", Toast.LENGTH_SHORT);
                             toast.show();
                             return;

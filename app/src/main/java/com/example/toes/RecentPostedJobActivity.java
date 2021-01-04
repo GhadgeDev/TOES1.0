@@ -54,38 +54,14 @@ public class RecentPostedJobActivity extends AppCompatActivity {
 
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit1.create(JsonPlaceHolderApi.class);
 
-       System.out.println("RID___-------------"+SplashScreenActivity.rId);
 
 
-        Call<GetRecruiterJobDetails> call1 = jsonPlaceHolderApi.getRecentJob("token "+LoginActivity.token,SplashScreenActivity.rId);
-        call1.enqueue(new Callback<GetRecruiterJobDetails>() {
-            @Override
-            public void onResponse(Call<GetRecruiterJobDetails> call, Response<GetRecruiterJobDetails> response) {
-                if(!response.isSuccessful()){
-                    System.out.println("Response : _--------- " + response.code());
-                    System.out.println("Response M : _--------- " + response.message());
-                }
-             //   List<String> list = response.body().getJobDescription();
-                System.out.println("------------------------------ "+response.code());
-                List<GetRecruiterJobDetails> lis = (List<GetRecruiterJobDetails>) response.body();
 
-                String jd1;
-                List<String> desc = null;
-                for (GetRecruiterJobDetails post : lis){
-                    jd1 = post.getJobDescription();
-                    desc.add(jd1);
-                }
-                // String[] jobs = {"painting a wall", "Repairing taps", "Developing website", "Electric Work", "painting a wall", "Repairing taps", "Developing website", "Electric Work", "painting a wall", "Repairing taps", "Developing website", "Electric Work"};
-                rvRecentJobList.setAdapter(new RecentPostedJobAdapter(desc));
+      // Call<GetRecruiterJobInfo> jobInfo = jsonPlaceHolderApi.getRecentJob(" "+LoginActivity.token, LoginActivity.userMeId);
 
-            }
 
-            @Override
-            public void onFailure(Call<GetRecruiterJobDetails> call, Throwable t) {
 
-            }
-        });
-         String[] jobs = {"painting a wall", "Repairing taps", "Developing website", "Electric Work", "painting a wall", "Repairing taps", "Developing website", "Electric Work", "painting a wall", "Repairing taps", "Developing website", "Electric Work"};
+        String[] jobs = {"painting a wall", "Repairing taps", "Developing website", "Electric Work", "painting a wall", "Repairing taps", "Developing website", "Electric Work", "painting a wall", "Repairing taps", "Developing website", "Electric Work"};
         rvRecentJobList.setAdapter(new RecentPostedJobAdapter(jobs));
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
