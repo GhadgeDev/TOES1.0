@@ -36,6 +36,10 @@ public class ResponseRecyclerAdapter extends RecyclerView.Adapter<ResponseRecycl
         mData = data;
     }
 
+    public ResponseRecyclerAdapter(List<GetRecruiterJobDetails> postResponse) {
+    }
+
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

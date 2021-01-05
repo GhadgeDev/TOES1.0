@@ -67,7 +67,7 @@ TextView t1,t2,t3;
         etJob2Exp = (EditText)findViewById(R.id.etExperience2);
         etJob3Exp = (EditText)findViewById(R.id.etExperience3);
 
-        token = "token "+LoginActivity.token;
+        token = "token "+ LoginActivity.token;
         //For http log
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
         okHttpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

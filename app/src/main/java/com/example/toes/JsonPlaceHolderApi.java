@@ -1,7 +1,5 @@
 package com.example.toes;
 
-import android.database.Observable;
-
 import java.util.List;
 import java.util.Map;
 
@@ -93,8 +91,8 @@ interface JsonPlaceHolderApi {
     //ProfileImage
     @Multipart
     @POST("profile/image")
-    Call<GetProfileImage> updateProfile(@Part MultipartBody.Part image,
-                                        @Part Integer id);
+    Call<GetProfileImage> uploadImage(@Part MultipartBody.Part part,
+                                      @Part("profile_image") int userId);
 
     //SelectRoleApi
     @GET("/worker/")
@@ -168,7 +166,7 @@ interface JsonPlaceHolderApi {
 */
     @GET("api/recruiterinfo/{recruiter_id}")
     Call<GetRecruiterJobDetails> getRecentJob(@Header("Authorization") String token,
-                                              @Path("recruiter_id") int recId);
+                                                    @Path("recruiter_id") int recId);
 
     //Get recruiter side accept reject button click
     @GET("api/recreq/{status}/{job_id}")

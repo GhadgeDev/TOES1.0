@@ -29,7 +29,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 LoginActivity.sp = getSharedPreferences("login",MODE_PRIVATE);
                 LoginActivity.token = LoginActivity.sp.getString("token","");
                 LoginActivity.userMeId = LoginActivity.sp.getInt("uid",0);
-                SplashScreenActivity.rId = LoginActivity.sp.getInt("rid",0);
+
                 System.out.println("Token : ----------------------- "+token);
                 if(LoginActivity.sp.getBoolean("logged",false)){
                     Intent intent1 = new Intent(SplashScreenActivity.this, SelectRoleActivity.class);
