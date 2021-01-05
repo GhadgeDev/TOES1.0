@@ -2,11 +2,15 @@ package com.example.toes;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +29,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.content.ContentValues.TAG;
+
 public class
 SelectRoleActivity extends AppCompatActivity {
     SharedPreferences prf;
@@ -38,7 +44,7 @@ SelectRoleActivity extends AppCompatActivity {
     static boolean userPresent = false;
     ArrayList<String> tokenDetails = new ArrayList<>();
     static int user ;
-
+    public static int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
     @Override
     protected void onPause() {
         super.onPause();
@@ -63,6 +69,19 @@ SelectRoleActivity extends AppCompatActivity {
         txtName = (TextView)findViewById(R.id.txtname);
         prf = getSharedPreferences("user_details",MODE_PRIVATE);
         token = "Token "+LoginActivity.token;
+
+        //asking the permission for sending sms
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+
+            Log.d(TAG, "Grant the permission");
+            ActivityCompat.requestPermissions( this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_SEND_SMS);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+
+            }
+
+        } else {
+
+        }
 
         //For http log
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
