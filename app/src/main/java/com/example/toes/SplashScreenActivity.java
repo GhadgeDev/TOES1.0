@@ -1,13 +1,19 @@
 package com.example.toes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.widget.Toast;
 
+import static android.content.ContentValues.TAG;
 import static com.example.toes.LoginActivity.token;
 import static com.example.toes.LoginActivity.tokenDetail;
 
@@ -22,6 +28,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         int SPLASH_TIME = 2500;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+
 
         new Handler().postDelayed(new Runnable() {
             @Override

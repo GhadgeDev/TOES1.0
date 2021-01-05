@@ -162,7 +162,7 @@ public class JobSeletionActivity extends AppCompatActivity {
                 } else {
                     flag = --flag;
                     //  job.remove(i);
-                    job.remove(chkboxJob2.getText().toString());
+                    job.remove("carpenter");
                     i--;
                     System.out.println("------------------------" + flag);
                 }

@@ -147,7 +147,7 @@ interface JsonPlaceHolderApi {
 
     //Get Jobs into profile
     @GET("/api/specificjobs/{user_id}")
-    Call<Worker> getJobs(@Header("Authorization") String aToken,
+    Call<List<Worker>> getJobs(@Header("Authorization") String aToken,
                          @Path("user_id") int uId);
 
     //logout

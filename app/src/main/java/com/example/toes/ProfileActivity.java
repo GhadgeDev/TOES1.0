@@ -120,55 +120,86 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        Call<Worker> job = jsonPlaceHolderApi.getJobs(token, SelectRoleActivity.id);
-        job.enqueue(new Callback<Worker>() {
+        Call<List<Worker>> job = jsonPlaceHolderApi.getJobs(token,SelectRoleActivity.id);
+        job.enqueue(new Callback<List<Worker>>() {
             @Override
-            public void onResponse(Call<Worker> call, Response<Worker> response) {
+            public void onResponse(Call<List<Worker>> call, Response<List<Worker>> response) {
                 if (!response.isSuccessful()) {
 
                     System.out.println("Response : _--------- " + response.code());
                     System.out.println("Response M : _--------- " + response.message());
                     return;
                 }
+                List<Worker> worker = response.body();
+                for(Worker job : worker){
+                    jobs.add(job.getCategory_1());
 
-                Worker workers = response.body();
-                System.out.println("Code :------------------- " + response.code());
-                jobs.add(workers.getCategory_1());
-                jobs.add(workers.getCategory_2());
-                jobs.add(workers.getCategory_3());
-                int size = jobs.size();
-                if (size == 1) {
+
+                    //jobs.add(job.getCategory_2());
+
+
+
+                  //  jobs.add(job.getCategory_3());
+
+                }
+
+                ArrayList<String> l = new ArrayList<>();
+                System.out.println("jobs :------------------- " + jobs);
+                System.out.println("Workers :------------------- " + worker);
+
+                l.add(jobs.get(0));
+                l.add(jobs.get(1));
+                l.add(jobs.get(2));
+                int size = l.size();
+                System.out.println("L list :------------------- " + l);
+
+                /*if (size == 1) {
                     txtProfession.setVisibility(View.GONE);
                     btnJob1.setVisibility(View.VISIBLE);
-                    btnJob1.setText(jobs.get(0));
+                    btnJob1.setText(l.get(0));
                 } else if (size == 2) {
                     txtProfession.setVisibility(View.GONE);
                     btnJob1.setVisibility(View.VISIBLE);
-                    btnJob1.setText(jobs.get(0));
+                    btnJob1.setText(l.get(0));
 
                     btnJob2.setVisibility(View.VISIBLE);
-                    btnJob2.setText(jobs.get(1));
-                } else if (size == 3) {
+                    btnJob2.setText(l.get(1));
+                } else if (size == 3) {*/
                     txtProfession.setVisibility(View.GONE);
-                    btnJob1.setVisibility(View.VISIBLE);
-                    btnJob1.setText(jobs.get(0));
-                    btnJob2.setVisibility(View.VISIBLE);
-                    btnJob2.setText(jobs.get(1));
-                    btnJob3.setVisibility(View.VISIBLE);
-                    btnJob3.setText(jobs.get(2));
-                }
 
-                System.out.println("jobs :------------------- " + jobs);
+                    if(l.get(0).toString().equals(l.get(1).toString()) && l.get(2).toString().equals(l.get(1).toString()) && l.get(0).toString().equals(l.get(2).toString())  ){
+                        txtProfession.setVisibility(View.GONE);
+                        btnJob1.setVisibility(View.VISIBLE);
+                        btnJob1.setText(l.get(0));
+                    }else if(l.get(0).toString().equals(l.get(2).toString())){
+                        txtProfession.setVisibility(View.GONE);
+                        btnJob1.setVisibility(View.VISIBLE);
+                        btnJob1.setText(l.get(0));
+                        btnJob2.setVisibility(View.VISIBLE);
+                        btnJob2.setText(l.get(1));
+                    }else {
+                        txtProfession.setVisibility(View.GONE);
+                        btnJob1.setVisibility(View.VISIBLE);
+                        btnJob1.setText(l.get(0));
+                        btnJob2.setVisibility(View.VISIBLE);
+                        btnJob2.setText(l.get(1));
+                        btnJob3.setVisibility(View.VISIBLE);
+                        btnJob3.setText(l.get(2));
+                    }
+
+              //  }
+
+
 
 
             }
 
             @Override
-            public void onFailure(Call<Worker> call, Throwable t) {
+            public void onFailure(Call<List<Worker>> call, Throwable t) {
+                System.out.println("Filed in category : " + t.getMessage());
             }
-
-
         });
+
 
         mLogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
