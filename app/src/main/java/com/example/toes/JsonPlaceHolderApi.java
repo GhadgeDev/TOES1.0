@@ -103,11 +103,6 @@ interface JsonPlaceHolderApi {
     Call<List<GetSpecificRecruiterModel>> getRecruiterInfo(@Header("Authorization") String aToken,
                                                            @Path("user_id") int uId);
 
- /*   //Getting recruiter job details
-    @GET("api/recruiterinfo/{recruiter_id}")
-    Call<List<GetRecruiterJobDetails>> getRecruiterJobIfo(@Header("Authorization") String token,
-                                                          @Path("recruiter_id") int recId);*/
-
     //Worker sends request to recruiter
     @FormUrlEncoded
     @POST("worker/req/")
@@ -160,13 +155,9 @@ interface JsonPlaceHolderApi {
     Call<User> logOut(@Header("Authorization") String aToken);
 
     //RecentJobList
- /*   @GET("api/recruiterinfo/{recruiter_id}")
-    Call<List<GetRecruiterJobDetails>> getRecentJob(@Header("Authorization") String token,
-                                          @Path("recruiter_id") int recId);
-*/
     @GET("api/recruiterinfo/{recruiter_id}")
-    Call<GetRecruiterJobDetails> getRecentJob(@Header("Authorization") String token,
-                                                    @Path("recruiter_id") int recId);
+    Call<List<GetRecruiterJobDetails>> getRecentJob(@Header("Authorization") String token,
+                                              @Path("recruiter_id") int recId);
 
     //Get recruiter side accept reject button click
     @GET("api/recreq/{status}/{job_id}")

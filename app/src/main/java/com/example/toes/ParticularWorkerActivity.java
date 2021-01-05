@@ -65,7 +65,12 @@ public class ParticularWorkerActivity extends AppCompatActivity {
                 anim.start();
 
                 startStop();
-                postHireReq();
+
+                if (RecentPostedJobActivity.indicator == 1) {
+                    postHireReq(RecentPostedJobActivity.jbId);
+                } else {
+                    postHireReq();
+                }
             }
         });
 
@@ -96,7 +101,11 @@ public class ParticularWorkerActivity extends AppCompatActivity {
                     return;
                 }
                 particularWorkerAddress.setText(response.body().getAddress());
-                jobDescription.setText(RecruiterHomeActivity.jobDescVal);
+                if(RecentPostedJobActivity.indicator == 1) {
+                    jobDescription.setText(RecentPostedJobActivity.jbDesc);
+                } else{
+                    jobDescription.setText(RecruiterHomeActivity.jobDescVal);
+                }
             }
 
             @Override
@@ -145,22 +154,55 @@ public class ParticularWorkerActivity extends AppCompatActivity {
         countDownText.setText(timeLeftText);
     }
 
+    //From search button
     JsonPlaceHolderApi jsonPlaceHolderApi = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
-    public void postHireReq(){
+
+    public void postHireReq() {
         Call<RecruiterHirePostRequest> call = jsonPlaceHolderApi.postHireReq("token " + LoginActivity.token, LoginActivity.userMeId,
-                1,RecruiterHomeActivity.RjbDetail,SelectWorkerActivity.RworkerId);
+                1, RecruiterHomeActivity.RjbDetail, SelectWorkerActivity.RworkerId);
 
         call.enqueue(new Callback<RecruiterHirePostRequest>() {
             @Override
             public void onResponse(Call<RecruiterHirePostRequest> call, Response<RecruiterHirePostRequest> response) {
-                if(!response.isSuccessful()){
-                    Toast.makeText(ParticularWorkerActivity.this,"Unsuccessful request",Toast.LENGTH_SHORT).show();
+                if (!response.isSuccessful()) {
+                    Toast.makeText(ParticularWorkerActivity.this, "Unsuccessful request", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 RecruiterHirePostRequest rq = new RecruiterHirePostRequest();
-               SplashScreenActivity.rId = response.body().getRecruiter();
-                LoginActivity.sp.edit().putInt("rid",SplashScreenActivity.rId).apply();
-                Toast.makeText(ParticularWorkerActivity.this,"Request Sent",Toast.LENGTH_SHORT).show();
+                SplashScreenActivity.rId = response.body().getRecruiter();
+                LoginActivity.sp.edit().putInt("rid", SplashScreenActivity.rId).apply();
+                Toast.makeText(ParticularWorkerActivity.this, "Request Sent", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<RecruiterHirePostRequest> call, Throwable t) {
+                Toast toast = Toast.makeText(ParticularWorkerActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                toastMessage.setTextColor(Color.RED);
+                toast.show();
+            }
+        });
+    }
+
+
+    //fromRecentPost
+    JsonPlaceHolderApi FromRecentPost = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+
+    public void postHireReq(int jbId) {
+        Call<RecruiterHirePostRequest> call = FromRecentPost.postHireReq("token " + LoginActivity.token, LoginActivity.userMeId,
+                1, jbId, SelectWorkerActivity.RworkerId);
+
+        call.enqueue(new Callback<RecruiterHirePostRequest>() {
+            @Override
+            public void onResponse(Call<RecruiterHirePostRequest> call, Response<RecruiterHirePostRequest> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(ParticularWorkerActivity.this, "Unsuccessful request", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                RecruiterHirePostRequest rq = new RecruiterHirePostRequest();
+                SplashScreenActivity.rId = response.body().getRecruiter();
+                LoginActivity.sp.edit().putInt("rid", SplashScreenActivity.rId).apply();
+                Toast.makeText(ParticularWorkerActivity.this, "Request Sent", Toast.LENGTH_SHORT).show();
             }
 
             @Override
