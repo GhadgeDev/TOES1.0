@@ -68,78 +68,6 @@ public class DeleteDilouge extends DialogFragment {
         Retrofit retrofit1 = retrofit.build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit1.create(JsonPlaceHolderApi.class);
 
-        Call<List<Worker>> job = jsonPlaceHolderApi.getJobs("token "+LoginActivity.token,SelectRoleActivity.id);
-        job.enqueue(new Callback<List<Worker>>() {
-            @Override
-            public void onResponse(Call<List<Worker>> call, Response<List<Worker>> response) {
-                if (!response.isSuccessful()) {
-
-                    System.out.println("Response : _--------- " + response.code());
-                    System.out.println("Response M : _--------- " + response.message());
-                    return;
-                }
-                List<Worker> worker = response.body();
-                for(Worker job : worker){
-                    jobs.add(job.getCategory_1());
-                    jobs.add(job.getCategory_1_vc());
-                    jobs.add(job.getCategory_1_exp());
-
-
-                    jobs.add(job.getCategory_2());
-                    jobs.add(job.getCategory_2_vc());
-                    jobs.add(job.getCategory_2_exp());
-
-
-
-                    jobs.add(job.getCategory_3());
-                    jobs.add(job.getCategory_3_vc());
-                    jobs.add(job.getCategory_3_exp());
-
-
-                }
-
-                category_1 = jobs.get(0);
-                category_1_vc = jobs.get(1);
-                category_1_exp = jobs.get(2);
-
-                category_2 = jobs.get(3);
-                category_2_vc = jobs.get(4);
-                category_2_exp = jobs.get(5);
-
-                category_3 = jobs.get(6);
-                category_3_vc = jobs.get(7);
-                category_3_exp = jobs.get(8);
-
-                String content = "";
-                content+=category_1+"\n";
-                content+=category_1_vc+"\n";
-                content+=category_1_exp+"\n";
-
-                content+=category_2+"\n";
-                content+=category_2_vc+"\n";
-                content+=category_2_exp+"\n";
-
-                content+=category_3+"\n";
-                content+=category_3_vc+"\n";
-                content+=category_3_exp+"\n";
-
-                System.out.println("contentes :-------------- "+content);
-
-
-
-
-
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Worker>> call, Throwable t) {
-                System.out.println("Filed in dilouge delete : " + t.getMessage());
-            }
-        });
-
-
-
 
         builder.setView(view).setTitle("Delete Profession")
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -155,6 +83,7 @@ public class DeleteDilouge extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         DeleteDilouge.delete = true;
+                        if (ProfileActivity.jobs.size() > 0){
                         Call<WorkerJobDetails> delete = jsonPlaceHolderApi.deleteProfession1("token "+LoginActivity.token, ProfileActivity.updateId);
                         delete.enqueue(new Callback<WorkerJobDetails>() {
                             @Override
@@ -176,6 +105,10 @@ public class DeleteDilouge extends DialogFragment {
 
                         Intent editJobi = new Intent(getActivity(),JobSeletionActivity.class);
                         startActivity(editJobi);
+                    }else{
+                            Intent editJobi = new Intent(getActivity(),JobSeletionActivity.class);
+                            startActivity(editJobi);
+                        }
                     }
                 })  .setNeutralButton("No Change", new DialogInterface.OnClickListener() {
             @Override
