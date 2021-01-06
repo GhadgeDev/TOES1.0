@@ -89,11 +89,11 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Call<WorkerJobDetails> deleteProfession1 = jsonPlaceHolderApi.deleteProfession1(token,updateId);
-                //updateJob = true;
-                DeleteDilouge deleteDilouge = new DeleteDilouge();
-                deleteDilouge.show(getSupportFragmentManager(), "delete dialog");
-               /* Intent editJobi = new Intent(ProfileActivity.this,JobSeletionActivity.class);
-                startActivity(editJobi);*/
+                updateJob = true;
+              //  DeleteDilouge deleteDilouge = new DeleteDilouge();
+            //    deleteDilouge.show(getSupportFragmentManager(), "delete dialog");
+                Intent editJobi = new Intent(ProfileActivity.this,JobSeletionActivity.class);
+                startActivity(editJobi);
             }
         });
 

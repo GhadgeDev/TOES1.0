@@ -171,7 +171,7 @@ TextView t1,t2,t3;
                     job3VC = etJob3VC.getText().toString();
                     job3Exp = Integer.parseInt(etJob3Exp.getText().toString());
                 }
-                if (DeleteDilouge.delete == true) {
+                if (ProfileActivity.updateJob == false) {
                     Call<WorkerJobDetails> call = jsonPlaceHolderApi.insertWorkerJobInfo(token, JobSeletionActivity.city, job1, job1VC, job1Exp, job2, job2VC, job2Exp, job3, job3VC, job3Exp, SelectRoleActivity.id);
                     call.enqueue(new Callback<WorkerJobDetails>() {
                         @Override
