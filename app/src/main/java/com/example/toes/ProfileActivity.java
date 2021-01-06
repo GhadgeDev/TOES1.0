@@ -44,7 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
     static boolean updateJob = false;
     static int updateId;
     String token = "";
-    ArrayList<String> jobs = new ArrayList<>();
+    static ArrayList<String> jobs = new ArrayList<>();
 
     static boolean btn1 = false,btn2 = false,btn3 = false;
     @Override
@@ -170,7 +170,7 @@ public class ProfileActivity extends AppCompatActivity {
                 System.out.println("Workers :------------------- " + response.body());
 
 
-
+if(jsize > 0){
     if (jobs.get(2).toString().equals("")) {
         jobs.remove(2);
     } else {
@@ -191,48 +191,42 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
+    int size = jobs.size();
+
+    System.out.println("Jobs after remove :------------------- " + jobs);
+    System.out.println("Size list :------------------- " + size);
+
+    updateId = Integer.parseInt(jobs.get(size-1));
+    System.out.println("UId :------------------- " + updateId);
+    if (size == 2) {
+        txtProfession.setVisibility(View.GONE);
+        btnJob1.setVisibility(View.VISIBLE);
+        btnJob1.setText(jobs.get(0));
+    } else if (size == 3) {
+        txtProfession.setVisibility(View.GONE);
+        btnJob1.setVisibility(View.VISIBLE);
+        btnJob1.setText(jobs.get(0));
+
+        btnJob2.setVisibility(View.VISIBLE);
+        btnJob2.setText(jobs.get(1));
+    } else if (size == 4) {
+        txtProfession.setVisibility(View.GONE);
 
 
-                int size = jobs.size();
-           //     System.out.println("L list :------------------- " + l);
-                System.out.println("Jobs after remove :------------------- " + jobs);
-                System.out.println("Size list :------------------- " + size);
-//                System.out.println("id :------------------- " + l.get(size-1));
-
-                updateId = Integer.parseInt(jobs.get(size-1));
-                System.out.println("UId :------------------- " + updateId);
-                if (size == 2) {
-                    txtProfession.setVisibility(View.GONE);
-                    btnJob1.setVisibility(View.VISIBLE);
-                    btnJob1.setText(jobs.get(0));
-                } else if (size == 3) {
-                    txtProfession.setVisibility(View.GONE);
-                    btnJob1.setVisibility(View.VISIBLE);
-                    btnJob1.setText(jobs.get(0));
-
-                    btnJob2.setVisibility(View.VISIBLE);
-                    btnJob2.setText(jobs.get(1));
-                } else if (size == 4) {
-                    txtProfession.setVisibility(View.GONE);
+        txtProfession.setVisibility(View.GONE);
+        btnJob1.setVisibility(View.VISIBLE);
+        btnJob1.setText(jobs.get(0));
 
 
-                        txtProfession.setVisibility(View.GONE);
-                        btnJob1.setVisibility(View.VISIBLE);
-                        btnJob1.setText(jobs.get(0));
+        btnJob2.setVisibility(View.VISIBLE);
+        btnJob2.setText(jobs.get(1));
 
+        btnJob3.setVisibility(View.VISIBLE);
+        btnJob3.setText(jobs.get(2));
+    }
+}else{
 
-                        btnJob2.setVisibility(View.VISIBLE);
-                        btnJob2.setText(jobs.get(1));
-
-                        btnJob3.setVisibility(View.VISIBLE);
-                        btnJob3.setText(jobs.get(2));
-                    }
-
-              //  }
-
-
-
-
+}
             }
 
             @Override
