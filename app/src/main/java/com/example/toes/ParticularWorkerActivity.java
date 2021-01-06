@@ -31,12 +31,13 @@ public class ParticularWorkerActivity extends AppCompatActivity {
     private TextView particularWorkerAddress;
     private TextView particularWorkerExperience;
     private TextView jobDescription;
-    private Button hireButton;
+    private Button hireButton,btnCall;
 
     private TextView countDownText;
     private CountDownTimer countDownTimer;
     private long timeLeft = 600000;
     private boolean timerRunning;
+    private boolean sPhone = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class ParticularWorkerActivity extends AppCompatActivity {
         countDownText = findViewById(R.id.count_down_tv);
 
         hireButton = findViewById(R.id.hire_btn);
+        btnCall = (Button)findViewById(R.id.call_btn);
         hireButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -100,6 +102,10 @@ public class ParticularWorkerActivity extends AppCompatActivity {
                     System.out.println("Response M : _--------- " + response.message());
                     return;
                 }
+                Post post = response.body();
+                sPhone = post.isSmartphone();
+
+
                 particularWorkerAddress.setText(response.body().getAddress());
                 if(RecentPostedJobActivity.indicator == 1) {
                     jobDescription.setText(RecentPostedJobActivity.jbDesc);
@@ -116,6 +122,16 @@ public class ParticularWorkerActivity extends AppCompatActivity {
                 toast.show();
             }
         });
+
+        if (!sPhone){
+                System.out.println("In not smart phone-------------------");
+                btnCall.setVisibility(View.VISIBLE);
+                hireButton.setVisibility(View.GONE);
+
+        }else{
+            System.out.println("In smart phone---------------------");
+        }
+
     }
 
     public void startStop() {

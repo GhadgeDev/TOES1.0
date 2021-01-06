@@ -8,6 +8,7 @@ class Post {
 
     private boolean is_superuser = false;
     private boolean is_admin = false;
+    private boolean smartphone = true;
     private String first_name;
     private String last_name;
     private String username;
@@ -38,46 +39,25 @@ class Post {
 
     }
 
-    public Post(String password, boolean is_superuser, boolean is_admin, String first_name, String last_name, String username, String dob, String gender, String aadhar_no, String profileImage, String address,String profile_image,int id,int user) {
+    public Post(String password, String phone, boolean is_superuser, boolean is_admin, boolean smartphone, String first_name, String last_name, String username, String dob, String gender, String aadhar_no, String profileImage, String address, int id, String re_pass, String profile_image, int user) {
         this.password = password;
+        this.phone = phone;
         this.is_superuser = is_superuser;
         this.is_admin = is_admin;
+        this.smartphone = smartphone;
         this.first_name = first_name;
         this.last_name = last_name;
         this.username = username;
         this.dob = dob;
         this.gender = gender;
         this.aadhar_no = aadhar_no;
-        this.profile_image = profile_image;
         this.profileImage = profileImage;
         this.address = address;
         this.id = id;
-        this.user = user;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getUser() {
-        return user;
-    }
-
-    public void setUser(int user) {
-        this.user = user;
-    }
-
- /*   public String getProfile_image() {
-        return profile_image;
-    }
-
-    public void setProfile_image(String profile_image) {
+        this.re_pass = re_pass;
         this.profile_image = profile_image;
-    }*/
+        this.user = user;
+    }
 
     public String getPassword() {
         return password;
@@ -111,20 +91,28 @@ class Post {
         this.is_admin = is_admin;
     }
 
-    public String getfName() {
+    public boolean isSmartphone() {
+        return smartphone;
+    }
+
+    public void setSmartphone(boolean smartphone) {
+        this.smartphone = smartphone;
+    }
+
+    public String getFirst_name() {
         return first_name;
     }
 
-    public void setfName(String fName) {
-        this.first_name = fName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getlName() {
+    public String getLast_name() {
         return last_name;
     }
 
-    public void setlName(String lName) {
-        this.last_name = lName;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getUsername() {
@@ -151,12 +139,12 @@ class Post {
         this.gender = gender;
     }
 
-    public String getAdharNo() {
+    public String getAadhar_no() {
         return aadhar_no;
     }
 
-    public void setAdharNo(String adharNo) {
-        this.aadhar_no = adharNo;
+    public void setAadhar_no(String aadhar_no) {
+        this.aadhar_no = aadhar_no;
     }
 
     public String getProfileImage() {
@@ -175,13 +163,36 @@ class Post {
         this.address = address;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getRe_pass() {
         return re_pass;
     }
 
-
-
     public void setRe_pass(String re_pass) {
         this.re_pass = re_pass;
     }
+
+    public String getProfile_image() {
+        return profile_image;
+    }
+
+    public void setProfile_image(String profile_image) {
+        this.profile_image = profile_image;
+    }
+
+    public int getUser() {
+        return user;
+    }
+
+    public void setUser(int user) {
+        this.user = user;
+    }
+
 }

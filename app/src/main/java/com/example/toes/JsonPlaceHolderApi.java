@@ -8,6 +8,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -15,6 +16,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
@@ -68,6 +70,24 @@ interface JsonPlaceHolderApi {
                                                @Field("category_3_vc") String category_3_vc,
                                                @Field("category_3_exp") int category_3_exp,
                                                @Field("user") int user
+    );
+
+    //Update Worker Job Details
+    @FormUrlEncoded
+    @PUT("/workerdetail/{id}/")
+    Call<WorkerJobDetails> updateWorkerJobInfo(@Header("Authorization") String token,
+                                               @Field("city") String city,
+                                               @Field("category_1") String category_1,
+                                               @Field("category_1_vc") String category_1_vc,
+                                               @Field("category_1_exp") int category_1_exp,
+                                               @Field("category_2") String category_2,
+                                               @Field("category_2_vc") String category_2_vc,
+                                               @Field("category_2_exp") int category_2_exp,
+                                               @Field("category_3") String category_3,
+                                               @Field("category_3_vc") String category_3_vc,
+                                               @Field("category_3_exp") int category_3_exp,
+                                               @Field("user") int user,
+                                               @Path("id") int id
     );
 
     //Recruiter clicks search, post get uploaded at worker side
@@ -146,7 +166,7 @@ interface JsonPlaceHolderApi {
                                                      @Path("user_me") int userMeId);
 
     //Get Jobs into profile
-    @GET("/api/specificjobs/{user_id}")
+    @GET("/api/specific/workerdetails/{user_id}")
     Call<List<Worker>> getJobs(@Header("Authorization") String aToken,
                                @Path("user_id") int uId);
 
@@ -169,4 +189,11 @@ interface JsonPlaceHolderApi {
     @GET("api/recruiters/responses/{userMeId}")
     Call<List<GetRecruiterResponses>> getRecruiterResponses(@Header("Authorization") String token,
                                                             @Path("userMeId") int userMeid);
+
+    //Delete Profession
+
+    @DELETE("/workerdetail/{id}/")
+    Call<WorkerJobDetails> deleteProfession1(@Header("Authorization") String token,
+                                            @Path("id") int id);
+
 }
