@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -29,66 +31,49 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.toes.SelectRoleActivity.userPresent;
 
-public class RecentPostedJobActivity extends AppCompatActivity {
+public class RecentPostedJobActivity extends AppCompatActivity implements RecentPostedJobAdapter.OnPostedJobListener {
     private List<GetRecruiterJobDetails> lstResponse;
     RecentPostedJobAdapter adapter;
     FloatingActionButton btnAdd;
+    RecyclerView rvRecentJobList;
+    public static int jbId;
+    public static String jbDesc;
+
+    public static int indicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recent_posted_job);
 
-        RecyclerView rvRecentJobList = (RecyclerView) findViewById(R.id.rvRecentJobList);
-        btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
+        rvRecentJobList =  findViewById(R.id.rvRecentJobList);
+        btnAdd =  findViewById(R.id.btnAdd);
         rvRecentJobList.setLayoutManager(new LinearLayoutManager(this));
 
-        //For http log
-        HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
-        okHttpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        JsonPlaceHolderApi recentJob = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
-
-        //connecting to base url
-        Retrofit.Builder retrofit = new Retrofit.Builder().
-                baseUrl("http://52.201.220.252/")
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit1 = retrofit.build();
-
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit1.create(JsonPlaceHolderApi.class);
-
-
-        Call<List<GetRecruiterJobDetails>> jobInfo = jsonPlaceHolderApi.getRecentJob("token " + LoginActivity.token, LoginActivity.userMeId);
-        jobInfo.enqueue(new Callback<List<GetRecruiterJobDetails>>() {
+        Call<List<GetRecruiterJobDetails>> call = recentJob.getRecentJob("token " + LoginActivity.token, LoginActivity.userMeId);
+        call.enqueue(new Callback<List<GetRecruiterJobDetails>>() {
             @Override
             public void onResponse(Call<List<GetRecruiterJobDetails>> call, Response<List<GetRecruiterJobDetails>> response) {
-                if (!response.isSuccessful()) {
-                    System.out.println("Response : _--------- " + response.code());
-                    System.out.println("Response M : _--------- " + response.message());
+                if(!response.isSuccessful()){
+                    Toast toast = Toast.makeText(RecentPostedJobActivity.this, "Unsuccessfully !", Toast.LENGTH_SHORT);
+                    toast.show();
                     return;
                 }
-                List<GetRecruiterJobDetails> postResponse = response.body();
-
-                System.out.println("Code :------------------- " + response.code());
-                String content = "";
-
                 lstResponse = response.body();
-                adapter = new RecentPostedJobAdapter(getBaseContext(), lstResponse);
+                adapter = new RecentPostedJobAdapter(RecentPostedJobActivity.this,lstResponse, RecentPostedJobActivity.this);
                 rvRecentJobList.setAdapter(adapter);
-
-                System.out.println("Data : _--------- " + content);
-                System.out.println("id : -------------------------- " + postResponse);
             }
 
             @Override
             public void onFailure(Call<List<GetRecruiterJobDetails>> call, Throwable t) {
-                System.out.println("Filed in RecentJOb Posted : " + t.getMessage());
-
+                Toast toast = Toast.makeText(RecentPostedJobActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                TextView toastMessage = toast.getView().findViewById(android.R.id.message);
+                toastMessage.setTextColor(Color.RED);
+                toast.show();
             }
         });
-
-
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,8 +81,6 @@ public class RecentPostedJobActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     @Override
@@ -105,7 +88,6 @@ public class RecentPostedJobActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.recentjobmenue, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -124,10 +106,17 @@ public class RecentPostedJobActivity extends AppCompatActivity {
                 Intent notification = new Intent(RecentPostedJobActivity.this, WokerNotificationActivity.class);
                 startActivity(notification);
                 break;
-
         }
-
         return true;
     }
 
+    @Override
+    public void onJobClick(int position) {
+        indicator = 1;
+        Intent intent = new Intent(this, SelectWorkerActivity.class);
+        intent.putExtra("selected_job_tile", lstResponse.get(position).getJobTitle());
+        jbDesc = lstResponse.get(position).getJob_Description();
+        jbId = lstResponse.get(position).getJob_id();
+        startActivity(intent);
+    }
 }

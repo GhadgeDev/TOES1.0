@@ -13,64 +13,64 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-class RecentPostedJobAdapter extends RecyclerView.Adapter<RecentPostedJobAdapter.RecentPostedJobHolder>{
+class RecentPostedJobAdapter extends RecyclerView.Adapter<RecentPostedJobAdapter.RecentPostedJobHolder> {
 
-    private List<GetRecruiterJobDetails>  data;
-    private String[] data1;
+    private List<GetRecruiterJobDetails> data;
+    private OnPostedJobListener mOnPostedJobListener;
     Context context;
-    String des = "";
-    public RecentPostedJobAdapter(Context context, List<GetRecruiterJobDetails> data) {
+    int jbId;
+
+    public RecentPostedJobAdapter(Context context, List<GetRecruiterJobDetails> data, OnPostedJobListener onPostedJobListener) {
         this.context = context;
         this.data = data;
+
+        this.mOnPostedJobListener = onPostedJobListener;
     }
-
-    public RecentPostedJobAdapter(String[] data1) {
-        this.data1 = data1;
-    }
-
-
 
     @NonNull
     @Override
     public RecentPostedJobHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext()) ;
-        View view = inflater.inflate(R.layout.list_item_posted_jobs,parent,false);
-        RecentPostedJobHolder vHolder = new RecentPostedJobHolder(view);
-
-        return new RecentPostedJobHolder(view);
-
+        View v;
+        v = LayoutInflater.from(context).inflate(R.layout.list_item_posted_jobs, parent, false);
+        RecentPostedJobHolder viewHolder = new RecentPostedJobHolder(v, mOnPostedJobListener);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecentPostedJobHolder holder, int position) {
 
-        String title = data.get(position).getJobDescription();
-//        String title = data1[position];
-        holder.txtDesc.setText(title);
+        String jobDesc = data.get(position).getJob_Description();
 
-
+        holder.txtDesc.setText(jobDesc);
     }
 
     @Override
     public int getItemCount() {
-
         return data.size();
-       // return data1.length;
     }
 
-    public class RecentPostedJobHolder extends RecyclerView.ViewHolder{
+    public static class RecentPostedJobHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView imgIcon;
         TextView txtDesc;
-        private LinearLayout workerJobList;
-        public RecentPostedJobHolder(@NonNull View itemView) {
+        OnPostedJobListener onPostedJobListener;
+
+        public RecentPostedJobHolder(@NonNull View itemView, OnPostedJobListener onPostedJobListener) {
             super(itemView);
 
-            imgIcon = (ImageView) itemView.findViewById(R.id.imgIcon);
-            txtDesc = (TextView) itemView.findViewById(R.id.txtJobDescription);
-            workerJobList = (LinearLayout) itemView.findViewById(R.id.lllist);
-
+            imgIcon = itemView.findViewById(R.id.imgIcon);
+            txtDesc = itemView.findViewById(R.id.txtJobDescription);
+            this.onPostedJobListener = onPostedJobListener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            onPostedJobListener.onJobClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnPostedJobListener{
+        void onJobClick(int position);
     }
 }

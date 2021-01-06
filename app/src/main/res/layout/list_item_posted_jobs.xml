@@ -1,31 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp"
-    >
+    android:padding="8dp">
+
     <ImageView
         android:id="@+id/imgIcon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/images"
-        />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:src="@drawable/images" />
+
     <TextView
         android:id="@+id/txtJobDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recent Posted job"
-
-        android:gravity="center"
-        android:padding="16dp"
         android:layout_gravity="center"
-        android:textSize="20sp"
+        android:padding="10dp"
+        android:text="Recent Posted job"
+        android:textSize="15sp"
 
         />
-
-
 
 
 </LinearLayout>

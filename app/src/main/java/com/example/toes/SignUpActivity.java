@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -63,15 +64,16 @@ public class SignUpActivity extends AppCompatActivity {
     public static String selectedImagePath;
 
     public static Uri selectedImageUri;
-    Bitmap bitmap;
-    public static String imgPath;
+    Bitmap photo;
+    public static File finalFile;
+
+   // public static String imgPath;
 
     String args[] = {"", ""};
 
     String fName = "", lName = "", contact = "", address = "", dob = "", gender = "", pass = "", phone = "";
     int l = 0;
 
-    File file;
     ArrayList<String> details1 = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -259,26 +261,39 @@ public class SignUpActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == PICK_IMAGE) {
-
                 selectedImageUri = data.getData();
-                selectedImagePath = selectedImageUri.getPath();
-                circleImageView.setImageURI(selectedImageUri);
+                // selectedImagePath = selectedImageUri.getPath();
+                //  circleImageView.setImageURI(selectedImageUri);
 
+                try {
+                    photo = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                    circleImageView.setImageBitmap(photo);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-         /*       selectedImageUri = data.getData();
-                System.out.println("--------------------------------selected Image: " + selectedImagePath);
+                // CALL THIS METHOD TO GET THE URI FROM THE BITMAP
+                Uri tempUri = getImageUri(getApplicationContext(), photo);
+                System.out.println("Temp Uri : " + tempUri);
 
-                File file = new File(selectedImagePath);
-                RequestBody requestBody = RequestBody.create(MediaType.parse("images/*"),file);
-                part = MultipartBody.Part.createFormData("profile_image", file.getName(),requestBody);*/
+                // CALL THIS METHOD TO GET THE ACTUAL PATH
+                finalFile = new File(getRealPathFromURI(tempUri));
+                System.out.println("Final file : " + finalFile);
             }
         }
     }
 
-   /* public String getPath(Uri uri){
-        Cursor cursor = getContentResolver().query(uri,null,null,null,null);
+    private Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    private String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
         cursor.moveToFirst();
         int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
         return cursor.getString(idx);
-    }*/
+    }
 }

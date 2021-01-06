@@ -16,12 +16,11 @@ public class GetRecruiterJobDetails {
     @SerializedName("job_Description")
     private String job_Description;
 
-    public GetRecruiterJobDetails(String fname, String lname, String address, String job_Description) {
-        this.fname = fname;
-        this.lname = lname;
-        this.address = address;
-        this.job_Description = job_Description;
-    }
+    @SerializedName("job_id")
+    private int job_id;
+
+    @SerializedName("job_title")
+    private String jobTitle;
 
     public String getFname() {
         return fname;
@@ -47,12 +46,27 @@ public class GetRecruiterJobDetails {
         this.address = address;
     }
 
-    public String getJobDescription() {
+    public String getJob_Description() {
         return job_Description;
     }
 
-    public void setJobDescription(String jobDescription) {
-        this.job_Description = jobDescription;
+    public void setJob_Description(String job_Description) {
+        this.job_Description = job_Description;
     }
 
+    public int getJob_id() {
+        return job_id;
+    }
+
+    public void setJob_id(int job_id) {
+        this.job_id = job_id;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
 }
