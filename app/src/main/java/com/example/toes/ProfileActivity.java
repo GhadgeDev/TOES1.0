@@ -89,11 +89,11 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Call<WorkerJobDetails> deleteProfession1 = jsonPlaceHolderApi.deleteProfession1(token,updateId);
-                updateJob = true;
-              //  DeleteDilouge deleteDilouge = new DeleteDilouge();
-            //    deleteDilouge.show(getSupportFragmentManager(), "delete dialog");
-                Intent editJobi = new Intent(ProfileActivity.this,JobSeletionActivity.class);
-                startActivity(editJobi);
+               // updateJob = true;
+              DeleteDilouge deleteDilouge = new DeleteDilouge();
+               deleteDilouge.show(getSupportFragmentManager(), "delete dialog");
+              //  Intent editJobi = new Intent(ProfileActivity.this,JobSeletionActivity.class);
+              //  startActivity(editJobi);
             }
         });
 
@@ -112,16 +112,16 @@ public class ProfileActivity extends AppCompatActivity {
                 // RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), photo);
                 System.out.println("Code :------------------- " + response.code());
                 String content = "";
-                content += "name : " + postResponse.getfName() + "\n";
-                content += "lName : " + postResponse.getlName() + "\n";
+                content += "name : " + postResponse.getFirst_name() + "\n";
+                content += "lName : " + postResponse.getLast_name() + "\n";
                 content += "Phone : " + postResponse.getPhone() + "\n";
                 content += "Gender : " + postResponse.getGender() + "\n";
-                content += "Aadhar : " + postResponse.getAdharNo() + "\n";
+                content += "Aadhar : " + postResponse.getAadhar_no() + "\n";
                 content += "address : " + postResponse.getAddress() + "\n";
-                txtName.setText(postResponse.getfName() + " " + postResponse.getlName());
+                txtName.setText(postResponse.getFirst_name() + " " + postResponse.getLast_name());
                 txtPhone.setText(postResponse.getPhone());
                 txtGender.setText(postResponse.getGender());
-                txtaadhar.setText("Aadhar Card No : "+postResponse.getAdharNo());
+                txtaadhar.setText("Aadhar Card No : "+postResponse.getAadhar_no());
                 txtaddr.setText("Address : "+postResponse.getAddress());
                 //    String mImgUrl = "";
                 //      mImgUrl = "http://52.201.220.252/" + postResponse.getProfile_image();

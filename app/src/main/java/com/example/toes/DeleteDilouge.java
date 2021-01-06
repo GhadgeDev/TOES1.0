@@ -146,6 +146,7 @@ public class DeleteDilouge extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         DeleteDilouge.delete = false;
+                        ProfileActivity.updateJob = true;
                         Intent editJobi = new Intent(getActivity(),JobSeletionActivity.class);
                         startActivity(editJobi);
                     }
@@ -154,13 +155,16 @@ public class DeleteDilouge extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         DeleteDilouge.delete = true;
-                        Call<WorkerJobDetails> delete = jsonPlaceHolderApi.deleteProfession1(LoginActivity.token, ProfileActivity.updateId);
+                        Call<WorkerJobDetails> delete = jsonPlaceHolderApi.deleteProfession1("token "+LoginActivity.token, ProfileActivity.updateId);
                         delete.enqueue(new Callback<WorkerJobDetails>() {
                             @Override
                             public void onResponse(Call<WorkerJobDetails> call, Response<WorkerJobDetails> response) {
-                                System.out.println("Response : _--------- " + response.code());
-                                System.out.println("Response M : _--------- " + response.message());
-
+                                if (!response.isSuccessful()) {
+                                    System.out.println("Response : _--------- " + response.code());
+                                    System.out.println("Response M : _--------- " + response.message());
+                                    return;
+                                }
+                                System.out.println("Sucessfully deleted :-------------- ");
                             }
 
                             @Override

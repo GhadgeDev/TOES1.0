@@ -165,11 +165,11 @@ public class IdentityProofActivity extends AppCompatActivity {
                             Post postResponse = response.body();
                             System.out.println("Code :------------------- " + response.code());
                             String content = "";
-                            content += "name : " + postResponse.getfName() + "\n";
-                            content += "lName : " + postResponse.getlName() + "\n";
+                            content += "name : " + postResponse.getFirst_name() + "\n";
+                            content += "lName : " + postResponse.getLast_name() + "\n";
                             content += "Contact : " + postResponse.getPhone() + "\n";
                             content += "Address : " + postResponse.getAddress() + "\n";
-                            content += "Adhar : " + postResponse.getAdharNo() + "\n";
+                            content += "Adhar : " + postResponse.getAadhar_no() + "\n";
                             content += "Dob : " + postResponse.getDob() + "\n";
                             content += "gender : " + postResponse.getGender() + "\n";
                             content += "username : " + postResponse.getUsername() + "\n";
