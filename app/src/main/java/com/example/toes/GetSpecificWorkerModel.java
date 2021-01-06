@@ -4,8 +4,12 @@ import com.google.gson.annotations.SerializedName;
 
 public class GetSpecificWorkerModel {
 
-    @SerializedName("worker_name")
-    private String workerName;
+
+    @SerializedName("fname")
+    private String fname;
+
+    @SerializedName("lname")
+    private String lname;
 
     @SerializedName("contact_no")
     private String contactNo;
@@ -22,13 +26,24 @@ public class GetSpecificWorkerModel {
     @SerializedName("Worker_id")
     private Integer workerId;
 
+    @SerializedName("address")
+    private String address;
 
-    public String getWorkerName() {
-        return workerName;
+
+    public String getFname() {
+        return fname;
     }
 
-    public void setWorkerName(String workerName) {
-        this.workerName = workerName;
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
     }
 
     public String getContactNo() {
@@ -69,5 +84,13 @@ public class GetSpecificWorkerModel {
 
     public void setWorkerId(Integer workerId) {
         this.workerId = workerId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

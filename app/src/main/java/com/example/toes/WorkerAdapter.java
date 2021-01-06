@@ -37,10 +37,10 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerView
 
     @Override
     public void onBindViewHolder(@NonNull WorkerViewHolder holder, int position) {
-        holder.wName.setText(mData.get(position).getWorkerName());
+        String FullName = mData.get(position).getFname()+" "+mData.get(position).getLname();
+        holder.wName.setText(FullName);
         holder.vCharges.setText(mData.get(position).getVisitingCharges());
         holder.wExperience.setText(""+mData.get(position).getExperience());
-        int a = mData.get(position).getWorkerId();
     }
 
     @Override

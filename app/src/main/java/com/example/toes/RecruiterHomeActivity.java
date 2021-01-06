@@ -38,13 +38,11 @@ public class RecruiterHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recruiter_home);
         spinner1 = findViewById(R.id.spinnerSelectJob);
-        CheckBox postJobCheckBox;
 
         String[] jobTitles = new String[]{"Select Job", "carpenter", "painter", "driver", "electrician", "plumber", "tailor"};
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.style_select_job_titles, jobTitles);
         spinner1.setAdapter(arrayAdapter);
 
-        postJobCheckBox = findViewById(R.id.post_job_CheckBox);
 
         JsonPlaceHolderApi jsonPlaceHolderApi = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
 
@@ -78,7 +76,7 @@ public class RecruiterHomeActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<GetRecruiterJobInfo> call, Throwable t) {
-                            Toast toast = Toast.makeText(RecruiterHomeActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(RecruiterHomeActivity.this, "In Recruiter Home Activity Please Check your Internet Connection !", Toast.LENGTH_SHORT);
                             TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                             toastMessage.setTextColor(Color.RED);
                             toast.show();

@@ -26,6 +26,7 @@ public class ParticularWorkerActivity extends AppCompatActivity {
     private String mWorkerName;
     private String mWorkerFees;
     private int mWorkerExp;
+    private String mWorkerAdd;
     private TextView particularWorkerName;
     private TextView particularWorkerFees;
     private TextView particularWorkerAddress;
@@ -80,7 +81,9 @@ public class ParticularWorkerActivity extends AppCompatActivity {
         particularWorkerName = findViewById(R.id.particular_worker_name);
         particularWorkerName.setText(mWorkerName);
 
+        mWorkerAdd = getIntent().getStringExtra("worker address");
         particularWorkerAddress = findViewById(R.id.particular_worker_address);
+        particularWorkerAddress.setText(mWorkerAdd);
 
         jobDescription = findViewById(R.id.txtprofession);
 

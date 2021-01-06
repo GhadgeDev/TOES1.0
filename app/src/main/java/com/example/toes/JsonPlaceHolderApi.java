@@ -194,6 +194,6 @@ interface JsonPlaceHolderApi {
 
     @DELETE("/workerdetail/{id}/")
     Call<WorkerJobDetails> deleteProfession1(@Header("Authorization") String token,
-                                            @Path("id") int id);
+                                             @Path("id") int id);
 
 }

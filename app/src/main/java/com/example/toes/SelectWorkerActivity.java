@@ -166,9 +166,12 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
     @Override
     public void onNoteClick(int position) {
         Intent intent = new Intent(this, ParticularWorkerActivity.class);
-        intent.putExtra("worker name", lstWorker.get(position).getWorkerName());
+        String wFname = lstWorker.get(position).getFname();
+        String wLname = lstWorker.get(position).getLname();
+        intent.putExtra("worker name", wFname + " " + wLname);
         intent.putExtra("worker fees", lstWorker.get(position).getVisitingCharges());
         intent.putExtra("worker experience", lstWorker.get(position).getExperience());
+        intent.putExtra("worker address",lstWorker.get(position).getAddress());
         RworkerId = lstWorker.get(position).getWorkerId();
         startActivity(intent);
     }
@@ -235,7 +238,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
 
             @Override
             public void onFailure(Call<List<GetSpecificWorkerModel>> call, Throwable t) {
-                Toast toast = Toast.makeText(SelectWorkerActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(SelectWorkerActivity.this, "In Select worker activity Please Check your Internet Connection !", Toast.LENGTH_SHORT);
                 TextView toastMessage = toast.getView().findViewById(android.R.id.message);
                 toastMessage.setTextColor(Color.RED);
                 toast.show();

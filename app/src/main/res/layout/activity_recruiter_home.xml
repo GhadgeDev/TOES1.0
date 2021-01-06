@@ -49,13 +49,6 @@
         android:textColor="@color/black"
         android:textColorHint="#ABA9A9" />
 
-    <CheckBox
-        android:layout_margin="10dp"
-        android:id="@+id/post_job_CheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Post your job to all worker"/>
-
     <Button
         android:id="@+id/btnsearch"
         android:layout_width="150dp"

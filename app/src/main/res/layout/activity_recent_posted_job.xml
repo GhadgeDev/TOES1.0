@@ -6,21 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".RecentPostedJobActivity">
 
-        <TextView
-            android:id="@+id/posted_job_tv"
-            android:layout_width="324dp"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:textStyle="bold"
-            android:text="Hire worker from your previous posted job"
-            android:textSize="20sp" />
+    <TextView
+        android:id="@+id/posted_job_tv"
+        android:layout_width="324dp"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="Hire worker from your previous posted job"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/recent_job_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/posted_job_tv" >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvRecentJobList"
-            android:layout_below="@id/posted_job_tv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+           />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAdd"

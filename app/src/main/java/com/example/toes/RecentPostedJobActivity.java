@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -41,6 +42,8 @@ public class RecentPostedJobActivity extends AppCompatActivity implements Recent
 
     public static int indicator;
 
+    private SwipeRefreshLayout refreshRecentJob;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +53,26 @@ public class RecentPostedJobActivity extends AppCompatActivity implements Recent
         btnAdd =  findViewById(R.id.btnAdd);
         rvRecentJobList.setLayoutManager(new LinearLayoutManager(this));
 
-        JsonPlaceHolderApi recentJob = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+        refreshRecentJob = findViewById(R.id.recent_job_refresh);
+        callToRecentJobs();
+        refreshRecentJob.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                callToRecentJobs();
+            }
+        });
 
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecentPostedJobActivity.this, RecruiterHomeActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    JsonPlaceHolderApi recentJob = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+    private void callToRecentJobs() {
         Call<List<GetRecruiterJobDetails>> call = recentJob.getRecentJob("token " + LoginActivity.token, LoginActivity.userMeId);
         call.enqueue(new Callback<List<GetRecruiterJobDetails>>() {
             @Override
@@ -64,6 +85,8 @@ public class RecentPostedJobActivity extends AppCompatActivity implements Recent
                 lstResponse = response.body();
                 adapter = new RecentPostedJobAdapter(RecentPostedJobActivity.this,lstResponse, RecentPostedJobActivity.this);
                 rvRecentJobList.setAdapter(adapter);
+
+                refreshRecentJob.setRefreshing(false);
             }
 
             @Override
@@ -72,13 +95,6 @@ public class RecentPostedJobActivity extends AppCompatActivity implements Recent
                 TextView toastMessage = toast.getView().findViewById(android.R.id.message);
                 toastMessage.setTextColor(Color.RED);
                 toast.show();
-            }
-        });
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RecentPostedJobActivity.this, RecruiterHomeActivity.class);
-                startActivity(intent);
             }
         });
     }
