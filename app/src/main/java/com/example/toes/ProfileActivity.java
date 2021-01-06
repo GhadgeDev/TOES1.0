@@ -1,6 +1,7 @@
 package com.example.toes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -37,6 +38,8 @@ public class ProfileActivity extends AppCompatActivity {
     private Button mLogoutButton;
     private Button mEditButton;
 
+    private SwipeRefreshLayout refreshJobs;
+
     TextView txtName, txtPhone, txtGender, txtaadhar, txtaddr, txtProfession;
     Button btnEditJob;
     ImageView profile_image;
@@ -46,7 +49,9 @@ public class ProfileActivity extends AppCompatActivity {
     String token = "";
     static ArrayList<String> jobs = new ArrayList<>();
 
-    static boolean btn1 = false,btn2 = false,btn3 = false;
+    static boolean btn1 = false, btn2 = false, btn3 = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,23 +72,44 @@ public class ProfileActivity extends AppCompatActivity {
         btnEditJob = (Button) findViewById(R.id.btnEditJob);
         txtProfession = (TextView) findViewById(R.id.txtNoProfession);
 
-        Intent intent1 = getIntent();
-        token = "Token " + LoginActivity.token;
-        //For http log
-        HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
-        okHttpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        refreshJobs = findViewById(R.id.refresh_jobs);
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
+        callToRefreshJobs();
+        refreshJobs.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                callToRefreshJobs();
+            }
+        });
 
-        //connecting to base url
-        Retrofit.Builder retrofit = new Retrofit.Builder().
-                baseUrl("http://52.201.220.252/")
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit1 = retrofit.build();
+    /*    Intent intent1 = getIntent();
+        token = "Token " + LoginActivity.token;*/
 
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit1.create(JsonPlaceHolderApi.class);
+        JsonPlaceHolderApi jsonPlaceHolderApi = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+        Call<Post> call = jsonPlaceHolderApi.getPost("token " + LoginActivity.token);
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (!response.isSuccessful()) {
+                    System.out.println("Response : _--------- " + response.code());
+                    System.out.println("Response M : _--------- " + response.message());
+                    return;
+                }
+                Post postResponse = response.body();
+                txtName.setText(postResponse.getFirst_name() + " " + postResponse.getLast_name());
+                txtPhone.setText(postResponse.getPhone());
+                txtGender.setText(postResponse.getGender());
+                txtaadhar.setText("Aadhar Card No : " + postResponse.getAadhar_no());
+                txtaddr.setText("Address : " + postResponse.getAddress());
 
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                System.out.println("Filed in ProfileActivity : " + t.getMessage());
+
+            }
+        });
 
         btnEditJob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,145 +122,6 @@ public class ProfileActivity extends AppCompatActivity {
                 //  startActivity(editJobi);
             }
         });
-
-
-        Call<Post> call = jsonPlaceHolderApi.getPost(token);
-        call.enqueue(new Callback<Post>() {
-            @Override
-            public void onResponse(Call<Post> call, Response<Post> response) {
-                if (!response.isSuccessful()) {
-                    System.out.println("Response : _--------- " + response.code());
-                    System.out.println("Response M : _--------- " + response.message());
-                    return;
-                }
-                Post postResponse = response.body();
-                // File photo = new File(postResponse.getProfile_image());
-                // RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), photo);
-                System.out.println("Code :------------------- " + response.code());
-                String content = "";
-                content += "name : " + postResponse.getFirst_name() + "\n";
-                content += "lName : " + postResponse.getLast_name() + "\n";
-                content += "Phone : " + postResponse.getPhone() + "\n";
-                content += "Gender : " + postResponse.getGender() + "\n";
-                content += "Aadhar : " + postResponse.getAadhar_no() + "\n";
-                content += "address : " + postResponse.getAddress() + "\n";
-                txtName.setText(postResponse.getFirst_name() + " " + postResponse.getLast_name());
-                txtPhone.setText(postResponse.getPhone());
-                txtGender.setText(postResponse.getGender());
-                txtaadhar.setText("Aadhar Card No : "+postResponse.getAadhar_no());
-                txtaddr.setText("Address : "+postResponse.getAddress());
-                //    String mImgUrl = "";
-                //      mImgUrl = "http://52.201.220.252/" + postResponse.getProfile_image();
-                //     profile_image.setImageURI(Uri.parse(mImgUrl));
-
-                System.out.println("Data : _--------- " + content);
-                System.out.println("id : -------------------------- " + postResponse.getId());
-            }
-
-            @Override
-            public void onFailure(Call<Post> call, Throwable t) {
-                System.out.println("Filed in ProfileActivity : " + t.getMessage());
-
-            }
-        });
-
-        //to fetch the jobs
-        Call<List<Worker>> job = jsonPlaceHolderApi.getJobs(token,SelectRoleActivity.id);
-        job.enqueue(new Callback<List<Worker>>() {
-            @Override
-            public void onResponse(Call<List<Worker>> call, Response<List<Worker>> response) {
-                if (!response.isSuccessful()) {
-
-                    System.out.println("Response : _--------- " + response.code());
-                    System.out.println("Response M : _--------- " + response.message());
-                    return;
-                }
-                List<Worker> worker = response.body();
-                for(Worker job : worker){
-                    jobs.add(job.getCategory_1());
-
-
-                    jobs.add(job.getCategory_2());
-
-
-
-                    jobs.add(job.getCategory_3());
-
-                    jobs.add(job.getId());
-                }
-
-                ArrayList<String> l = new ArrayList<>();
-                System.out.println("jobs :------------------- " + jobs);
-
-                int jsize = jobs.size();
-                System.out.println("Workers :------------------- " + response.body());
-
-
-                if(jsize > 0){
-                    if (jobs.get(2).toString().equals("")) {
-                        jobs.remove(2);
-                    } else {
-
-                    }
-                    if (jobs.get(1).toString().equals("")) {
-                        jobs.remove(1);
-                    } else {
-
-                    }
-
-                    if (jobs.size() > 3) {
-                        if (jobs.get(3).toString().equals("")) {
-                            jobs.remove(3);
-                        } else {
-                            l.add(jobs.get(3));
-                            // l.add(jobs.get(4));
-                        }
-                    }
-
-                    int size = jobs.size();
-
-                    System.out.println("Jobs after remove :------------------- " + jobs);
-                    System.out.println("Size list :------------------- " + size);
-
-                    updateId = Integer.parseInt(jobs.get(size-1));
-                    System.out.println("UId :------------------- " + updateId);
-                    if (size == 2) {
-                        txtProfession.setVisibility(View.GONE);
-                        btnJob1.setVisibility(View.VISIBLE);
-                        btnJob1.setText(jobs.get(0));
-                    } else if (size == 3) {
-                        txtProfession.setVisibility(View.GONE);
-                        btnJob1.setVisibility(View.VISIBLE);
-                        btnJob1.setText(jobs.get(0));
-
-                        btnJob2.setVisibility(View.VISIBLE);
-                        btnJob2.setText(jobs.get(1));
-                    } else if (size == 4) {
-                        txtProfession.setVisibility(View.GONE);
-
-
-                        txtProfession.setVisibility(View.GONE);
-                        btnJob1.setVisibility(View.VISIBLE);
-                        btnJob1.setText(jobs.get(0));
-
-
-                        btnJob2.setVisibility(View.VISIBLE);
-                        btnJob2.setText(jobs.get(1));
-
-                        btnJob3.setVisibility(View.VISIBLE);
-                        btnJob3.setText(jobs.get(2));
-                    }
-                }else{
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Worker>> call, Throwable t) {
-                System.out.println("Filed in category : " + t.getMessage());
-            }
-        });
-
 
         mLogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -257,4 +144,85 @@ public class ProfileActivity extends AppCompatActivity {
         logoutDialog.show(getSupportFragmentManager(), "logout dialog");
     }
 
+    JsonPlaceHolderApi fetchJob = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+    public void callToRefreshJobs(){
+        //to fetch the jobs
+        Call<List<Worker>> job = fetchJob.getJobs("token " + LoginActivity.token, SelectRoleActivity.id);
+        job.enqueue(new Callback<List<Worker>>() {
+            @Override
+            public void onResponse(Call<List<Worker>> call, Response<List<Worker>> response) {
+                if (!response.isSuccessful()) {
+                    System.out.println("Response : _--------- " + response.code());
+                    System.out.println("Response M : _--------- " + response.message());
+                    return;
+                }
+                List<Worker> worker = response.body();
+                for (Worker job : worker) {
+                    jobs.add(job.getCategory_1());
+                    jobs.add(job.getCategory_2());
+                    jobs.add(job.getCategory_3());
+                    jobs.add(job.getId());
+                }
+                ArrayList<String> l = new ArrayList<>();
+                System.out.println("jobs :------------------- " + jobs);
+
+                int jsize = jobs.size();
+                System.out.println("Workers :------------------- " + response.body());
+
+                if (jsize > 0) {
+                    if (jobs.get(2).toString().equals("")) {
+                        jobs.remove(2);
+                    } else {
+
+                    }
+                    if (jobs.get(1).toString().equals("")) {
+                        jobs.remove(1);
+                    } else {
+
+                    }
+
+                    if (jobs.size() > 3) {
+                        if (jobs.get(3).toString().equals("")) {
+                            jobs.remove(3);
+                        } else {
+                            l.add(jobs.get(3));
+                            // l.add(jobs.get(4));
+                        }
+                    }
+
+                    int size = jobs.size();
+                    updateId = Integer.parseInt(jobs.get(size - 1));
+                    System.out.println("UId :------------------- " + updateId);
+                    if (size == 2) {
+                        txtProfession.setVisibility(View.GONE);
+                        btnJob1.setVisibility(View.VISIBLE);
+                        btnJob1.setText(jobs.get(0));
+                    } else if (size == 3) {
+                        txtProfession.setVisibility(View.GONE);
+                        btnJob1.setVisibility(View.VISIBLE);
+                        btnJob1.setText(jobs.get(0));
+
+                        btnJob2.setVisibility(View.VISIBLE);
+                        btnJob2.setText(jobs.get(1));
+                    } else if (size == 4) {
+                        txtProfession.setVisibility(View.GONE);
+                        txtProfession.setVisibility(View.GONE);
+                        btnJob1.setVisibility(View.VISIBLE);
+                        btnJob1.setText(jobs.get(0));
+                        btnJob2.setVisibility(View.VISIBLE);
+                        btnJob2.setText(jobs.get(1));
+                        btnJob3.setVisibility(View.VISIBLE);
+                        btnJob3.setText(jobs.get(2));
+                    }
+                } else {
+
+                }
+                refreshJobs.setRefreshing(false);
+            }
+            @Override
+            public void onFailure(Call<List<Worker>> call, Throwable t) {
+                System.out.println("Filed in category : " + t.getMessage());
+            }
+        });
+    }
 }
