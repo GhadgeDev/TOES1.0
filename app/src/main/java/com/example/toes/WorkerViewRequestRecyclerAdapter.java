@@ -191,7 +191,7 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
 
         //setting string and phone no to send message
         String msg = "Message From Toes" + "\n" + "Recruiter name: " + rFullName + "\n" + "Contact no: " + rPhoneNumber + "\n" + "Address: " + rAdd;
-        String no = rPhoneNumber;
+        String no = LoginActivity.userPhoneNumber;
         SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
         sms.sendTextMessage(no, null, msg, pi, null);        //method to send sms
         Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!",Toast.LENGTH_LONG).show();
@@ -206,7 +206,7 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
 
         //setting string and phone no to send message
         String msg = "Message From Toes" + "\n" + "Worker name: " + LoginActivity.userName + "\n" + "Contact no: " + LoginActivity.userPhoneNumber + "\n" + "Address: " + LoginActivity.userAddress;
-        String no = rPhoneNumber;
+        String no = LoginActivity.userPhoneNumber;
         SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
         sms.sendTextMessage(no, null, msg, pi, null);        //method to send sms
 

@@ -275,7 +275,7 @@ public class LoginActivity extends AppCompatActivity {
                 userMeId = response.body().getId();
                 sp.edit().putInt("uid",userMeId).apply();
                 userPhoneNumber = response.body().getPhone();
-                userName = response.body().getFirst_name() +" " + response.body().getLast_name();
+                userName = response.body().getFirst_name() + " " + response.body().getLast_name();
                 userAddress = response.body().getAddress();
 
                 System.out.println("userId ----------------------------------"+userMeId);
