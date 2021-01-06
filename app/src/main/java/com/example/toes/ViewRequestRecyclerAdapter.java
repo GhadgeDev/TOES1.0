@@ -1,9 +1,14 @@
 package com.example.toes;
 
+import android.Manifest;
 import android.app.AppOpsManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -27,6 +33,9 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
     List<GetRecruiterViewRequestModel> mData;
     Dialog myDialog;
     Button AcceptBtn, RejectBtn;
+    String fullWName;
+    String wPhoneNumber;
+    String wAddress;
     int status;
     int jbid;
 
@@ -52,6 +61,11 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
 
                 String wFName = mData.get(viewHolder.getAdapterPosition()).getWokerFname();
                 String wLName = mData.get(viewHolder.getAdapterPosition()).getWokerLname();
+
+                fullWName = wFName +" "+ wLName;
+                wPhoneNumber = mData.get(viewHolder.getAdapterPosition()).getWokerPhoneNo();
+                wAddress = mData.get(viewHolder.getAdapterPosition()).getWokerAddress();
+
                 String wAmount = mData.get(viewHolder.getAdapterPosition()).getAmount().toString();
                 String jbTitle = mData.get(viewHolder.getAdapterPosition()).getJobTitle();
 
@@ -133,8 +147,14 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
                     Toast toast = Toast.makeText(mContext, "Unsuccessfully !", Toast.LENGTH_SHORT);
                     toast.show();
                 }
-                Toast toast = Toast.makeText(mContext, "Operation Successful !", Toast.LENGTH_SHORT);
-                toast.show();
+                //We’ll check the permission is granted or not . If not granted the displaying message
+                if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+                    Toast toast = Toast.makeText(mContext, "Give SMS permission to this app from setting then again accept job", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    sendSmsToMySelf();
+                    sendSmsToWorker(wPhoneNumber);
+                }
             }
 
             @Override
@@ -145,5 +165,37 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
                 toast.show();
             }
         });
+    }
+
+    public void sendSmsToMySelf() {
+
+        //Messages
+        //Creating intent of current activity/fragment/context
+        Intent intent = new Intent(mContext.getApplicationContext(), WorkerViewRequestRecyclerAdapter.class);
+        PendingIntent pi = PendingIntent.getActivity(mContext.getApplicationContext(), 0, intent, 0);
+
+        //setting string and phone no to send message
+        String msg = "Message From Toes" + "\n" + "Worker name: " + fullWName + "\n" + "Contact no: " + wPhoneNumber + "\n" + "Address: " + wAddress;
+        String no = LoginActivity.userPhoneNumber;
+        SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
+        sms.sendTextMessage(no,null,msg,pi,null);        //method to send sms
+
+        Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
+    }
+
+    public void sendSmsToWorker(String wPhoneNumber) {
+
+        //Messages
+        //Creating intent of current activity/fragment/context
+        Intent intent = new Intent(mContext.getApplicationContext(), WorkerViewRequestRecyclerAdapter.class);
+        PendingIntent pi = PendingIntent.getActivity(mContext.getApplicationContext(), 0, intent, 0);
+
+        //setting string and phone no to send message
+        String msg = "Message From Toes" + "\n" + "Recruiter name: " + LoginActivity.userName + "\n" + "Contact no: " + LoginActivity.userPhoneNumber + "\n" + "Address: " + LoginActivity.userAddress;
+        String no = wPhoneNumber;
+        SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
+        sms.sendTextMessage(no, null, msg, pi, null);        //method to send sms
+
+        Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
     }
 }

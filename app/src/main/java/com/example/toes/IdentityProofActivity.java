@@ -52,6 +52,7 @@ public class IdentityProofActivity extends AppCompatActivity {
     EditText etnewPass, etCPass, etAadhar, etCAadhar;
     Button btnNext;
     String selectedLanguage;
+
     //String selectedImagePath;
     //String args[];
 
@@ -176,6 +177,7 @@ public class IdentityProofActivity extends AppCompatActivity {
                             System.out.println("Data : _--------- " + content);
 
                             userme = response.body().getId();
+
 
                             Intent go = new Intent(IdentityProofActivity.this, LoginActivity.class);
                             go.putExtra(Intent.EXTRA_TEXT, selectedLanguage);

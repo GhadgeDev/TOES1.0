@@ -60,6 +60,10 @@ public class LoginActivity extends AppCompatActivity {
     String uName = "", pass = "";
     int code = 0;
 
+    public static String userPhoneNumber;
+    public static String userName;
+    public static String userAddress;
+
     public static String token;
     public static int userMeId;
    public static SharedPreferences sp;
@@ -270,6 +274,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 userMeId = response.body().getId();
                 sp.edit().putInt("uid",userMeId).apply();
+                userPhoneNumber = response.body().getPhone();
+                userName = response.body().getfName() +" " + response.body().getlName();
+                userAddress = response.body().getAddress();
 
                 System.out.println("userId ----------------------------------"+userMeId);
             }

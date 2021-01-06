@@ -24,6 +24,10 @@ public class GetRecruiterViewRequestModel {
     @SerializedName("job_id")
     private int jbid;
 
+    @SerializedName("woker_phone_no")
+    private String wokerPhoneNo;
+
+
     public String getJobTitle() {
         return jobTitle;
     }
@@ -78,5 +82,13 @@ public class GetRecruiterViewRequestModel {
 
     public void setJbid(int jbid) {
         this.jbid = jbid;
+    }
+
+    public String getWokerPhoneNo() {
+        return wokerPhoneNo;
+    }
+
+    public void setWokerPhoneNo(String wokerPhoneNo) {
+        this.wokerPhoneNo = wokerPhoneNo;
     }
 }

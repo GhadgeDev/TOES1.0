@@ -1,8 +1,13 @@
 package com.example.toes;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 
@@ -25,7 +30,7 @@ public class WokerNotificationActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.wvPager);
         tabItem1 = findViewById(R.id.Worker_Response_Request);
         tabItem2 = findViewById(R.id.Worker_View_Request);
-        adapter = new WorkerResponseRequestAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
+        adapter = new WorkerResponseRequestAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -33,7 +38,7 @@ public class WokerNotificationActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
 
-                if(tab.getPosition() == 0 || tab.getPosition() == 1)
+                if (tab.getPosition() == 0 || tab.getPosition() == 1)
                     adapter.notifyDataSetChanged();
             }
 
