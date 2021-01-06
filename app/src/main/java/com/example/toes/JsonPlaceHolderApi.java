@@ -52,7 +52,7 @@ interface JsonPlaceHolderApi {
                           @Field("phone") String phone,
                           @Field("re_password") String re_password);
 
-    @GET("/api/user/{Phone_no}")
+    @GET("/api/otp/{Phone_no}")
     Call<User> sendOTP(@Path(value = "Phone_no") String Phone_no);
 
     //InsertWorkerDetails

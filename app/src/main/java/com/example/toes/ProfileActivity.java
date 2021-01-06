@@ -171,25 +171,25 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-                if(jobs.get(2).toString().equals("")){
-                    jobs.remove(2);
-                }else{
+    if (jobs.get(2).toString().equals("")) {
+        jobs.remove(2);
+    } else {
 
-                }
-                if(jobs.get(1).toString().equals("")){
-                    jobs.remove(1);
-                }else{
+    }
+    if (jobs.get(1).toString().equals("")) {
+        jobs.remove(1);
+    } else {
 
-                }
+    }
 
-              if(jobs.size() > 3){
-                  if(jobs.get(3).toString().equals("")){
-                      jobs.remove(3);
-                  }else {
-                      l.add(jobs.get(3));
-                     // l.add(jobs.get(4));
-                  }
-              }
+    if (jobs.size() > 3) {
+        if (jobs.get(3).toString().equals("")) {
+            jobs.remove(3);
+        } else {
+            l.add(jobs.get(3));
+            // l.add(jobs.get(4));
+        }
+    }
 
 
 

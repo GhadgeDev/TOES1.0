@@ -78,7 +78,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         toastMessage.setTextColor(Color.parseColor("#2E7D32"));
                         toast.show();
 
-
+                        Intent intent = new Intent(ForgotPasswordActivity.this,LoginActivity.class);
+                        startActivity(intent);
 
                         String content = "";
                         content += "code : " + response.code() + "\n";
