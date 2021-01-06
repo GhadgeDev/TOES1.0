@@ -156,7 +156,9 @@ public class SelectJobActivity extends AppCompatActivity implements RecruiterAda
                 refreshRecruiterList.setRefreshing(false);
 
                 dUserName = findViewById(R.id.nav_text_click);
-                dUserName.setText(LoginActivity.userName);
+                String dfname = SelectRoleActivity.textUserfName;
+                String dlname = SelectRoleActivity.textUserlName;
+                dUserName.setText(dfname + " " + dlname);
             }
 
             @Override

@@ -35,8 +35,10 @@ public class
 SelectRoleActivity extends AppCompatActivity {
     SharedPreferences prf;
     TextView txtName;
+
     public static String textUserfName;
     public static String textUserlName;
+
     String selectedLanguage;
     Button btnFindJob,btnFindWorker;
     String token = (String) LoginActivity.token;
@@ -117,9 +119,9 @@ SelectRoleActivity extends AppCompatActivity {
                 content += "name : " + postResponse.getFirst_name() + "\n";
                 content += "lName : " + postResponse.getLast_name() + "\n";
 
-                txtName.setText(postResponse.getFirst_name()+",");
                 textUserfName = postResponse.getFirst_name();
-                textUserlName = postResponse.getFirst_name();
+                textUserlName = postResponse.getLast_name();
+                txtName.setText(postResponse.getFirst_name()+",");
                 System.out.println("Data : _--------- " + content);
 
             }

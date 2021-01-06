@@ -81,6 +81,7 @@ public class ParticularWorkerActivity extends AppCompatActivity {
         particularWorkerName.setText(mWorkerName);
 
         particularWorkerAddress = findViewById(R.id.particular_worker_address);
+
         jobDescription = findViewById(R.id.txtprofession);
 
         mWorkerExp = getIntent().getIntExtra("worker experience", 1);
@@ -106,7 +107,6 @@ public class ParticularWorkerActivity extends AppCompatActivity {
                 sPhone = post.isSmartphone();
 
 
-                particularWorkerAddress.setText(response.body().getAddress());
                 if(RecentPostedJobActivity.indicator == 1) {
                     jobDescription.setText(RecentPostedJobActivity.jbDesc);
                 } else{

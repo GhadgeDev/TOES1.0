@@ -193,7 +193,7 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
 
         //setting string and phone no to send message
         String msg = "Message From Toes" + "\n" + "Recruiter name: " + LoginActivity.userName + "\n" + "Contact no: " + LoginActivity.userPhoneNumber + "\n" + "Address: " + LoginActivity.userAddress;
-        String no = LoginActivity.userPhoneNumber;
+        String no = wPhoneNumber;
         SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
         sms.sendTextMessage(no, null, msg, pi, null);        //method to send sms
 

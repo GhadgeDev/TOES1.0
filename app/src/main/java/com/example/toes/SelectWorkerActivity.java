@@ -228,7 +228,9 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
                 refreshWorkerList.setRefreshing(false);
 
                 dUserName = findViewById(R.id.nav_text_click);
-                dUserName.setText(LoginActivity.userName);
+                String dfname = SelectRoleActivity.textUserfName;
+                String dlname = SelectRoleActivity.textUserlName;
+                dUserName.setText(dfname + " " + dlname);
             }
 
             @Override
