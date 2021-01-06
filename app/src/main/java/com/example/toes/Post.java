@@ -30,6 +30,9 @@ class Post {
     private  int user ;
     //private String re_password;
 
+    @SerializedName("isblocked")
+    private Boolean isblocked;
+
     public Post(String password, String phone) {
         this.password = password;
         this.phone = phone;
@@ -195,4 +198,11 @@ class Post {
         this.user = user;
     }
 
+    public Boolean getIsblocked() {
+        return isblocked;
+    }
+
+    public void setIsblocked(Boolean isblocked) {
+        this.isblocked = isblocked;
+    }
 }

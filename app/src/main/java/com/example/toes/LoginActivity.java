@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     public static String userPhoneNumber;
     public static String userName;
     public static String userAddress;
+    public static boolean userBlocked;
 
     public static String token;
     public static int userMeId;
@@ -277,6 +278,7 @@ public class LoginActivity extends AppCompatActivity {
                 userPhoneNumber = response.body().getPhone();
                 userName = response.body().getFirst_name() + " " + response.body().getLast_name();
                 userAddress = response.body().getAddress();
+                userBlocked = response.body().getIsblocked();
 
                 System.out.println("userId ----------------------------------"+userMeId);
             }
