@@ -114,12 +114,12 @@ SelectRoleActivity extends AppCompatActivity {
                 id = postResponse.getId();
                 System.out.println("Code :------------------- " + response.code());
                 String content = "";
-                content += "name : " + postResponse.getfName() + "\n";
-                content += "lName : " + postResponse.getlName() + "\n";
+                content += "name : " + postResponse.getFirst_name() + "\n";
+                content += "lName : " + postResponse.getLast_name() + "\n";
 
-                txtName.setText(postResponse.getfName()+",");
-                textUserfName = postResponse.getfName();
-                textUserlName = postResponse.getlName();
+                txtName.setText(postResponse.getFirst_name()+",");
+                textUserfName = postResponse.getFirst_name();
+                textUserlName = postResponse.getFirst_name();
                 System.out.println("Data : _--------- " + content);
 
             }

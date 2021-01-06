@@ -58,8 +58,6 @@ public class IdentityProofActivity extends AppCompatActivity {
 
     String newPass = "", cPass = "", aadharNo = "", cAadharNo = "";
 
-    Bitmap bitmap = null;
-
     Integer userme;
 
     ArrayList<String> details2 = new ArrayList<>();
