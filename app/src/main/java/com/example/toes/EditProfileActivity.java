@@ -21,6 +21,7 @@ public class EditProfileActivity extends AppCompatActivity {
     EditText editFname, editLname, editContact, editAddress;
     String fname, lname, contact, address;
 
+
     RadioButton rBtnMale, rBtnFemale, rBtnOther;
     String gender;
 
@@ -31,10 +32,12 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        editFname = findViewById(R.id.edit_profile_fname);
-        editLname = findViewById(R.id.edit_profile_lname);
-        editContact = findViewById(R.id.edit_profile_contact);
-        editAddress = findViewById(R.id.edit_profile_address);
+        editFname = (EditText) findViewById(R.id.edit_profile_fname);
+        editLname = (EditText)findViewById(R.id.edit_profile_lname);
+        editContact = (EditText)findViewById(R.id.edit_profile_contact);
+        editAddress = (EditText)findViewById(R.id.edit_profile_address);
+
+
 
         rBtnMale = findViewById(R.id.edit_profile_male);
         rBtnFemale = findViewById(R.id.edit_profile_female);
@@ -84,4 +87,5 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
     }
+
 }

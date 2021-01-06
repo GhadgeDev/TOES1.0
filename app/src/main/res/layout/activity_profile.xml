@@ -20,9 +20,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:drawableTint="@color/purple_700"
         android:layout_toRightOf="@+id/profile_image"
         android:padding="8dp"
-        android:text="Niket Jadhav"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="20sp" />
 
@@ -34,7 +35,7 @@
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/profile_image"
         android:padding="8dp"
-        android:text="1234567891"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="20sp" />
 
@@ -46,7 +47,7 @@
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/profile_image"
         android:padding="8dp"
-        android:text="MALE"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="20sp" />
 
@@ -58,7 +59,7 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:lineSpacingExtra="8dp"
-        android:text="Adhar Number: 123456789012"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="15sp" />
 
@@ -71,7 +72,7 @@
         android:layout_margin="10dp"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Katraj, Pune - 411046"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="15sp" />
 
@@ -101,19 +102,36 @@
         android:text="Logout"
         android:textColor="@color/white"
         android:textSize="15sp" />
+<LinearLayout
+    android:layout_below="@+id/txtprofile_address"
+    android:gravity="right"
+    android:layout_width="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:background="@drawable/devnagaribtn"
+    android:layout_margin="25dp"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+<Button
+    android:id="@+id/btnEditJob"
+    android:layout_width="20dp"
+    android:layout_height="20dp"
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:padding="1dp"
+    android:drawableTint="#384ABC"
+    android:textColor="#3494F3"
+    android:background="@drawable/editpen1"
 
 
+   />
     <LinearLayout
         android:id="@+id/linear1"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_below="@+id/txtprofile_address"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="25dp"
-        android:background="@drawable/devnagaribtn"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+
+
         android:orientation="horizontal"
-        android:padding="20dp">
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/txtNoProfession"
@@ -160,7 +178,7 @@
             android:visibility="gone" />
 
     </LinearLayout>
-
+</LinearLayout>
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"

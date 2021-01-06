@@ -159,7 +159,9 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
                     Toast toast = Toast.makeText(mContext, "Give SMS permission to this app from setting then again accept job", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
+
                     sendSms();
+
                 }
 
 

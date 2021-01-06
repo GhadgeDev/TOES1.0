@@ -38,11 +38,15 @@ public class ProfileActivity extends AppCompatActivity {
     private Button mEditButton;
 
     TextView txtName, txtPhone, txtGender, txtaadhar, txtaddr, txtProfession;
+    Button btnEditJob;
     ImageView profile_image;
     Button btnJob1, btnJob2, btnJob3, btnGo;
+    static boolean updateJob = false;
+    static int updateId;
     String token = "";
     ArrayList<String> jobs = new ArrayList<>();
 
+    static boolean btn1 = false,btn2 = false,btn3 = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +64,11 @@ public class ProfileActivity extends AppCompatActivity {
         btnJob1 = (Button) findViewById(R.id.btnJob1);
         btnJob2 = (Button) findViewById(R.id.btnJob2);
         btnJob3 = (Button) findViewById(R.id.btnJob3);
-
+        btnEditJob = (Button) findViewById(R.id.btnEditJob);
         txtProfession = (TextView) findViewById(R.id.txtNoProfession);
 
         Intent intent1 = getIntent();
         token = "Token " + LoginActivity.token;
-
         //For http log
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
         okHttpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -80,6 +83,20 @@ public class ProfileActivity extends AppCompatActivity {
         Retrofit retrofit1 = retrofit.build();
 
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit1.create(JsonPlaceHolderApi.class);
+
+
+        btnEditJob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Call<WorkerJobDetails> deleteProfession1 = jsonPlaceHolderApi.deleteProfession1(token,updateId);
+                //updateJob = true;
+                DeleteDilouge deleteDilouge = new DeleteDilouge();
+                deleteDilouge.show(getSupportFragmentManager(), "delete dialog");
+               /* Intent editJobi = new Intent(ProfileActivity.this,JobSeletionActivity.class);
+                startActivity(editJobi);*/
+            }
+        });
+
 
         Call<Post> call = jsonPlaceHolderApi.getPost(token);
         call.enqueue(new Callback<Post>() {
@@ -104,8 +121,8 @@ public class ProfileActivity extends AppCompatActivity {
                 txtName.setText(postResponse.getfName() + " " + postResponse.getlName());
                 txtPhone.setText(postResponse.getPhone());
                 txtGender.setText(postResponse.getGender());
-                txtaadhar.setText(postResponse.getAdharNo());
-                txtaddr.setText(postResponse.getAddress());
+                txtaadhar.setText("Aadhar Card No : "+postResponse.getAdharNo());
+                txtaddr.setText("Address : "+postResponse.getAddress());
                 //    String mImgUrl = "";
                 //      mImgUrl = "http://52.201.220.252/" + postResponse.getProfile_image();
                 //     profile_image.setImageURI(Uri.parse(mImgUrl));
@@ -117,9 +134,11 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
                 System.out.println("Filed in ProfileActivity : " + t.getMessage());
+
             }
         });
 
+        //to fetch the jobs
         Call<List<Worker>> job = jsonPlaceHolderApi.getJobs(token,SelectRoleActivity.id);
         job.enqueue(new Callback<List<Worker>>() {
             @Override
@@ -135,56 +154,78 @@ public class ProfileActivity extends AppCompatActivity {
                     jobs.add(job.getCategory_1());
 
 
-                    //jobs.add(job.getCategory_2());
+                    jobs.add(job.getCategory_2());
 
 
 
-                  //  jobs.add(job.getCategory_3());
+                    jobs.add(job.getCategory_3());
 
+                    jobs.add(job.getId());
                 }
 
                 ArrayList<String> l = new ArrayList<>();
                 System.out.println("jobs :------------------- " + jobs);
-                System.out.println("Workers :------------------- " + worker);
 
-                l.add(jobs.get(0));
-                l.add(jobs.get(1));
-                l.add(jobs.get(2));
-                int size = l.size();
-                System.out.println("L list :------------------- " + l);
+        int jsize = jobs.size();
+                System.out.println("Workers :------------------- " + response.body());
 
-                /*if (size == 1) {
+
+
+                if(jobs.get(2).toString().equals("")){
+                    jobs.remove(2);
+                }else{
+
+                }
+                if(jobs.get(1).toString().equals("")){
+                    jobs.remove(1);
+                }else{
+
+                }
+
+              if(jobs.size() > 3){
+                  if(jobs.get(3).toString().equals("")){
+                      jobs.remove(3);
+                  }else {
+                      l.add(jobs.get(3));
+                     // l.add(jobs.get(4));
+                  }
+              }
+
+
+
+                int size = jobs.size();
+           //     System.out.println("L list :------------------- " + l);
+                System.out.println("Jobs after remove :------------------- " + jobs);
+                System.out.println("Size list :------------------- " + size);
+//                System.out.println("id :------------------- " + l.get(size-1));
+
+                updateId = Integer.parseInt(jobs.get(size-1));
+                System.out.println("UId :------------------- " + updateId);
+                if (size == 2) {
                     txtProfession.setVisibility(View.GONE);
                     btnJob1.setVisibility(View.VISIBLE);
-                    btnJob1.setText(l.get(0));
-                } else if (size == 2) {
+                    btnJob1.setText(jobs.get(0));
+                } else if (size == 3) {
                     txtProfession.setVisibility(View.GONE);
                     btnJob1.setVisibility(View.VISIBLE);
-                    btnJob1.setText(l.get(0));
+                    btnJob1.setText(jobs.get(0));
 
                     btnJob2.setVisibility(View.VISIBLE);
-                    btnJob2.setText(l.get(1));
-                } else if (size == 3) {*/
+                    btnJob2.setText(jobs.get(1));
+                } else if (size == 4) {
                     txtProfession.setVisibility(View.GONE);
 
-                    if(l.get(0).toString().equals(l.get(1).toString()) && l.get(2).toString().equals(l.get(1).toString()) && l.get(0).toString().equals(l.get(2).toString())  ){
+
                         txtProfession.setVisibility(View.GONE);
                         btnJob1.setVisibility(View.VISIBLE);
-                        btnJob1.setText(l.get(0));
-                    }else if(l.get(0).toString().equals(l.get(2).toString())){
-                        txtProfession.setVisibility(View.GONE);
-                        btnJob1.setVisibility(View.VISIBLE);
-                        btnJob1.setText(l.get(0));
+                        btnJob1.setText(jobs.get(0));
+
+
                         btnJob2.setVisibility(View.VISIBLE);
-                        btnJob2.setText(l.get(1));
-                    }else {
-                        txtProfession.setVisibility(View.GONE);
-                        btnJob1.setVisibility(View.VISIBLE);
-                        btnJob1.setText(l.get(0));
-                        btnJob2.setVisibility(View.VISIBLE);
-                        btnJob2.setText(l.get(1));
+                        btnJob2.setText(jobs.get(1));
+
                         btnJob3.setVisibility(View.VISIBLE);
-                        btnJob3.setText(l.get(2));
+                        btnJob3.setText(jobs.get(2));
                     }
 
               //  }
@@ -221,4 +262,5 @@ public class ProfileActivity extends AppCompatActivity {
         LogoutDialog logoutDialog = new LogoutDialog();
         logoutDialog.show(getSupportFragmentManager(), "logout dialog");
     }
+
 }
