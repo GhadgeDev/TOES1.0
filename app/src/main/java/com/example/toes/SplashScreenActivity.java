@@ -21,7 +21,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     static boolean IsLoggedIn = false;
     static int rId;
-   // static String token;
+    // static String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

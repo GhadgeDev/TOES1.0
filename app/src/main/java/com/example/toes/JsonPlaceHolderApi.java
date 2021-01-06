@@ -74,7 +74,7 @@ interface JsonPlaceHolderApi {
 
     //Update Worker Job Details
     @FormUrlEncoded
-    @PUT("/workerdetail/{id}/")
+    @PATCH("/workerdetail/{id}/")
     Call<WorkerJobDetails> updateWorkerJobInfo(@Header("Authorization") String token,
                                                @Field("city") String city,
                                                @Field("category_1") String category_1,

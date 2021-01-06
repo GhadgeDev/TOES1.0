@@ -221,7 +221,6 @@ public class IdentityProofActivity extends AppCompatActivity {
         File file = new File(String.valueOf(SignUpActivity.finalFile));
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"),file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("profile_image", file.getName(), requestFile);
-
         Call<GetProfileImage> call = uploadImage.updateProfile(body,userme);
         call.enqueue(new Callback<GetProfileImage>() {
             @Override
@@ -234,7 +233,6 @@ public class IdentityProofActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(IdentityProofActivity.this, "Profile uploaded!", Toast.LENGTH_SHORT);
                 toast.show();
             }
-
             @Override
             public void onFailure(Call<GetProfileImage> call, Throwable t) {
                 Toast toast = Toast.makeText(IdentityProofActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
@@ -243,7 +241,6 @@ public class IdentityProofActivity extends AppCompatActivity {
                 toast.show();
             }
         });
-
     }*/
 
 }
