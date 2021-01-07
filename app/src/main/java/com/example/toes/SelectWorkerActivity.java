@@ -52,6 +52,8 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
     private WorkerAdapter adapter;
     private SwipeRefreshLayout refreshWorkerList;
 
+    public static String workerPhnNo;
+    public static Integer isSmartPhone;
     public static int RworkerId;
     private static final String EXTRA_ITEM_SELECTED_IS = "recruiter.home.activity.itemSelected";
 
@@ -173,6 +175,8 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         intent.putExtra("worker experience", lstWorker.get(position).getExperience());
         intent.putExtra("worker address",lstWorker.get(position).getAddress());
         RworkerId = lstWorker.get(position).getWorkerId();
+        isSmartPhone = lstWorker.get(position).getSmartphone();
+        workerPhnNo = lstWorker.get(position).getContactNo();
         startActivity(intent);
     }
 

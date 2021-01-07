@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.Button;
@@ -32,7 +35,7 @@ public class ParticularWorkerActivity extends AppCompatActivity {
     private TextView particularWorkerAddress;
     private TextView particularWorkerExperience;
     private TextView jobDescription;
-    private Button hireButton,btnCall;
+    private Button hireButton, btnCall;
 
     private TextView countDownText;
     private CountDownTimer countDownTimer;
@@ -48,7 +51,6 @@ public class ParticularWorkerActivity extends AppCompatActivity {
         countDownText = findViewById(R.id.count_down_tv);
 
         hireButton = findViewById(R.id.hire_btn);
-        btnCall = (Button)findViewById(R.id.call_btn);
         hireButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -69,10 +71,15 @@ public class ParticularWorkerActivity extends AppCompatActivity {
 
                 startStop();
 
-                if (RecentPostedJobActivity.indicator == 1) {
-                    postHireReq(RecentPostedJobActivity.jbId);
+                if (SelectWorkerActivity.isSmartPhone == 1) {
+                    sendSmsToMySelf();
+                    sendSmsToWorker();
                 } else {
-                    postHireReq();
+                    if (RecentPostedJobActivity.indicator == 1) {
+                        postHireReq(RecentPostedJobActivity.jbId);
+                    } else {
+                        postHireReq();
+                    }
                 }
             }
         });
@@ -106,13 +113,10 @@ public class ParticularWorkerActivity extends AppCompatActivity {
                     System.out.println("Response M : _--------- " + response.message());
                     return;
                 }
-                Post post = response.body();
-                sPhone = post.isSmartphone();
 
-
-                if(RecentPostedJobActivity.indicator == 1) {
+                if (RecentPostedJobActivity.indicator == 1) {
                     jobDescription.setText(RecentPostedJobActivity.jbDesc);
-                } else{
+                } else {
                     jobDescription.setText(RecruiterHomeActivity.jobDescVal);
                 }
             }
@@ -125,15 +129,6 @@ public class ParticularWorkerActivity extends AppCompatActivity {
                 toast.show();
             }
         });
-
-        if (!sPhone){
-                System.out.println("In not smart phone-------------------");
-                btnCall.setVisibility(View.VISIBLE);
-                hireButton.setVisibility(View.GONE);
-
-        }else{
-            System.out.println("In smart phone---------------------");
-        }
 
     }
 
@@ -232,5 +227,38 @@ public class ParticularWorkerActivity extends AppCompatActivity {
                 toast.show();
             }
         });
+    }
+
+    public void sendSmsToMySelf() {
+
+        //Messages
+        //Creating intent of current activity/fragment/context
+        Intent intent = new Intent(ParticularWorkerActivity.this, WorkerViewRequestRecyclerAdapter.class);
+        PendingIntent pi = PendingIntent.getActivity(ParticularWorkerActivity.this, 0, intent, 0);
+
+        //setting string and phone no to send message
+        String msg = "Message From Toes" + "\n" + "Worker name: " + mWorkerName + "\n" + "Contact no: " + SelectWorkerActivity.workerPhnNo + "\n" + "Address: " + mWorkerAdd;
+        String no = LoginActivity.userPhoneNumber;
+
+        SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
+        sms.sendTextMessage(no, null, msg, pi, null);        //method to send sms
+
+        Toast.makeText(ParticularWorkerActivity.this, "Message Sent successfully!", Toast.LENGTH_LONG).show();
+    }
+
+    public void sendSmsToWorker() {
+
+        //Messages
+        //Creating intent of current activity/fragment/context
+        Intent intent = new Intent(ParticularWorkerActivity.this, WorkerViewRequestRecyclerAdapter.class);
+        PendingIntent pi = PendingIntent.getActivity(ParticularWorkerActivity.this, 0, intent, 0);
+
+        //setting string and phone no to send message
+        String msg = "Message From Toes" + "\n" + "Recruiter name: " + LoginActivity.userName + "\n" + "Contact no: " + LoginActivity.userPhoneNumber + "\n" + "Address: " + LoginActivity.userAddress;
+        String no = SelectWorkerActivity.workerPhnNo;
+        SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
+        sms.sendTextMessage(no, null, msg, pi, null);        //method to send sms
+
+        Toast.makeText(ParticularWorkerActivity.this, "Message Sent successfully!", Toast.LENGTH_LONG).show();
     }
 }

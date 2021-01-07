@@ -29,6 +29,8 @@ public class GetSpecificWorkerModel {
     @SerializedName("address")
     private String address;
 
+    @SerializedName("smartphone")
+    private Integer smartphone;
 
     public String getFname() {
         return fname;
@@ -92,5 +94,13 @@ public class GetSpecificWorkerModel {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Integer getSmartphone() {
+        return smartphone;
+    }
+
+    public void setSmartphone(Integer smartphone) {
+        this.smartphone = smartphone;
     }
 }

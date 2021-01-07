@@ -152,8 +152,10 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
                     Toast toast = Toast.makeText(mContext, "Give SMS permission to this app from setting then again accept job", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
-                    sendSmsToMySelf();
-                    sendSmsToWorker(wPhoneNumber);
+                    if (status == 2) {
+                        sendSmsToMySelf();
+                        sendSmsToWorker(wPhoneNumber);
+                    }
                 }
             }
 
