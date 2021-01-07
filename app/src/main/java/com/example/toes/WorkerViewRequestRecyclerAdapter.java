@@ -145,7 +145,6 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
     }
 
     JsonPlaceHolderApi acceptRejectApi = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
-
     public void callAcceptRejectApi() {
         Call<GetAcceptRejectBtnClick> call = acceptRejectApi.getAcceptRejectBtnClick("token " + LoginActivity.token, status, viewJob_id);
         call.enqueue(new Callback<GetAcceptRejectBtnClick>() {
@@ -163,13 +162,11 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
                     Toast toast = Toast.makeText(mContext, "Give SMS permission to this app from setting then again accept job", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
-                    if(status == 2) {
+                    if (status == 2) {
                         sendSmsToMySelf();
                         sendSmsToRecruiter(rPhoneNumber);
                     }
                 }
-
-
             }
 
 
@@ -196,7 +193,7 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
         String no = LoginActivity.userPhoneNumber;
         SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
         sms.sendTextMessage(no, null, msg, pi, null);        //method to send sms
-        Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!",Toast.LENGTH_LONG).show();
+        Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
     }
 
     public void sendSmsToRecruiter(String wPhoneNumber) {
