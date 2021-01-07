@@ -147,12 +147,11 @@ interface JsonPlaceHolderApi {
     @FormUrlEncoded
     @PATCH("users/{me}/")
     Call<Post> editProfile(@Header("Authorization") String token,
+                           @Path("me") int id,
                            @Field("first_name") String fName,
                            @Field("last_name") String lName,
                            @Field("gender") String g,
-                           @Field("address") String address,
-                           @Field("phone") String contact,
-                           @Path("me") int id);
+                           @Field("address") String address);
 
     //Get worker side accept reject button click
     @GET("api/worreq/{status}/{viewJob_id}")

@@ -18,9 +18,8 @@ import retrofit2.Response;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    EditText editFname, editLname, editContact, editAddress;
+    EditText editFname, editLname, editAddress;
     String fname, lname, contact, address;
-
 
     RadioButton rBtnMale, rBtnFemale, rBtnOther;
     String gender;
@@ -33,10 +32,8 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
 
         editFname = (EditText) findViewById(R.id.edit_profile_fname);
-        editLname = (EditText)findViewById(R.id.edit_profile_lname);
-        editContact = (EditText)findViewById(R.id.edit_profile_contact);
-        editAddress = (EditText)findViewById(R.id.edit_profile_address);
-
+        editLname = (EditText) findViewById(R.id.edit_profile_lname);
+        editAddress = (EditText) findViewById(R.id.edit_profile_address);
 
 
         rBtnMale = findViewById(R.id.edit_profile_male);
@@ -49,7 +46,6 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 fname = editFname.getText().toString();
                 lname = editLname.getText().toString();
-                contact = editContact.getText().toString();
                 address = editAddress.getText().toString();
 
                 if (rBtnMale.isChecked()) {
@@ -60,8 +56,15 @@ public class EditProfileActivity extends AppCompatActivity {
                     gender = rBtnOther.getText().toString();
                 }
 
+                if (editFname.getText().toString().isEmpty() || editLname.getText().toString().isEmpty() || editAddress.getText().toString().isEmpty()) {
+                    Toast.makeText(EditProfileActivity.this, "Please fill all fields !", Toast.LENGTH_SHORT).show();
+                }
+                if (rBtnMale.getText().toString().isEmpty() || rBtnFemale.getText().toString().isEmpty() || rBtnOther.getText().toString().isEmpty()) {
+                    Toast.makeText(EditProfileActivity.this, "Please fill all fields !", Toast.LENGTH_SHORT).show();
+                }
+
                 JsonPlaceHolderApi editProfile = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
-                Call<Post> call = editProfile.editProfile("token " + LoginActivity.token, fname, lname, gender, address, contact, LoginActivity.userMeId);
+                Call<Post> call = editProfile.editProfile("token " + LoginActivity.token, LoginActivity.userMeId, fname, lname, gender, address);
                 call.enqueue(new Callback<Post>() {
                     @Override
                     public void onResponse(Call<Post> call, Response<Post> response) {
@@ -87,5 +90,4 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
     }
-
 }
