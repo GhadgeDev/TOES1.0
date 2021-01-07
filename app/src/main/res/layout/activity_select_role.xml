@@ -80,4 +80,16 @@
         android:layout_below="@+id/btnFindWorker"
         android:src="@drawable/thinking"
         />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnCall"
+        android:layout_width="50dp"
+        android:visibility="gone"
+        android:layout_height="50dp"
+        android:layout_margin="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:foreground="@drawable/alert"
+        android:src="@drawable/alert"
+        android:layout_alignParentRight="true"
+        />
 </RelativeLayout>

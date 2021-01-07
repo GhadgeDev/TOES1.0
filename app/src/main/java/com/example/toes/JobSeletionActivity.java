@@ -56,6 +56,10 @@ public class JobSeletionActivity extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.style_select_job_titles, jobTitles);
         spinnerCity.setAdapter(arrayAdapter);
 
+        if(ProfileActivity.jobs.size() > 0){
+            ProfileActivity.jobs.clear();
+        }
+
         job.removeAll(job);
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override

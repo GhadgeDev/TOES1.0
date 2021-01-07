@@ -2,6 +2,7 @@ package com.example.toes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
-
+    private ProgressDialog loadingBar;
     Button btnSendOtp;
     EditText etPhone;
     @Override
@@ -30,7 +31,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
         btnSendOtp = (Button)findViewById(R.id.btnSendOTP);
         etPhone = (EditText)findViewById(R.id.etPhone);
-
+        loadingBar = new ProgressDialog(this);
         //For http log
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
         okHttpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -51,12 +52,17 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Post post = new Post();
+                loadingBar.setTitle("Loading");
+                loadingBar.setMessage("Please wait..");
+                loadingBar.setCanceledOnTouchOutside(true);
+                loadingBar.show();
                 Call<User> call = jsonPlaceHolderApi.sendOTP(etPhone.getText().toString());
 
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         if (!response.isSuccessful()) {
+                            loadingBar.dismiss();
                             System.out.println("Response : _--------- " + response.code());
                             System.out.println("Response M : _--------- " + response.message());
                             if (response.code() == 400) {
@@ -68,7 +74,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             }
                             return;
                         }
-
+                        loadingBar.dismiss();
 
                         //     Post postResponse = response.body();
                         System.out.println("----------------------------------------------------");
@@ -89,6 +95,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
+                        loadingBar.dismiss();
+
                         System.out.println("fail : _--------- " + t.getMessage());
                         Toast toast = Toast.makeText(ForgotPasswordActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
                         View view = toast.getView();

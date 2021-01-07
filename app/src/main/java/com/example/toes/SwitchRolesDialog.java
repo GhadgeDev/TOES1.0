@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class SwitchRolesDialog extends DialogFragment {
     private TextView mTextSureMsg;
     @NonNull
@@ -21,6 +23,7 @@ public class SwitchRolesDialog extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.switch_roles_dialog,null);
+
 
         builder.setView(view).setTitle("Switch Roles")
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

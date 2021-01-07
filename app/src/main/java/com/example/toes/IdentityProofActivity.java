@@ -59,9 +59,9 @@ public class IdentityProofActivity extends AppCompatActivity {
     String newPass = "", cPass = "", aadharNo = "", cAadharNo = "";
 
     Integer userme;
-
+    static String name = "";
     ArrayList<String> details2 = new ArrayList<>();
-
+    static int uid ;
     JsonPlaceHolderApi jsonPlaceHolderApi;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -173,16 +173,29 @@ public class IdentityProofActivity extends AppCompatActivity {
                             content += "gender : " + postResponse.getGender() + "\n";
                             content += "username : " + postResponse.getUsername() + "\n";
                             System.out.println("Data : _--------- " + content);
-
+                            String gender = postResponse.getGender();
                             userme = response.body().getId();
+                            name = response.body().getFirst_name().toString();
+                            uid = response.body().getId();
+                            if(gender.toString().equals("female") || gender.toString().equals("Female") ){
+
+                                Intent go = new Intent(IdentityProofActivity.this, EmergencyActiviy.class);
+                                go.putExtra(Intent.EXTRA_TEXT, selectedLanguage);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(go);
+
+                            }else{
+                                Intent go = new Intent(IdentityProofActivity.this, LoginActivity.class);
+                                go.putExtra(Intent.EXTRA_TEXT, selectedLanguage);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(go);
+                            }
 
 
-                            Intent go = new Intent(IdentityProofActivity.this, LoginActivity.class);
-                            go.putExtra(Intent.EXTRA_TEXT, selectedLanguage);
 
 
 
-                            startActivity(go);
+
 
                         }
                         @Override

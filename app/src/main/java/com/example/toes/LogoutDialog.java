@@ -94,11 +94,7 @@ public class LogoutDialog extends DialogFragment {
                             @Override
                             public void onFailure(Call<User> call, Throwable t) {
                                 System.out.println("fail : _--------- " + t.getMessage());
-                                /*Toast toast = Toast.makeText(, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
-                                View view = toast.getView();
-                                TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-                                toastMessage.setTextColor(Color.RED);
-                                toast.show();*/
+
                             }
                         });
 

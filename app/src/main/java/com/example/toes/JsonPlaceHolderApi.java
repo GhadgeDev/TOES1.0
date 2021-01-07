@@ -195,4 +195,15 @@ interface JsonPlaceHolderApi {
     Call<WorkerJobDetails> deleteProfession1(@Header("Authorization") String token,
                                              @Path("id") int id);
 
+    //Post Emergency Call
+    @FormUrlEncoded
+    @POST("/emergency")
+    Call<EmergencyContact> postEmergencyContact(@Field("contact_no") String contact_no,
+                                                @Field("user") int user);
+
+    //get Emergency Contact
+    @GET("/api/get/emergency/{id}")
+    Call<EmergencyContact> getEmergencyContact(@Header("Authorization") String token,
+                                               @Path("id") int id);
+
 }

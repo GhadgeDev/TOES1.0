@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EmergencyActiviy">
+
+    <TextView
+        android:id="@+id/heytxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:text="Hey"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:text="name,"
+        android:textSize="20sp"
+        android:layout_below="@+id/heytxt"
+        />
+    <TextView
+        android:id="@+id/txtMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:text="Please enter your\nparent's/guardians\ncontact number in case of emergency"
+        android:textSize="20sp"
+        android:layout_below="@+id/txtName"
+        />
+
+    <TextView
+        android:id="@+id/txtEContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/txtMessage"
+        android:text="Emergency Contact"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+    <EditText
+        android:id="@+id/etEcontact"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:layout_below="@id/txtEContact"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:inputType="phone"
+        android:maxLength="10"
+        android:gravity="center"
+        android:padding="5dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/devnagaribtn"/>
+    <Button
+        android:id="@+id/btnGetIn"
+        android:layout_width="100dp"
+        android:layout_height="55dp"
+        android:layout_below="@id/etEcontact"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/englishbutton"
+        android:text="Get'In"
+        android:textColor="@color/white"
+        />
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:src="@drawable/e2"
+        android:layout_margin="45dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btnGetIn"
+        />
+</RelativeLayout>

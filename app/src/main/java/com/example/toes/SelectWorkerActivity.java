@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -51,7 +52,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
     private TextView mJobNameTextView, txtName;
     private WorkerAdapter adapter;
     private SwipeRefreshLayout refreshWorkerList;
-
+    private ProgressDialog loadingBar;
     public static String workerPhnNo;
     public static Integer isSmartPhone;
     public static int RworkerId;
@@ -67,7 +68,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_worker);
-
+        loadingBar = new ProgressDialog(this);
         workerList = findViewById(R.id.worker_list);
         refreshWorkerList = findViewById(R.id.refresh_worker_list);
 
@@ -217,16 +218,25 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
 
     JsonPlaceHolderApi workersList = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
     public void callToGetAllWorkers(String selectedItemIs){
+        loadingBar.setTitle("Loading");
+        loadingBar.setMessage("Please wait..");
+        loadingBar.setCanceledOnTouchOutside(true);
+        loadingBar.show();
         Call<List<GetSpecificWorkerModel>> call = workersList.getWorkerInfo("token " + LoginActivity.token,selectedItemIs);
         mJobNameTextView.setText(selectedItemIs);
         call.enqueue(new Callback<List<GetSpecificWorkerModel>>() {
+
+
             @Override
             public void onResponse(@NotNull Call<List<GetSpecificWorkerModel>> call, @NotNull Response<List<GetSpecificWorkerModel>> response) {
                 if (!response.isSuccessful()) {
+                    loadingBar.dismiss();
+
                     Toast toast = Toast.makeText(SelectWorkerActivity.this, "Unsuccessfully !", Toast.LENGTH_SHORT);
                     toast.show();
                     return;
                 }
+                loadingBar.dismiss();
 
                 lstWorker = response.body();
                 adapter = new WorkerAdapter(SelectWorkerActivity.this, lstWorker, SelectWorkerActivity.this);
@@ -242,6 +252,8 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
 
             @Override
             public void onFailure(Call<List<GetSpecificWorkerModel>> call, Throwable t) {
+                loadingBar.dismiss();
+
                 Toast toast = Toast.makeText(SelectWorkerActivity.this, "In Select worker activity Please Check your Internet Connection !", Toast.LENGTH_SHORT);
                 TextView toastMessage = toast.getView().findViewById(android.R.id.message);
                 toastMessage.setTextColor(Color.RED);
