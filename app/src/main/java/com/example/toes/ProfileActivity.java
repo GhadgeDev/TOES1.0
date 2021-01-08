@@ -109,7 +109,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         //connecting to base url
         Retrofit.Builder retrofit = new Retrofit.Builder().
-                baseUrl("http://52.201.220.252/")
+                baseUrl("http://65.1.2.12/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit1 = retrofit.build();
@@ -162,7 +162,7 @@ public class ProfileActivity extends AppCompatActivity {
                 txtaadhar.setText("Aadhar Card No : "+postResponse.getAadhar_no());
                 txtaddr.setText("Address : "+postResponse.getAddress());
                 //    String mImgUrl = "";
-                //      mImgUrl = "http://52.201.220.252/" + postResponse.getProfile_image();
+                //      mImgUrl = "http://65.1.2.12/" + postResponse.getProfile_image();
                 //     profile_image.setImageURI(Uri.parse(mImgUrl));
 
                 System.out.println("Data : _--------- " + content);
