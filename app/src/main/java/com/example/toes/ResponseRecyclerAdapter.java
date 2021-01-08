@@ -75,7 +75,7 @@ public class ResponseRecyclerAdapter extends RecyclerView.Adapter<ResponseRecycl
                             mContext.startActivity(intent);
                         }
                         else{
-                            Toast.makeText(mContext,"Request is not accepted yet !",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mContext,"Request is not accepted !",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
