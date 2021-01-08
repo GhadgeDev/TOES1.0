@@ -76,6 +76,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         Toast toast = Toast.makeText(EditProfileActivity.this, "Profile updated", Toast.LENGTH_SHORT);
                         toast.show();
                         Intent intent = new Intent(EditProfileActivity.this, SelectRoleActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
 

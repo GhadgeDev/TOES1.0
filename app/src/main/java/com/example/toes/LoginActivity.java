@@ -26,7 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,9 +66,10 @@ public class LoginActivity extends AppCompatActivity {
 
     public static String token;
     public static int userMeId;
-   public static SharedPreferences sp;
+    public static SharedPreferences sp;
 
-   static ArrayList<String> tokenDetail = new ArrayList<>();
+    static ArrayList<String> tokenDetail = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
         labelContact = (TextView) findViewById(R.id.lableContact);
         lablePass = (TextView) findViewById(R.id.lablePass);
         txtForgotPass = (TextView) findViewById(R.id.txtForgotPass);
-        prf = getSharedPreferences("user_details",MODE_PRIVATE);
+        prf = getSharedPreferences("user_details", MODE_PRIVATE);
         cbShow = (CheckBox) findViewById(R.id.cbShowPass);
 
         btnLogIn = (Button) findViewById(R.id.btnSignIn);
@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         registerReceiver(new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                Log.d("onReceive","Logout in progress");
+                Log.d("onReceive", "Logout in progress");
                 //At this point you should start the login activity and finish this one
                 finish();
             }
@@ -180,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
                 Post post = new Post(pass, uName);
                 Call<User> call = jsonPlaceHolderApi.createPost(post);
 
-               call.enqueue(new Callback<User>() {
+                call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         if (!response.isSuccessful()) {
@@ -197,28 +197,28 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
 
-                          //  Post postResponse = response.body();
+                        //  Post postResponse = response.body();
                         System.out.println("----------------------------------------------------");
-                        Toast toast = Toast.makeText(LoginActivity.this, "Log In successfully ! " , Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(LoginActivity.this, "Log In successfully ! ", Toast.LENGTH_SHORT);
                         View view = toast.getView();
                         TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
 
                         toastMessage.setTextColor(Color.parseColor("#2E7D32"));
                         toast.show();
                         userMeId = response.body().getId();
-                        LoginActivity.token =  response.body().getAuth_token();
-                        System.out.println("----------------------------------------------------"+LoginActivity.token);
+                        LoginActivity.token = response.body().getAuth_token();
+                        System.out.println("----------------------------------------------------" + LoginActivity.token);
                         callFirst();
 
                         tokenDetail.add(selectedLanguage);
                         tokenDetail.add(response.body().getAuth_token());
-                        System.out.println("details"+tokenDetail);
+                        System.out.println("details" + tokenDetail);
 
-                        sp.edit().putBoolean("logged",true).apply();
-                        sp.edit().putString("token",token).apply();
+                        sp.edit().putBoolean("logged", true).apply();
+                        sp.edit().putString("token", token).apply();
                         Intent intent1 = new Intent(LoginActivity.this, SelectRoleActivity.class);
                         intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent1.putExtra("tokenDetails",tokenDetail);
+                        intent1.putExtra("tokenDetails", tokenDetail);
                         startActivity(intent1);
 
                         String content = "";
@@ -242,13 +242,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     public void onCheck(View view) {
         boolean checked = ((CheckBox) view).isChecked();
         switch (view.getId()) {
             case R.id.cbShowPass:
-                if (checked){
+                if (checked) {
                     etPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                }else{
+                } else {
 
                     etPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 }
@@ -256,6 +257,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
     }
+
     public void forgotPass(View view) {
         Intent forgotPass = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
         startActivity(forgotPass);
@@ -263,25 +265,26 @@ public class LoginActivity extends AppCompatActivity {
 
     JsonPlaceHolderApi callToApi = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
 
-    public void callFirst(){
+    public void callFirst() {
         Call<Post> call1 = callToApi.getPost("token " + token);
         call1.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     Toast toast = Toast.makeText(LoginActivity.this, "ERROR :( ", Toast.LENGTH_SHORT);
                     toast.show();
                     return;
                 }
                 userMeId = response.body().getId();
-                sp.edit().putInt("uid",userMeId).apply();
+                sp.edit().putInt("uid", userMeId).apply();
                 userPhoneNumber = response.body().getPhone();
                 userName = response.body().getFirst_name() + " " + response.body().getLast_name();
                 userAddress = response.body().getAddress();
                 userBlocked = response.body().getIsblocked();
 
-                System.out.println("userId ----------------------------------"+userMeId);
+                System.out.println("userId ----------------------------------" + userMeId);
             }
+
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
                 Toast toast = Toast.makeText(LoginActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);

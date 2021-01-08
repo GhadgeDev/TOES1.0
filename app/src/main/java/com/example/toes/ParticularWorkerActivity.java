@@ -1,5 +1,6 @@
 package com.example.toes;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +8,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,14 +45,15 @@ public class ParticularWorkerActivity extends AppCompatActivity {
     private boolean timerRunning;
     private boolean sPhone = true;
 
+    private List<GetWorkerViewRequestModel> lstRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_particular_worker);
 
         countDownText = findViewById(R.id.count_down_tv);
-
         hireButton = findViewById(R.id.hire_btn);
+        callToGetViewRequests();
         hireButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -83,6 +86,7 @@ public class ParticularWorkerActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         mWorkerName = getIntent().getStringExtra("worker name");
         particularWorkerName = findViewById(R.id.particular_worker_name);
@@ -148,7 +152,7 @@ public class ParticularWorkerActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-
+                
             }
         }.start();
         timerRunning = true;
@@ -260,5 +264,37 @@ public class ParticularWorkerActivity extends AppCompatActivity {
         sms.sendTextMessage(no, null, msg, pi, null);        //method to send sms
 
         Toast.makeText(ParticularWorkerActivity.this, "Message Sent successfully!", Toast.LENGTH_LONG).show();
+    }
+
+    public void callToGetViewRequests(){
+        JsonPlaceHolderApi viewRequests = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+        Call<List<GetWorkerViewRequestModel>> call = viewRequests.getWorkerViewRequest("token " + LoginActivity.token,
+                SelectWorkerActivity.RworkerId);
+        call.enqueue(new Callback<List<GetWorkerViewRequestModel>>() {
+            @Override
+            public void onResponse(Call<List<GetWorkerViewRequestModel>> call, Response<List<GetWorkerViewRequestModel>> response) {
+                if(!response.isSuccessful()){
+                    Toast toast = Toast.makeText(ParticularWorkerActivity.this, "Unsuccessfully !", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                lstRequest = response.body();
+                for(GetWorkerViewRequestModel lst : lstRequest){
+                    int wId = lst.getWorkerId();
+                    int jId = lst.getJobId();
+                    if ((jId == RecentPostedJobActivity.jbId || jId == RecruiterHomeActivity.RjbDetail) && (wId == SelectWorkerActivity.RworkerId)) {
+                        hireButton.setVisibility(View.INVISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<GetWorkerViewRequestModel>> call, Throwable t) {
+                Toast toast = Toast.makeText(ParticularWorkerActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                TextView toastMessage = toast.getView().findViewById(android.R.id.message);
+                toastMessage.setTextColor(Color.RED);
+                toast.show();
+            }
+        });
     }
 }

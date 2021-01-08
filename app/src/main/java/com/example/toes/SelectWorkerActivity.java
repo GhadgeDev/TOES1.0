@@ -84,9 +84,10 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        String str = getIntent().getStringExtra("selected_job_tile");
 
         if (RecentPostedJobActivity.indicator == 1) {
-            callToGetAllWorkers(getIntent().getStringExtra("selected_job_tile"));
+            callToGetAllWorkers(str);
         }
         else{
             callToGetAllWorkers();
@@ -95,7 +96,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
             @Override
             public void onRefresh() {
                 if (RecentPostedJobActivity.indicator == 1) {
-                    callToGetAllWorkers(getIntent().getStringExtra("selected_job_tile"));
+                    callToGetAllWorkers(str);
                 }
                 else{
                     callToGetAllWorkers();
@@ -253,7 +254,6 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
             @Override
             public void onFailure(Call<List<GetSpecificWorkerModel>> call, Throwable t) {
                 loadingBar.dismiss();
-
                 Toast toast = Toast.makeText(SelectWorkerActivity.this, "In Select worker activity Please Check your Internet Connection !", Toast.LENGTH_SHORT);
                 TextView toastMessage = toast.getView().findViewById(android.R.id.message);
                 toastMessage.setTextColor(Color.RED);

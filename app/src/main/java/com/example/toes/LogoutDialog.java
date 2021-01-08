@@ -103,7 +103,7 @@ public class LogoutDialog extends DialogFragment {
                         LoginActivity.sp.edit().putBoolean("logged",false).apply();
                         LoginActivity.sp.edit().putString("token","").apply();
                         LoginActivity.sp.edit().putInt("uid",0).apply();
-                        Toast toast = Toast.makeText(getActivity(), "Loged out successfully ! " , Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getActivity(), "Logged out successfully ! " , Toast.LENGTH_SHORT);
                         View view = toast.getView();
                         TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
 
