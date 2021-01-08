@@ -251,10 +251,10 @@ public class ProfileActivity extends AppCompatActivity {
                     }
 
                     if (jobs.size() == 3) {
-                        if (jobs.get(3).toString().equals("")) {
-                            jobs.remove(3);
+                        if (jobs.get(2).toString().equals("")) {
+                            jobs.remove(2);
                         } else {
-                            l.add(jobs.get(3));
+                            l.add(jobs.get(2));
                             // l.add(jobs.get(4));
                         }
                     }
