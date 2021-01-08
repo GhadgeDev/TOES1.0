@@ -40,7 +40,7 @@ public class RecentPostedJobActivity extends AppCompatActivity implements Recent
     public static int jbId;
     public static String jbDesc;
 
-    public static int indicator;
+    public static int indicator = 0;
 
     private SwipeRefreshLayout refreshRecentJob;
 

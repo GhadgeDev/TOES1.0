@@ -56,6 +56,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
     public static String workerPhnNo;
     public static Integer isSmartPhone;
     public static int RworkerId;
+    String str;
     private static final String EXTRA_ITEM_SELECTED_IS = "recruiter.home.activity.itemSelected";
 
     public static Intent newIntent(Context packageContext, String selectedItem) {
@@ -84,10 +85,10 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String str = getIntent().getStringExtra("selected_job_tile");
+        str = getIntent().getStringExtra("selected_job_tile");
 
         if (RecentPostedJobActivity.indicator == 1) {
-            callToGetAllWorkers(str);
+            callToGetAllWorkersFromRecent();
         }
         else{
             callToGetAllWorkers();
@@ -96,7 +97,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
             @Override
             public void onRefresh() {
                 if (RecentPostedJobActivity.indicator == 1) {
-                    callToGetAllWorkers(str);
+                    callToGetAllWorkersFromRecent();
                 }
                 else{
                     callToGetAllWorkers();
@@ -217,14 +218,15 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         });
     }
 
-    JsonPlaceHolderApi workersList = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
-    public void callToGetAllWorkers(String selectedItemIs){
+
+    public void callToGetAllWorkersFromRecent(){
+        JsonPlaceHolderApi workersList = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
         loadingBar.setTitle("Loading");
         loadingBar.setMessage("Please wait..");
         loadingBar.setCanceledOnTouchOutside(true);
         loadingBar.show();
-        Call<List<GetSpecificWorkerModel>> call = workersList.getWorkerInfo("token " + LoginActivity.token,selectedItemIs);
-        mJobNameTextView.setText(selectedItemIs);
+        Call<List<GetSpecificWorkerModel>> call = workersList.getWorkerInfo("token " + LoginActivity.token,str);
+        mJobNameTextView.setText(str);
         call.enqueue(new Callback<List<GetSpecificWorkerModel>>() {
 
 

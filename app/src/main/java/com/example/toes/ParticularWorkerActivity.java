@@ -283,7 +283,12 @@ public class ParticularWorkerActivity extends AppCompatActivity {
                     int wId = lst.getWorkerId();
                     int jId = lst.getJobId();
                     if ((jId == RecentPostedJobActivity.jbId || jId == RecruiterHomeActivity.RjbDetail) && (wId == SelectWorkerActivity.RworkerId)) {
-                        hireButton.setVisibility(View.INVISIBLE);
+                        hireButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(ParticularWorkerActivity.this,"You've already sent request to this worker",Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 }
             }
