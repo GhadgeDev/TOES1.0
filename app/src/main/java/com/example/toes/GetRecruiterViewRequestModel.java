@@ -27,6 +27,8 @@ public class GetRecruiterViewRequestModel {
     @SerializedName("woker_phone_no")
     private String wokerPhoneNo;
 
+    @SerializedName("recruiter_id")
+    private Integer recruiterId;
 
     public String getJobTitle() {
         return jobTitle;
@@ -90,5 +92,13 @@ public class GetRecruiterViewRequestModel {
 
     public void setWokerPhoneNo(String wokerPhoneNo) {
         this.wokerPhoneNo = wokerPhoneNo;
+    }
+
+    public Integer getRecruiterId() {
+        return recruiterId;
+    }
+
+    public void setRecruiterId(Integer recruiterId) {
+        this.recruiterId = recruiterId;
     }
 }

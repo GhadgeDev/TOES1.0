@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,6 +38,8 @@ public class ParticularRecruiterActivity extends AppCompatActivity {
 
     private Button hire_btn;
 
+    private List<GetRecruiterViewRequestModel> lstRequests;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +59,7 @@ public class ParticularRecruiterActivity extends AppCompatActivity {
 
         JsonPlaceHolderApi sendReq = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
         hire_btn = findViewById(R.id.send_req);
+        callToGetViewRequests();
         hire_btn.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
@@ -97,13 +102,49 @@ public class ParticularRecruiterActivity extends AppCompatActivity {
                                 toast.show();
                             }
                         });
-                    }
-                    else{
-                        Toast.makeText(ParticularRecruiterActivity.this,"Please fill appropriate amount",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(ParticularRecruiterActivity.this, "Please fill appropriate amount", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(ParticularRecruiterActivity.this, "Please fill amount", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+
+    public void callToGetViewRequests(){
+        JsonPlaceHolderApi viewRequest = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
+        Call<List<GetRecruiterViewRequestModel>> call = viewRequest.getRecruiterViewRequest("token " + LoginActivity.token, SelectJobActivity.recruiterId);
+        call.enqueue(new Callback<List<GetRecruiterViewRequestModel>>() {
+            @Override
+            public void onResponse(Call<List<GetRecruiterViewRequestModel>> call, Response<List<GetRecruiterViewRequestModel>> response) {
+                if(!response.isSuccessful()){
+                    Toast toast = Toast.makeText(ParticularRecruiterActivity.this, "Unsuccessfully !", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+
+                lstRequests = response.body();
+                for(GetRecruiterViewRequestModel lst : lstRequests){
+                    int jId = lst.getJbid();
+                    int rId = lst.getRecruiterId();
+                    if((jId == SelectJobActivity.WjbDetail) && rId == (SelectJobActivity.recruiterId)){
+                        hire_btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Toast.makeText(ParticularRecruiterActivity.this,"You've already sent request to this recruiter",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                }
+            }
+            @Override
+            public void onFailure(Call<List<GetRecruiterViewRequestModel>> call, Throwable t) {
+                Toast toast = Toast.makeText(ParticularRecruiterActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                TextView toastMessage = toast.getView().findViewById(android.R.id.message);
+                toastMessage.setTextColor(Color.RED);
+                toast.show();
             }
         });
     }
