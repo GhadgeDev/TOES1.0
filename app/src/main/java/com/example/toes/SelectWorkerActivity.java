@@ -56,7 +56,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
     public static String workerPhnNo;
     public static Integer isSmartPhone;
     public static int RworkerId;
-    String str;
+    public static String str;
     private static final String EXTRA_ITEM_SELECTED_IS = "recruiter.home.activity.itemSelected";
 
     public static Intent newIntent(Context packageContext, String selectedItem) {
@@ -80,7 +80,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         mSelectedItemIs = getIntent().getStringExtra(EXTRA_ITEM_SELECTED_IS);
 
         mJobNameTextView = findViewById(R.id.job_name);
-        mJobNameTextView.setText(mSelectedItemIs);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -88,9 +88,11 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         str = getIntent().getStringExtra("selected_job_tile");
 
         if (RecentPostedJobActivity.indicator == 1) {
+            mJobNameTextView.setText(str);
             callToGetAllWorkersFromRecent();
         }
         else{
+            mJobNameTextView.setText(mSelectedItemIs);
             callToGetAllWorkers();
         }
         refreshWorkerList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -183,8 +185,8 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         startActivity(intent);
     }
 
-    JsonPlaceHolderApi workerInfoList = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
-    public void callToGetAllWorkers(){
+    private void callToGetAllWorkers() {
+        JsonPlaceHolderApi workerInfoList = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
         Call<List<GetSpecificWorkerModel>> call = workerInfoList.getWorkerInfo("token " + LoginActivity.token, mSelectedItemIs);
 
         call.enqueue(new Callback<List<GetSpecificWorkerModel>>() {
@@ -219,14 +221,13 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
     }
 
 
-    public void callToGetAllWorkersFromRecent(){
+    private void callToGetAllWorkersFromRecent(){
         JsonPlaceHolderApi workersList = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
         loadingBar.setTitle("Loading");
         loadingBar.setMessage("Please wait..");
         loadingBar.setCanceledOnTouchOutside(true);
         loadingBar.show();
         Call<List<GetSpecificWorkerModel>> call = workersList.getWorkerInfo("token " + LoginActivity.token,str);
-        mJobNameTextView.setText(str);
         call.enqueue(new Callback<List<GetSpecificWorkerModel>>() {
 
 
@@ -239,13 +240,14 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
                     toast.show();
                     return;
                 }
-                loadingBar.dismiss();
+
 
                 lstWorker = response.body();
                 adapter = new WorkerAdapter(SelectWorkerActivity.this, lstWorker, SelectWorkerActivity.this);
                 workerList.setAdapter(adapter);
 
                 refreshWorkerList.setRefreshing(false);
+                loadingBar.dismiss();
 
                 dUserName = findViewById(R.id.nav_text_click);
                 String dfname = SelectRoleActivity.textUserfName;
@@ -256,7 +258,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
             @Override
             public void onFailure(Call<List<GetSpecificWorkerModel>> call, Throwable t) {
                 loadingBar.dismiss();
-                Toast toast = Toast.makeText(SelectWorkerActivity.this, "In Select worker activity Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(SelectWorkerActivity.this, "......Please Check your Internet Connection....... !", Toast.LENGTH_SHORT);
                 TextView toastMessage = toast.getView().findViewById(android.R.id.message);
                 toastMessage.setTextColor(Color.RED);
                 toast.show();
