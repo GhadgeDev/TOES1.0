@@ -81,6 +81,34 @@ SelectRoleActivity extends AppCompatActivity {
     static String eContact;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        //check permission
+        if (ActivityCompat.checkSelfPermission(SelectRoleActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(SelectRoleActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.SEND_SMS},
+                    44);
+
+            Log.d(TAG, "Grant the permission");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_SEND_SMS);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+
+            }
+        } else {
+            //When permission denied
+
+        }
+        //asking the permission for sending sms
+    /*    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+
+
+
+        }*/
+
+
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         SharedPreferences prefs = getSharedPreferences("X", MODE_PRIVATE);
@@ -110,29 +138,9 @@ SelectRoleActivity extends AppCompatActivity {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
-        //check permission
-        if (ActivityCompat.checkSelfPermission(SelectRoleActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            //When Permission granted
-            getLocation();
-        } else {
-            //When permission denied
-            ActivityCompat.requestPermissions(SelectRoleActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    44);
-        }
+
         getLocation();
 
-        //asking the permission for sending sms
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-
-            Log.d(TAG, "Grant the permission");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_SEND_SMS);
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
-
-            }
-
-        } else {
-
-        }
 
 
         //For http log

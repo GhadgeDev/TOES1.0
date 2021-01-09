@@ -152,6 +152,11 @@ public class IdentityProofActivity extends AppCompatActivity {
                             if (!response.isSuccessful()) {
                                 System.out.println("Response : _--------- " + response.code());
                                 System.out.println("Response M : _--------- " + response.message());
+                                Toast toast = Toast.makeText(IdentityProofActivity.this, " Password must contain minimum 8 latters\n Password should not match with your name\n May be your phone number is registered..!", Toast.LENGTH_LONG);
+                                View view = toast.getView();
+                                TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                                toastMessage.setTextColor(Color.RED);
+                                toast.show();
                                 return;
                             }
 

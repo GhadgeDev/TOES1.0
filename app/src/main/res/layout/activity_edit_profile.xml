@@ -64,9 +64,11 @@
         android:textSize="20sp" />
 
     <RadioGroup
+        android:id="@+id/radGroupGen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_margin="5dp"
         android:visibility="visible">
 
         <RadioButton
@@ -99,6 +101,17 @@
     </RadioGroup>
 
 
+    <EditText
+        android:id="@+id/edit_EmergencyContact"
+        android:layout_width="324dp"
+        android:layout_height="55dp"
+        android:visibility="gone"
+        android:background="@drawable/devnagaribtn"
+        android:gravity="center"
+        android:hint="Enter Emergency Contact"
+        android:inputType="textMultiLine"
+        android:maxLength="200"
+        android:textSize="16sp" />
     <Button
         android:id="@+id/btn_save_profile"
         android:layout_width="150dp"

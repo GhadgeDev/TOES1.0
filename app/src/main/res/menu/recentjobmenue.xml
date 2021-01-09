@@ -5,8 +5,6 @@
     <group android:id="@+id/group_settings">
         <item android:id="@+id/menue_profile"
             android:title="View Profile" />
-        <item android:id="@+id/menu_Notification"
-            android:title="Notification" />
         <item android:id="@+id/menu_logout"
             android:title="Logout" />
     </group>

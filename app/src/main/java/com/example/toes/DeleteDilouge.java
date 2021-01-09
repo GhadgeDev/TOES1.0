@@ -111,12 +111,7 @@ public class DeleteDilouge extends DialogFragment {
                             startActivity(editJobi);
                         }
                     }
-                })  .setNeutralButton("No Change", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
+                }) ;
         mTextSureMsg = view.findViewById(R.id.sure_msg);
         return builder.create();
     }

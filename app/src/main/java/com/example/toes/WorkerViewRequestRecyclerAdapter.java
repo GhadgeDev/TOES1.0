@@ -51,6 +51,7 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
     int status;
     public int viewJob_id;
 
+
     public WorkerViewRequestRecyclerAdapter(Context context, List<GetWorkerViewRequestModel> data) {
         mContext = context;
         mData = data;
@@ -72,12 +73,11 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
         viewHolder.workerViewList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewJob_id = mData.get(viewHolder.getAdapterPosition()).getJobId();
-
+                //viewJob_id = mData.get(viewHolder.getAdapterPosition()).getJobId();
+                viewJob_id = TabWorkerViewRequest.jid.get(viewHolder.getAdapterPosition());
                 rFName = mData.get(viewHolder.getAdapterPosition()).getRecruiterFname();
                 rLName = mData.get(viewHolder.getAdapterPosition()).getRecruiterLname();
                 String rDesc = mData.get(viewHolder.getAdapterPosition()).getJobDescription();
-
                 rAdd = mData.get(viewHolder.getAdapterPosition()).getAddress();
                 rPhoneNumber = mData.get(viewHolder.getAdapterPosition()).getRecruiterPhoneNo();
                 rFullName = rFName + " " + rLName;
@@ -94,25 +94,36 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
                 dialog_recruiter_add.setText(rAdd);
                 myDialog.show();
 
-                workerAcceptBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        status = 2;
-                        Toast.makeText(mContext, "Job accepted", Toast.LENGTH_SHORT).show();
-                        callAcceptRejectApi();
-                        myDialog.dismiss();
-                    }
-                });
+                try {
+                    workerAcceptBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            status = 2;
+                            Toast.makeText(mContext, "Job accepted", Toast.LENGTH_SHORT).show();
+                            System.out.println("jid __---------------"+viewJob_id);
 
-                workerRejectBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        status = 3;
-                        Toast.makeText(mContext, "Job Rejected", Toast.LENGTH_SHORT).show();
-                        callAcceptRejectApi();
-                        myDialog.dismiss();
-                    }
-                });
+                            callAcceptRejectApi();
+                            myDialog.dismiss();
+                        }
+                    });
+
+                    workerRejectBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            status = 3;
+                            Toast.makeText(mContext, "Job Rejected", Toast.LENGTH_SHORT).show();
+                            System.out.println("jid __---------------"+viewJob_id);
+
+                            callAcceptRejectApi();
+                            myDialog.dismiss();
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(mContext,"Something went wrong",Toast.LENGTH_SHORT).show();
+                    System.out.println("jid __---------------"+viewJob_id);
+
+                }
+
             }
         });
         return viewHolder;
@@ -191,8 +202,9 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
         //setting string and phone no to send message
         String msg = "Message From Toes" + "\n" + "Recruiter name: " + rFullName + "\n" + "Contact no: " + rPhoneNumber + "\n" + "Address: " + rAdd;
         String no = LoginActivity.userPhoneNumber;
-        SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
-        sms.sendTextMessage(no, null, msg, pi, null);        //method to send sms
+       // SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
+        android.telephony.SmsManager sms = android.telephony.SmsManager.getDefault();
+        sms.sendTextMessage(no.toString(), null, msg, pi, null);        //method to send sms
         Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
     }
 
@@ -206,8 +218,9 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
         //setting string and phone no to send message
         String msg = "Message From Toes" + "\n" + "Worker name: " + LoginActivity.userName + "\n" + "Contact no: " + LoginActivity.userPhoneNumber + "\n" + "Address: " + LoginActivity.userAddress;
         String no = rPhoneNumber;
-        SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
-        sms.sendTextMessage(no, null, msg, pi, null);        //method to send sms
+        android.telephony.SmsManager sms = android.telephony.SmsManager.getDefault();
+       // SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
+        sms.sendTextMessage(no.toString(), null, msg, pi, null);        //method to send sms
 
         Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
     }

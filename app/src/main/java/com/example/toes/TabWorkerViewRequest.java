@@ -30,6 +30,13 @@ public class TabWorkerViewRequest extends Fragment {
     private List<GetWorkerViewRequestModel> lstViewRequest;
     WorkerViewRequestRecyclerAdapter adapter;
     private SwipeRefreshLayout refreshWorkerViewRequests;
+    static List<Integer> jid = new ArrayList<>() ;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        jid.clear();
+    }
 
     public TabWorkerViewRequest() {
 
@@ -74,6 +81,13 @@ public class TabWorkerViewRequest extends Fragment {
                 lstViewRequest = response.body();
                 adapter = new WorkerViewRequestRecyclerAdapter(getContext(),lstViewRequest);
                 myRecyclerView.setAdapter(adapter);
+                System.out.println(lstViewRequest);
+                for(GetWorkerViewRequestModel  gv : lstViewRequest){
+
+                     jid.add(gv.getJobId());
+
+                }
+                System.out.println("jid __---------------"+jid);
 
                 refreshWorkerViewRequests.setRefreshing(false);
             }

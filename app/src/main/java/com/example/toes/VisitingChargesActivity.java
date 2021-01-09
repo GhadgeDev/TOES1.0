@@ -121,7 +121,7 @@ TextView t1,t2,t3;
             btnJob2.setVisibility(View.VISIBLE);
             btnJob3.setVisibility(View.VISIBLE);
 
-            ll2.setVisibility(View.VISIBLE);
+            outerLinear2.setVisibility(View.VISIBLE);
             outerLinear3.setVisibility(View.VISIBLE);
 
             job1 = job.get(0);

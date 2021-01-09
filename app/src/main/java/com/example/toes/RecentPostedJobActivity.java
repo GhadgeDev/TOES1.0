@@ -118,10 +118,7 @@ public class RecentPostedJobActivity extends AppCompatActivity implements Recent
                 LogoutDialog logoutDialog = new LogoutDialog();
                 logoutDialog.show(getSupportFragmentManager(), "logout dialog");
                 break;
-            case R.id.menu_Notification:
-                Intent notification = new Intent(RecentPostedJobActivity.this, WokerNotificationActivity.class);
-                startActivity(notification);
-                break;
+
         }
         return true;
     }
