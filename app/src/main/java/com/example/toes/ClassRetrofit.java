@@ -21,7 +21,7 @@ public class ClassRetrofit {
         if (retrofit == null) {
             //connecting to base url
             retrofit = new Retrofit.Builder().
-                    baseUrl("http://52.201.220.252/")
+                    baseUrl("http://65.1.2.12/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(okHttpClient).build();
         }

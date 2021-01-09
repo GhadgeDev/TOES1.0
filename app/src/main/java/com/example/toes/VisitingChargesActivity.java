@@ -37,9 +37,10 @@ String job2 = null,job2VC = null;
 int job2Exp = 0;
 String job3 = null,job3VC = null;
 int job3Exp = 0;
-
+    JsonPlaceHolderApi jsonPlaceHolderApi;
 String token = "" ;
 LinearLayout ll1,ll2,ll3;
+LinearLayout outerLinear1,outerLinear2,outerLinear3;
 TextView t1,t2,t3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,9 @@ TextView t1,t2,t3;
         etJob2Exp = (EditText)findViewById(R.id.etExperience2);
         etJob3Exp = (EditText)findViewById(R.id.etExperience3);
 
+        outerLinear1 = (LinearLayout)findViewById(R.id.outerLinear1);
+        outerLinear2 = (LinearLayout)findViewById(R.id.outerLinear2);
+        outerLinear3 = (LinearLayout)findViewById(R.id.outerLinear3);
         token = "token "+ LoginActivity.token;
         //For http log
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
@@ -77,12 +81,12 @@ TextView t1,t2,t3;
 
         //connecting to base url
         Retrofit.Builder retrofit = new Retrofit.Builder().
-                baseUrl("http://52.201.220.252/")
+                baseUrl("http://65.1.2.12/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit1 = retrofit.build();
 
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit1.create(JsonPlaceHolderApi.class);
+         jsonPlaceHolderApi = retrofit1.create(JsonPlaceHolderApi.class);
 
 
         Intent intent = getIntent();
@@ -93,15 +97,17 @@ TextView t1,t2,t3;
 
         //flag = intent.getIntExtra("f",0);
         flag = JobSeletionActivity.flag;
+        //flag = JobSeletionActivity.job.size();
         System.out.println("In Visiting charge"+JobSeletionActivity.job.size());
 
         if(flag == 1){
+
             job1 = job.get(0);
             btnJob1.setText(job.get(0));
             t1.setText(job.get(0));
         }else if (flag == 2){
             btnJob2.setVisibility(View.VISIBLE);
-            ll2.setVisibility(View.VISIBLE);
+            outerLinear2.setVisibility(View.VISIBLE);
 
             job1 = job.get(0);
             btnJob1.setText(job.get(0));
@@ -115,8 +121,8 @@ TextView t1,t2,t3;
             btnJob2.setVisibility(View.VISIBLE);
             btnJob3.setVisibility(View.VISIBLE);
 
-            ll2.setVisibility(View.VISIBLE);
-            ll3.setVisibility(View.VISIBLE);
+            outerLinear2.setVisibility(View.VISIBLE);
+            outerLinear3.setVisibility(View.VISIBLE);
 
             job1 = job.get(0);
             btnJob1.setText(job.get(0));
@@ -138,157 +144,175 @@ TextView t1,t2,t3;
             public void onClick(View v) {
 
                 if (flag == 1) {
-                    job1 = job.get(0);
-                    job1VC = etJob1VC.getText().toString();
-                    job1Exp = Integer.parseInt(etJob1Exp.getText().toString());
-
+                    if(etJob1VC.getText().toString().equals("") || etJob1Exp.getText().toString().equals("")){
+                        Toast.makeText(VisitingChargesActivity.this,"Fill all fields",Toast.LENGTH_SHORT).show();
+                    }else {
+                        job1 = job.get(0);
+                        job1VC = etJob1VC.getText().toString();
+                        job1Exp = Integer.parseInt(etJob1Exp.getText().toString());
+                        postData();
+                    }
                 } else if (flag == 2) {
+                    if((etJob1VC.getText().toString().equals("") ||etJob2VC.getText().toString().equals("")) || (etJob1Exp.getText().toString().equals("") || etJob2Exp.getText().toString().equals(""))){
+                        Toast.makeText(VisitingChargesActivity.this,"Fill all fields",Toast.LENGTH_SHORT).show();
+                    }else {
+                        job1 = job.get(0);
+                        job2 = job.get(1);
 
-                    job1 = job.get(0);
-                    job2 = job.get(1);
 
+                        job1VC = etJob1VC.getText().toString();
+                        job1Exp = Integer.parseInt(etJob1Exp.getText().toString());
 
-                    job1VC = etJob1VC.getText().toString();
-                    job1Exp = Integer.parseInt(etJob1Exp.getText().toString());
-
-                    job2VC = etJob2VC.getText().toString();
-                    job2Exp = Integer.parseInt(etJob2Exp.getText().toString());
-
+                        job2VC = etJob2VC.getText().toString();
+                        job2Exp = Integer.parseInt(etJob2Exp.getText().toString());
+                        postData();
+                    }
 
                 } else if (flag == 3) {
+                    if((etJob1VC.getText().toString().equals("")||etJob2VC.getText().toString().equals("") || etJob3VC.getText().toString().equals(""))||(etJob1Exp.getText().toString().equals("") || etJob2Exp.getText().toString().equals("")||etJob3Exp.getText().toString().equals(""))){
+                        Toast.makeText(VisitingChargesActivity.this,"Fill all fields",Toast.LENGTH_SHORT).show();
+                    }else {
+                        job1 = job.get(0);
+                        job2 = job.get(1);
+                        job3 = job.get(2);
 
-                    job1 = job.get(0);
-                    job2 = job.get(1);
-                    job3 = job.get(2);
+                        job1VC = etJob1VC.getText().toString();
+                        job1Exp = Integer.parseInt(etJob1Exp.getText().toString());
 
+                        job2VC = etJob2VC.getText().toString();
+                        job2Exp = Integer.parseInt(etJob2Exp.getText().toString());
 
-                    job1VC = etJob1VC.getText().toString();
-                    job1Exp = Integer.parseInt(etJob1Exp.getText().toString());
-
-                    job2VC = etJob2VC.getText().toString();
-                    job2Exp = Integer.parseInt(etJob2Exp.getText().toString());
-
-                    job3VC = etJob3VC.getText().toString();
-                    job3Exp = Integer.parseInt(etJob3Exp.getText().toString());
+                        job3VC = etJob3VC.getText().toString();
+                        job3Exp = Integer.parseInt(etJob3Exp.getText().toString());
+                        postData();
+                    }
                 }
-                if (ProfileActivity.updateJob == false) {
-                    Call<WorkerJobDetails> call = jsonPlaceHolderApi.insertWorkerJobInfo(token, JobSeletionActivity.city, job1, job1VC, job1Exp, job2, job2VC, job2Exp, job3, job3VC, job3Exp, SelectRoleActivity.id);
-                    call.enqueue(new Callback<WorkerJobDetails>() {
-                        @Override
-                        public void onResponse(Call<WorkerJobDetails> call, Response<WorkerJobDetails> response) {
-                            if (!response.isSuccessful()) {
-                                System.out.println("Response : _--------- " + response.code());
-                                System.out.println("Response M : _--------- " + response.message());
 
-                                return;
-                            }
-
-                            Toast toast = Toast.makeText(VisitingChargesActivity.this, "Congratulation !\n You are details saved successfully !.", Toast.LENGTH_SHORT);
-                            View view = toast.getView();
-                            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-                            toastMessage.setTextColor(Color.parseColor("#2E7D32"));
-                            toast.show();
-
-                            WorkerJobDetails postResponse = response.body();
-                            System.out.println("Code :------------------- " + response.code());
-                            String content = "";
-                            content += "Id : " + postResponse.getId() + "\n";
-                            content += "city : " + postResponse.getCity() + "\n";
-                            content += "job1 : " + postResponse.getCategory_1() + "\n";
-                            content += "job1_VC : " + postResponse.getCategory_1_vc() + "\n";
-                            content += "job1_exp : " + postResponse.getCategory_1_exp() + "\n";
-
-                            content += "job2 : " + postResponse.getCategory_2() + "\n";
-                            content += "job2_VC : " + postResponse.getCategory_2_vc() + "\n";
-                            content += "job2_exp : " + postResponse.getCategory_2_exp() + "\n";
-
-                            content += "job3 : " + postResponse.getCategory_3() + "\n";
-                            content += "job3_VC : " + postResponse.getCategory_3_vc() + "\n";
-                            content += "job3_exp : " + postResponse.getCategory_3_exp() + "\n";
-
-
-                            System.out.println("Data : _--------- " + content);
-
-                            Intent go = new Intent(VisitingChargesActivity.this, SelectJobActivity.class);
-
-                            startActivity(go);
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<WorkerJobDetails> call, Throwable t) {
-                            Toast toast = Toast.makeText(VisitingChargesActivity.this, "You are disconnected from internet\nOr Server is under maintenance", Toast.LENGTH_SHORT);
-                            View view = toast.getView();
-                            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-                            toastMessage.setTextColor(Color.RED);
-                            toast.show();
-                            System.out.println("fail : _--------- " + t.getMessage());
-
-                        }
-                    });
-
-                }else{
-
-                    Call<WorkerJobDetails> call = jsonPlaceHolderApi.updateWorkerJobInfo(token, JobSeletionActivity.city, job1, job1VC, job1Exp, job2, job2VC, job2Exp, job3, job3VC, job3Exp, SelectRoleActivity.id,ProfileActivity.updateId);
-                    call.enqueue(new Callback<WorkerJobDetails>() {
-                        @Override
-                        public void onResponse(Call<WorkerJobDetails> call, Response<WorkerJobDetails> response) {
-                            if (!response.isSuccessful()) {
-                                System.out.println("Response : _--------- " + response.code());
-                                System.out.println("Response M : _--------- " + response.message());
-
-                                return;
-                            }
-
-                            Toast toast = Toast.makeText(VisitingChargesActivity.this, "Congratulation !\n You are details saved successfully !.", Toast.LENGTH_SHORT);
-                            View view = toast.getView();
-                            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-                            toastMessage.setTextColor(Color.parseColor("#2E7D32"));
-                            toast.show();
-
-                            WorkerJobDetails postResponse = response.body();
-                            System.out.println("Code :------------------- " + response.code());
-                            String content = "";
-                            content += "Id : " + postResponse.getId() + "\n";
-                            content += "city : " + postResponse.getCity() + "\n";
-                            content += "job1 : " + postResponse.getCategory_1() + "\n";
-                            content += "job1_VC : " + postResponse.getCategory_1_vc() + "\n";
-                            content += "job1_exp : " + postResponse.getCategory_1_exp() + "\n";
-
-                            content += "job2 : " + postResponse.getCategory_2() + "\n";
-                            content += "job2_VC : " + postResponse.getCategory_2_vc() + "\n";
-                            content += "job2_exp : " + postResponse.getCategory_2_exp() + "\n";
-
-                            content += "job3 : " + postResponse.getCategory_3() + "\n";
-                            content += "job3_VC : " + postResponse.getCategory_3_vc() + "\n";
-                            content += "job3_exp : " + postResponse.getCategory_3_exp() + "\n";
-
-
-                            System.out.println("Data : _--------- " + content);
-
-                            Intent go = new Intent(VisitingChargesActivity.this, SelectJobActivity.class);
-
-                            startActivity(go);
-
-                        }
-
-                        @Override
-                        public void onFailure(Call<WorkerJobDetails> call, Throwable t) {
-                            Toast toast = Toast.makeText(VisitingChargesActivity.this, "You are disconnected from internet\nOr Server is under maintenance", Toast.LENGTH_SHORT);
-                            View view = toast.getView();
-                            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-                            toastMessage.setTextColor(Color.RED);
-                            toast.show();
-                            System.out.println("fail : _--------- " + t.getMessage());
-
-                        }
-                    });
 
 
                 }
-            }
+
 
 
         });
+
+
+    }
+
+    public void postData(){
+        if (ProfileActivity.updateJob == false) {
+            Call<WorkerJobDetails> call = jsonPlaceHolderApi.insertWorkerJobInfo(token, JobSeletionActivity.city, job1, job1VC, job1Exp, job2, job2VC, job2Exp, job3, job3VC, job3Exp, SelectRoleActivity.id);
+            call.enqueue(new Callback<WorkerJobDetails>() {
+                @Override
+                public void onResponse(Call<WorkerJobDetails> call, Response<WorkerJobDetails> response) {
+                    if (!response.isSuccessful()) {
+                        System.out.println("Response : _--------- " + response.code());
+                        System.out.println("Response M : _--------- " + response.message());
+
+                        return;
+                    }
+
+                    Toast toast = Toast.makeText(VisitingChargesActivity.this, "Congratulation !\n You are details saved successfully !.", Toast.LENGTH_SHORT);
+                    View view = toast.getView();
+                    TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                    toastMessage.setTextColor(Color.parseColor("#2E7D32"));
+                    toast.show();
+
+                    WorkerJobDetails postResponse = response.body();
+                    System.out.println("Code :------------------- " + response.code());
+                    String content = "";
+                    content += "Id : " + postResponse.getId() + "\n";
+                    content += "city : " + postResponse.getCity() + "\n";
+                    content += "job1 : " + postResponse.getCategory_1() + "\n";
+                    content += "job1_VC : " + postResponse.getCategory_1_vc() + "\n";
+                    content += "job1_exp : " + postResponse.getCategory_1_exp() + "\n";
+
+                    content += "job2 : " + postResponse.getCategory_2() + "\n";
+                    content += "job2_VC : " + postResponse.getCategory_2_vc() + "\n";
+                    content += "job2_exp : " + postResponse.getCategory_2_exp() + "\n";
+
+                    content += "job3 : " + postResponse.getCategory_3() + "\n";
+                    content += "job3_VC : " + postResponse.getCategory_3_vc() + "\n";
+                    content += "job3_exp : " + postResponse.getCategory_3_exp() + "\n";
+
+
+                    System.out.println("Data : _--------- " + content);
+
+                    Intent go = new Intent(VisitingChargesActivity.this, SelectJobActivity.class);
+
+                    startActivity(go);
+
+                }
+
+                @Override
+                public void onFailure(Call<WorkerJobDetails> call, Throwable t) {
+                    Toast toast = Toast.makeText(VisitingChargesActivity.this, "You are disconnected from internet\nOr Server is under maintenance", Toast.LENGTH_SHORT);
+                    View view = toast.getView();
+                    TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                    toastMessage.setTextColor(Color.RED);
+                    toast.show();
+                    System.out.println("fail : _--------- " + t.getMessage());
+
+                }
+            });
+
+        }else {
+
+            Call<WorkerJobDetails> call = jsonPlaceHolderApi.updateWorkerJobInfo(token, JobSeletionActivity.city, job1, job1VC, job1Exp, job2, job2VC, job2Exp, job3, job3VC, job3Exp, SelectRoleActivity.id, ProfileActivity.updateId);
+            call.enqueue(new Callback<WorkerJobDetails>() {
+                @Override
+                public void onResponse(Call<WorkerJobDetails> call, Response<WorkerJobDetails> response) {
+                    if (!response.isSuccessful()) {
+                        System.out.println("Response : _--------- " + response.code());
+                        System.out.println("Response M : _--------- " + response.message());
+
+                        return;
+                    }
+
+                    Toast toast = Toast.makeText(VisitingChargesActivity.this, "Congratulation !\n You are details saved successfully !.", Toast.LENGTH_SHORT);
+                    View view = toast.getView();
+                    TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                    toastMessage.setTextColor(Color.parseColor("#2E7D32"));
+                    toast.show();
+
+                    WorkerJobDetails postResponse = response.body();
+                    System.out.println("Code :------------------- " + response.code());
+                    String content = "";
+                    content += "Id : " + postResponse.getId() + "\n";
+                    content += "city : " + postResponse.getCity() + "\n";
+                    content += "job1 : " + postResponse.getCategory_1() + "\n";
+                    content += "job1_VC : " + postResponse.getCategory_1_vc() + "\n";
+                    content += "job1_exp : " + postResponse.getCategory_1_exp() + "\n";
+
+                    content += "job2 : " + postResponse.getCategory_2() + "\n";
+                    content += "job2_VC : " + postResponse.getCategory_2_vc() + "\n";
+                    content += "job2_exp : " + postResponse.getCategory_2_exp() + "\n";
+
+                    content += "job3 : " + postResponse.getCategory_3() + "\n";
+                    content += "job3_VC : " + postResponse.getCategory_3_vc() + "\n";
+                    content += "job3_exp : " + postResponse.getCategory_3_exp() + "\n";
+
+
+                    System.out.println("Data : _--------- " + content);
+
+                    Intent go = new Intent(VisitingChargesActivity.this, SelectJobActivity.class);
+
+                    startActivity(go);
+
+                }
+
+                @Override
+                public void onFailure(Call<WorkerJobDetails> call, Throwable t) {
+                    Toast toast = Toast.makeText(VisitingChargesActivity.this, "You are disconnected from internet\nOr Server is under maintenance", Toast.LENGTH_SHORT);
+                    View view = toast.getView();
+                    TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                    toastMessage.setTextColor(Color.RED);
+                    toast.show();
+                    System.out.println("fail : _--------- " + t.getMessage());
+
+                }
+            });
+        }
+
     }
 }

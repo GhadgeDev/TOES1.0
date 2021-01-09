@@ -65,6 +65,10 @@ public class ParticularRecruiterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 editAmount = findViewById(R.id.worker_edit_amount);
+                editAmount.setSelection(0);
+                editAmount.setFocusable(false);
+                editAmount.setClickable(false);
+                editAmount.setEnabled(false);
                 if (!editAmount.getText().toString().isEmpty()) {
                     amount = Integer.parseInt(editAmount.getText().toString());
                     if (amount >= 10) {
@@ -132,6 +136,8 @@ public class ParticularRecruiterActivity extends AppCompatActivity {
                         hire_btn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+
+
                                 Toast.makeText(ParticularRecruiterActivity.this,"You've already sent request to this recruiter",Toast.LENGTH_SHORT).show();
                             }
                         });

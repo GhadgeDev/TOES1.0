@@ -43,7 +43,7 @@ public class EmergencyActiviy extends AppCompatActivity {
 
         //connecting to base url
         Retrofit.Builder retrofit = new Retrofit.Builder().
-                baseUrl("http://52.201.220.252/")
+                baseUrl("http://65.1.2.12/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit1 = retrofit.build();
