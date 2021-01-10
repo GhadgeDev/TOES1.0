@@ -3,14 +3,6 @@ plugins {
 }
 
 android {
-    signingConfigs {
-        release_01 {
-            storeFile file('C:\\Users\\Devendra Ghadge\\Desktop\\Apk\\toes_01.jks')
-            storePassword '123456'
-            keyAlias 'kay0'
-            keyPassword '123456'
-        }
-    }
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
 
