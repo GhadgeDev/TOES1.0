@@ -108,12 +108,12 @@ interface JsonPlaceHolderApi {
                                                @Field("job_detail") int jbDetail,
                                                @Field("worker") int workerId);
 
-    //ProfileImage
+   /* //ProfileImage
     @Multipart
     @POST("profile/image")
     Call<GetProfileImage> uploadImage(@Part MultipartBody.Part part,
                                       @Part("profile_image") int userId);
-
+*/
     //SelectRoleApi
     @GET("/worker/")
     Call<List<Post>> getId(@Header("Authorization") String token);

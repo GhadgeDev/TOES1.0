@@ -234,31 +234,5 @@ public class IdentityProofActivity extends AppCompatActivity {
         }
     }
 
- /*   JsonPlaceHolderApi uploadImage = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
-    public void uploadImage(){
-        File file = new File(String.valueOf(SignUpActivity.finalFile));
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"),file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("profile_image", file.getName(), requestFile);
-        Call<GetProfileImage> call = uploadImage.updateProfile(body,userme);
-        call.enqueue(new Callback<GetProfileImage>() {
-            @Override
-            public void onResponse(Call<GetProfileImage> call, Response<GetProfileImage> response) {
-                if(!response.isSuccessful()){
-                    Toast toast = Toast.makeText(IdentityProofActivity.this, "Unsuccessfully !", Toast.LENGTH_SHORT);
-                    toast.show();
-                    return;
-                }
-                Toast toast = Toast.makeText(IdentityProofActivity.this, "Profile uploaded!", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-            @Override
-            public void onFailure(Call<GetProfileImage> call, Throwable t) {
-                Toast toast = Toast.makeText(IdentityProofActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
-                TextView toastMessage = toast.getView().findViewById(android.R.id.message);
-                toastMessage.setTextColor(Color.RED);
-                toast.show();
-            }
-        });
-    }*/
 
 }
