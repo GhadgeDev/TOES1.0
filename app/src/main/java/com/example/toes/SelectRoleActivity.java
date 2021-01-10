@@ -205,7 +205,10 @@ SelectRoleActivity extends AppCompatActivity {
                /* Intent recruiter = new Intent(SelectRoleActivity.this,RecruiterHomeActivity.class);
                 startActivity(recruiter);*/
                 Intent recruiter = new Intent(SelectRoleActivity.this, RecentPostedJobActivity.class);
-                startActivity(recruiter);
+                if(!LoginActivity.userBlocked)
+                    startActivity(recruiter);
+                else
+                    Toast.makeText(SelectRoleActivity.this,"Access Denied",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -287,7 +290,10 @@ SelectRoleActivity extends AppCompatActivity {
 
                         if (userPresent) {
                             Intent recruiter = new Intent(SelectRoleActivity.this, SelectJobActivity.class);
-                            startActivity(recruiter);
+                            if(!LoginActivity.userBlocked)
+                                startActivity(recruiter);
+                            else
+                                Toast.makeText(SelectRoleActivity.this,"Access Denied",Toast.LENGTH_SHORT).show();
                         } else {
                             Toast toast = Toast.makeText(SelectRoleActivity.this, "Welcome to TOES!\nPlease Enter your Details ", Toast.LENGTH_SHORT);
                             View view = toast.getView();
@@ -295,7 +301,10 @@ SelectRoleActivity extends AppCompatActivity {
                             toastMessage.setTextColor(Color.parseColor("#2E7D32"));
                             toast.show();
                             Intent recruiter = new Intent(SelectRoleActivity.this, JobSeletionActivity.class);
-                            startActivity(recruiter);
+                            if(!LoginActivity.userBlocked)
+                                startActivity(recruiter);
+                            else
+                                Toast.makeText(SelectRoleActivity.this,"Access Denied",Toast.LENGTH_SHORT).show();
                         }
 
                         System.out.println("User Data : _---------------- " + user);
@@ -373,7 +382,10 @@ SelectRoleActivity extends AppCompatActivity {
             case R.id.menue_profile:
                 Intent Profileintent = new Intent(SelectRoleActivity.this,ProfileActivity.class);
                 Profileintent.putExtra(Intent.EXTRA_TEXT,token);
-                startActivity(Profileintent);
+                if(!LoginActivity.userBlocked)
+                    startActivity(Profileintent);
+                else
+                    Toast.makeText(SelectRoleActivity.this,"Access Denied",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.menu_logout:
                 LogoutDialog logoutDialog = new LogoutDialog();
