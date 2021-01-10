@@ -43,6 +43,10 @@ public class DeleteDilouge extends DialogFragment {
     private String category_3_exp;
 
     static boolean delete = false;
+   JsonPlaceHolderApi jsonPlaceHolderApi;
+
+    public DeleteDilouge() {
+    }
 
     @NonNull
     @Override
@@ -66,7 +70,7 @@ public class DeleteDilouge extends DialogFragment {
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit1 = retrofit.build();
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit1.create(JsonPlaceHolderApi.class);
+         jsonPlaceHolderApi = retrofit1.create(JsonPlaceHolderApi.class);
 
 
         builder.setView(view).setTitle("Delete Profession")

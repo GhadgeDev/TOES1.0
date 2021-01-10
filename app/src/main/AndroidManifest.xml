@@ -19,11 +19,16 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EmergencyActiviy"></activity>
-        <activity android:name=".RecentPostedJobActivity"></activity>
+        <activity android:name=".EmergencyActiviy"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".RecentPostedJobActivity"
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".ForgotPasswordActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
         <activity
             android:name=".EditProfileActivity"
             android:label="Edit Profile"
@@ -60,32 +65,41 @@
             android:name=".WokerNotificationActivity"
             android:label="Notifications"
             android:screenOrientation="portrait" />
-        <activity android:name=".VisitingChargesActivity" />
+        <activity android:name=".VisitingChargesActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".JobSeletionActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SignUpActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SelectLanguageActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".IdentityProofActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".SplashScreenActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectRoleActivity" />
+        <activity android:name=".SelectRoleActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
