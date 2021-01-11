@@ -20,14 +20,24 @@
         android:id="@+id/recent_job_refresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/posted_job_tv" >
+        android:layout_below="@id/posted_job_tv">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvRecentJobList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-           />
+            android:layout_height="match_parent" />
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="No data available"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAdd"

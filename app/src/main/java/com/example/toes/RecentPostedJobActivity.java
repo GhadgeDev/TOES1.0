@@ -37,6 +37,7 @@ public class RecentPostedJobActivity extends AppCompatActivity implements Recent
     RecentPostedJobAdapter adapter;
     FloatingActionButton btnAdd;
     RecyclerView rvRecentJobList;
+    TextView emptyView;
     public static int jbId;
     public static String jbDesc;
 
@@ -49,6 +50,7 @@ public class RecentPostedJobActivity extends AppCompatActivity implements Recent
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recent_posted_job);
 
+        emptyView = findViewById(R.id.empty_view);
         rvRecentJobList =  findViewById(R.id.rvRecentJobList);
         btnAdd =  findViewById(R.id.btnAdd);
         rvRecentJobList.setLayoutManager(new LinearLayoutManager(this));
@@ -86,6 +88,14 @@ public class RecentPostedJobActivity extends AppCompatActivity implements Recent
                 adapter = new RecentPostedJobAdapter(RecentPostedJobActivity.this,lstResponse, RecentPostedJobActivity.this);
                 rvRecentJobList.setAdapter(adapter);
 
+                if (lstResponse.isEmpty()) {
+                    rvRecentJobList.setVisibility(View.GONE);
+                    emptyView.setVisibility(View.VISIBLE);
+                }
+                else {
+                    rvRecentJobList.setVisibility(View.VISIBLE);
+                    emptyView.setVisibility(View.GONE);
+                }
                 refreshRecentJob.setRefreshing(false);
             }
 
