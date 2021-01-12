@@ -36,6 +36,11 @@ interface JsonPlaceHolderApi {
     Call<List<GetSpecificWorkerModel>> getWorkerInfo(@Header("Authorization") String authToken,
                                                      @Path("category_name") String a);
 
+    //For recent posted jobs
+    @GET("api/category/{category_name}/")
+    Call<List<GetSpecificWorkerModel>> getRecentWorkerInfo(@Header("Authorization") String authToken,
+                                                           @Path("category_name") String a);
+
     //PostingNewUser
     @FormUrlEncoded
     @POST("users/")
@@ -108,12 +113,12 @@ interface JsonPlaceHolderApi {
                                                @Field("job_detail") int jbDetail,
                                                @Field("worker") int workerId);
 
-   /* //ProfileImage
-    @Multipart
-    @POST("profile/image")
-    Call<GetProfileImage> uploadImage(@Part MultipartBody.Part part,
-                                      @Part("profile_image") int userId);
-*/
+    /* //ProfileImage
+     @Multipart
+     @POST("profile/image")
+     Call<GetProfileImage> uploadImage(@Part MultipartBody.Part part,
+                                       @Part("profile_image") int userId);
+ */
     //SelectRoleApi
     @GET("/worker/")
     Call<List<Post>> getId(@Header("Authorization") String token);
@@ -202,8 +207,8 @@ interface JsonPlaceHolderApi {
                                                 @Field("user") int user);
 
     //Update Emergency Call
-  //  @FormUrlEncoded
-   // @PATCH("/emergency/{id}/")
+    //  @FormUrlEncoded
+    // @PATCH("/emergency/{id}/")
  /*   Call<EmergencyContact> updateEmergencyContact(@Path("id") int id,
                                                   @Field("contact_no") String contact_no
                                                 );*/

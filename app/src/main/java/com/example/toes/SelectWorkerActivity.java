@@ -235,7 +235,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         loadingBar.setMessage("Please wait..");
         loadingBar.setCanceledOnTouchOutside(true);
         loadingBar.show();
-        Call<List<GetSpecificWorkerModel>> call = workersList.getWorkerInfo("token " + LoginActivity.token,str);
+        Call<List<GetSpecificWorkerModel>> call = workersList.getRecentWorkerInfo("token " + LoginActivity.token,str);
         call.enqueue(new Callback<List<GetSpecificWorkerModel>>() {
 
 
@@ -266,7 +266,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
             @Override
             public void onFailure(Call<List<GetSpecificWorkerModel>> call, Throwable t) {
                 loadingBar.dismiss();
-                Toast toast = Toast.makeText(SelectWorkerActivity.this, "......Please Check your Internet Connection....... !", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(SelectWorkerActivity.this, "Please Check your Internet Connection....... !", Toast.LENGTH_SHORT);
                 TextView toastMessage = toast.getView().findViewById(android.R.id.message);
                 toastMessage.setTextColor(Color.RED);
                 toast.show();
