@@ -192,6 +192,7 @@ public class LoginActivity extends AppCompatActivity {
                                 View view = toast.getView();
                                 TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                                 toastMessage.setTextColor(Color.RED);
+                                toastMessage.setBackgroundColor(Color.WHITE);
                                 toast.show();
                             }
                             return;
@@ -203,7 +204,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast toast = Toast.makeText(LoginActivity.this, "Log In successfully ! ", Toast.LENGTH_SHORT);
                         View view = toast.getView();
                         TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-
+                        toastMessage.setBackgroundColor(Color.WHITE);
                         toastMessage.setTextColor(Color.parseColor("#2E7D32"));
                         toast.show();
                         userMeId = response.body().getId();
@@ -237,6 +238,7 @@ public class LoginActivity extends AppCompatActivity {
                         View view = toast.getView();
                         TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                         toastMessage.setTextColor(Color.RED);
+                        toastMessage.setBackgroundColor(Color.WHITE);
                         toast.show();
                     }
                 });
@@ -291,6 +293,8 @@ public class LoginActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(LoginActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
                 TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                 toastMessage.setTextColor(Color.RED);
+                toastMessage.setBackgroundColor(Color.WHITE);
+                toastMessage.setGravity(View.TEXT_ALIGNMENT_VIEW_END);
                 toast.show();
             }
         });

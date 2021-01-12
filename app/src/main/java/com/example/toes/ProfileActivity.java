@@ -1,5 +1,6 @@
 package com.example.toes;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -11,6 +12,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -77,12 +79,24 @@ public class ProfileActivity extends AppCompatActivity {
         super.onStart();
         showJob();
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(ProfileActivity.this, SelectRoleActivity.class);
+                startActivity(intent);
+               // onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         txtName = (TextView) findViewById(R.id.txtprofile_name);
         txtPhone = (TextView) findViewById(R.id.txtprofile_contact);
         txtGender = (TextView) findViewById(R.id.txtprofile_gender);

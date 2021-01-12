@@ -1,5 +1,6 @@
 package com.example.toes;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -27,6 +28,13 @@ public class EditProfileActivity extends AppCompatActivity {
     Button btnSave;
     JsonPlaceHolderApi editProfile;
     static boolean eCo = false;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        eCo = false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +74,15 @@ public class EditProfileActivity extends AppCompatActivity {
                     Toast.makeText(EditProfileActivity.this, "Please fill all fields !", Toast.LENGTH_SHORT).show();
                 }
                 if (rBtnMale.getText().toString().isEmpty() || rBtnFemale.getText().toString().isEmpty() || rBtnOther.getText().toString().isEmpty()) {
-                    Toast.makeText(EditProfileActivity.this, "Please fill all fields !", Toast.LENGTH_SHORT).show();
+                    Toast toast =  Toast.makeText(EditProfileActivity.this, "Please fill all fields !", Toast.LENGTH_SHORT);
+                    View view = toast.getView();
+                    TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
+                    toastMessage.setTextColor(Color.RED);
+                    toastMessage.setBackgroundColor(Color.WHITE);
+                    toast.show();
+
+
+
                 }
 
                  editProfile = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
@@ -99,6 +115,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         Toast toast = Toast.makeText(EditProfileActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
                         TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                         toastMessage.setTextColor(Color.RED);
+                        toastMessage.setBackgroundColor(Color.WHITE);
                         toast.show();
                     }
                 });

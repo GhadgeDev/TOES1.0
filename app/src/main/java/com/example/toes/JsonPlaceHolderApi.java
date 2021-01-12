@@ -206,12 +206,11 @@ interface JsonPlaceHolderApi {
     Call<EmergencyContact> postEmergencyContact(@Field("contact_no") String contact_no,
                                                 @Field("user") int user);
 
-    //Update Emergency Call
-    //  @FormUrlEncoded
-    // @PATCH("/emergency/{id}/")
- /*   Call<EmergencyContact> updateEmergencyContact(@Path("id") int id,
-                                                  @Field("contact_no") String contact_no
-                                                );*/
+   // Update Emergency Call
+      @FormUrlEncoded
+    @PATCH("/emergency/{id}")
+   Call<EmergencyContact> updateEmergencyContact(@Field("contact_no") String contact_no,
+                                                   @Path("id") int id);
 
 
     //get Emergency Contact

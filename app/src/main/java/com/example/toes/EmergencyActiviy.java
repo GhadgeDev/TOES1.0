@@ -64,11 +64,13 @@ public class EmergencyActiviy extends AppCompatActivity {
                     Toast.makeText(EmergencyActiviy.this, "Please Enter Contact Number", Toast.LENGTH_SHORT).show();
                 } else {
                     contact = etCno.getText().toString();
-                   // if (EditProfileActivity.eCo == false) {
+                    if (EditProfileActivity.eCo == true) {
+                        txtName.setText(SelectRoleActivity.textUserlName);
+                        System.out.println("textUserfName : _--------- " + SelectRoleActivity.textUserfName);
+                        eUpdateEContact();
 
-                       // eUpdateEContact();
 
-                   // } else {
+                    } else {
                         Call<EmergencyContact> postEContact = jsonPlaceHolderApi.postEmergencyContact(contact, IdentityProofActivity.uid);
                         postEContact.enqueue(new Callback<EmergencyContact>() {
                             @Override
@@ -97,12 +99,13 @@ public class EmergencyActiviy extends AppCompatActivity {
                 }
 
 
-           // }
+            }
         });
 
 
     }
-   /* private void eUpdateEContact() {
+    private void eUpdateEContact() {
+
 
         Call<EmergencyContact> getEContact = jsonPlaceHolderApi.getEmergencyContact("token " + LoginActivity.token, LoginActivity.userMeId);
         getEContact.enqueue(new Callback<EmergencyContact>() {
@@ -117,10 +120,33 @@ public class EmergencyActiviy extends AppCompatActivity {
                     EmergencyContact ec = response.body();
                     EmergencyActiviy.emergencyID = ec.getId();
 
-                    System.out.println("ID ------------ "+emergencyID);
+                    System.out.println("ID ----------------------------- "+emergencyID);
                     System.out.println("Cno ------------ "+ec.getContact_no());
                     System.out.println("user ------------ "+ec.getUser());
 
+                Call<EmergencyContact> postEContact = jsonPlaceHolderApi.updateEmergencyContact(contact,ec.getId());
+                postEContact.enqueue(new Callback<EmergencyContact>() {
+                    @Override
+                    public void onResponse(Call<EmergencyContact> call, Response<EmergencyContact> response) {
+                        if (!response.isSuccessful()) {
+                            System.out.println("Response : _--------- " + response.code());
+                            System.out.println("Response M : _--------- " + response.message());
+
+                            return;
+                        }
+                        System.out.println("E Contact " + response.body().getContact_no());
+                        Toast.makeText(EmergencyActiviy.this, "Emergency contact updated successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(EmergencyActiviy.this, ProfileActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<EmergencyContact> call, Throwable t) {
+                        System.out.println("Error M : _--------- " + t.getMessage());
+                    }
+                });
 
             }
 
@@ -130,29 +156,6 @@ public class EmergencyActiviy extends AppCompatActivity {
             }
         });
 
-       Call<EmergencyContact> postEContact = jsonPlaceHolderApi.updateEmergencyContact(5,contact);
-            postEContact.enqueue(new Callback<EmergencyContact>() {
-                @Override
-                public void onResponse(Call<EmergencyContact> call, Response<EmergencyContact> response) {
-                    if (!response.isSuccessful()) {
-                        System.out.println("Response : _--------- " + response.code());
-                        System.out.println("Response M : _--------- " + response.message());
 
-                        return;
-                    }
-                    System.out.println("E Contact " + response.body().getContact_no());
-                    Toast.makeText(EmergencyActiviy.this, "Emergency contact updated successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(EmergencyActiviy.this, LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-
-                }
-
-                @Override
-                public void onFailure(Call<EmergencyContact> call, Throwable t) {
-                    System.out.println("Error M : _--------- " + t.getMessage());
-                }
-            });
-
-    }*/
+    }
 }

@@ -212,10 +212,11 @@ TextView t1,t2,t3;
                         return;
                     }
 
-                    Toast toast = Toast.makeText(VisitingChargesActivity.this, "Congratulation !\n You are details saved successfully !.", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(VisitingChargesActivity.this, "Congratulation !\n Your details saved successfully !.", Toast.LENGTH_SHORT);
                     View view = toast.getView();
                     TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                     toastMessage.setTextColor(Color.parseColor("#2E7D32"));
+                    toastMessage.setBackgroundColor(Color.WHITE);
                     toast.show();
 
                     WorkerJobDetails postResponse = response.body();
@@ -250,6 +251,7 @@ TextView t1,t2,t3;
                     View view = toast.getView();
                     TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                     toastMessage.setTextColor(Color.RED);
+                    toastMessage.setBackgroundColor(Color.WHITE);
                     toast.show();
                     System.out.println("fail : _--------- " + t.getMessage());
 
@@ -273,6 +275,7 @@ TextView t1,t2,t3;
                     View view = toast.getView();
                     TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                     toastMessage.setTextColor(Color.parseColor("#2E7D32"));
+                    toastMessage.setBackgroundColor(Color.WHITE);
                     toast.show();
 
                     WorkerJobDetails postResponse = response.body();
@@ -307,6 +310,8 @@ TextView t1,t2,t3;
                     View view = toast.getView();
                     TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
                     toastMessage.setTextColor(Color.RED);
+                    toastMessage.setBackgroundColor(Color.WHITE);
+
                     toast.show();
                     System.out.println("fail : _--------- " + t.getMessage());
 
