@@ -56,7 +56,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
     public static String workerPhnNo;
     public static Integer isSmartPhone;
     public static int RworkerId;
-    public static String str;
+    private String str;
     private static final String EXTRA_ITEM_SELECTED_IS = "recruiter.home.activity.itemSelected";
 
     public static Intent newIntent(Context packageContext, String selectedItem) {
@@ -85,9 +85,8 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        str = getIntent().getStringExtra("selected_job_tile");
-
         if (RecentPostedJobActivity.indicator == 1) {
+            str = getIntent().getStringExtra("selected_job_tile");
             mJobNameTextView.setText(str);
             callToGetAllWorkersFromRecent();
         }
