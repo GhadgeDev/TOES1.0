@@ -96,9 +96,11 @@
         android:layout_height="50dp"
         android:layout_margin="50dp"
         android:layout_alignParentBottom="true"
+
         android:layout_alignParentEnd="true"
-        android:foreground="@drawable/alert"
-        android:src="@drawable/alert"
+        android:foreground="@drawable/siren2"
+
+        android:src="@drawable/siren2"
         android:layout_alignParentRight="true"
         />
 </RelativeLayout>
