@@ -52,6 +52,8 @@ public class RecruiterHomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 jobDesc = (EditText) findViewById(R.id.jobDescription);
                 jobDescVal = jobDesc.getText().toString();
+                RecentPostedJobActivity.indicator = 0;
+                System.out.println("INDICATOR(Recruiter Home): " + RecentPostedJobActivity.indicator);
 
                 String text = spinner1.getSelectedItem().toString();
                 if (text != "Select Job" && (!jobDescVal.isEmpty())) {

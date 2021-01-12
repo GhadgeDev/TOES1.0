@@ -57,6 +57,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
     public static Integer isSmartPhone;
     public static int RworkerId;
     private String str;
+    private String token = "token " + LoginActivity.token;
     private static final String EXTRA_ITEM_SELECTED_IS = "recruiter.home.activity.itemSelected";
 
     public static Intent newIntent(Context packageContext, String selectedItem) {
@@ -85,6 +86,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        System.out.println("INDICATOR(Select worker): " + RecentPostedJobActivity.indicator);
         if (RecentPostedJobActivity.indicator == 1) {
             str = getIntent().getStringExtra("selected_job_tile");
             mJobNameTextView.setText(str);
@@ -186,7 +188,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
 
     private void callToGetAllWorkers() {
         JsonPlaceHolderApi workerInfoList = ClassRetrofit.getRetrofit().create(JsonPlaceHolderApi.class);
-        Call<List<GetSpecificWorkerModel>> call = workerInfoList.getWorkerInfo("token " + LoginActivity.token, mSelectedItemIs);
+        Call<List<GetSpecificWorkerModel>> call = workerInfoList.getWorkerInfo(token, mSelectedItemIs);
 
         call.enqueue(new Callback<List<GetSpecificWorkerModel>>() {
             @Override
@@ -234,7 +236,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         loadingBar.setMessage("Please wait..");
         loadingBar.setCanceledOnTouchOutside(true);
         loadingBar.show();
-        Call<List<GetSpecificWorkerModel>> call = workersList.getRecentWorkerInfo("token " + LoginActivity.token,str);
+        Call<List<GetSpecificWorkerModel>> call = workersList.getRecentWorkerInfo(token,str);
         call.enqueue(new Callback<List<GetSpecificWorkerModel>>() {
 
 

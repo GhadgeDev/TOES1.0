@@ -136,6 +136,7 @@ public class RecentPostedJobActivity extends AppCompatActivity implements Recent
     @Override
     public void onJobClick(int position) {
         indicator = 1;
+        System.out.println("INDICATOR(recent post): " + indicator);
         Intent intent = new Intent(this, SelectWorkerActivity.class);
         intent.putExtra("selected_job_tile", lstResponse.get(position).getJobTitle());
         jbDesc = lstResponse.get(position).getJob_Description();
