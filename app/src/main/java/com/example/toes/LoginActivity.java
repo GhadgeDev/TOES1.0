@@ -2,6 +2,7 @@ package com.example.toes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.app.VoiceInteractor;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -67,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
     public static String token;
     public static int userMeId;
     public static SharedPreferences sp;
-
+    private ProgressDialog loadingBar;
     static ArrayList<String> tokenDetail = new ArrayList<>();
 
     @Override
@@ -87,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         txtForgotPass = (TextView) findViewById(R.id.txtForgotPass);
         prf = getSharedPreferences("user_details", MODE_PRIVATE);
         cbShow = (CheckBox) findViewById(R.id.cbShowPass);
-
+        loadingBar = new ProgressDialog(this);
         btnLogIn = (Button) findViewById(R.id.btnSignIn);
         btnSignUp = (Button) findViewById(R.id.btnCreateNewAcc);
 
@@ -109,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }, intentFilter);
         selectedLanguage = SelectLanguageActivity.selectedLanguage;
-        switch (selectedLanguage) {
+    /*    switch (selectedLanguage) {
             case "0":
 
                 break;
@@ -144,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                 break;
 
 
-        }
+        }*/
 
         //For http log
         HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();

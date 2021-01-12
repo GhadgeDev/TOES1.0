@@ -48,15 +48,23 @@
         android:textSize="22sp"
         android:layout_margin="25dp"
         />
+    <LinearLayout
+        android:id="@+id/llBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtselect"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:orientation="vertical">
     <Button
         android:id="@+id/btnFindJob"
         android:layout_width="324dp"
         android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
+
         android:background="@drawable/englishbutton"
         android:text="Find Job"
         android:textColor="@color/white"
-        android:layout_below="@+id/txtselect"
+
 
         />
     <Button
@@ -70,6 +78,7 @@
         android:textColor="@color/white"
         android:layout_below="@+id/btnFindJob"
         />
+    </LinearLayout>
     <ImageView
         android:id="@+id/imgIllustrator1"
         android:layout_margin="25dp"
@@ -77,7 +86,7 @@
         android:layout_height="200dp"
         android:foregroundGravity=""
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btnFindWorker"
+        android:layout_below="@+id/llBtn"
         android:src="@drawable/thinking"
         />
     <com.google.android.material.floatingactionbutton.FloatingActionButton

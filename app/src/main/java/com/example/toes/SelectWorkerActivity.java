@@ -45,7 +45,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
         WorkerAdapter.OnNoteListener {
 
     private DrawerLayout drawer;
-    TextView dUserName;
+    TextView dUserName,emptyView;
     private RecyclerView workerList;
     private List<GetSpecificWorkerModel> lstWorker;
     private String mSelectedItemIs;
@@ -81,7 +81,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
 
         mJobNameTextView = findViewById(R.id.job_name);
 
-
+        emptyView = (TextView)findViewById(R.id.emptyView) ;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -208,6 +208,14 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
                 String dfname = SelectRoleActivity.textUserfName;
                 String dlname = SelectRoleActivity.textUserlName;
                 dUserName.setText(dfname + " " + dlname);
+                if (lstWorker.isEmpty()) {
+                    workerList.setVisibility(View.GONE);
+                    emptyView.setVisibility(View.VISIBLE);
+                }
+                else {
+                    workerList.setVisibility(View.VISIBLE);
+                    emptyView.setVisibility(View.GONE);
+                }
             }
 
             @Override

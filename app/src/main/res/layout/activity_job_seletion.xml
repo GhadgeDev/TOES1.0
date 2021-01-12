@@ -138,7 +138,7 @@
 
     <EditText
         android:id="@+id/etOtherJob"
-        android:layout_width="324dp"
+        android:layout_width="300dp"
         android:layout_height="55dp"
         android:layout_below="@id/chkboxOther"
         android:layout_centerHorizontal="true"
@@ -152,7 +152,7 @@
         />
     <Button
         android:id="@+id/btnStart"
-        android:layout_width="324dp"
+        android:layout_width="300dp"
         android:layout_height="55dp"
         android:layout_below="@+id/etOtherJob"
         android:layout_centerHorizontal="true"

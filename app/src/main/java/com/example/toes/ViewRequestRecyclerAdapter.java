@@ -183,7 +183,8 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
 
         try {
             android.telephony.SmsManager sms = android.telephony.SmsManager.getDefault();
-            sms.sendTextMessage(no.toString(), null, msg, pi, null);        //method to send sms
+            sms.sendTextMessage(no.toString(), null, msg, pi, null);        //method to send sm
+
             Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
             throw (Throwable) IllegalAccessException;
         }catch (IllegalArgumentException illegalArgumentException){

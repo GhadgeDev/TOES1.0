@@ -29,228 +29,231 @@
         android:src="@mipmap/useravatar"
         />
 
-    <LinearLayout
-        android:id="@+id/llMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/cimgprofile"
-        android:layout_margin="10dp"
-        android:layout_centerHorizontal="true"
-        >
-        <LinearLayout
-            android:id="@+id/ll1Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@id/cimgprofile"
-            >
-            <TextView
-                android:id="@+id/txtFName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/cimgprofile"
 
-                android:layout_marginTop="10dp"
-
-                android:text="First Name"
-                android:textColor="@color/black" />
-
-            <EditText
-                android:id="@+id/etFName"
-                android:layout_width="160dp"
-                android:layout_height="55dp"
-                android:layout_below="@+id/txtFName"
-
-                android:layout_marginTop="5dp"
-                android:inputType="textPersonName"
-                android:background="@drawable/devnagaribtn"
-
-                android:cursorVisible="true"
-                android:duplicateParentState="true"
-
-                android:fontFamily="@font/lohitdevanagari"
-                android:gravity="center"
-                android:hint="Name"
-                android:textColor="@color/black"
-                android:textColorHint="#97616161" />
-        </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll2Name"
+            android:id="@+id/llMain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_below="@id/cimgprofile"
-            android:layout_toRightOf="@+id/ll1Name"
-            >
-            <TextView
-                android:id="@+id/txtLName"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll1Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/cimgprofile"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"
+                android:layout_below="@id/cimgprofile"
+                android:orientation="vertical">
 
-                android:text="Last Name"
-                android:textColor="@color/black"
-                android:layout_toRightOf="@+id/etFName" />
-            <EditText
-                android:id="@+id/etLName"
-                android:layout_width="160dp"
-                android:inputType="textPersonName"
-                android:layout_height="55dp"
-                android:fontFamily="@font/lohitdevanagari"
-                android:layout_below="@+id/txtLName"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
-                android:layout_toRightOf="@+id/etFName"
-                android:hint="Last Name"
-                android:textColor="@color/black"
-                android:gravity="center"
-                android:textColorHint="#97616161"
-                android:background="@drawable/devnagaribtn"
-                />
+                <TextView
+                    android:id="@+id/txtFName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cimgprofile"
+
+                    android:layout_marginTop="10dp"
+
+                    android:text="First Name"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/etFName"
+                    android:layout_width="160dp"
+                    android:layout_height="55dp"
+                    android:layout_below="@+id/txtFName"
+
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/devnagaribtn"
+                    android:cursorVisible="true"
+
+                    android:duplicateParentState="true"
+                    android:fontFamily="@font/lohitdevanagari"
+
+                    android:gravity="center"
+                    android:hint="Name"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:textColorHint="#97616161" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll2Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cimgprofile"
+                android:layout_toRightOf="@+id/ll1Name"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtLName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/cimgprofile"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+
+                    android:layout_toRightOf="@+id/etFName"
+                    android:text="Last Name"
+                    android:textColor="@color/black" />
+
+                <EditText
+                    android:id="@+id/etLName"
+                    android:layout_width="160dp"
+                    android:layout_height="55dp"
+                    android:layout_below="@+id/txtLName"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/etFName"
+                    android:background="@drawable/devnagaribtn"
+                    android:fontFamily="@font/lohitdevanagari"
+                    android:gravity="center"
+                    android:hint="Last Name"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/black"
+                    android:textColorHint="#97616161" />
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/txtContact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llMain"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:text="Contact Number"
+            android:textColor="@color/black" />
 
-    <TextView
-        android:id="@+id/txtContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/llMain"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"
-        android:text="Contact Number"
-        android:textColor="@color/black"
-        />
-    <EditText
-        android:id="@+id/etContact"
-        android:layout_width="324dp"
-        android:layout_height="55dp"
-        android:layout_below="@+id/txtContact"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:hint="Contact Number"
-        android:inputType="number"
+        <EditText
+            android:id="@+id/etContact"
+            android:layout_width="324dp"
+            android:layout_height="55dp"
+            android:layout_below="@+id/txtContact"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/devnagaribtn"
+            android:gravity="center"
 
-        android:maxLength="10"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:textColorHint="#97616161"
-        android:background="@drawable/devnagaribtn"
-        />
-    <TextView
-        android:id="@+id/txtAddr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etContact"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"
-        android:text="Address"
-        android:textColor="@color/black"
-        />
-    <EditText
-        android:id="@+id/etAddr"
-        android:layout_width="324dp"
-        android:layout_height="55dp"
-        android:layout_below="@+id/txtAddr"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:hint="Address"
-        android:inputType="textPostalAddress"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textColorHint="#97616161"
-        android:background="@drawable/devnagaribtn"
-        />
-    <TextView
-        android:id="@+id/txtdob"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etAddr"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"
-        android:text="Date Of Birth"
-        android:textColor="@color/black"
-        />
-    <EditText
-        android:id="@+id/etDob"
-        android:layout_width="324dp"
-        android:layout_height="55dp"
-        android:layout_below="@+id/txtdob"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:hint="Date of Birth"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:textColorHint="#97616161"
-        android:focusable="false"
-        android:background="@drawable/devnagaribtn"
-        />
-    <TextView
-        android:id="@+id/txtGender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etDob"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"
-        android:text="Gender"
-        android:textColor="@color/black"
-        />
+            android:hint="Contact Number"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textColor="@color/black"
+            android:textColorHint="#97616161" />
 
-    <RadioGroup
-        android:id="@+id/radGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtGender"
-        android:layout_marginLeft="50dp"
-        android:background="#FFFFFF"
-        android:checkedButton="@id/rbtnGenderMale"
-        android:visibility="visible">
+        <TextView
+            android:id="@+id/txtAddr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etContact"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:text="Address"
+            android:textColor="@color/black" />
 
-        <RadioButton
-            android:id="@+id/rbtnGenderMale"
+        <EditText
+            android:id="@+id/etAddr"
+            android:layout_width="324dp"
+            android:layout_height="55dp"
+            android:layout_below="@+id/txtAddr"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/devnagaribtn"
+            android:gravity="center"
+            android:hint="Address"
+            android:inputType="textPostalAddress"
+            android:textColor="@color/black"
+            android:textColorHint="#97616161" />
+
+        <TextView
+            android:id="@+id/txtdob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etAddr"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:text="Date Of Birth"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/etDob"
+            android:layout_width="324dp"
+            android:layout_height="55dp"
+            android:layout_below="@+id/txtdob"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/devnagaribtn"
+            android:focusable="false"
+            android:gravity="center"
+            android:hint="Date of Birth"
+            android:textColor="@color/black"
+            android:textColorHint="#97616161" />
+
+        <TextView
+            android:id="@+id/txtGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etDob"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:text="Gender"
+            android:textColor="@color/black" />
+
+        <RadioGroup
+            android:id="@+id/radGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtGender"
             android:layout_marginLeft="50dp"
-            android:outlineAmbientShadowColor="@color/black"
-            android:shadowColor="@color/black"
-            android:text="Male"
-            android:textColor="@color/black"
-            android:visibility="visible"
-            tools:visibility="visible"
-            android:buttonTint="#2B1EC0"/>
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:checkedButton="@id/rbtnGenderMale"
+            android:visibility="visible">
 
-        <RadioButton
-            android:id="@+id/rbtnGenderFemale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:outlineAmbientShadowColor="@color/black"
-            android:shadowColor="@color/black"
-            android:text="Female"
-            android:textColor="@color/black"
-            android:visibility="visible"
-            android:buttonTint="#2B1EC0"
-            tools:visibility="visible" />
+            <RadioButton
+                android:id="@+id/rbtnGenderMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtGender"
+                android:layout_marginLeft="5dp"
+                android:buttonTint="#2B1EC0"
+                android:outlineAmbientShadowColor="@color/black"
+                android:shadowColor="@color/black"
+                android:text="Male"
+                android:textColor="@color/black"
+                android:visibility="visible"
+                tools:visibility="visible" />
 
-        <RadioButton
-            android:id="@+id/rbtnGenderOther"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rbtnGenderFemale"
-            android:layout_marginLeft="50dp"
-            android:outlineAmbientShadowColor="@color/black"
-            android:shadowColor="@color/black"
-            android:text="Other"
-            android:textColor="@color/black"
-            android:buttonTint="#2B1EC0"
-            android:visibility="visible"
-            tools:visibility="visible" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/rbtnGenderFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:buttonTint="#2B1EC0"
+                android:outlineAmbientShadowColor="@color/black"
+                android:shadowColor="@color/black"
+                android:text="Female"
+                android:textColor="@color/black"
+                android:visibility="visible"
+                tools:visibility="visible" />
+
+            <RadioButton
+                android:id="@+id/rbtnGenderOther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rbtnGenderFemale"
+                android:layout_marginLeft="5dp"
+                android:buttonTint="#2B1EC0"
+                android:outlineAmbientShadowColor="@color/black"
+                android:shadowColor="@color/black"
+                android:text="Other"
+                android:textColor="@color/black"
+                android:visibility="visible"
+                tools:visibility="visible" />
+        </RadioGroup>
+
     <TextView
         android:id="@+id/txt_next"
         android:layout_width="wrap_content"

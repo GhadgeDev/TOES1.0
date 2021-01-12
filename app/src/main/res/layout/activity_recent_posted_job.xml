@@ -54,10 +54,12 @@
         android:background="@drawable/devnagaribtn"
         android:clickable="true"
         android:contentDescription="TODO"
+
         android:drawingCacheQuality="auto"
         android:fadeScrollbars="false"
         android:focusable="auto"
         android:foreground="@drawable/addfbtn"
+        android:foregroundGravity="fill"
         android:tint="#FF303F9F"
         app:backgroundTint="#303F9F"
         app:backgroundTintMode="add"

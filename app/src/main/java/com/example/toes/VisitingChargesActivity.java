@@ -239,7 +239,7 @@ TextView t1,t2,t3;
                     System.out.println("Data : _--------- " + content);
 
                     Intent go = new Intent(VisitingChargesActivity.this, SelectJobActivity.class);
-
+                    go.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(go);
 
                 }
@@ -296,7 +296,7 @@ TextView t1,t2,t3;
                     System.out.println("Data : _--------- " + content);
 
                     Intent go = new Intent(VisitingChargesActivity.this, SelectJobActivity.class);
-
+                    go.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(go);
 
                 }

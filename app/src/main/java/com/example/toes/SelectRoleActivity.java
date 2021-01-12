@@ -8,6 +8,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -71,7 +72,7 @@ SelectRoleActivity extends AppCompatActivity {
     public static int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;
 
     FloatingActionButton callBtn;
-
+    private ProgressDialog loadingBar;
 
     String latitude, longitude;
     private static final int REQUEST_LOCATION = 1;
@@ -128,7 +129,7 @@ SelectRoleActivity extends AppCompatActivity {
         selectedLanguage = intent.getStringExtra(Intent.EXTRA_TEXT);
         System.out.println("Token :---------- " + LoginActivity.token);
         System.out.println("Details :---------- " + LoginActivity.tokenDetail);
-
+        loadingBar = new ProgressDialog(this);
         btnFindJob = (Button) findViewById(R.id.btnFindJob);
         btnFindWorker = (Button) findViewById(R.id.btnFindWorker);
         txtName = (TextView) findViewById(R.id.txtname);
@@ -158,7 +159,10 @@ SelectRoleActivity extends AppCompatActivity {
         Retrofit retrofit1 = retrofit.build();
 
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit1.create(JsonPlaceHolderApi.class);
-
+        loadingBar.setTitle("Loading");
+        loadingBar.setMessage("Please wait..");
+        loadingBar.setCanceledOnTouchOutside(true);
+        loadingBar.show();
         Call<Post> call = jsonPlaceHolderApi.getPost(token);
         call.enqueue(new Callback<Post>() {
             @Override
@@ -170,7 +174,7 @@ SelectRoleActivity extends AppCompatActivity {
 
                     return;
                 }
-
+                loadingBar.dismiss();
                 Post postResponse = response.body();
                 id = postResponse.getId();
                 System.out.println("Code :------------------- " + response.code());
