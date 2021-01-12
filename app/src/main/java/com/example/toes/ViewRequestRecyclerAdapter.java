@@ -38,6 +38,7 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
     String wAddress;
     int status;
     int jbid;
+    private Object IllegalAccessException;
 
 
     public ViewRequestRecyclerAdapter(Context context, List<GetRecruiterViewRequestModel> data) {
@@ -180,10 +181,18 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
         String msg = "Message From Toes" + "\n" + "Worker name: " + fullWName + "\n" + "Contact no: " + wPhoneNumber + "\n" + "Address: " + wAddress;
         String no = LoginActivity.userPhoneNumber;
 
-        SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
-        sms.sendTextMessage(no,null,msg,pi,null);        //method to send sms
+        try {
+            android.telephony.SmsManager sms = android.telephony.SmsManager.getDefault();
+            sms.sendTextMessage(no.toString(), null, msg, pi, null);        //method to send sms
+            Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
+            throw (Throwable) IllegalAccessException;
+        }catch (IllegalArgumentException illegalArgumentException){
+         //   Toast.makeText(mContext.getApplicationContext(), "Something went wrong try after relogin into app", Toast.LENGTH_LONG).show();
 
-        Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
+        } catch (Throwable throwable) {
+         //   Toast.makeText(mContext.getApplicationContext(), "Something went wrong try after relogin into app", Toast.LENGTH_LONG).show();
+            throwable.printStackTrace();
+        }
     }
 
     public void sendSmsToWorker(String wPhoneNumber) {
@@ -196,9 +205,17 @@ public class ViewRequestRecyclerAdapter extends RecyclerView.Adapter<ViewRequest
         //setting string and phone no to send message
         String msg = "Message From Toes" + "\n" + "Recruiter name: " + LoginActivity.userName + "\n" + "Contact no: " + LoginActivity.userPhoneNumber + "\n" + "Address: " + LoginActivity.userAddress;
         String no = wPhoneNumber;
-        SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
-        sms.sendTextMessage(no, null, msg, pi, null);        //method to send sms
+        try {
+            android.telephony.SmsManager sms = android.telephony.SmsManager.getDefault();
+            sms.sendTextMessage(no.toString(), null, msg, pi, null);        //method to send sms
+            Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
+            throw (Throwable) IllegalAccessException;
+        }catch (IllegalArgumentException illegalArgumentException){
+          //  Toast.makeText(mContext.getApplicationContext(), "Something went wrong try after relogin into app", Toast.LENGTH_LONG).show();
 
-        Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
+        } catch (Throwable throwable) {
+         //   Toast.makeText(mContext.getApplicationContext(), "Something went wrong try after relogin into app", Toast.LENGTH_LONG).show();
+            throwable.printStackTrace();
+        }
     }
 }

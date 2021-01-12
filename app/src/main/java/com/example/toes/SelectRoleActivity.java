@@ -79,6 +79,7 @@ SelectRoleActivity extends AppCompatActivity {
     double lat, longi;
     String addr,locality,country;
     static String eContact;
+    private Object IllegalArgumentException;
 
     @Override
     protected void onStart() {
@@ -242,9 +243,16 @@ SelectRoleActivity extends AppCompatActivity {
                                 +"\n"+" Address : "+addr;
 
                         System.out.println("Location : ---------- "+msg);
-                        SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
-                        sms.sendTextMessage(eContact, null, msg, pi, null);        //method to send sms
-                        sms.sendTextMessage(eContact, null, locMsg, pi, null);        //method to send sms
+                        SmsManager sms = SmsManager.getDefault() ;    //android mobile sms manager
+                        try {
+                            sms.sendTextMessage(eContact, null, msg, pi, null) ;        //method to send sms
+                            sms.sendTextMessage(eContact, null, locMsg, pi, null);        //method to send sms
+                            throw (Throwable) IllegalArgumentException;
+                        }  catch (Throwable throwable) {
+                            //Toast.makeText(mContext.getApplicationContext(), "", Toast.LENGTH_LONG).show();
+                            throwable.printStackTrace();
+                        }
+                        
                         Toast.makeText(SelectRoleActivity.this.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
                         System.out.println("E Contact " + response.body().getContact_no());
                     }

@@ -26,6 +26,7 @@ public class EditProfileActivity extends AppCompatActivity {
     String eno ;
     Button btnSave;
     JsonPlaceHolderApi editProfile;
+    static boolean eCo = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,18 +81,17 @@ public class EditProfileActivity extends AppCompatActivity {
                         }
                         Toast toast = Toast.makeText(EditProfileActivity.this, "Profile updated", Toast.LENGTH_SHORT);
                         toast.show();
-                    //    if(gender.equals("female") || gender.equals("Female")){
-                        //    eUpdateEContact();
+                       if(gender.equals("female") || gender.equals("Female")){
+                            EditProfileActivity.eCo = true;
+                            Intent intent = new Intent(EditProfileActivity.this, EmergencyActiviy.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                           startActivity(intent);
 
-                          //  Intent intent = new Intent(EditProfileActivity.this, SelectRoleActivity.class);
-                         //   intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                         //   startActivity(intent);
-
-                     //   }else {
+                       }else {
                             Intent intent = new Intent(EditProfileActivity.this, SelectRoleActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
-                    //    }
+                        }
                     }
 
                     @Override
@@ -106,31 +106,5 @@ public class EditProfileActivity extends AppCompatActivity {
         });
     }
 
-    private void eUpdateEContact() {
-        if(etEcno.getText().toString().isEmpty() || etEcno.getText().toString().equals("")){
-            Toast.makeText(EditProfileActivity.this,"Please Enter Contact Number",Toast.LENGTH_SHORT).show();
-        }else {
-            String eContact = etEcno.getText().toString();
-            Call<EmergencyContact> postEContact = editProfile.updateEmergencyContact(eContact, LoginActivity.userMeId);
-            postEContact.enqueue(new Callback<EmergencyContact>() {
-                @Override
-                public void onResponse(Call<EmergencyContact> call, Response<EmergencyContact> response) {
-                    if (!response.isSuccessful()) {
-                        System.out.println("Response : _--------- " + response.code());
-                        System.out.println("Response M : _--------- " + response.message());
 
-                        return;
-                    }
-                    System.out.println("E Contact " + response.body().getContact_no());
-                    Toast.makeText(EditProfileActivity.this, "Emergency contact updated successfully", Toast.LENGTH_SHORT).show();
-
-                }
-
-                @Override
-                public void onFailure(Call<EmergencyContact> call, Throwable t) {
-
-                }
-            });
-        }
-    }
 }

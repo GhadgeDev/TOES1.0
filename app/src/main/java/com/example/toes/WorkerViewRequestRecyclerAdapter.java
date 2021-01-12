@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,9 +31,13 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.content.ContentValues.TAG;
 import static android.provider.Settings.System.getString;
@@ -49,8 +54,11 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
     String rAdd;
     String rPhoneNumber;
     int status;
+    static String no;
     public int viewJob_id;
-
+    private Object IllegalAccessException;
+    JsonPlaceHolderApi jsonPlaceHolderApi;
+    private Object IllegalArgumentException;
 
     public WorkerViewRequestRecyclerAdapter(Context context, List<GetWorkerViewRequestModel> data) {
         mContext = context;
@@ -63,6 +71,27 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
         View v;
         v = LayoutInflater.from(mContext).inflate(R.layout.workerviewrequestlist, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(v);
+
+
+        //For http log
+        HttpLoggingInterceptor okHttpLoggingInterceptor = new HttpLoggingInterceptor();
+        okHttpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
+
+        //connecting to base url
+        Retrofit.Builder retrofit = new Retrofit.Builder().
+                baseUrl("http://65.1.2.12/")
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit1 = retrofit.build();
+
+        jsonPlaceHolderApi  = retrofit1.create(JsonPlaceHolderApi.class);
+
+
+
+
+
 
         //Dialog
         myDialog = new Dialog(mContext);
@@ -81,7 +110,7 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
                 rAdd = mData.get(viewHolder.getAdapterPosition()).getAddress();
                 rPhoneNumber = mData.get(viewHolder.getAdapterPosition()).getRecruiterPhoneNo();
                 rFullName = rFName + " " + rLName;
-
+                System.out.println("rPhoneNumber __---------------"+rPhoneNumber);
                 TextView dialog_recruiter_name = myDialog.findViewById(R.id.view_request_recruiter_name_dialog);
                 TextView dialog_recruiter_desc = myDialog.findViewById(R.id.view_request_recruiter_desc);
                 TextView dialog_recruiter_add = myDialog.findViewById(R.id.view_request_recruiter_address);
@@ -118,8 +147,8 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
                             myDialog.dismiss();
                         }
                     });
-                }catch (Exception e){
-                    Toast.makeText(mContext,"Something went wrong",Toast.LENGTH_SHORT).show();
+                }catch (IllegalArgumentException exception){
+                    Toast.makeText(mContext,"Something went wrong try after restarting your app",Toast.LENGTH_SHORT).show();
                     System.out.println("jid __---------------"+viewJob_id);
 
                 }
@@ -175,7 +204,7 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
                 } else {
                     if (status == 2) {
                         sendSmsToMySelf();
-                        sendSmsToRecruiter(rPhoneNumber);
+                        sendSmsToRecruiter();
                     }
                 }
             }
@@ -193,35 +222,112 @@ public class WorkerViewRequestRecyclerAdapter extends RecyclerView.Adapter<Worke
 
 
     public void sendSmsToMySelf() {
+        Call<Post> call = jsonPlaceHolderApi.getPost("token "+LoginActivity.token);
+        call.enqueue(new Callback<Post>() {
 
-        //Messages
-        //Creating intent of current activity/fragment/context
-        Intent intent = new Intent(mContext.getApplicationContext(), WorkerViewRequestRecyclerAdapter.class);
-        PendingIntent pi = PendingIntent.getActivity(mContext.getApplicationContext(), 0, intent, 0);
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
 
-        //setting string and phone no to send message
-        String msg = "Message From Toes" + "\n" + "Recruiter name: " + rFullName + "\n" + "Contact no: " + rPhoneNumber + "\n" + "Address: " + rAdd;
-        String no = LoginActivity.userPhoneNumber;
-       // SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
-        android.telephony.SmsManager sms = android.telephony.SmsManager.getDefault();
-        sms.sendTextMessage(no.toString(), null, msg, pi, null);        //method to send sms
-        Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
+                if (!response.isSuccessful()) {
+                    System.out.println("Response : _--------- " + response.code());
+                    System.out.println("Response M : _--------- " + response.message());
+
+                    return;
+                }
+
+                Post postResponse = response.body();
+                // File photo = new File(postResponse.getProfile_image());
+                // RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), photo);
+                System.out.println("Code :------------------- " + response.code());
+                String content = "";
+                content += "name : " + postResponse.getFirst_name() + "\n";
+                content += "lName : " + postResponse.getLast_name() + "\n";
+                content += "Phone : " + postResponse.getPhone() + "\n";
+                content += "Gender : " + postResponse.getGender() + "\n";
+                content += "Aadhar : " + postResponse.getAadhar_no() + "\n";
+                content += "address : " + postResponse.getAddress() + "\n";
+
+                no = postResponse.getPhone();
+                Intent intent = new Intent(mContext.getApplicationContext(), WorkerViewRequestRecyclerAdapter.class);
+                PendingIntent pi = PendingIntent.getActivity(mContext.getApplicationContext(), 0, intent, 0);
+
+                //setting string and phone no to send message
+                String msg = "Message From Toes" + "\n" + "Recruiter name: "+rFName +" "+rLName  + "\n" + "Contact no: "+rPhoneNumber  + "\n" + "Address: "+rAdd ;
+
+                System.out.println("postResponse.getPhone(); __---------------"+postResponse.getPhone());
+                // SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
+                try {
+                    android.telephony.SmsManager sms = android.telephony.SmsManager.getDefault();
+
+                    sms.sendTextMessage(postResponse.getPhone(), null, msg, pi,null);        //method to send sms
+                    Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
+                    throw (Throwable) IllegalAccessException;
+                } catch (Throwable throwable) {
+                   // Toast.makeText(mContext.getApplicationContext(), "", Toast.LENGTH_LONG).show();
+                    throwable.printStackTrace();
+                }
+                System.out.println("Data : _--------- " + content);
+                //System.out.println("no : _--------- " + no);
+                System.out.println("id : -------------------------- " + postResponse.getId());
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                System.out.println("Filed in ProfileActivity : " + t.getMessage());
+
+            }
+        });
     }
 
-    public void sendSmsToRecruiter(String wPhoneNumber) {
+    public void sendSmsToRecruiter() {
+        Call<Post> call = jsonPlaceHolderApi.getPost("token "+LoginActivity.token);
+        call.enqueue(new Callback<Post>() {
 
-        //Messages
-        //Creating intent of current activity/fragment/context
-        Intent intent = new Intent(mContext.getApplicationContext(), WorkerViewRequestRecyclerAdapter.class);
-        PendingIntent pi = PendingIntent.getActivity(mContext.getApplicationContext(), 0, intent, 0);
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
 
-        //setting string and phone no to send message
-        String msg = "Message From Toes" + "\n" + "Worker name: " + LoginActivity.userName + "\n" + "Contact no: " + LoginActivity.userPhoneNumber + "\n" + "Address: " + LoginActivity.userAddress;
-        String no = rPhoneNumber;
-        android.telephony.SmsManager sms = android.telephony.SmsManager.getDefault();
-       // SmsManager sms = SmsManager.getDefault();    //android mobile sms manager
-        sms.sendTextMessage(no.toString(), null, msg, pi, null);        //method to send sms
+                if (!response.isSuccessful()) {
+                    System.out.println("Response : _--------- " + response.code());
+                    System.out.println("Response M : _--------- " + response.message());
 
-        Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                Post postResponse = response.body();
+
+                //Messages
+                //Creating intent of current activity/fragment/context
+                Intent intent = new Intent(mContext.getApplicationContext(), WorkerViewRequestRecyclerAdapter.class);
+                PendingIntent pi = PendingIntent.getActivity(mContext.getApplicationContext(), 0, intent, 0);
+
+                //setting string and phone no to send message
+                String msg = "Message From Toes" + "\n" + "Worker name: " + postResponse.getFirst_name()+" "+postResponse.getLast_name() +  "\n" + "Contact no: " +  "\n"+postResponse.getPhone() +"\n"+ "Address: "+postResponse.getAddress()  ;
+                //String no = rPhoneNumber;
+                System.out.println("rPhoneNumberSelf1 __---------------"+rPhoneNumber);
+                try {
+                    System.out.println("rPhoneNumberSelfT1 __---------------"+rPhoneNumber);
+                    System.out.println("rPhoneNumberSelfT1 __---------------"+LoginActivity.userName);
+                    System.out.println("rPhoneNumberSelfT1 __---------------"+LoginActivity.userPhoneNumber );
+                    System.out.println("rPhoneNumberSelfT1 __---------------"+LoginActivity.userAddress);
+                    android.telephony.SmsManager sms = android.telephony.SmsManager.getDefault() ;
+                    sms.sendTextMessage(rPhoneNumber, null, msg, pi, null) ;        //m// ethod to send sms
+                    System.out.println("rPhoneNumberSelfT2 __---------------"+rPhoneNumber);
+                    Toast.makeText(mContext.getApplicationContext(), "Message Sent successfully!", Toast.LENGTH_LONG).show();
+                    throw (Throwable) IllegalArgumentException;
+                }  catch (Throwable throwable) {
+                    //Toast.makeText(mContext.getApplicationContext(), "", Toast.LENGTH_LONG).show();
+                    throwable.printStackTrace();
+                }
+
+                System.out.println("id : -------------------------- " + postResponse.getId());
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                System.out.println("Filed in ProfileActivity : " + t.getMessage());
+
+            }
+        });
+
     }
 }

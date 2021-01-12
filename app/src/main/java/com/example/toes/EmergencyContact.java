@@ -2,21 +2,21 @@ package com.example.toes;
 
 class EmergencyContact {
 
-    private String id;
+    private int id;
     private String emergency_contact;
     private String user ;
 
-    public EmergencyContact(String id, String contact_no, String user) {
+    public EmergencyContact(int id, String contact_no, String user) {
         this.id = id;
         this.emergency_contact = contact_no;
         this.user = user;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
