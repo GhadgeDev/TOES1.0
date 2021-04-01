@@ -96,7 +96,8 @@ public class IdentityProofActivity extends AppCompatActivity {
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(okHttpLoggingInterceptor).build();
 
         Retrofit retrofit = new Retrofit.Builder().
-                baseUrl("http://65.1.2.12/")
+                //baseUrl("http://65.1.2.12/")
+                        baseUrl("https://tcp-api.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();

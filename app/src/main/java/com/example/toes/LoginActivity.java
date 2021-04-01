@@ -155,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //connecting to base url
         Retrofit.Builder retrofit = new Retrofit.Builder().
-                baseUrl("http://65.1.2.12/token/")
+                baseUrl("http://tcp-api.herokuapp.com/token/")
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit1 = retrofit.build();
 

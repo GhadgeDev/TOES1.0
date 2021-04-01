@@ -21,7 +21,8 @@ public class ClassRetrofit {
         if (retrofit == null) {
             //connecting to base url
             retrofit = new Retrofit.Builder().
-                    baseUrl("http://65.1.2.12/")
+                    //baseUrl("http://65.1.2.12/")
+                            baseUrl("https://tcp-api.herokuapp.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(okHttpClient).build();
         }

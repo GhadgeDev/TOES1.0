@@ -123,7 +123,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         //connecting to base url
         Retrofit.Builder retrofit = new Retrofit.Builder().
-                baseUrl("http://65.1.2.12/")
+                baseUrl("https://tcp-api.herokuapp.com/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit1 = retrofit.build();
