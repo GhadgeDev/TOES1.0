@@ -54,7 +54,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
     private SwipeRefreshLayout refreshWorkerList;
     private ProgressDialog loadingBar;
     public static String workerPhnNo;
-    public static Integer isSmartPhone;
+    public static Boolean isSmartPhone;
     public static int RworkerId;
     private String str;
     private String token = "token " + LoginActivity.token;
@@ -221,7 +221,7 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
 
             @Override
             public void onFailure(Call<List<GetSpecificWorkerModel>> call, Throwable t) {
-                Toast toast = Toast.makeText(SelectWorkerActivity.this, "Please Check your Internet Connection !", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(SelectWorkerActivity.this, "callToGetAllWorkers !", Toast.LENGTH_SHORT);
                 TextView toastMessage = toast.getView().findViewById(android.R.id.message);
                 toastMessage.setTextColor(Color.RED);
                 toast.show();
@@ -267,7 +267,8 @@ public class SelectWorkerActivity extends AppCompatActivity implements Navigatio
             @Override
             public void onFailure(Call<List<GetSpecificWorkerModel>> call, Throwable t) {
                 loadingBar.dismiss();
-                Toast toast = Toast.makeText(SelectWorkerActivity.this, "Please Check your Internet Connection....... !", Toast.LENGTH_SHORT);
+                System.out.println("Throwable message" + t.getMessage());
+                Toast toast = Toast.makeText(SelectWorkerActivity.this, "callToGetAllWorkersFromRecent !", Toast.LENGTH_SHORT);
                 TextView toastMessage = toast.getView().findViewById(android.R.id.message);
                 toastMessage.setTextColor(Color.RED);
                 toast.show();

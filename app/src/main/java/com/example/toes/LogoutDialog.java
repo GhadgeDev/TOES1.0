@@ -48,7 +48,7 @@ public class LogoutDialog extends DialogFragment {
 
         //connecting to base url
         Retrofit.Builder retrofit = new Retrofit.Builder().
-                baseUrl("http://tcp-api.herokuapp.com/token/login/")
+                baseUrl("http://tcp-api.herokuapp.com/token/")
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit1 = retrofit.build();
 

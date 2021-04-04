@@ -10,7 +10,7 @@ public class GetRecruiterJobInfo {
     @SerializedName("job_title")
     private String jobTitle;
 
-    @SerializedName("job_Description")
+    @SerializedName("job_description")
     private String jobDescription;
 
     @SerializedName("status")

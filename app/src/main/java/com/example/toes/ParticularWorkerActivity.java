@@ -74,7 +74,7 @@ public class ParticularWorkerActivity extends AppCompatActivity {
 
                 startStop();
 
-                if (SelectWorkerActivity.isSmartPhone == 1) {
+                if (SelectWorkerActivity.isSmartPhone == Boolean.TRUE) {
                     sendSmsToMySelf();
                     sendSmsToWorker();
                 } else {

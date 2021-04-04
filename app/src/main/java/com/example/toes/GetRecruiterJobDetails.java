@@ -13,7 +13,7 @@ public class GetRecruiterJobDetails {
     @SerializedName("address")
     private String address;
 
-    @SerializedName("job_Description")
+    @SerializedName("job_description")
     private String job_Description;
 
     @SerializedName("job_id")

@@ -100,7 +100,7 @@ interface JsonPlaceHolderApi {
     @POST("job/")
     Call<GetRecruiterJobInfo> getRecruiterJobInfo(@Header("Authorization") String token,
                                                   @Field("job_title") String jobTitle,
-                                                  @Field("job_Description") String jbDesc,
+                                                  @Field("job_description") String jbDesc,
                                                   @Field("status") int status,
                                                   @Field("recruiter") int id);
 
@@ -206,11 +206,11 @@ interface JsonPlaceHolderApi {
     Call<EmergencyContact> postEmergencyContact(@Field("contact_no") String contact_no,
                                                 @Field("user") int user);
 
-   // Update Emergency Call
-      @FormUrlEncoded
+    // Update Emergency Call
+    @FormUrlEncoded
     @PATCH("/emergency/{id}")
-   Call<EmergencyContact> updateEmergencyContact(@Field("contact_no") String contact_no,
-                                                   @Path("id") int id);
+    Call<EmergencyContact> updateEmergencyContact(@Field("contact_no") String contact_no,
+                                                  @Path("id") int id);
 
 
     //get Emergency Contact
