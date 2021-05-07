@@ -55,7 +55,8 @@ public class ProfileActivity extends AppCompatActivity {
     String cat1 = "";
     String cat2 = "";
     String cat3 = "";
-
+    static int profileId;
+    static  String gender = "";
  /*   @Override
     protected void onPause() {
         super.onPause();
@@ -170,8 +171,10 @@ public class ProfileActivity extends AppCompatActivity {
                 content += "Gender : " + postResponse.getGender() + "\n";
                 content += "Aadhar : " + postResponse.getAadhar_no() + "\n";
                 content += "address : " + postResponse.getAddress() + "\n";
+                profileId = postResponse.getId();
                 txtName.setText(postResponse.getFirst_name() + " " + postResponse.getLast_name());
                 txtPhone.setText(postResponse.getPhone());
+                gender = postResponse.getGender();
                 txtGender.setText(postResponse.getGender());
                 txtaadhar.setText("Aadhar Card No : "+postResponse.getAadhar_no());
                 txtaddr.setText("Address : "+postResponse.getAddress());

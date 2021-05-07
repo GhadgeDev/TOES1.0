@@ -214,8 +214,11 @@ interface JsonPlaceHolderApi {
 
 
     //get Emergency Contact
-    @GET("/api/get/emergency/{id}")
+    /*@GET("/api/get/emergency/{id}")
     Call<EmergencyContact> getEmergencyContact(@Header("Authorization") String token,
                                                @Path("id") int id);
-
+*/
+    @GET("/emergency/{id}")
+    Call<EmergencyContact> getEmergencyContact(@Header("Authorization") String token,
+                                               @Path("id") int id);
 }

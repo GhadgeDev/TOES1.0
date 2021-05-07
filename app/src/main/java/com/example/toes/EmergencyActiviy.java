@@ -28,6 +28,7 @@ public class EmergencyActiviy extends AppCompatActivity {
     String contact;
     String name = IdentityProofActivity.name;
     static int emergencyID;
+    String emergencyGender = ProfileActivity.gender;
     JsonPlaceHolderApi jsonPlaceHolderApi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class EmergencyActiviy extends AppCompatActivity {
 
         //connecting to base url
         Retrofit.Builder retrofit = new Retrofit.Builder().
-                baseUrl("https://tcp-api.herokuapp.com/")
+                baseUrl("https://tcp-api.herokuapp.com")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit1 = retrofit.build();
@@ -83,7 +84,7 @@ public class EmergencyActiviy extends AppCompatActivity {
                                 }
                                 EmergencyContact contact = response.body();
                                 EmergencyActiviy.emergencyID = contact.getId();
-                                System.out.println("E Contact " + response.body().getContact_no());
+                                //System.out.println("E Contact " + response.body().getContact_no());
                                 Toast.makeText(EmergencyActiviy.this, "Details Saved successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(EmergencyActiviy.this, LoginActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -107,16 +108,18 @@ public class EmergencyActiviy extends AppCompatActivity {
     private void eUpdateEContact() {
 
 
-        Call<EmergencyContact> getEContact = jsonPlaceHolderApi.getEmergencyContact("token " + LoginActivity.token, LoginActivity.userMeId);
-        getEContact.enqueue(new Callback<EmergencyContact>() {
-            @Override
-            public void onResponse(Call<EmergencyContact> call, Response<EmergencyContact> response) {
-                if (!response.isSuccessful()) {
-                    System.out.println("Response : _--------- " + response.code());
-                    System.out.println("Response M : _--------- " + response.message());
+        if(emergencyGender.equals("Female")){
+            System.out.println("Gender : _--------------//////////////////FEMALE//////////////////////---- "+ProfileActivity.gender );
+           Call<EmergencyContact> getEContact = jsonPlaceHolderApi.getEmergencyContact("token " + LoginActivity.token, LoginActivity.userMeId);
+            getEContact.enqueue(new Callback<EmergencyContact>() {
+                @Override
+                public void onResponse(Call<EmergencyContact> call, Response<EmergencyContact> response) {
+                    if (!response.isSuccessful()) {
+                        System.out.println("Response : _--------- " + response.code());
+                        System.out.println("Response M : _--------- " + response.message());
 
-                    return;
-                }
+                        return;
+                    }
                     EmergencyContact ec = response.body();
                     EmergencyActiviy.emergencyID = ec.getId();
 
@@ -124,37 +127,66 @@ public class EmergencyActiviy extends AppCompatActivity {
                     System.out.println("Cno ------------ "+ec.getContact_no());
                     System.out.println("user ------------ "+ec.getUser());
 
-                Call<EmergencyContact> postEContact = jsonPlaceHolderApi.updateEmergencyContact(contact,ec.getId());
-                postEContact.enqueue(new Callback<EmergencyContact>() {
-                    @Override
-                    public void onResponse(Call<EmergencyContact> call, Response<EmergencyContact> response) {
-                        if (!response.isSuccessful()) {
-                            System.out.println("Response : _--------- " + response.code());
-                            System.out.println("Response M : _--------- " + response.message());
+                    Call<EmergencyContact> postEContact = jsonPlaceHolderApi.updateEmergencyContact(contact,ec.getId());
+                    postEContact.enqueue(new Callback<EmergencyContact>() {
+                        @Override
+                        public void onResponse(Call<EmergencyContact> call, Response<EmergencyContact> response) {
+                            if (!response.isSuccessful()) {
+                                System.out.println("Response : _--------- " + response.code());
+                                System.out.println("Response M : _--------- " + response.message());
 
-                            return;
+                                return;
+                            }
+                            System.out.println("E Contact " + response.body().getContact_no());
+                            Toast.makeText(EmergencyActiviy.this, "Emergency contact updated successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(EmergencyActiviy.this, ProfileActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+
                         }
-                        System.out.println("E Contact " + response.body().getContact_no());
-                        Toast.makeText(EmergencyActiviy.this, "Emergency contact updated successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(EmergencyActiviy.this, ProfileActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
 
+                        @Override
+                        public void onFailure(Call<EmergencyContact> call, Throwable t) {
+                            System.out.println("Error M : _--------- " + t.getMessage());
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onFailure(Call<EmergencyContact> call, Throwable t) {
+                    System.out.println("In button find job ------------ " + t.getMessage());
+                }
+            });
+        }
+        else{
+
+            System.out.println("Gender : _--------------//NOT FEMALE//////////////////////////////////////---- "+ProfileActivity.gender );
+            Call<EmergencyContact> postEContact = jsonPlaceHolderApi.updateEmergencyContact(contact,ProfileActivity.profileId);
+            postEContact.enqueue(new Callback<EmergencyContact>() {
+                @Override
+                public void onResponse(Call<EmergencyContact> call, Response<EmergencyContact> response) {
+                    if (!response.isSuccessful()) {
+                        System.out.println("Response : _--------- " + response.code());
+                        System.out.println("Response M : _--------- " + response.message());
+
+                        return;
                     }
+                    System.out.println("E Contact " + response.body().getContact_no());
+                    Toast.makeText(EmergencyActiviy.this, "Emergency contact updated successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(EmergencyActiviy.this, ProfileActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
 
-                    @Override
-                    public void onFailure(Call<EmergencyContact> call, Throwable t) {
-                        System.out.println("Error M : _--------- " + t.getMessage());
-                    }
-                });
+                }
 
-            }
+                @Override
+                public void onFailure(Call<EmergencyContact> call, Throwable t) {
+                    System.out.println("Error M : _--------- " + t.getMessage());
+                }
+            });
+        }
 
-            @Override
-            public void onFailure(Call<EmergencyContact> call, Throwable t) {
-                System.out.println("In button find job ------------ " + t.getMessage());
-            }
-        });
 
 
     }
